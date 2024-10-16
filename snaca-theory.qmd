@@ -100,7 +100,7 @@ knitr::include_graphics( "images/ch-02-table-02.jpeg" )
 
 -   In a study by @carley2002destabilizing, the authors examined the structure and evolution of the Al Qaeda terrorist network. They identified key nodes and relationships within the network, showing how the removal of certain individuals would impact the network's operational efficiency and adaptability. What are the metaphor(s) used in this example?
 
--  @walker2019misconduct, examined how social networks of police officers influenced patterns of misconduct in the Chicago Police Department. They found that officers who were connected to others with histories of misconduct were more likely to engage in similar behavior, demonstrating how network ties can perpetuate unethical practices within law enforcement. What are the metaphor(s) used in this example?
+-   @walker2019misconduct, examined how social networks of police officers influenced patterns of misconduct in the Chicago Police Department. They found that officers who were connected to others with histories of misconduct were more likely to engage in similar behavior, demonstrating how network ties can perpetuate unethical practices within law enforcement. What are the metaphor(s) used in this example?
 
 -   What is the 'social contagion' model of gun violence, and how does it explain victimization patterns?
 

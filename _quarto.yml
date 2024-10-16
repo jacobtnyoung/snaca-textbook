@@ -19,9 +19,10 @@ book:
 
   chapters:
     - index.qmd
-    - snaca-01-introduction.qmd
-    - snaca-02-theory.qmd
-    - snaca-03-methods.qmd
+    - snaca-introduction.qmd
+    - snaca-theory.qmd
+    - snaca-methods.qmd
+    - snaca-net-data-structures.qmd
     - references.qmd
 
 bibliography: references.bib

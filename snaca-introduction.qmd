@@ -17,7 +17,7 @@ library( grid )      # to include the null graphical object
 
 ```
 
-# Introduction to Social Network Analysis
+# Introduction to Social Network Analysis for Crime Analysts
 
 Why add "social network analysis" to your crime analyst toolkit? To answer this question, it probably helps to know what social network analysis is! In this chapter, I want to introduce you to how people who study networks **think** about research problems and the types of data they use to examine these research problems from a network perspective. As such, we have the following *learning goals*:
 
