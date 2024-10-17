@@ -4,6 +4,7 @@ project:
 
 book:
   title: "Social Network Analysis for Crime Analysts"
+  search: true
   reader-mode: true
 
   page-footer: 
