@@ -24,6 +24,7 @@ book:
     - snaca-theory.qmd
     - snaca-methods.qmd
     - snaca-net-data-structures.qmd
+    - snaca-net-description.qmd
     - references.qmd
 
 bibliography: references.bib
