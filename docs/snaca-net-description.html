@@ -8,7 +8,7 @@
 
 <meta name="author" content="Jacob T.N. Young">
 
-<title>Social Network Analysis for Crime Analysts - References</title>
+<title>Social Network Analysis for Crime Analysts - 5&nbsp; Network Description</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,26 +21,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -50,7 +31,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./snaca-net-description.html" rel="prev">
+<link href="./references.html" rel="next">
+<link href="./snaca-net-data-structures.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -80,6 +62,8 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -92,7 +76,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">References</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./snaca-net-description.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">----</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -157,13 +141,13 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./snaca-net-description.html" class="sidebar-item-text sidebar-link">
+  <a href="./snaca-net-description.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">—-</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link active">
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -173,14 +157,26 @@ div.csl-indent {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#simple-network-summary" id="toc-simple-network-summary" class="nav-link active" data-scroll-target="#simple-network-summary"><span class="header-section-number">5.1</span> Simple Network Summary</a>
+  <ul class="collapse">
+  <li><a href="#size" id="toc-size" class="nav-link" data-scroll-target="#size"><span class="header-section-number">5.1.1</span> Size</a></li>
+  <li><a href="#density" id="toc-density" class="nav-link" data-scroll-target="#density"><span class="header-section-number">5.1.2</span> Density</a></li>
+  </ul></li>
+  <li><a href="#test-your-knowledge" id="toc-test-your-knowledge" class="nav-link" data-scroll-target="#test-your-knowledge"><span class="header-section-number">5.2</span> Test your Knowledge</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">5.3</span> Summary</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jacobtnyoung/sna-textbook-revisions/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">References</h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Network Description</span></h1>
 </div>
 
 
@@ -195,90 +191,80 @@ div.csl-indent {
 
 </header>
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-bright2013evolution" class="csl-entry" role="listitem">
-Bright, David A, and JJ Delaney. 2013. <span>“Evolution of a Drug
-Trafficking Network: Mapping Changes in Network Structure and Function
-Across Time.”</span> <em>Global Crime</em> 14 (2-3): 238–60.
-</div>
-<div id="ref-carley2002destabilizing" class="csl-entry" role="listitem">
-Carley, Kathleen M, Ju-Sung Lee, and David Krackhardt. 2002.
-<span>“Destabilizing Dynamic Covert Networks.”</span> <em>Proceedings of
-the 8th International Command and Control Research and Technology
-Symposium</em>, 1–10.
-</div>
-<div id="ref-coleman1990foundations" class="csl-entry" role="listitem">
-Coleman, James S. 1990. <em>Foundations of Social Theory</em>.
-Cambridge, MA: Harvard University Press.
-</div>
-<div id="ref-densley2012hierarchy" class="csl-entry" role="listitem">
-Densley, James A. 2012. <span>“The Organisation of London’s Street
-Gangs.”</span> <em>Global Crime</em> 13 (1): 42–64.
-</div>
-<div id="ref-faris2011status" class="csl-entry" role="listitem">
-Faris, Robert, and Diane Felmlee. 2011. <span>“Status Struggles: Network
-Centrality and Gender Segregation in Same- and Cross-Gender
-Aggression.”</span> <em>American Sociological Review</em> 76 (1): 48–73.
-</div>
-<div id="ref-klovdahl1994social" class="csl-entry" role="listitem">
-Klovdahl, Alden S., John J. Potterat, Donald E. Woodhouse, Stephen Q.
-Muth, John B. Muth, and William W. Darrow. 1994. <span>“Social Networks
-and Infectious Disease: The Colorado Springs Study.”</span> <em>Social
-Science &amp; Medicine</em> 38 (1): 79–88.
-</div>
-<div id="ref-kreager2020prison" class="csl-entry" role="listitem">
-Kreager, Derek, Gary Zajac, Dana L. Haynie, David Schaefer, Martin
-Bouchard, and Jacob Young. 2020. <span>“The Prison Inmate Network Study,
-United States, 2015.”</span> Inter-university Consortium for Political;
-Social Research [distributor]. <a href="https://doi.org/10.3886/ICPSR37514.v2">https://doi.org/10.3886/ICPSR37514.v2</a>.
-</div>
-<div id="ref-papachristos2009murder" class="csl-entry" role="listitem">
-Papachristos, Andrew V. 2009. <span>“Murder by Structure: Dominance
-Relations and the Social Structure of Gang Homicide.”</span>
-<em>American Journal of Sociology</em> 115 (1): 74–128.
-</div>
-<div id="ref-papachristos2013corner" class="csl-entry" role="listitem">
-Papachristos, Andrew V., David M. Hureau, and Anthony A. Braga. 2013.
-<span>“The Corner and the Crew: The Influence of Geography and Social
-Networks on Gang Violence.”</span> <em>American Sociological Review</em>
-78 (3): 417–47.
-</div>
-<div id="ref-papachristos2015tragic" class="csl-entry" role="listitem">
-Papachristos, Andrew V., Christopher Wildeman, and Elizabeth Roberto.
-2015. <span>“Tragic, but Not Random: The Social Contagion of Nonfatal
-Gunshot Injuries.”</span> <em>Social Science &amp; Medicine</em> 125:
-139–50.
-</div>
-<div id="ref-rostami2015complexity" class="csl-entry" role="listitem">
-Rostami, Amir, and Hernan Mondani. 2015. <span>“The Complexity of Crime
-Network Data: A Case Study of Its Consequences for Crime Control and the
-Study of Networks.”</span> <em>PLOS ONE</em> 10 (3): e0119309.
-</div>
-<div id="ref-smith_papachristos_capone" class="csl-entry" role="listitem">
-Smith, Chris M., and Andrew V. Papachristos. Publication Year.
-<span>“The Archival Research on Al Capone’s Criminal Network: A Social
-Network Approach to Organized Crime.”</span> <em>Social Networks</em>,
-Publication Year, Page Numbers.
-</div>
-<div id="ref-visher2003transitions" class="csl-entry" role="listitem">
-Visher, Christy A., and Jeremy Travis. 2003. <span>“Transitions from
-Prison to Community: Understanding Individual Pathways.”</span>
-<em>Annual Review of Sociology</em> 29: 89–113.
-</div>
-<div id="ref-walker2019misconduct" class="csl-entry" role="listitem">
-Walker, Samuel, Stanley Wasserman, and Barry Wellman. 2019. <span>“The
-Small World of Misconduct: Network Analysis of Police Officers’
-Complaints and Their Misconduct Networks.”</span> <em>Criminal Justice
-Review</em> 44 (1): 22–45.
-</div>
-<div id="ref-young2018boston" class="csl-entry" role="listitem">
-Young, Jacob T. N., Scott H. Decker, and Gary Sweeten. 2018. <span>“The
-Boston Special Youth Project Affiliation Dataset.”</span>
-<em>Connections</em> 37 (1&amp;2): 85–88.
+<p>Understanding the basic structure of a network is the first step toward making informed, data-driven decisions in crime analysis. Networks, whether simple or complex, contain key features that offer valuable insights into relationships, patterns, and points of vulnerability. As crime analysts, the ability to describe these features—such as the number of connections, the centrality of actors, and the overall shape of the network—is essential for identifying trends and prioritizing interventions. But how do we translate raw data into these insights?</p>
+<p>By the end of the chapter, be able to answer this question:</p>
+<ul>
+<li>How can I describe some simple features of a network?</li>
+</ul>
+<section id="simple-network-summary" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="simple-network-summary"><span class="header-section-number">5.1</span> Simple Network Summary</h2>
+<p>So you have you network data, now what? The next step is to summarize its most critical features, which can guide your analysis. First, consider the size: How <em>big</em> is the network? This is the number of actors involved, giving a sense of its scale. Next, think about how tightly connected the network is—this is the <em>density</em>, or the proportion of actual connections relative to all possible ones. Another key question is separation: How fragmented or divided is the network? Understanding its <em>components</em> or <em>subgraphs</em> can highlight isolated clusters. Finally, consider the network’s compactness, or its <em>diameter</em>—how far do actors have to travel through connections to reach others? These four basic measures lay the groundwork for describing and understanding the structure of any network you encounter in your analysis.</p>
+<section id="size" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="size"><span class="header-section-number">5.1.1</span> Size</h3>
+<p>Put simply: how big is it? The size of the network is just the number of nodes in the network. We represent this with <span class="math inline">\(g\)</span>.</p>
+<p>In the graphs below, what is <span class="math inline">\(g\)</span>?</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-description_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
 </div>
 </div>
+</div>
+</section>
+<section id="density" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="density"><span class="header-section-number">5.1.2</span> Density</h3>
+<p>Of the ties that could exist, what fraction are observed? This is the <em>density</em> of a graph: the number of edges compared to how many ties there could be.</p>
+<section id="undirected-graph" class="level4" data-number="5.1.2.1">
+<h4 data-number="5.1.2.1" class="anchored" data-anchor-id="undirected-graph"><span class="header-section-number">5.1.2.1</span> Undirected Graph</h4>
+<p>The density of an <strong>undirected</strong> graph is given by: <span class="math display">\[\frac{2L}{g(g-1)}\]</span> where <span class="math inline">\(L\)</span> is the number of edges and <span class="math inline">\(g\)</span> is the number of nodes. So, if a network has 5 nodes (i.e.&nbsp;<span class="math inline">\(g\)</span> is 5) then we could observe <span class="math inline">\(g(g-1) = 5*(5-1) = 5*4 = 20\)</span> edges. Take a look at the undirected graph below, what is the density?</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-description_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>First we identify the quantities: <span class="math inline">\(L\)</span> is 5 and <span class="math inline">\(g\)</span> is 5. Now, let’s just plug through the math: <span class="math display">\[\frac{2L}{g(g-1)} = \frac{2*5}{5*(5-1)} = \frac{10}{20} = 0.5\]</span>. So, 0.5, or half, of the ties that could occur in this network did occur.</p>
+</section>
+<section id="directed-graph" class="level4" data-number="5.1.2.2">
+<h4 data-number="5.1.2.2" class="anchored" data-anchor-id="directed-graph"><span class="header-section-number">5.1.2.2</span> Directed Graph</h4>
+<p>The density of a <strong>directed</strong> graph is given by: <span class="math display">\[\frac{L}{g(g-1)}\]</span> where <span class="math inline">\(L\)</span> is the number of edges and <span class="math inline">\(g\)</span> is the number of nodes. So, if a network has 5 nodes (i.e.&nbsp;<span class="math inline">\(g\)</span> is 5) then we could observe <span class="math inline">\(g(g-1) = 5*(5-1) = 5*4 = 20\)</span> edges. Take a look at the directed graph below, what is the density?</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-description_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>First we identify the quantities: <span class="math inline">\(L\)</span> is 8 and <span class="math inline">\(g\)</span> is 5. Why is <span class="math inline">\(L\)</span> 8? Since the graph is directed, a dyad (or two nodes) can have two ties. For example, there is a tie from Jim to Leaf and a tie from Leaf to Jim. If we count up all the arrowheads, we get to 8.Now, let’s just plug through the math: <span class="math display">\[\frac{L}{g(g-1)} = \frac{8}{5*(5-1)} = \frac{8}{20} = 0.4\]</span>. So, 0.4 of the ties that could occur in this network did occur.</p>
+<p>HERE WITH COMPONENTS</p>
+</section>
+</section>
+</section>
+<section id="test-your-knowledge" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="test-your-knowledge"><span class="header-section-number">5.2</span> Test your Knowledge</h2>
+<ul>
+<li><p>What was the key question behind the Konigsberg bridge problem? How did Euler represent this problem using points and lines? What was the significance of this representation?</p></li>
+<li><p>How is a graph represented in terms of nodes and edges? What does the notation <span class="math inline">\(G = (N,L)\)</span> mean?</p></li>
+<li><p>What does it mean for two nodes to be <strong>adjacent</strong> in a graph?</p></li>
+<li><p>In an undirected graph, how are the connections between nodes represented? How is this different from a directed graph?</p></li>
+<li><p>In an adjacency matrix, what does the value in the <span class="math inline">\(i^{th}\)</span> row and <span class="math inline">\(j^{th}\)</span> column represent?</p></li>
+<li><p>What is the difference between an <strong>undirected</strong> and a <strong>directed</strong> adjacency matrix? In an <strong>undirected</strong> graph, is the <span class="math inline">\(i^{th}\)</span> row equal to the <span class="math inline">\(j^{th}\)</span> column? What about for a <strong>directed</strong> graph?</p></li>
+<li><p>Define the following terms as they relate to matrices: Scalar, Column vector, Row vector, Matrix, Square matrix, Order of a matrix.</p></li>
+</ul>
+</section>
+<section id="summary" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="summary"><span class="header-section-number">5.3</span> Summary</h2>
+<p>This chapter has how to represent networks using matrices. In the next chapter, we will start looking at how to analyze these matrices.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -516,11 +502,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./snaca-net-description.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">—-</span></span>
+      <a href="./snaca-net-data-structures.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Network Data Structures</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
@@ -529,7 +518,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-left">Social Network Analysis for Crime Analysts was written by <a href="https://jacobtnyoung.github.io/">Jacob T.N. Young</a></div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jacobtnyoung/sna-textbook-revisions/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    </div>
     <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a>.</div>
   </div>
 </footer>
