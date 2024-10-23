@@ -25,6 +25,7 @@ book:
     - snaca-methods.qmd
     - snaca-net-data-structures.qmd
     - snaca-net-description.qmd
+    - snaca-centrality-degree.qmd
     - references.qmd
 
 bibliography: references.bib
