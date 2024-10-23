@@ -13,8 +13,8 @@ book:
     right: |
       This book was built with <a href="https://quarto.org/">Quarto</a>.
 
-  site-url: https://jacobtnyoung.github.io/sna-textbook-revisions/
-  repo-url: https://github.com/jacobtnyoung/sna-textbook-revisions
+  site-url: https://jacobtnyoung.github.io/snaca-textbook/
+  repo-url: https://github.com/jacobtnyoung/snaca-textbook
   repo-branch: main
   repo-actions: [issue]
 
