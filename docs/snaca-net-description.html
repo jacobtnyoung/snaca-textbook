@@ -21,7 +21,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -165,6 +184,8 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#size" id="toc-size" class="nav-link" data-scroll-target="#size"><span class="header-section-number">5.1.1</span> Size</a></li>
   <li><a href="#density" id="toc-density" class="nav-link" data-scroll-target="#density"><span class="header-section-number">5.1.2</span> Density</a></li>
+  <li><a href="#components" id="toc-components" class="nav-link" data-scroll-target="#components"><span class="header-section-number">5.1.3</span> Components</a></li>
+  <li><a href="#diameter" id="toc-diameter" class="nav-link" data-scroll-target="#diameter"><span class="header-section-number">5.1.4</span> Diameter</a></li>
   </ul></li>
   <li><a href="#test-your-knowledge" id="toc-test-your-knowledge" class="nav-link" data-scroll-target="#test-your-knowledge"><span class="header-section-number">5.2</span> Test your Knowledge</a></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">5.3</span> Summary</a></li>
@@ -191,14 +212,14 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Understanding the basic structure of a network is the first step toward making informed, data-driven decisions in crime analysis. Networks, whether simple or complex, contain key features that offer valuable insights into relationships, patterns, and points of vulnerability. As crime analysts, the ability to describe these features—such as the number of connections, the centrality of actors, and the overall shape of the network—is essential for identifying trends and prioritizing interventions. But how do we translate raw data into these insights?</p>
+<p>Understanding the basic structure of a network is the first step toward making informed, data-driven decisions in crime analysis. Networks, whether simple or complex, contain key features that offer valuable insights into relationships, patterns, and points of vulnerability. As crime analysts, the ability to describe these features (such as the number of connections), the centrality of nodes, and the overall shape of the network, is essential for identifying trends and prioritizing interventions. But how do we translate raw data into these insights?</p>
 <p>By the end of the chapter, be able to answer this question:</p>
 <ul>
 <li>How can I describe some simple features of a network?</li>
 </ul>
 <section id="simple-network-summary" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="simple-network-summary"><span class="header-section-number">5.1</span> Simple Network Summary</h2>
-<p>So you have you network data, now what? The next step is to summarize its most critical features, which can guide your analysis. First, consider the size: How <em>big</em> is the network? This is the number of actors involved, giving a sense of its scale. Next, think about how tightly connected the network is—this is the <em>density</em>, or the proportion of actual connections relative to all possible ones. Another key question is separation: How fragmented or divided is the network? Understanding its <em>components</em> or <em>subgraphs</em> can highlight isolated clusters. Finally, consider the network’s compactness, or its <em>diameter</em>—how far do actors have to travel through connections to reach others? These four basic measures lay the groundwork for describing and understanding the structure of any network you encounter in your analysis.</p>
+<p>So you have you network data, now what? The next step is to summarize its most critical features, which can guide your analysis. First, consider the size: How <em>big</em> is the network? This is the number of nodes involved, giving a sense of its scale. Next, think about how tightly connected the network is—this is the <em>density</em>, or the proportion of actual connections relative to all possible ones. Another key question is separation: How fragmented or divided is the network? Understanding its <em>components</em> or <em>subgraphs</em> can highlight isolated clusters. Finally, consider the network’s compactness, or its <em>diameter</em>, how far do nodes have to travel through connections to reach others? These four basic measures lay the groundwork for describing and understanding the structure of any network you encounter in your analysis.</p>
 <section id="size" class="level3" data-number="5.1.1">
 <h3 data-number="5.1.1" class="anchored" data-anchor-id="size"><span class="header-section-number">5.1.1</span> Size</h3>
 <p>Put simply: how big is it? The size of the network is just the number of nodes in the network. We represent this with <span class="math inline">\(g\)</span>.</p>
@@ -228,7 +249,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<p>First we identify the quantities: <span class="math inline">\(L\)</span> is 5 and <span class="math inline">\(g\)</span> is 5. Now, let’s just plug through the math: <span class="math display">\[\frac{2L}{g(g-1)} = \frac{2*5}{5*(5-1)} = \frac{10}{20} = 0.5\]</span>. So, 0.5, or half, of the ties that could occur in this network did occur.</p>
+<p>First we identify the quantities: <span class="math inline">\(L\)</span> is 5 and <span class="math inline">\(g\)</span> is 5. Now, let’s just plug through the math: <span class="math display">\[\frac{2L}{g(g-1)} = \frac{2*5}{5*(5-1)} = \frac{10}{20} = 0.5\]</span> So, 0.5, or half, of the ties that could occur in this network did occur.</p>
 </section>
 <section id="directed-graph" class="level4" data-number="5.1.2.2">
 <h4 data-number="5.1.2.2" class="anchored" data-anchor-id="directed-graph"><span class="header-section-number">5.1.2.2</span> Directed Graph</h4>
@@ -242,28 +263,81 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<p>First we identify the quantities: <span class="math inline">\(L\)</span> is 8 and <span class="math inline">\(g\)</span> is 5. Why is <span class="math inline">\(L\)</span> 8? Since the graph is directed, a dyad (or two nodes) can have two ties. For example, there is a tie from Jim to Leaf and a tie from Leaf to Jim. If we count up all the arrowheads, we get to 8.Now, let’s just plug through the math: <span class="math display">\[\frac{L}{g(g-1)} = \frac{8}{5*(5-1)} = \frac{8}{20} = 0.4\]</span>. So, 0.4 of the ties that could occur in this network did occur.</p>
-<p>HERE WITH COMPONENTS</p>
+<p>First we identify the quantities: <span class="math inline">\(L\)</span> is 8 and <span class="math inline">\(g\)</span> is 5. Why is <span class="math inline">\(L\)</span> 8? Since the graph is directed, a dyad (or two nodes) can have two ties. For example, there is a tie from Jim to Leaf and a tie from Leaf to Jim. If we count up all the arrowheads, we get to 8.Now, let’s just plug through the math: <span class="math display">\[\frac{L}{g(g-1)} = \frac{8}{5*(5-1)} = \frac{8}{20} = 0.4\]</span> So, 0.4 of the ties that could occur in this network did occur.</p>
+</section>
+</section>
+<section id="components" class="level3" data-number="5.1.3">
+<h3 data-number="5.1.3" class="anchored" data-anchor-id="components"><span class="header-section-number">5.1.3</span> Components</h3>
+<p>So far we have seen graphs where are the nodes are connected either directly or indirectly. For example, in the directed graph above, Jen is not directly connected to every node, but you can trace a path from Jen to all other nodes in the graph. But, what about graphs where the nodes are not able to reach other nodes? In other words, what about graphs where there are separated groups of nodes? These disconnected <strong>subgraphs</strong> are referred to as <em>components</em>.</p>
+<p>Take a look at the plot below. How many components are there?</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-description_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>To figure it out, just count up the number of separate subgraphs (or different colors of nodes). In this plot, there are 15 components. Note that the components are not all the same. Some are larger than others. In a graph that has different size components, the <em>first component</em> is the subgraph (i.e.&nbsp;component) with the most nodes. In this plot, the nodes in the first component are labeled “1”. The <em>second component</em> of a graph is the component that has the second-most nodes and the <em>third component</em> has the third most nodes (and so on). In the plot, what are the <em>second</em> and <em>third</em> components?</p>
+<p>The components of a graph are a useful tool for helping us think, conceptually, about what our network means. For example, <span class="citation" data-cites="papachristos2014network">Papachristos and Wildeman (<a href="references.html#ref-papachristos2014network" role="doc-biblioref">2014</a>)</span> conducted a study of homicide, examining how individuals may be disproportionately exposed to violence. Research has shown that violence often spreads between components through a small number of brokers who connect otherwise isolated factions. Identifying and targeting these brokers or the most violent components can significantly reduce retaliatory violence. Isolated components also offer opportunities for more focused community interventions. By understanding these network structures, law enforcement can prevent the spread of violence and effectively target interventions.</p>
+</section>
+<section id="diameter" class="level3" data-number="5.1.4">
+<h3 data-number="5.1.4" class="anchored" data-anchor-id="diameter"><span class="header-section-number">5.1.4</span> Diameter</h3>
+<p>A final question we can ask is how <em>compact</em> is the network? In other words, can nodes reach other nodes directly and indirectly fairly easily? Or, are nodes really far from each other?</p>
+<p>To understand diameter, let’s set up a definition: A <em>step</em> is movement along an edge. Let’s think about it how this works. For example, take two nodes <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> who are directly connected. How many steps is <span class="math inline">\(A\)</span> from <span class="math inline">\(B\)</span>? Since <span class="math inline">\(A\)</span> is directly tied to <span class="math inline">\(B\)</span>, the number of steps is 1. Now, take another example where <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <em>not</em> directly connected. Rather, suppose <span class="math inline">\(A\)</span> is connected to <span class="math inline">\(D\)</span>, who is connected to <span class="math inline">\(C\)</span>, who is connected to <span class="math inline">\(B\)</span>, like this: <span class="math inline">\(A-D-C-B\)</span>. How many steps is <span class="math inline">\(A\)</span> from <span class="math inline">\(B\)</span>? Well, how many edges are there between them? There are 3 edges.</p>
+<p>We can extend this to an entire graph be calculating the steps for every pair of nodes (i.e.&nbsp;dyads) in the graph. When we do this, we can define two other terms:</p>
+<ul>
+<li><p>A <em>shortest path</em> is the fewest number of steps node <span class="math inline">\(A\)</span> has to take to reach node <span class="math inline">\(B\)</span>;</p></li>
+<li><p>The <em>diameter</em> is the longest of <strong>all</strong> the shortest paths in the network.</p></li>
+</ul>
+<section id="undirected-graph-1" class="level4" data-number="5.1.4.1">
+<h4 data-number="5.1.4.1" class="anchored" data-anchor-id="undirected-graph-1"><span class="header-section-number">5.1.4.1</span> Undirected Graph</h4>
+<p>Let’s see how this works in an <strong>undirected</strong> graph. In the plot below, what is the shortest path from Leaf to Jen?</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-description_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>To answer this question, we need to first figure out what the paths are, then figure out which is the shortest (i.e.&nbsp;has the fewest edges to traverse). In this plot there are two:</p>
+<ul>
+<li><span class="math inline">\(Leaf-Jim-Bob-Tom-Jen\)</span></li>
+<li><span class="math inline">\(Leaf-Bob-Tom-Jen\)</span></li>
+</ul>
+<p>The second path, <span class="math inline">\(Leaf-Bob-Tom-Jen\)</span>, is the shortest path.</p>
+<p>Now, what is the <em>diameter</em> of the network. To figure this out, we would identify the shortest paths for all pairs of nodes, then see which is the largest. So, taking a look at this plot? What is the <em>diameter</em>? It is 3. The longest shortest paths (I know, it sounds confusing) are <span class="math inline">\(Leaf-Bob-Tom-Jen\)</span> and <span class="math inline">\(Jim-Bob-Tom-Jen\)</span>. Both are of length 3.</p>
+</section>
+<section id="directed-graph-1" class="level4" data-number="5.1.4.2">
+<h4 data-number="5.1.4.2" class="anchored" data-anchor-id="directed-graph-1"><span class="header-section-number">5.1.4.2</span> Directed Graph</h4>
+<p>Paths with <em>directed graphs</em> can be a bit tricky to comprehend due to the directionality of the ties. For example, for how many steps is <span class="math inline">\(A\)</span> from <span class="math inline">\(B\)</span> in this graph, <span class="math inline">\(B \rightarrow D \rightarrow C \rightarrow A\)</span>? If we focus on the direction of the ties, then <span class="math inline">\(A\)</span> cannot reach <span class="math inline">\(B\)</span>. But, if we <strong>ignore</strong> the direction of the ties, then <span class="math inline">\(A\)</span> is 3 steps from <span class="math inline">\(B\)</span>.</p>
 </section>
 </section>
 </section>
 <section id="test-your-knowledge" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="test-your-knowledge"><span class="header-section-number">5.2</span> Test your Knowledge</h2>
 <ul>
-<li><p>What was the key question behind the Konigsberg bridge problem? How did Euler represent this problem using points and lines? What was the significance of this representation?</p></li>
-<li><p>How is a graph represented in terms of nodes and edges? What does the notation <span class="math inline">\(G = (N,L)\)</span> mean?</p></li>
-<li><p>What does it mean for two nodes to be <strong>adjacent</strong> in a graph?</p></li>
-<li><p>In an undirected graph, how are the connections between nodes represented? How is this different from a directed graph?</p></li>
-<li><p>In an adjacency matrix, what does the value in the <span class="math inline">\(i^{th}\)</span> row and <span class="math inline">\(j^{th}\)</span> column represent?</p></li>
-<li><p>What is the difference between an <strong>undirected</strong> and a <strong>directed</strong> adjacency matrix? In an <strong>undirected</strong> graph, is the <span class="math inline">\(i^{th}\)</span> row equal to the <span class="math inline">\(j^{th}\)</span> column? What about for a <strong>directed</strong> graph?</p></li>
-<li><p>Define the following terms as they relate to matrices: Scalar, Column vector, Row vector, Matrix, Square matrix, Order of a matrix.</p></li>
+<li>What are the key features of a network that crime analysts can focus on for identifying trends and prioritizing interventions?</li>
+<li>How do you calculate the size of a network, and why is it important to know?</li>
+<li>What is network density, and how is the calculation different for undirected and directed graphs?</li>
+<li>Why is it important to examine the components of a network?</li>
+<li>How do you identify the largest component in a graph, and why might this component be particularly important?</li>
+<li>What is the diameter of a network, and why is it a significant measure of network compactness?</li>
 </ul>
 </section>
 <section id="summary" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="summary"><span class="header-section-number">5.3</span> Summary</h2>
-<p>This chapter has how to represent networks using matrices. In the next chapter, we will start looking at how to analyze these matrices.</p>
+<p>This chapter focused on how crime analysts can gain an understanding of a network by describing some basic structures. We focused on key network features (size, density, components, and diameter) for gaining insights into relationships and patterns. Examining these properties can help analyst identify areas for targeted interventions. In the next chapters we will begin focusing on a key idea in social network analysis: <em>centrality</em>.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-papachristos2014network" class="csl-entry" role="listitem">
+Papachristos, Andrew V., and Christopher Wildeman. 2014. <span>“Network Exposure and Homicide Victimization in an African American Community.”</span> <em>American Journal of Public Health</em> 104 (1): 143–50. <a href="https://doi.org/10.2105/AJPH.2013.301441">https://doi.org/10.2105/AJPH.2013.301441</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
