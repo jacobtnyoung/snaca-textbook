@@ -18,6 +18,16 @@ library( reshape2 )  # for reshaping the matrix data for a plot
 
 ```
 
+# Centrality
+
+When we say a *node* is "central", what do we mean conceptually? As a crime analyst, you probably already know that identifying and understanding who holds the most influence within a group is crucial for effective intervention. For example, in a study of white-collar crime networks, @smith2012corporatefraud identified individuals most connected to others in a corporate fraud scheme, revealing key facilitators who had a disproportionate influence over the flow of information and resources. This allowed the researchers to pinpoint the central figures within the fraud ring, enabling targeted investigative efforts. This chapter will guide you through the conceptualization of **centrality** as it pertains to *degree* centrality, demonstrating how to calculate degree centrality scores for individual nodes and how to assess the overall degree centralization of an entire network. By gaining a conceptual understanding of centrality, and understanding the operationalization of centrality through degree centrality, crime analysts can more effectively identify key targets for investigation and disruption in criminal organizations.
+
+By the end of this chapter, you should be able to:
+
+-   Explain the conceptualization of "centrality" as it pertains to *degree centrality*.
+-   Calculate degree centrality scores for a set of nodes.
+-   Calculate a degree centralization score for a graph.
+
 ```{r, graphs-define}
 
 # ----
@@ -124,15 +134,6 @@ d_graph <-
 
 ```
 
-# Centrality
-
-When we say a *node* is "central", what do we mean conceptually? As a crime analyst, you probably already know that identifying and understanding who holds the most influence within a group is crucial for effective intervention. For example, in a study of white-collar crime networks, @smith2012corporatefraud identified individuals most connected to others in a corporate fraud scheme, revealing key facilitators who had a disproportionate influence over the flow of information and resources. This allowed the researchers to pinpoint the central figures within the fraud ring, enabling targeted investigative efforts. This chapter will guide you through the conceptualization of **centrality** as it pertains to *degree* centrality, demonstrating how to calculate degree centrality scores for individual nodes and how to assess the overall degree centralization of an entire network. By gaining a conceptual understanding of centrality, and understanding the operationalization of centrality through degree centrality, crime analysts can more effectively identify key targets for investigation and disruption in criminal organizations.
-
-By the end of this chapter, you should be able to:
-
--   Explain the conceptualization of "centrality" as it pertains to *degree centrality*.
--   Calculate degree centrality scores for a set of nodes.
--   Calculate a degree centralization score for a graph.
 
 ## Case Study: Disrupting Hate Speech Online
 
@@ -567,7 +568,7 @@ An outdegree centralization score close to 1 indicates that the outdegrees in th
 
 ##### Comparing Indegree and Outdegree Centralization
 
-The indegree centralization score, $C_I$, is 0.438 and the outdegree centralization score, $C_O$, is 0.125. *What does the difference tell us?* It tells us that the outdegrees are more decentralized than the indegrees. Put another way, the indegrees are more centralized than are the outdegrees. *Make sense?* Think of it this way: there is more inequality in the way the indegrees are distributed than the way the outdegrees are distributed. 
+The indegree centralization score, $C_I$, is 0.438 and the outdegree centralization score, $C_O$, is 0.125. *What does the difference tell us?* It tells us that the outdegrees are more decentralized than the indegrees. Put another way, the indegrees are more centralized than are the outdegrees. *Make sense?* Think of it this way: there is more inequality in the way the indegrees are distributed than the way the outdegrees are distributed.
 
 ## Test your Knowledge
 
