@@ -2,30 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://jacobtnyoung.github.io/sna-textbook-revisions/index.html</loc>
-    <lastmod>2024-10-17T20:05:50.971Z</lastmod>
+    <lastmod>2024-10-23T18:38:13.481Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/sna-textbook-revisions/snaca-introduction.html</loc>
-    <lastmod>2024-10-17T20:05:50.980Z</lastmod>
+    <lastmod>2024-10-23T18:38:13.495Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/sna-textbook-revisions/snaca-theory.html</loc>
-    <lastmod>2024-10-17T20:05:50.986Z</lastmod>
+    <lastmod>2024-10-23T18:38:13.502Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/sna-textbook-revisions/snaca-methods.html</loc>
-    <lastmod>2024-10-17T20:05:50.991Z</lastmod>
+    <lastmod>2024-10-23T18:38:13.508Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/sna-textbook-revisions/snaca-net-data-structures.html</loc>
-    <lastmod>2024-10-17T20:05:51.002Z</lastmod>
-  </url>
-  <url>
-    <loc>https://jacobtnyoung.github.io/sna-textbook-revisions/references.html</loc>
-    <lastmod>2024-10-23T17:07:02.342Z</lastmod>
+    <lastmod>2024-10-23T18:38:13.516Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/sna-textbook-revisions/snaca-net-description.html</loc>
-    <lastmod>2024-10-23T17:07:00.762Z</lastmod>
+    <lastmod>2024-10-23T18:38:13.523Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jacobtnyoung.github.io/sna-textbook-revisions/snaca-centrality-degree.html</loc>
+    <lastmod>2024-10-23T18:38:13.539Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jacobtnyoung.github.io/sna-textbook-revisions/references.html</loc>
+    <lastmod>2024-10-23T18:38:13.543Z</lastmod>
   </url>
 </urlset>
