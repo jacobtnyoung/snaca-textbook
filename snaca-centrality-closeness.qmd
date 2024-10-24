@@ -170,7 +170,7 @@ To find the closeness centrality score, we need to first find the distances betw
 
 Let's take a look at this with some data. Recall our example network with Jen, Tom, Bob, Leaf, and Jim:
 
-```{r}
+```{r, adj-undirected-define}
 
 # create an adjacency matrix from the graph
 adj_matrix <- as_adjacency_matrix( ugraph, sparse = FALSE )
@@ -200,9 +200,10 @@ adj_to_plot <- ggplot( df, aes( Var1, Var2 ) ) +
   scale_x_discrete(position = "top")  +
   ggtitle( "Adjacency Matrix for Undirected Graph" )
 
-# plot the network and the adjacency matrix
-grid.arrange( u_graph, adj_to_plot, ncol = 2 )
+```
 
+```{r}
+ugraph
 ```
 
 How far is Jen from Tom? How far is Jen from Bob? In other words, how many edges do we count in going from Jen to Tom? From Jen to Bob?
@@ -551,11 +552,9 @@ The closeness centralization score for the figure on the left is 1, whereas the 
 
 ## Directed Graphs
 
+As was covered in the prior chapter, when we have a directed graph, we have to consider directionality when evaluating a centrality measure. For example, in the graph below, *how far is Jen from Tom?* *How far is Jen from Bob?*
 
-!!!UPDATING THIS
-make a copy of this file and just work through it
-
-```{r}
+```{r, adj-directed-define}
 
 # create an adjacency matrix from the digraph
 # note that you have to take the transpose for this to work correctly in the table
@@ -585,12 +584,157 @@ adj_to_plot <- ggplot( dfd, aes( Var1, Var2 ) ) +
   scale_x_discrete(position = "top")  +
   ggtitle( "Adjacency Matrix for Directed Graph" )
 
-# plot the network and the adjacency matrix
-grid.arrange( d_graph, adj_to_plot, ncol = 2 )
+```
+
+```{r}
+d_graph
+```
+
+To answer this question, let's think again about what closeness measures. It is the inverse of the distance matrix. So, if we are looking at outgoing ties (i.e. $L(n_i,n_j)$) then our equation is the same for the undirected graph:
+
+$$C_C(n_i) = [\sum\limits_{j=1}^g d(n_i,n_j)]^{-1} = \frac{1}{[\sum\limits_{j=1}^g d(n_i,n_j)]}$$
+
+Note, however, that the distance of *i* to *j*, $d(n_i,n_j)$, does not necessarily equal the distance from *j* to *i*, $d(n_j,n_i)$. For example, the distance from Jen to Tom, $d(Jen,Tom)$, is 1. But, the distance from Tom to Jen, $d(Tom,Jen)$ is....? It is <u>undefined</u> because there is not an edge that originates from Tom and ends at Jen. This complicates things a bit. Let's work through an example to see what this looks like.
+
+As before, we want to first build a *distance matrix* which shows the value of the geodesic (i.e. shortest path) from *i* to *j*.
+
+```{r}
+
+# create the distance matrix
+d_matrix <- distances( digraph )
+
+# melt the matrix into a long format suitable for ggplot
+df_d <- melt( d_matrix )
+
+# Reverse the order of the y-axis labels so they aren't backwards
+df_d$Var2 <- factor( dfd$Var2, levels = rev( rownames( d_adj_matrix ) ) )
+
+# plot the blank distance matrix
+d_to_plot <- ggplot( df_d, aes( Var1, Var2 ) ) +
+  geom_tile( color = "black", fill = "white" ) +
+  coord_fixed() +
+  theme_minimal() + 
+  theme(panel.background = element_rect(fill = "white", color = NA),
+        panel.grid.major = element_line(color = "gray"),  
+        panel.grid.minor = element_line(color = "lightgray"),
+        axis.text.x = element_text(hjust = 0.5, vjust = 0.5),
+        axis.text.y = element_text(hjust = 0.5, vjust = 0.5),
+        axis.title = element_blank(),
+        axis.text.x.top = element_text(hjust = 0.5, vjust = 0.5),
+        axis.ticks = element_blank()) + 
+  labs(x = NULL, y = NULL) +  
+  scale_y_discrete(position = "left") +
+  scale_x_discrete(position = "top")  +
+  ggtitle( "Distance Matrix for Directed Graph" )
+
+# plot the network and the distance matrix
+grid.arrange( d_graph, d_to_plot, ncol = 2 )
 
 ```
 
+*How far is Jen from Tom?* *How far is Jen from Bob?* To figure this out, we can simply count the steps from Jen to Tom. Then Jen to Bob.
 
+```{r}
+
+# dummy the distances for Jen
+df_d$Jen <- ifelse( rownames( df_d ) %in% c( 2:3 ), "show", "dont" )
+
+# plot the blank distance matrix
+d_to_plot <- ggplot( df_d, aes( Var1, Var2 ) ) +
+    geom_tile( aes( fill = Jen ), color = "black" ) +
+  geom_text( aes( label = ifelse( Jen == "show", value, "" ) ), color = "black" ) +
+  scale_fill_manual(values = c("show" = "#fc23fc", "dont" = "white"), guide = "none") +
+  coord_fixed() +
+  theme_minimal() + 
+  theme(panel.background = element_rect(fill = "white", color = NA),
+        panel.grid.major = element_line(color = "gray"),  
+        panel.grid.minor = element_line(color = "lightgray"),
+        axis.text.x = element_text(hjust = 0.5, vjust = 0.5),
+        axis.text.y = element_text(hjust = 0.5, vjust = 0.5),
+        axis.title = element_blank(),
+        axis.text.x.top = element_text(hjust = 0.5, vjust = 0.5),
+        axis.ticks = element_blank()) + 
+  labs(x = NULL, y = NULL) +  
+  scale_y_discrete(position = "left") +
+  scale_x_discrete(position = "top")  +
+  ggtitle( "Distance Matrix for Directed Graph" )
+
+# plot the network and the distance matrix
+grid.arrange( d_graph, d_to_plot, ncol = 2 )
+
+```
+
+Jen is 1 step from Tom and 2 steps from Bob. *What about the rest of the scores for Jen?*
+
+```{r}
+
+# dummy the distances for Jen
+df_d$Jen <- ifelse( rownames( df_d ) %in% c( 2:5 ), "show", "dont" )
+
+# plot the blank distance matrix
+d_to_plot <- ggplot( df_d, aes( Var1, Var2 ) ) +
+    geom_tile( aes( fill = Jen ), color = "black" ) +
+  geom_text( aes( label = ifelse( Jen == "show", value, "" ) ), color = "black" ) +
+  scale_fill_manual(values = c("show" = "#fc23fc", "dont" = "white"), guide = "none") +
+  coord_fixed() +
+  theme_minimal() + 
+  theme(panel.background = element_rect(fill = "white", color = NA),
+        panel.grid.major = element_line(color = "gray"),  
+        panel.grid.minor = element_line(color = "lightgray"),
+        axis.text.x = element_text(hjust = 0.5, vjust = 0.5),
+        axis.text.y = element_text(hjust = 0.5, vjust = 0.5),
+        axis.title = element_blank(),
+        axis.text.x.top = element_text(hjust = 0.5, vjust = 0.5),
+        axis.ticks = element_blank()) + 
+  labs(x = NULL, y = NULL) +  
+  scale_y_discrete(position = "left") +
+  scale_x_discrete(position = "top")  +
+  ggtitle( "Distance Matrix for Directed Graph" )
+
+# plot the network and the distance matrix
+grid.arrange( d_graph, d_to_plot, ncol = 2 )
+
+```
+
+Now, recall that we sum these distances, and then take the reciprocal:
+
+$$C_C(Jen) =  \frac{1}{[\sum\limits_{j=1}^g d(Jen,n_j)]} = \frac{1}{9} = 0.111$$
+
+*What about Bob? How far is Bob from everyone?*
+
+
+HERE: Stuck with trying to get the values correct here on the plot
+
+
+```{r}
+
+# dummy the distances for Bob
+df_d$Bob <- ifelse( rownames( df_d ) %in% c( 11:12, 14:15 ), "show", "dont" )
+
+# plot the blank distance matrix
+d_to_plot <- ggplot( df_d, aes( Var1, Var2 ) ) +
+    geom_tile( aes( fill = Bob ), color = "black" ) +
+  geom_text( aes( label = ifelse( Bob == "show", c( 1, 2, 3, 4 ), "" ) ), color = "black" ) +
+  scale_fill_manual(values = c("show" = "#fc23fc", "dont" = "white"), guide = "none") +
+  coord_fixed() +
+  theme_minimal() + 
+  theme(panel.background = element_rect(fill = "white", color = NA),
+        panel.grid.major = element_line(color = "gray"),  
+        panel.grid.minor = element_line(color = "lightgray"),
+        axis.text.x = element_text(hjust = 0.5, vjust = 0.5),
+        axis.text.y = element_text(hjust = 0.5, vjust = 0.5),
+        axis.title = element_blank(),
+        axis.text.x.top = element_text(hjust = 0.5, vjust = 0.5),
+        axis.ticks = element_blank()) + 
+  labs(x = NULL, y = NULL) +  
+  scale_y_discrete(position = "left") +
+  scale_x_discrete(position = "top")  +
+  ggtitle( "Distance Matrix for Directed Graph" )
+
+# plot the network and the distance matrix
+grid.arrange( d_graph, d_to_plot, ncol = 2 )
+
+```
 
 
 
