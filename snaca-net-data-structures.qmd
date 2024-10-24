@@ -388,7 +388,7 @@ adj_to_plot <- ggplot( df, aes( Var1, Var2 ) ) +
   labs(x = NULL, y = NULL) +  
   scale_y_discrete(position = "left") +
   scale_x_discrete(position = "top")  +
-  ggtitle( "Adjacency Matrix for\n Undirected Graph" )
+  ggtitle( "Adjacency Matrix for Undirected Graph" )
 
 # plot the network and the adjacency matrix
 grid.arrange( u_graph, adj_to_plot, ncol = 2 )
@@ -429,7 +429,7 @@ adj_to_plot <- ggplot( dfd, aes( Var1, Var2 ) ) +
   labs(x = NULL, y = NULL) +  
   scale_y_discrete(position = "left") +
   scale_x_discrete(position = "top")  +
-  ggtitle( "Adjacency Matrix for\n Directed Graph" )
+  ggtitle( "Adjacency Matrix for Directed Graph" )
 
 # plot the network and the adjacency matrix
 grid.arrange( d_graph, adj_to_plot, ncol = 2 )
@@ -462,7 +462,7 @@ adj_to_plot <- ggplot( dfd, aes( Var1, Var2 ) ) +
   labs(x = NULL, y = NULL) +  
   scale_y_discrete(position = "left") +
   scale_x_discrete(position = "top")  +
-  ggtitle( "Adjacency Matrix for\n Directed Graph" )
+  ggtitle( "Adjacency Matrix for Directed Graph" )
 
 # plot the network and the adjacency matrix
 grid.arrange( d_graph, adj_to_plot, ncol = 2 )

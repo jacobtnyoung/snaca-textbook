@@ -26,6 +26,7 @@ book:
     - snaca-net-data-structures.qmd
     - snaca-net-description.qmd
     - snaca-centrality-degree.qmd
+    - snaca-centrality-closeness.qmd
     - references.qmd
 
 bibliography: references.bib
