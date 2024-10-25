@@ -514,25 +514,25 @@ u_graph
 
 Recall our table of standardized closeness scores:
 
-| Node  | Distance | Closeness   | Standardized Closeness   |
-| :---: | :------: | :---------: | :----------------------: |
-| Jen   | 9        | 1/9 = 0.111 | 0.111*4 = 0.444          |
-| Tom   | 6        | 1/6 = 0.167 | 0.167*4 = 0.668          |
-| Bob   | 5        | 1/5 = 0.200 | 0.200*4 = 0.800          |
-| Leaf  | 7        | 1/7 = 0.143 | 0.143*4 = 0.572          |
-| Jim   | 7        | 1/7 = 0.143 | 0.143*4 = 0.572          |
+| Node | Distance |  Closeness  | Standardized Closeness |
+|:----:|:--------:|:-----------:|:----------------------:|
+| Jen  |    9     | 1/9 = 0.111 |    0.111\*4 = 0.444    |
+| Tom  |    6     | 1/6 = 0.167 |    0.167\*4 = 0.668    |
+| Bob  |    5     | 1/5 = 0.200 |    0.200\*4 = 0.800    |
+| Leaf |    7     | 1/7 = 0.143 |    0.143\*4 = 0.572    |
+| Jim  |    7     | 1/7 = 0.143 |    0.143\*4 = 0.572    |
 
 *What is the largest standardized closeness score?* It is 0.8 for Bob. Also, we have $g = 5$. Now, we just plug these into our equation:
 
 $$C_C = \frac{\sum\limits_{i=1}^g[0.800-C'_C(n_i)]}{[(5-2)(5-1)]/(2*5-3)}$$
 
-| Node  | Distance | Closeness   | Standardized Closeness   | Deviations of Standardized Closeness $0.800-C'_C(n_i)$ |
-| :---: | :------: | :---------: | :----------------------: | :----------------------------------------------------: |
-| Jen   | 9        | 1/9 = 0.111 | 0.111*4 = 0.444          | 0.800 - 0.444 = 0.356 |
-| Tom   | 6        | 1/6 = 0.167 | 0.167*4 = 0.668          | 0.800 - 0.668 = 0.132 |
-| Bob   | 5        | 1/5 = 0.200 | 0.200*4 = 0.800          | 0.800 - 0.800 = 0.000 |
-| Leaf  | 7        | 1/7 = 0.143 | 0.143*4 = 0.572          | 0.800 - 0.572 = 0.228 |
-| Jim   | 7        | 1/7 = 0.143 | 0.143*4 = 0.572          | 0.800 - 0.572 = 0.228 |
+| Node | Distance |  Closeness  | Standardized Closeness | Deviations of Standardized Closeness $0.800-C'_C(n_i)$ |
+|:---------:|:---------:|:---------:|:---------:|:---------------------------:|
+| Jen  |    9     | 1/9 = 0.111 |    0.111\*4 = 0.444    |                 0.800 - 0.444 = 0.356                  |
+| Tom  |    6     | 1/6 = 0.167 |    0.167\*4 = 0.668    |                 0.800 - 0.668 = 0.132                  |
+| Bob  |    5     | 1/5 = 0.200 |    0.200\*4 = 0.800    |                 0.800 - 0.800 = 0.000                  |
+| Leaf |    7     | 1/7 = 0.143 |    0.143\*4 = 0.572    |                 0.800 - 0.572 = 0.228                  |
+| Jim  |    7     | 1/7 = 0.143 |    0.143\*4 = 0.572    |                 0.800 - 0.572 = 0.228                  |
 
 Now, if we total all of the values in the last column we get 0.944. Plugging this in as our numerator, we get:
 
@@ -548,7 +548,7 @@ We can see this by examining two additional undirected networks:
 grid.arrange( star_graph, nullGrob(), circle_graph, ncol = 3, widths = c( 1, 0.2, 1 ) )
 ```
 
-The closeness centralization score for the figure on the left is 1, whereas the closeness centralization score for the figure on the right is 0. 
+The closeness centralization score for the figure on the left is 1, whereas the closeness centralization score for the figure on the right is 0.
 
 ## Directed Graphs
 
@@ -595,6 +595,10 @@ To answer this question, let's think again about what closeness measures. It is 
 $$C_C(n_i) = [\sum\limits_{j=1}^g d(n_i,n_j)]^{-1} = \frac{1}{[\sum\limits_{j=1}^g d(n_i,n_j)]}$$
 
 Note, however, that the distance of *i* to *j*, $d(n_i,n_j)$, does not necessarily equal the distance from *j* to *i*, $d(n_j,n_i)$. For example, the distance from Jen to Tom, $d(Jen,Tom)$, is 1. But, the distance from Tom to Jen, $d(Tom,Jen)$ is....? It is <u>undefined</u> because there is not an edge that originates from Tom and ends at Jen. This complicates things a bit. Let's work through an example to see what this looks like.
+
+### Outdegree
+
+Closeness centrality in directed graphs usually focuses on the send network (i.e. outgoing ties). Remember, *row* sums are the *outdegree*, so row distance tells you how close <u>you</u> are to others. That is, how many steps it takes <u>you</u> to reach another node.
 
 As before, we want to first build a *distance matrix* which shows the value of the geodesic (i.e. shortest path) from *i* to *j*.
 
@@ -702,19 +706,23 @@ $$C_C(Jen) =  \frac{1}{[\sum\limits_{j=1}^g d(Jen,n_j)]} = \frac{1}{9} = 0.111$$
 
 *What about Bob? How far is Bob from everyone?*
 
-
-HERE: Stuck with trying to get the values correct here on the plot
-
-
 ```{r}
 
 # dummy the distances for Bob
 df_d$Bob <- ifelse( rownames( df_d ) %in% c( 11:12, 14:15 ), "show", "dont" )
 
+# create a vector for the labels
+custom_labels <- c("?", "?", "?", "?")
+
+# assign these to show in the plot
+df_d$label <- ifelse( df_d$Bob == "show", 
+                     custom_labels[ match( rownames( df_d ), c( 11, 12, 14, 15 ) ) ], 
+                     "")
+
 # plot the blank distance matrix
 d_to_plot <- ggplot( df_d, aes( Var1, Var2 ) ) +
     geom_tile( aes( fill = Bob ), color = "black" ) +
-  geom_text( aes( label = ifelse( Bob == "show", c( 1, 2, 3, 4 ), "" ) ), color = "black" ) +
+  geom_text( aes( label = label ), color = "black" ) +
   scale_fill_manual(values = c("show" = "#fc23fc", "dont" = "white"), guide = "none") +
   coord_fixed() +
   theme_minimal() + 
@@ -736,13 +744,167 @@ grid.arrange( d_graph, d_to_plot, ncol = 2 )
 
 ```
 
+How far is Bob from Jen? Bob, is "infinite distance" from Jen because there is not a directed path by when he can reach her. This is also the case for the distance from Bob to Tom. But, Bob does have directed ties to Jim and Leaf. With directionality in mind, they are unreachable. But, Bob is 1 step from Leaf and 1 step from Jim along a directed path:
 
+```{r}
 
+# dummy the distances for Bob
+df_d$Bob <- ifelse( rownames( df_d ) %in% c( 11:12, 14:15 ), "show", "dont" )
 
-HERE WITH GOING THROUGH
+# create a vector for the labels
+custom_labels <- c(Inf, Inf, 1, 1)
 
+# assign these to show in the plot
+df_d$label <- ifelse( df_d$Bob == "show", 
+                     custom_labels[ match( rownames( df_d ), c( 11, 12, 14, 15 ) ) ], 
+                     "")
 
+# plot the blank distance matrix
+d_to_plot <- ggplot( df_d, aes( Var1, Var2 ) ) +
+    geom_tile( aes( fill = Bob ), color = "black" ) +
+  geom_text( aes( label = label ), color = "black" ) +
+  scale_fill_manual(values = c("show" = "#fc23fc", "dont" = "white"), guide = "none") +
+  coord_fixed() +
+  theme_minimal() + 
+  theme(panel.background = element_rect(fill = "white", color = NA),
+        panel.grid.major = element_line(color = "gray"),  
+        panel.grid.minor = element_line(color = "lightgray"),
+        axis.text.x = element_text(hjust = 0.5, vjust = 0.5),
+        axis.text.y = element_text(hjust = 0.5, vjust = 0.5),
+        axis.title = element_blank(),
+        axis.text.x.top = element_text(hjust = 0.5, vjust = 0.5),
+        axis.ticks = element_blank()) + 
+  labs(x = NULL, y = NULL) +  
+  scale_y_discrete(position = "left") +
+  scale_x_discrete(position = "top")  +
+  ggtitle( "Distance Matrix for Directed Graph" )
 
+# plot the network and the distance matrix
+grid.arrange( d_graph, d_to_plot, ncol = 2 )
+
+```
+
+So what is Bob's closeness centrality score? If we do not count the cells that have "infinite distance", and only count cells where there are values, then we just count the distance for Leaf and Jim, which sums to 2. We just plug this in:
+
+$$C_C(Bob) =  \frac{1}{[\sum\limits_{j=1}^g d(Bob,n_j)]} = \frac{1}{2} = 0.500$$
+
+Note that this changes the denominator for each node. 
+
+If we fill in our matrix, then we have the following distance values:
+
+```{r}
+
+# plot the distance matrix
+d_to_plot <- ggplot( df_d, aes( Var1, Var2 ) ) +
+  geom_tile( color = "black", fill = "white" ) +
+  geom_text( aes( label = as.vector( t( distances( digraph, mode = "out" ) ) ) ) ) +
+  coord_fixed() +
+  theme_minimal() + 
+  theme(panel.background = element_rect(fill = "white", color = NA),
+        panel.grid.major = element_line(color = "gray"),  
+        panel.grid.minor = element_line(color = "lightgray"),
+        axis.text.x = element_text(hjust = 0.5, vjust = 0.5),
+        axis.text.y = element_text(hjust = 0.5, vjust = 0.5),
+        axis.title = element_blank(),
+        axis.text.x.top = element_text(hjust = 0.5, vjust = 0.5),
+        axis.ticks = element_blank()) + 
+  labs(x = NULL, y = NULL) +  
+  scale_y_discrete(position = "left") +
+  scale_x_discrete(position = "top")  +
+  ggtitle( "Distance Matrix for Directed Graph (Outdegree)" )
+
+# plot the network and the distance matrix
+grid.arrange( d_graph, d_to_plot, ncol = 2 )
+
+```
+
+Going through the rest of the matrix, we get a closeness centrality score for each individual:
+
+| Node  | Distance | Closeness   |
+| :---: | :------: | :---------: |
+| Jen   | 9        | 1/9 = 0.111 |
+| Tom   | 5        | 1/5 = 0.200 |
+| Bob   | 2        | 1/2 = 0.500 |
+| Leaf  | 2        | 1/2 = 0.500 |
+| Jim   | 2        | 1/2 = 0.500 |
+
+#### Standardization
+
+Dont, forget: raw centrality scores are sensitive to the size of the graph. Son, as before, we can standardize our closeness score as:
+
+$$C'_C(n_i) = [\sum\limits_{j=1}^g d(n_i,n_j)]^{-1} \times [g-1]$$
+
+| Node  | Distance | Closeness   | Standardized Closeness   |
+| :---: | :------: | :---------: | :----------------------: |
+| Jen   | 9        | 1/9 = 0.111 | 0.111*4 = 0.444          |
+| Tom   | 5        | 1/5 = 0.200 | 0.200*4 = 0.800          |
+| Bob   | 2        | 1/2 = 0.500 | 0.500*4 = 0.200          |
+| Leaf  | 2        | 1/2 = 0.500 | 0.500*4 = 0.200          |
+| Jim   | 2        | 1/2 = 0.500 | 0.500*4 = 0.200          |
+
+### Indegree
+
+Note that in the prior section we were looking at *outdegree*. When we are looking at *outgoing* ties the closeness scores reflect how close a <u>you</u> are to other nodes. For example, Tom's distance to Leaf is 2, meaning that it takes 2 outgoing ties to reach Leaf. What about the other way around? We can reverse this and look at the *incoming* ties by focusing on *indegree*. Remember, *column* sums are the *indegree*, so column distance tells you how close <u>others</u> are to you. That is, how many steps it takes a <u>node</u> to reach you. The difference is a bit nuanced, but meaningful. In this case, instead of summing the rows as we did above, we could sum the columns.
+
+```{r}
+
+# plot the distance matrix
+d_to_plot <- ggplot( df_d, aes( Var1, Var2 ) ) +
+  geom_tile( color = "black", fill = "white" ) +
+  geom_text( aes( label = as.vector( distances( digraph, mode = "out" ) ) ) ) +
+  coord_fixed() +
+  theme_minimal() + 
+  theme(panel.background = element_rect(fill = "white", color = NA),
+        panel.grid.major = element_line(color = "gray"),  
+        panel.grid.minor = element_line(color = "lightgray"),
+        axis.text.x = element_text(hjust = 0.5, vjust = 0.5),
+        axis.text.y = element_text(hjust = 0.5, vjust = 0.5),
+        axis.title = element_blank(),
+        axis.text.x.top = element_text(hjust = 0.5, vjust = 0.5),
+        axis.ticks = element_blank()) + 
+  labs(x = NULL, y = NULL) +  
+  scale_y_discrete(position = "left") +
+  scale_x_discrete(position = "top")  +
+  ggtitle( "Distance Matrix for Directed Graph (Indegree)" )
+
+# plot the network and the distance matrix
+grid.arrange( d_graph, d_to_plot, ncol = 2 )
+
+```
+
+If we sum the columns, then we get these scores:
+
+| Node  | Distance | Closeness       |
+| :---: | :------: | :-------------: |
+| Jen   | 0        | 1/0 = Undefined |
+| Tom   | 1        | 1/1 = 1.000 |
+| Bob   | 5        | 1/5 = 0.200 |
+| Leaf  | 7        | 1/7 = 0.143 |
+| Jim   | 7        | 1/7 = 0.143 |
+
+#### Standardization
+
+We can then standardize our closeness score as:
+
+$$C'_C(n_i) = [\sum\limits_{j=1}^g d(n_i,n_j)]^{-1} \times [g-1]$$
+
+| Node  | Distance |    Closeness    | Standardized Closeness   |
+| :---: | :------: | :-------------: | :----------------------: |
+| Jen   | 0        | 1/0 = Undefined | Undefined*4 = Undefined  |
+| Tom   | 1        | 1/1 = 1.000     | 1.000*4 = 4.000          |
+| Bob   | 5        | 1/5 = 0.200     | 0.200*4 = 0.800          |
+| Leaf  | 7        | 1/7 = 0.143     | 0.143*4 = 0.571          |
+| Jim   | 7        | 1/7 = 0.143     | 0.143*4 = 0.571          |
+
+### Conversion to Undirected Graph
+
+**NOTE**: While these are correct, mathematically, they are far less intuitive than the scores we calculated based on the *outgoing* ties. For example, Tom's closeness score is 1. But, Bob, Leaf, and Jim cannot reach him. Also, note that Tom's standardized score is greater than 1. For these reasons, we often convert the directed graph to an undirected graph and calculate the scores on the undirected graph. In this case, the directed graph we have here would revert to the undirected graph we examined above in the section on undirected graphs.
+
+### Closeness Centralization
+
+The denominator for group closeness centralization is not defined for directed graphs. To get a centralization score, we would just convert it to an undirected graph and calculate the score. Note that, unlike with degree centralization which has two scores (i.e. indegree centralization and outdegree centralization), there is only a single centralization score for a directed graph. 
+
+HERE: NEED TO WORK ON THE SLIDE THAT SHOWS THE DIFFERENT CENTRALIZATION SCORES!!!
 
 ## Test your Knowledge
 
