@@ -830,7 +830,7 @@ Going through the rest of the matrix, we get a closeness centrality score for ea
 
 #### Standardization
 
-Dont, forget: raw centrality scores are sensitive to the size of the graph. Son, as before, we can standardize our closeness score as:
+Don't, forget: raw centrality scores are sensitive to the size of the graph. So, as before, we can standardize our closeness score as:
 
 $$C'_C(n_i) = [\sum\limits_{j=1}^g d(n_i,n_j)]^{-1} \times [g-1]$$
 
@@ -904,12 +904,22 @@ $$C'_C(n_i) = [\sum\limits_{j=1}^g d(n_i,n_j)]^{-1} \times [g-1]$$
 
 The denominator for group closeness centralization is not defined for directed graphs. To get a centralization score, we would just convert it to an undirected graph and calculate the score. Note that, unlike with degree centralization which has two scores (i.e. indegree centralization and outdegree centralization), there is only a single centralization score for a directed graph. 
 
-HERE: NEED TO WORK ON THE SLIDE THAT SHOWS THE DIFFERENT CENTRALIZATION SCORES!!!
+```{r}
+d_graph
+```
+
+For the graph above, we can compare the centralization scores based on the different measures of centrality. The indegree centralization score is 0.428, the outdegree centralization score is 0.125, and the closeness centralization score is 0.556. What can we say about the closeness centralization scores for each type of centrality? 
 
 ## Test your Knowledge
 
--   ?
+-   What does "closeness centrality" measure in a network?
+-   How does closeness centrality differ from degree centrality when analyzing a network?
+-   Explain why individuals with high closeness centrality might hold important roles within a network, even if they are not directly connected to many others.
+-   Describe a scenario in which using closeness centrality would be more informative for a crime analyst than using degree centrality.
+-   How is the calculation of closeness centrality different in directed graphs compared to undirected graphs?
+-   How does the closeness centralization score help in determining the overall structure of a network?
+-   What does it mean if the closeness centralization score of a graph is close to 1? What does it mean if the score is close to 0?
 
 ## Summary
 
-In this chapter,..In the next chapter we will focus on a final conceptualization and operationalization of centrality: *betweenness*.
+In this chapter we focused on closeness centrality. This concept is particularly useful for understanding the efficiency of information flow in a network. Unlike degree centrality, which measures direct connections, closeness centrality provides insight into the influence and access a node has through indirect connections. Studies, such as the analysis of drug trafficking and terrorist networks, have shown that individuals with high closeness centrality, though not necessarily the most directly connected, play crucial roles in maintaining communication and operational efficiency. In the next chapter we will focus on a final conceptualization and operationalization of centrality: *betweenness*.
