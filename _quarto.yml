@@ -27,6 +27,7 @@ book:
     - snaca-net-description.qmd
     - snaca-centrality-degree.qmd
     - snaca-centrality-closeness.qmd
+    - snaca-centrality-betweenness.qmd
     - references.qmd
 
 bibliography: references.bib

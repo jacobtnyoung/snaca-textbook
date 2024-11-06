@@ -18,15 +18,15 @@ library( reshape2 )  # for reshaping the matrix data for a plot
 
 ```
 
-# Closeness Centrality
+# Betweenness Centrality
 
-In the prior chapter, we examined the idea of "centrality" for nodes and "centralization" for graphs, focusing attention on the conceptual aspects of what it means to be *central* as well as the ways in which we can operationalize the concept using *degree centrality*. In this chapter we want to continue thinking about what it means to be central, but through a different conceptual lens: **closeness**. As a crime analyst, examining closeness centrality can provide crucial insights into the efficiency and influence of individuals within a group that may go beyond what you can glean from examining degree centrality. For instance, @bright2015illuminating study of drug trafficking networks illustrates how closeness centrality played a pivotal role in understanding the structure and function of illicit organizations. In this study, @bright2015illuminating examined an Australian drug trafficking network and found that individuals with higher closeness centrality were not necessarily the most visible or directly connected (in terms of degree centrality), but held critical positions because of their proximity to others in the network. These individuals could quickly access and disseminate information across the group, making them key actors in maintaining the flow of drugs, money, and communication. By identifying those with high closeness centrality, law enforcement was able to target individuals who had the potential to disrupt the network's operations more effectively than simply targeting those with the most connections.
+In the prior chapter, we examined the idea of "centrality" for nodes and "centralization" for graphs, focusing attention on the conceptual aspects of what it means to be *central* as well as the ways in which we can operationalize the concept using *degree centrality* and *closeness centrality*. In this chapter we want to continue thinking about what it means to be central, but through a different conceptual lens: **betweenness**. Betweenness centrality serves as a powerful indicator of actors who bridge otherwise disconnected parts of a network, offering unique control over the flow of information and resources across network boundaries. Unlike *degree* centrality, which emphasizes direct ties, or *closeness* centrality, which identifies actors closest to others, betweenness centrality highlights those who can influence inter-group dynamics. A compelling example is seen in a study by @calderoni2014social, which examined the Italian Mafia network, specifically the Ndrangheta organization. Calderoni found that individuals with high betweenness centrality played pivotal roles in connecting local criminal cells to broader, often international networks. These "connectors" were essential for coordinating illicit activities across regions and facilitating transactions that would otherwise remain confined to isolated groups. For law enforcement, targeting these high-betweenness actors provided a strategic leverage point to disrupt cross-regional collaboration, making them critical targets in efforts to dismantle organized crime networks. By understanding the role of betweenness, crime analysts can better assess how key individuals maintain structural cohesion within social networks.
 
 By the end of this chapter, you should be able to:
 
--   Explain the conceptualization of "centrality" as it pertains to *closeness centrality*.
--   Calculate closeness centrality scores for a set of nodes.
--   Calculate a closeness centralization score for a graph.
+-   Explain the conceptualization of "centrality" as it pertains to *betweenness centrality*.
+-   Calculate betweenness centrality scores for a set of nodes.
+-   Calculate a betweenness centralization score for a graph.
 
 ```{r, graphs-define}
 
@@ -134,41 +134,15 @@ d_graph <-
 
 ```
 
-## Case Study: Terror Networks and Closeness
+## Case Study: Money-Laundering and Betweenness
 
-@sageman2004understanding studied global Islamist terrorist networks and demonstrated how individuals with high closeness centrality played a key role in maintaining the cohesion and communication efficiency within these decentralized groups. These key players, even though they may not have had the most direct connections (high degree centrality), were crucial in maintaining the operational efficiency of the network. By targeting those with high closeness centrality, counter-terrorism efforts were able to more effectively disrupt communication channels and reduce the operational capabilities of the group.
+In a case study examining the role of betweenness centrality in criminal networks, @malm2011using analyzed money-laundering to understand how different actors influenced network cohesion and resource flow. Analyzing data from intelligence reports, the authors found that the majority of money-laundering in this drug market was self-laundering (where individuals laundered their own illicit earnings), rather than employing specialized professionals. Using betweenness centrality to assess how well-positioned launderers were within the network, @malm2011using found that self-launderers generally exhibited higher betweenness centrality, showing they often acted as key brokers facilitating information flow and transactions across different parts of the network. The findings suggested that targeting individuals with high betweenness centrality, particularly those involved in self-laundering, may be most effective for disrupting drug networks.
 
-### Closeness Centrality Terms
+## Betweenness Centrality Definition
 
-How *close* is a node to other nodes? *Closeness* centrality measures how near a node is to the other nodes in the network. That is, how "close" the nodes are. What we mean by "close" will differ based on whether the graph is undirected or directed. By the conceptual definition is the same. How close nodes are in a graph is based on the inverse of the distance of each node to every other node.
-
-Terminology:
-
--   A **path** is an edge or sequence of edges that connect two nodes.
--   A **geodesic** is the shortest path between two nodes.
--   The **distance**, $d(n_i,n_j)$, is the length of the path between *i* and *j*.
-
-Another way of saying this is that if we now how "far apart" two nodes are (i.e. the distance), then we can take the inverse of that and know how "close" the nodes are to each other.
+*Betweenness* centrality is based on the number of <u>shortest</u> paths between two nodes, *j* and *k*, that node *i* resides on. Recall that a **path** is an edge or sequence of edges that connect two nodes and a **geodesic** is the shortest path between two nodes.
 
 ## Undirected Graphs
-
-### Closeness Centrality
-
-For an undirected binary graph, the closeness is:
-
-$$C_C(n_i) = [\sum\limits_{j=1}^g d(n_i,n_j)]^{-1}$$
-
-This reads as: Find the distance between two nodes *i* and *j*, $d(n_i,n_j)$, sum them, and then take the inverse.
-
-Another way to write this is as:
-
-$$C_C(n_i) = [\sum\limits_{j=1}^g d(n_i,n_j)]^{-1} = \frac{1}{[\sum\limits_{j=1}^g d(n_i,n_j)]}$$
-
-In words, the closeness is 1 divided by the sum of the distances (called the *reciprocal*).
-
-To find the closeness centrality score, we need to first find the distances between each node. We can express these distances using a matrix, just like we did with the sociomatrix before.
-
-Let's take a look at this with some data. Recall our example network with Jen, Tom, Bob, Leaf, and Jim:
 
 ```{r, adj-undirected-define}
 
@@ -202,11 +176,195 @@ adj_to_plot <- ggplot( df, aes( Var1, Var2 ) ) +
 
 ```
 
+### Betweenness Centrality
+
+For an undirected binary graph, betweenness centrality is:
+
+$$C_B(n_i) = \sum\limits_{j<k} g_{jk}(n_i) / g_{jk}$$
+
+This equation is a bit different from those for degree and closeness centrality. Let's unpack it:
+
+-   The denominator, $g_{jk}$, is the number of geodesics linking *j* to *k*.
+-   The numerator, $g_{jk}(n_i)$, is the number of geodesics linking *j* and *k* that contain *i*.\
+-   Betweenness centrality is the ratio of the geodesics between *j* and *k* that contain *i*.
+
+In words, if *j* has to go through *i* to reach *k*, $j-i-k$, then *i* will have high betweenness because *i* is **between** *j* and *k*.
+
+Let's consider an example. Take a look at this graph:
+
 ```{r}
 u_graph
 ```
 
-How far is Jen from Tom? How far is Jen from Bob? In other words, how many edges do we count in going from Jen to Tom? From Jen to Bob?
+*What are the* <u>paths</u> between Jen and Jim?
+
+There are two:
+
+-   Jen to Tom to Bob to Jim
+-   Jen to Tom to Bob to Leaf to Jim
+
+We can see this visually:
+
+```{r}
+
+# set up the colors
+edge_colors1 <- c("#28a88d", "#28a88d", "grey80", "#28a88d", "grey80" )
+edge_colors2 <- c("#28a88d", "#28a88d", "#28a88d", "grey80", "#28a88d" )
+
+E( ugraph )$color1 <- edge_colors1
+E( ugraph )$color2 <- edge_colors2
+
+
+# do the plots
+plot1 <-
+  ggraph( ugraph, 
+          layout = layout ) +                  
+  geom_edge_link( aes( color = edge_colors1 ), width = 0.8, show.legend = FALSE ) +  
+  geom_node_point( color = "#28a88d", size = 15 ) +
+  geom_node_text( aes( label = name ), 
+                 color = "black", 
+                 size = 5,        
+                 vjust = 0.5,     
+                 hjust = 0.5 ) +
+  ggtitle( "Jen to Tom to Bob to Jim" ) + 
+  scale_x_continuous( expand = expansion( mult = c( 0.2, 0.2 ) ) ) +
+  scale_y_continuous( expand = expansion( mult = c( 0.2, 0.2 ) ) ) +
+  scale_edge_color_identity() +
+theme_void() 
+
+plot2 <-
+  ggraph( ugraph, 
+          layout = layout ) +                  
+  geom_edge_link( aes( color = edge_colors2 ), width = 0.8, show.legend = FALSE ) +  
+  geom_node_point( color = "#28a88d", size = 15 ) +
+  geom_node_text( aes( label = name ), 
+                 color = "black", 
+                 size = 5,        
+                 vjust = 0.5,     
+                 hjust = 0.5 ) +
+  ggtitle( "Jen to Tom to Bob to Leaf to Jim" ) + 
+  scale_x_continuous( expand = expansion( mult = c( 0.2, 0.2 ) ) ) +
+  scale_y_continuous( expand = expansion( mult = c( 0.2, 0.2 ) ) ) +
+  scale_edge_color_identity() +
+theme_void() 
+
+# now plot the plots
+grid.arrange( plot1, plot2, ncol = 2 )
+
+```
+
+Note that Bob is on both of those paths. He is *between* Jen and Jim on both paths. Note, however, that only one of the paths is a <u>geodesic path</u> (the Jen-\>Tom-\>Bob-\>Jim path). That is because it is shorter.
+
+Now, let's calculate the betweenness centrality for Bob. The **first** thing we need to find are the geodesic paths. Then, figure out how many of those geodesic paths contain Bob. We do this be creating a table of geodesic proportions for Bob.
+
+#### Geodesic Proportions for *Bob*
+
+|      | Jen | Tom | Leaf |              Jim              |
+|:-----|:---:|:---:|:----:|:-----------------------------:|
+| Jen  |     |     |      | [/?]{style="color: #28a88d;"} |
+| Tom  |     |     |      |                               |
+| Leaf |     |     |      |                               |
+| Jim  |     |     |      |                               |
+
+*How many geodesics from Jen to Jim?* There is 1 geodesic from **Jen** to **Jim**. So, we would just add that to our table:
+
+#### Geodesic Proportions for *Bob*
+
+|      | Jen | Tom | Leaf |              Jim              |
+|:-----|:---:|:---:|:----:|:-----------------------------:|
+| Jen  |     |     |      | [/1]{style="color: #28a88d;"} |
+| Tom  |     |     |      |                               |
+| Leaf |     |     |      |                               |
+| Jim  |     |     |      |                               |
+
+Now, how many geodesics from **Jen** to **Jim** include **Bob**? Bob is <u>on</u> the *only* geodesic from Jen to Jim. So, we would just add that to our table:
+
+#### Geodesic Proportions for *Bob*
+
+|      | Jen | Tom | Leaf |              Jim               |
+|:-----|:---:|:---:|:----:|:------------------------------:|
+| Jen  |     |     |      | [1/1]{style="color: #28a88d;"} |
+| Tom  |     |     |      |                                |
+| Leaf |     |     |      |                                |
+| Jim  |     |     |      |                                |
+
+What about Jen to Tom?
+
+```{r}
+
+edge_colors1 <- c("#28a88d", "grey80", "grey80", "grey80", "grey80" )
+E( ugraph )$color1 <- edge_colors1
+
+  ggraph( ugraph, 
+          layout = layout ) +                  
+  geom_edge_link( aes( color = edge_colors1 ), width = 0.8, show.legend = FALSE ) +  
+  geom_node_point( color = "#28a88d", size = 15 ) +
+  geom_node_text( aes( label = name ), 
+                 color = "black", 
+                 size = 5,        
+                 vjust = 0.5,     
+                 hjust = 0.5 ) +
+  ggtitle( "Jen to Tom" ) + 
+  scale_x_continuous( expand = expansion( mult = c( 0.2, 0.2 ) ) ) +
+  scale_y_continuous( expand = expansion( mult = c( 0.2, 0.2 ) ) ) +
+  scale_edge_color_identity() +
+theme_void() 
+
+```
+
+#### Geodesic Proportions for *Bob*
+
+|      | Jen |              Tom               | Leaf | Jim |
+|:-----|:---:|:------------------------------:|:----:|:---:|
+| Jen  |     | [?/?]{style="color: #28a88d;"} |      | 1/1 |
+| Tom  |     |                                |      |     |
+| Leaf |     |                                |      |     |
+| Jim  |     |                                |      |     |
+
+There is 1 geodesic from Jen to Tom, <u>and</u> Bob is not on it. So, that is a 0 for the numerator. We can update the table accordingly:
+
+#### Geodesic Proportions for *Bob*
+
+|      | Jen |              Tom               | Leaf | Jim |
+|:-----|:---:|:------------------------------:|:----:|:---:|
+| Jen  |     | [0/1]{style="color: #28a88d;"} |      | 1/1 |
+| Tom  |     |                                |      |     |
+| Leaf |     |                                |      |     |
+| Jim  |     |                                |      |     |
+
+Finally, what about Jen to Leaf?
+
+#### Geodesic Proportions for *Bob*
+
+|      | Jen | Tom |              Leaf              | Jim |
+|:-----|:---:|:---:|:------------------------------:|:---:|
+| Jen  |     | 0/1 | [?/?]{style="color: #28a88d;"} | 1/1 |
+| Tom  |     |     |                                |     |
+| Leaf |     |     |                                |     |
+| Jim  |     |     |                                |     |
+
+Bob is on the geodesic from Jen to Leaf:
+
+|      | Jen | Tom |              Leaf              | Jim |
+|:-----|:---:|:---:|:------------------------------:|:---:|
+| Jen  |     | 0/1 | [1/1]{style="color: #28a88d;"} | 1/1 |
+| Tom  |     |     |                                |     |
+| Leaf |     |     |                                |     |
+| Jim  |     |     |                                |     |
+
+Of the geodesics (Jen, Tom; Jen, Leaf; and Jen, Jim) how many include Bob? It is 2.
+
+|      | Jen | Tom | Leaf | Jim |
+|:-----|:---:|:---:|:----:|:---:|
+| Jen  |     | 0/1 | 1/1  | 1/1 |
+| Tom  |     |     |      |     |
+| Leaf |     |     |      |     |
+| Jim  |     |     |      |     |
+
+
+HERE
+
+
 
 ```{r}
 
@@ -527,7 +685,7 @@ Recall our table of standardized closeness scores:
 $$C_C = \frac{\sum\limits_{i=1}^g[0.800-C'_C(n_i)]}{[(5-2)(5-1)]/(2*5-3)}$$
 
 | Node | Distance |  Closeness  | Standardized Closeness | Deviations of Standardized Closeness $0.800-C'_C(n_i)$ |
-|:------------:|:------------:|:------------:|:------------:|:---------------:|
+|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
 | Jen  |    9     | 1/9 = 0.111 |    0.111\*4 = 0.444    |                 0.800 - 0.444 = 0.356                  |
 | Tom  |    6     | 1/6 = 0.167 |    0.167\*4 = 0.668    |                 0.800 - 0.668 = 0.132                  |
 | Bob  |    5     | 1/5 = 0.200 |    0.200\*4 = 0.800    |                 0.800 - 0.800 = 0.000                  |
