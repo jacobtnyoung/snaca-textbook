@@ -50,7 +50,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
+<link href="./snaca-centrality-betweenness.html" rel="next">
 <link href="./snaca-centrality-degree.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -178,6 +178,12 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./snaca-centrality-betweenness.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Betweenness Centrality</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -202,8 +208,15 @@ div.csl-indent {
   <li><a href="#standardization" id="toc-standardization" class="nav-link" data-scroll-target="#standardization"><span class="header-section-number">7.2.2</span> Standardization</a></li>
   <li><a href="#closeness-centralization" id="toc-closeness-centralization" class="nav-link" data-scroll-target="#closeness-centralization"><span class="header-section-number">7.2.3</span> Closeness Centralization</a></li>
   </ul></li>
-  <li><a href="#test-your-knowledge" id="toc-test-your-knowledge" class="nav-link" data-scroll-target="#test-your-knowledge"><span class="header-section-number">7.3</span> Test your Knowledge</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">7.4</span> Summary</a></li>
+  <li><a href="#directed-graphs" id="toc-directed-graphs" class="nav-link" data-scroll-target="#directed-graphs"><span class="header-section-number">7.3</span> Directed Graphs</a>
+  <ul class="collapse">
+  <li><a href="#outdegree" id="toc-outdegree" class="nav-link" data-scroll-target="#outdegree"><span class="header-section-number">7.3.1</span> Outdegree</a></li>
+  <li><a href="#indegree" id="toc-indegree" class="nav-link" data-scroll-target="#indegree"><span class="header-section-number">7.3.2</span> Indegree</a></li>
+  <li><a href="#conversion-to-undirected-graph" id="toc-conversion-to-undirected-graph" class="nav-link" data-scroll-target="#conversion-to-undirected-graph"><span class="header-section-number">7.3.3</span> Conversion to Undirected Graph</a></li>
+  <li><a href="#closeness-centralization-1" id="toc-closeness-centralization-1" class="nav-link" data-scroll-target="#closeness-centralization-1"><span class="header-section-number">7.3.4</span> Closeness Centralization</a></li>
+  </ul></li>
+  <li><a href="#test-your-knowledge" id="toc-test-your-knowledge" class="nav-link" data-scroll-target="#test-your-knowledge"><span class="header-section-number">7.4</span> Test your Knowledge</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">7.5</span> Summary</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jacobtnyoung/snaca-textbook/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -227,7 +240,7 @@ div.csl-indent {
 
 </header>
 
-<p>In the prior lecture, we examined the idea of “centrality” for nodes and “centralization” for graphs, focusing attention on the conceptual aspects of what it means to be <em>central</em> as well as the ways in which we can operationalize the concept using <em>degree centrality</em>. In this chapter we want to continue thinking about what it means to be central, but through a different conceptual lens: <strong>closeness</strong>. As a crime analyst, examining closeness centrality can provide crucial insights into the efficiency and influence of individuals within a group that may go beyond what you can glean from examining degree centrality. For instance, <span class="citation" data-cites="bright2015illuminating">Bright, Hughes, and Chalmers (<a href="references.html#ref-bright2015illuminating" role="doc-biblioref">2015</a>)</span> study of drug trafficking networks illustrates how closeness centrality played a pivotal role in understanding the structure and function of illicit organizations. In this study, <span class="citation" data-cites="bright2015illuminating">Bright, Hughes, and Chalmers (<a href="references.html#ref-bright2015illuminating" role="doc-biblioref">2015</a>)</span> examined an Australian drug trafficking network and found that individuals with higher closeness centrality were not necessarily the most visible or directly connected (in terms of degree centrality), but held critical positions because of their proximity to others in the network. These individuals could quickly access and disseminate information across the group, making them key actors in maintaining the flow of drugs, money, and communication. By identifying those with high closeness centrality, law enforcement was able to target individuals who had the potential to disrupt the network’s operations more effectively than simply targeting those with the most connections.</p>
+<p>In the prior chapter, we examined the idea of “centrality” for nodes and “centralization” for graphs, focusing attention on the conceptual aspects of what it means to be <em>central</em> as well as the ways in which we can operationalize the concept using <em>degree centrality</em>. In this chapter we want to continue thinking about what it means to be central, but through a different conceptual lens: <strong>closeness</strong>. As a crime analyst, examining closeness centrality can provide crucial insights into the efficiency and influence of individuals within a group that may go beyond what you can glean from examining degree centrality. For instance, <span class="citation" data-cites="bright2015illuminating">Bright, Hughes, and Chalmers (<a href="references.html#ref-bright2015illuminating" role="doc-biblioref">2015</a>)</span> study of drug trafficking networks illustrates how closeness centrality played a pivotal role in understanding the structure and function of illicit organizations. In this study, <span class="citation" data-cites="bright2015illuminating">Bright, Hughes, and Chalmers (<a href="references.html#ref-bright2015illuminating" role="doc-biblioref">2015</a>)</span> examined an Australian drug trafficking network and found that individuals with higher closeness centrality were not necessarily the most visible or directly connected (in terms of degree centrality), but held critical positions because of their proximity to others in the network. These individuals could quickly access and disseminate information across the group, making them key actors in maintaining the flow of drugs, money, and communication. By identifying those with high closeness centrality, law enforcement was able to target individuals who had the potential to disrupt the network’s operations more effectively than simply targeting those with the most connections.</p>
 <p>By the end of this chapter, you should be able to:</p>
 <ul>
 <li>Explain the conceptualization of “centrality” as it pertains to <em>closeness centrality</em>.</li>
@@ -500,11 +513,11 @@ div.csl-indent {
 <p><span class="math display">\[C_C = \frac{\sum\limits_{i=1}^g[0.800-C'_C(n_i)]}{[(5-2)(5-1)]/(2*5-3)}\]</span></p>
 <table class="table">
 <colgroup>
-<col style="width: 4%">
-<col style="width: 7%">
-<col style="width: 10%">
+<col style="width: 19%">
+<col style="width: 19%">
+<col style="width: 19%">
+<col style="width: 19%">
 <col style="width: 23%">
-<col style="width: 52%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -568,18 +581,307 @@ div.csl-indent {
 </div>
 </div>
 <p>The closeness centralization score for the figure on the left is 1, whereas the closeness centralization score for the figure on the right is 0.</p>
-<p>HERE WITH GOING THROUGH</p>
 </section>
 </section>
-<section id="test-your-knowledge" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="test-your-knowledge"><span class="header-section-number">7.3</span> Test your Knowledge</h2>
+<section id="directed-graphs" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="directed-graphs"><span class="header-section-number">7.3</span> Directed Graphs</h2>
+<p>As was covered in the prior chapter, when we have a directed graph, we have to consider directionality when evaluating a centrality measure. For example, in the graph below, <em>how far is Jen from Tom?</em> <em>How far is Jen from Bob?</em></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-centrality-closeness_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>To answer this question, let’s think again about what closeness measures. It is the inverse of the distance matrix. So, if we are looking at outgoing ties (i.e.&nbsp;<span class="math inline">\(L(n_i,n_j)\)</span>) then our equation is the same for the undirected graph:</p>
+<p><span class="math display">\[C_C(n_i) = [\sum\limits_{j=1}^g d(n_i,n_j)]^{-1} = \frac{1}{[\sum\limits_{j=1}^g d(n_i,n_j)]}\]</span></p>
+<p>Note, however, that the distance of <em>i</em> to <em>j</em>, <span class="math inline">\(d(n_i,n_j)\)</span>, does not necessarily equal the distance from <em>j</em> to <em>i</em>, <span class="math inline">\(d(n_j,n_i)\)</span>. For example, the distance from Jen to Tom, <span class="math inline">\(d(Jen,Tom)\)</span>, is 1. But, the distance from Tom to Jen, <span class="math inline">\(d(Tom,Jen)\)</span> is….? It is <u>undefined</u> because there is not an edge that originates from Tom and ends at Jen. This complicates things a bit. Let’s work through an example to see what this looks like.</p>
+<section id="outdegree" class="level3" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="outdegree"><span class="header-section-number">7.3.1</span> Outdegree</h3>
+<p>Closeness centrality in directed graphs usually focuses on the send network (i.e.&nbsp;outgoing ties). Remember, <em>row</em> sums are the <em>outdegree</em>, so row distance tells you how close <u>you</u> are to others. That is, how many steps it takes <u>you</u> to reach another node.</p>
+<p>As before, we want to first build a <em>distance matrix</em> which shows the value of the geodesic (i.e.&nbsp;shortest path) from <em>i</em> to <em>j</em>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-centrality-closeness_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><em>How far is Jen from Tom?</em> <em>How far is Jen from Bob?</em> To figure this out, we can simply count the steps from Jen to Tom. Then Jen to Bob.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-centrality-closeness_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Jen is 1 step from Tom and 2 steps from Bob. <em>What about the rest of the scores for Jen?</em></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-centrality-closeness_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now, recall that we sum these distances, and then take the reciprocal:</p>
+<p><span class="math display">\[C_C(Jen) =  \frac{1}{[\sum\limits_{j=1}^g d(Jen,n_j)]} = \frac{1}{9} = 0.111\]</span></p>
+<p><em>What about Bob? How far is Bob from everyone?</em></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-centrality-closeness_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>How far is Bob from Jen? Bob, is “infinite distance” from Jen because there is not a directed path by when he can reach her. This is also the case for the distance from Bob to Tom. But, Bob does have directed ties to Jim and Leaf. With directionality in mind, they are unreachable. But, Bob is 1 step from Leaf and 1 step from Jim along a directed path:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-centrality-closeness_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>So what is Bob’s closeness centrality score? If we do not count the cells that have “infinite distance”, and only count cells where there are values, then we just count the distance for Leaf and Jim, which sums to 2. We just plug this in:</p>
+<p><span class="math display">\[C_C(Bob) =  \frac{1}{[\sum\limits_{j=1}^g d(Bob,n_j)]} = \frac{1}{2} = 0.500\]</span></p>
+<p>Note that this changes the denominator for each node.</p>
+<p>If we fill in our matrix, then we have the following distance values:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-centrality-closeness_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Going through the rest of the matrix, we get a closeness centrality score for each individual:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Node</th>
+<th style="text-align: center;">Distance</th>
+<th style="text-align: center;">Closeness</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Jen</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">1/9 = 0.111</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Tom</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1/5 = 0.200</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Bob</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1/2 = 0.500</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Leaf</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1/2 = 0.500</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Jim</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1/2 = 0.500</td>
+</tr>
+</tbody>
+</table>
+<section id="standardization-1" class="level4" data-number="7.3.1.1">
+<h4 data-number="7.3.1.1" class="anchored" data-anchor-id="standardization-1"><span class="header-section-number">7.3.1.1</span> Standardization</h4>
+<p>Don’t, forget: raw centrality scores are sensitive to the size of the graph. So, as before, we can standardize our closeness score as:</p>
+<p><span class="math display">\[C'_C(n_i) = [\sum\limits_{j=1}^g d(n_i,n_j)]^{-1} \times [g-1]\]</span></p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Node</th>
+<th style="text-align: center;">Distance</th>
+<th style="text-align: center;">Closeness</th>
+<th style="text-align: center;">Standardized Closeness</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Jen</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">1/9 = 0.111</td>
+<td style="text-align: center;">0.111*4 = 0.444</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Tom</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1/5 = 0.200</td>
+<td style="text-align: center;">0.200*4 = 0.800</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Bob</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1/2 = 0.500</td>
+<td style="text-align: center;">0.500*4 = 0.200</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Leaf</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1/2 = 0.500</td>
+<td style="text-align: center;">0.500*4 = 0.200</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Jim</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1/2 = 0.500</td>
+<td style="text-align: center;">0.500*4 = 0.200</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="indegree" class="level3" data-number="7.3.2">
+<h3 data-number="7.3.2" class="anchored" data-anchor-id="indegree"><span class="header-section-number">7.3.2</span> Indegree</h3>
+<p>Note that in the prior section we were looking at <em>outdegree</em>. When we are looking at <em>outgoing</em> ties the closeness scores reflect how close a <u>you</u> are to other nodes. For example, Tom’s distance to Leaf is 2, meaning that it takes 2 outgoing ties to reach Leaf. What about the other way around? We can reverse this and look at the <em>incoming</em> ties by focusing on <em>indegree</em>. Remember, <em>column</em> sums are the <em>indegree</em>, so column distance tells you how close <u>others</u> are to you. That is, how many steps it takes a <u>node</u> to reach you. The difference is a bit nuanced, but meaningful. In this case, instead of summing the rows as we did above, we could sum the columns.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-centrality-closeness_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>If we sum the columns, then we get these scores:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Node</th>
+<th style="text-align: center;">Distance</th>
+<th style="text-align: center;">Closeness</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Jen</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1/0 = Undefined</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Tom</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1/1 = 1.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Bob</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1/5 = 0.200</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Leaf</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">1/7 = 0.143</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Jim</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">1/7 = 0.143</td>
+</tr>
+</tbody>
+</table>
+<section id="standardization-2" class="level4" data-number="7.3.2.1">
+<h4 data-number="7.3.2.1" class="anchored" data-anchor-id="standardization-2"><span class="header-section-number">7.3.2.1</span> Standardization</h4>
+<p>We can then standardize our closeness score as:</p>
+<p><span class="math display">\[C'_C(n_i) = [\sum\limits_{j=1}^g d(n_i,n_j)]^{-1} \times [g-1]\]</span></p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Node</th>
+<th style="text-align: center;">Distance</th>
+<th style="text-align: center;">Closeness</th>
+<th style="text-align: center;">Standardized Closeness</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Jen</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1/0 = Undefined</td>
+<td style="text-align: center;">Undefined*4 = Undefined</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Tom</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1/1 = 1.000</td>
+<td style="text-align: center;">1.000*4 = 4.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Bob</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1/5 = 0.200</td>
+<td style="text-align: center;">0.200*4 = 0.800</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Leaf</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">1/7 = 0.143</td>
+<td style="text-align: center;">0.143*4 = 0.571</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Jim</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">1/7 = 0.143</td>
+<td style="text-align: center;">0.143*4 = 0.571</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="conversion-to-undirected-graph" class="level3" data-number="7.3.3">
+<h3 data-number="7.3.3" class="anchored" data-anchor-id="conversion-to-undirected-graph"><span class="header-section-number">7.3.3</span> Conversion to Undirected Graph</h3>
+<p><strong>NOTE</strong>: While these are correct, mathematically, they are far less intuitive than the scores we calculated based on the <em>outgoing</em> ties. For example, Tom’s closeness score is 1. But, Bob, Leaf, and Jim cannot reach him. Also, note that Tom’s standardized score is greater than 1. For these reasons, we often convert the directed graph to an undirected graph and calculate the scores on the undirected graph. In this case, the directed graph we have here would revert to the undirected graph we examined above in the section on undirected graphs.</p>
+</section>
+<section id="closeness-centralization-1" class="level3" data-number="7.3.4">
+<h3 data-number="7.3.4" class="anchored" data-anchor-id="closeness-centralization-1"><span class="header-section-number">7.3.4</span> Closeness Centralization</h3>
+<p>The denominator for group closeness centralization is not defined for directed graphs. To get a centralization score, we would just convert it to an undirected graph and calculate the score. Note that, unlike with degree centralization which has two scores (i.e.&nbsp;indegree centralization and outdegree centralization), there is only a single centralization score for a directed graph.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-centrality-closeness_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>For the graph above, we can compare the centralization scores based on the different measures of centrality. The indegree centralization score is 0.428, the outdegree centralization score is 0.125, and the closeness centralization score is 0.556. What can we say about the closeness centralization scores for each type of centrality?</p>
+</section>
+</section>
+<section id="test-your-knowledge" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="test-your-knowledge"><span class="header-section-number">7.4</span> Test your Knowledge</h2>
 <ul>
-<li>?</li>
+<li>What does “closeness centrality” measure in a network?</li>
+<li>How does closeness centrality differ from degree centrality when analyzing a network?</li>
+<li>Explain why individuals with high closeness centrality might hold important roles within a network, even if they are not directly connected to many others.</li>
+<li>Describe a scenario in which using closeness centrality would be more informative for a crime analyst than using degree centrality.</li>
+<li>How is the calculation of closeness centrality different in directed graphs compared to undirected graphs?</li>
+<li>How does the closeness centralization score help in determining the overall structure of a network?</li>
+<li>What does it mean if the closeness centralization score of a graph is close to 1? What does it mean if the score is close to 0?</li>
 </ul>
 </section>
-<section id="summary" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="summary"><span class="header-section-number">7.4</span> Summary</h2>
-<p>In this chapter,..In the next chapter we will focus on a final conceptualization and operationalization of centrality: <em>betweenness</em>.</p>
+<section id="summary" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="summary"><span class="header-section-number">7.5</span> Summary</h2>
+<p>In this chapter we focused on closeness centrality. This concept is particularly useful for understanding the efficiency of information flow in a network. Unlike degree centrality, which measures direct connections, closeness centrality provides insight into the influence and access a node has through indirect connections. Studies, such as the analysis of drug trafficking and terrorist networks, have shown that individuals with high closeness centrality, though not necessarily the most directly connected, play crucial roles in maintaining communication and operational efficiency. In the next chapter we will focus on a final conceptualization and operationalization of centrality: <em>betweenness</em>.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
@@ -833,8 +1135,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./snaca-centrality-betweenness.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Betweenness Centrality</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
