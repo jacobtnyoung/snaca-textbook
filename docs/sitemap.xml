@@ -2,46 +2,50 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-textbook/index.html</loc>
-    <lastmod>2024-11-20T16:57:49.370Z</lastmod>
+    <lastmod>2024-11-20T21:45:41.265Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-textbook/snaca-introduction.html</loc>
-    <lastmod>2024-11-20T16:57:49.379Z</lastmod>
+    <lastmod>2024-11-20T21:45:41.275Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-textbook/snaca-theory.html</loc>
-    <lastmod>2024-11-20T16:57:49.386Z</lastmod>
+    <lastmod>2024-11-20T21:45:41.283Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-textbook/snaca-methods.html</loc>
-    <lastmod>2024-11-20T16:57:49.392Z</lastmod>
+    <lastmod>2024-11-20T21:45:41.289Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-textbook/snaca-net-data-structures.html</loc>
-    <lastmod>2024-11-20T16:57:49.399Z</lastmod>
+    <lastmod>2024-11-20T21:45:41.300Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-textbook/snaca-net-description.html</loc>
-    <lastmod>2024-11-20T16:57:49.406Z</lastmod>
+    <lastmod>2024-11-20T21:45:41.308Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-textbook/snaca-centrality-degree.html</loc>
-    <lastmod>2024-11-20T16:57:49.421Z</lastmod>
+    <lastmod>2024-11-20T21:45:41.322Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-textbook/snaca-centrality-closeness.html</loc>
-    <lastmod>2024-11-20T16:57:49.436Z</lastmod>
+    <lastmod>2024-11-20T21:45:41.340Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-textbook/snaca-centrality-betweenness.html</loc>
-    <lastmod>2024-11-20T16:57:49.462Z</lastmod>
+    <lastmod>2024-11-20T21:45:41.366Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-textbook/snaca-bipartite.html</loc>
-    <lastmod>2024-11-20T16:57:49.475Z</lastmod>
+    <lastmod>2024-11-20T21:45:41.377Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jacobtnyoung.github.io/snaca-textbook/snaca-projection.html</loc>
+    <lastmod>2024-11-20T21:45:41.388Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-textbook/references.html</loc>
-    <lastmod>2024-11-20T16:57:49.479Z</lastmod>
+    <lastmod>2024-11-20T21:45:41.393Z</lastmod>
   </url>
 </urlset>
