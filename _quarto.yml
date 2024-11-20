@@ -36,9 +36,10 @@ bibliography: references.bib
 format:
   html:
     theme: darkly
+
     navbar:
       right:
-      
+
       # add a link to report an issue
         - text: "Report an Issue"
           href: "https://github.com/jacobtnyoung/sna-textbook-revisions/issues"
