@@ -24,30 +24,30 @@ In the prior chapters, we have mainly focused our attention on networks that hav
 
 But, not all of the networks we want to examine have a single node set. More complex relational structures have multiple partitions of node sets (i.e. *n*-mode). **Bipartite** graphs allow us to represent networks that have two partitions of nodes. In many instances, data are structured such that nodes come from two separate classes. Some examples include:
 
-  * Members of various groups
-  * Authors of papers
-  * Students in courses
-  * Participants in an event
+-   Members of various groups
+-   Authors of papers
+-   Students in courses
+-   Participants in an event
 
 In all these examples, there are not direct ties between the nodes. For example, students who attend the same courses are not connected directly through some tie like friendship. Rather, they are connected through their shared course taking. It is the *courses* that connect them.
 
-In contrast to *unipartite* graphs, this is a very different way of **conceptualizing** and **operationalizing** social structure. 
+In contrast to *unipartite* graphs, this is a very different way of **conceptualizing** and **operationalizing** social structure.
 
-## Motivating Question and Empirical Example
+## Case Study: Body-Worn Cameras, Police Officer Perceptions, and Shared-Incident Networks
 
 Let's revisit an empirical question from the introductory chapter of this book:
 
-  *What determines whether a police officer endorses the use of body-worn cameras and whether they activate their body-camera during an incident?*
+*What determines whether a police officer endorses the use of body-worn cameras and whether they activate their body-camera during an incident?*
 
 Rather than focus on individual characteristics (e.g. age, experience) or situational characteristics (e.g. time of day, incident), a study by @young2015 entitled, *Diffusion of Ideas and Technology: The Role of Networks in Influencing the Endorsement and Use of On-Officer Video Cameras*, focused on the **network** among police officers. Specifically, they examined two research questions:
 
 -   How do police officers "frame" body-worn cameras?
 -   Is the meaning officers attribute to cameras created and transmitted in groups?
-  
-To answer these questions, they proposed the following model:  
+
+To answer these questions, they proposed the following model:
 
 ```{r, fig.cap = "", out.width = "60%"}
-knitr::include_graphics( "images/ch-01-model-figure.jpeg" )
+knitr::include_graphics( "images/young-ready-model-figure.jpeg" )
 ```
 
 In this model, the argued that police officers views of body-worn cameras influence whether they use their cameras in incidents. Where do these views come from? The authors proposed a *contagion* process whereby officers who shared incidents together exchanged views about the legitimacy of body-worn cameras.
@@ -57,7 +57,7 @@ Thus, the network matters!
 The network @young2015 analyzed is shown below:
 
 ```{r, fig.cap = "", out.width = "60%"}
-knitr::include_graphics( "images/ch-01-net-06.jpeg" )
+knitr::include_graphics( "images/young-ready-bipartite-figure.jpeg" )
 ```
 
 In this network, incidents (white circles) connect officers (squares and triangles). This is a bipartite graph because there are two sets of nodes: incidents and officers. The plot shows two types of officers, those who were in the treatment condition of the study (i.e. they were assigned a body-worn camera) and those who were in the control condition (i.e. they did not receive a camera). The focus of the study was how exposure to body-cameras during incidents influenced views, especially for those who were not assigned a camera. What @young2015 found was that officers views of body-cameras changed based on who they interacted with in the shared-incident network.
@@ -68,63 +68,7 @@ Data such as this are what we are going to examine in this chapter. By the end o
 -   Understand how bipartite graphs are represented in matrix form.
 -   Analyze the structural properties of bipartite graphs.
 
-## Biparite Graphs
-
-
-```{r, graphs-define}
-
-# ----
-# This creates the graphs for the plots below
-
-twomode_graph  <- graph_from_data_frame( 
-  data.frame( 
-    from = c( 1,2,3, 1,3,4, 4,5,6, 4,   4,6 ),
-    to   = c( 7,7,7, 8,8,8, 9,9,9, 10, 11,11   ) ), 
-  directed = FALSE )
-
-
-!!!HERE WITH WORKING THROUGH THIS
-
-
-
-# Set the random seed to render the same plot
-set.seed( 507 )
-
-# Set a fixed layout using the Fruchterman-Reingold layout
-layout <- layout_with_fr( ugraph )
-dilayout <- layout_with_fr( digraph )
-
-# Set the labels
-custom_labels <- c( "Jen","Tom","Bob","Leaf","Jim" )
-
-# Assign the labels to the graph nodes
-V( ugraph )$name <- custom_labels
-V( digraph )$name <- custom_labels
-
-```
-
-```{r, plots-define}
-
-# create the undirected plots
-u_graph <-
-  ggraph( ugraph, 
-          layout = layout ) +                  
-  geom_edge_link( color = "black", width = 0.8 ) +  
-  geom_node_point( color = "#28a88d", size = 15 ) +
-  geom_node_text( aes( label = name ), 
-                 color = "black", 
-                 size = 5,        
-                 vjust = 0.5,     
-                 hjust = 0.5 ) +
-  ggtitle( "Undirected Graph" ) + 
-  scale_x_continuous( expand = expansion( mult = c( 0.2, 0.2 ) ) ) +
-  scale_y_continuous( expand = expansion( mult = c( 0.2, 0.2 ) ) ) +
-theme_void() 
-
-
-```
-
-### Graph Notation
+## Biparite Graphs: Notation
 
 A **bipartite** graph has two partitions of nodes (called *modes*), and edges only occur between these partitions (i.e. not within). The definition of a bipartite graph is the following: $G = (N,M,L)$ where $G$ is the graph and is defined by:
 
@@ -136,14 +80,6 @@ In this definition, there are $N$ nodes in the first set, $M$ nodes in the secon
 
 We can visualize an example as:
 
-
-
-
-HERE!!!
-
-
-
-
 ```{r, fig.cap = "", out.width = "60%"}
 knitr::include_graphics( "images/ch-10-graph-01.jpeg" )
 ```
@@ -154,588 +90,192 @@ In this example, we can define all of pieces of the graph using our definition a
   * Node set: $M = \{m_1, m_2, m_3, m_4, m_5 \}$
   * Line/Edge set: $L = \{l_1, l_2…, l_{12} \}$
 
-<br>
+### Adjacency
 
-#### Adjacency
-
-As discussed in the chapter on [data structures for unipartite graphs](), we define two nodes, $n_i$ and $n_j$ as **adjacent** if there is a link $l_k = (n_i,n_j)$. We then went on to show that these data can be represented as an **adjacency matrix**, where each node is listed on the row and the column. The $i_{th}$ row and the $j_{th}$ column of $X_{ij}$ records the value of a tie from *i* to *j*. 
+As discussed in the [Network Data Structures]() chapter, we define two nodes, $n_i$ and $n_j$ as **adjacent** if there is a link $l_k = (n_i,n_j)$. We then went on to show that these data can be represented as an **adjacency matrix**, where each node is listed on the row and the column. The $i_{th}$ row and the $j_{th}$ column of $X_{ij}$ records the value of a tie from *i* to *j*. 
 
 In bipartite graphs, we can also use an **adjacency matrix**. But, we have to represent the two different sets of nodes $N$ and $M$. we define two nodes from separate node sets, $n_i$ and $m_j$ as **adjacent** if there is a link $l_k = (n_i,m_j)$. The $i_{th}$ row and the $j_{th}$ column of $X_{ij}$ records the value of a tie from $n_i$ to $m_j$. Note the difference. That is, $N$ (the first mode) is listed on the **rows** and $M$ is listed on the **columns** of the adjacency matrix. As a consequence, the *order* of the matrix is $N \times M$, meaning that it has $N$ rows and $M$ columns. Thus, if the number of nodes in $N$ is not equal to the number of nodes in $M$, we have a **rectangular** matrix (as opposed to a **square** matrix when the order is equal, as with unipartite graphs).
 
+Let's take our example network above and build the adjacency matrix:
 
-
-
-## Case Study: Money-Laundering and Betweenness
-
-In a case study examining the role of betweenness centrality in criminal networks, @malm2011using analyzed money-laundering to understand how different actors influenced network cohesion and resource flow. Analyzing data from intelligence reports, the authors found that the majority of money-laundering in this drug market was self-laundering (where individuals laundered their own illicit earnings), rather than employing specialized professionals. Using betweenness centrality to assess how well-positioned launderers were within the network, @malm2011using found that self-launderers generally exhibited higher betweenness centrality, showing they often acted as key brokers facilitating information flow and transactions across different parts of the network. The findings suggested that targeting individuals with high betweenness centrality, particularly those involved in self-laundering, may be most effective for disrupting drug networks.
-
-## Betweenness Centrality Definition
-
-*Betweenness* centrality is based on the number of <u>shortest</u> paths between two nodes, *j* and *k*, that node *i* resides on. Recall that a **path** is an edge or sequence of edges that connect two nodes and a **geodesic** is the shortest path between two nodes.
-
-## Undirected Graphs
-
-### Betweenness Centrality
-
-For an undirected binary graph, betweenness centrality is:
-
-$$C_B(n_i) = \sum\limits_{j<k} g_{jk}(n_i) / g_{jk}$$
-
-This equation is a bit different from those for degree and closeness centrality. Let's unpack it:
-
--   The denominator, $g_{jk}$, is the number of geodesics linking *j* to *k*.
--   The numerator, $g_{jk}(n_i)$, is the number of geodesics linking *j* and *k* that contain *i*.\
--   Betweenness centrality is the ratio of the geodesics between *j* and *k* that contain *i*.
-
-In words, if *j* has to go through *i* to reach *k*, $j-i-k$, then *i* will have high betweenness because *i* is **between** *j* and *k*.
-
-Let's consider an example. Take a look at this graph:
-
-```{r}
-u_graph
+```{r, fig.cap = "", out.width = "60%"}
+knitr::include_graphics( "images/ch-10-graph-02.jpeg" )
 ```
 
-*What are the* <u>paths</u> between Jen and Jim?
+Each column corresponds to the edges incident on a node, $m_i$, from the set $M$. The set of nodes $M$ usually corresponds to an event, group, etc.
 
-There are two:
-
--   Jen to Tom to Bob to Jim
--   Jen to Tom to Bob to Leaf to Jim
-
-We can see this visually:
-
-```{r}
-
-# set up the colors
-edge_colors1 <- c("#28a88d", "#28a88d", "grey80", "#28a88d", "grey80" )
-edge_colors2 <- c("#28a88d", "#28a88d", "#28a88d", "grey80", "#28a88d" )
-
-E( ugraph )$color1 <- edge_colors1
-E( ugraph )$color2 <- edge_colors2
-
-
-# do the plots
-plot1 <-
-  ggraph( ugraph, 
-          layout = layout ) +                  
-  geom_edge_link( aes( color = edge_colors1 ), width = 0.8, show.legend = FALSE ) +  
-  geom_node_point( color = "#28a88d", size = 15 ) +
-  geom_node_text( aes( label = name ), 
-                 color = "black", 
-                 size = 5,        
-                 vjust = 0.5,     
-                 hjust = 0.5 ) +
-  ggtitle( "Jen to Tom to Bob to Jim" ) + 
-  scale_x_continuous( expand = expansion( mult = c( 0.2, 0.2 ) ) ) +
-  scale_y_continuous( expand = expansion( mult = c( 0.2, 0.2 ) ) ) +
-  scale_edge_color_identity() +
-theme_void() 
-
-plot2 <-
-  ggraph( ugraph, 
-          layout = layout ) +                  
-  geom_edge_link( aes( color = edge_colors2 ), width = 0.8, show.legend = FALSE ) +  
-  geom_node_point( color = "#28a88d", size = 15 ) +
-  geom_node_text( aes( label = name ), 
-                 color = "black", 
-                 size = 5,        
-                 vjust = 0.5,     
-                 hjust = 0.5 ) +
-  ggtitle( "Jen to Tom to Bob to Leaf to Jim" ) + 
-  scale_x_continuous( expand = expansion( mult = c( 0.2, 0.2 ) ) ) +
-  scale_y_continuous( expand = expansion( mult = c( 0.2, 0.2 ) ) ) +
-  scale_edge_color_identity() +
-theme_void() 
-
-# now plot the plots
-grid.arrange( plot1, plot2, ncol = 2 )
-
+```{r, fig.cap = "", out.width = "60%"}
+knitr::include_graphics( "images/ch-10-graph-03.jpeg" )
 ```
 
-Note that Bob is on both of those paths. He is *between* Jen and Jim on both paths. Note, however, that only one of the paths is a <u>geodesic path</u> (the Jen-\>Tom-\>Bob-\>Jim path). That is because it is shorter.
+Each row corresponds to the edges incident on a node, $n_j$, from the set $N$. The set of nodes $N$ usually corresponds to a person.
 
-Now, let's calculate the betweenness centrality for Bob. The **first** thing we need to find are the geodesic paths. Then, figure out how many of those geodesic paths contain Bob. We do this be creating a table of geodesic proportions for Bob.
-
-#### Geodesic Proportions for *Bob*
-
-|      | Jen | Tom | Leaf |              Jim              |
-|:-----|:---:|:---:|:----:|:-----------------------------:|
-| Jen  |     |     |      | [/?]{style="color: #28a88d;"} |
-| Tom  |     |     |      |                               |
-| Leaf |     |     |      |                               |
-| Jim  |     |     |      |                               |
-
-*How many geodesics from Jen to Jim?* There is 1 geodesic from **Jen** to **Jim**. So, we would just add that to our table:
-
-#### Geodesic Proportions for *Bob*
-
-|      | Jen | Tom | Leaf |              Jim              |
-|:-----|:---:|:---:|:----:|:-----------------------------:|
-| Jen  |     |     |      | [/1]{style="color: #28a88d;"} |
-| Tom  |     |     |      |                               |
-| Leaf |     |     |      |                               |
-| Jim  |     |     |      |                               |
-
-Now, how many geodesics from **Jen** to **Jim** include **Bob**? Bob is <u>on</u> the *only* geodesic from Jen to Jim. So, we would just add that to our table:
-
-#### Geodesic Proportions for *Bob*
-
-|      | Jen | Tom | Leaf |              Jim               |
-|:-----|:---:|:---:|:----:|:------------------------------:|
-| Jen  |     |     |      | [1/1]{style="color: #28a88d;"} |
-| Tom  |     |     |      |                                |
-| Leaf |     |     |      |                                |
-| Jim  |     |     |      |                                |
-
-What about Jen to Tom?
-
-```{r}
-
-edge_colors1 <- c("#28a88d", "grey80", "grey80", "grey80", "grey80" )
-E( ugraph )$color1 <- edge_colors1
-
-  ggraph( ugraph, 
-          layout = layout ) +                  
-  geom_edge_link( aes( color = edge_colors1 ), width = 0.8, show.legend = FALSE ) +  
-  geom_node_point( color = "#28a88d", size = 15 ) +
-  geom_node_text( aes( label = name ), 
-                 color = "black", 
-                 size = 5,        
-                 vjust = 0.5,     
-                 hjust = 0.5 ) +
-  ggtitle( "Jen to Tom" ) + 
-  scale_x_continuous( expand = expansion( mult = c( 0.2, 0.2 ) ) ) +
-  scale_y_continuous( expand = expansion( mult = c( 0.2, 0.2 ) ) ) +
-  scale_edge_color_identity() +
-theme_void() 
-
+```{r, fig.cap = "", out.width = "60%"}
+knitr::include_graphics( "images/ch-10-graph-04.jpeg" )
 ```
 
-#### Geodesic Proportions for *Bob*
+Here is a question: what does $l_k = (n_i,n_i)$ represent in a **unipartite** graph? What does $l_k = (n_i,m_i)$ represent in a **bipartite** graph?
 
-|      | Jen |              Tom               | Leaf | Jim |
-|:-----|:---:|:------------------------------:|:----:|:---:|
-| Jen  |     | [?/?]{style="color: #28a88d;"} |      | 1/1 |
-| Tom  |     |                                |      |     |
-| Leaf |     |                                |      |     |
-| Jim  |     |                                |      |     |
+In a **unipartite** graph, $l_k = (n_i,n_i)$ would represent an edge from $n_i$ to $n_i$. This is called a *loop* and it represents a self-nomination. Recall from the chapter on [unipartite data structures]() that we usually set these elements of the matrix to zero. 
 
-There is 1 geodesic from Jen to Tom, <u>and</u> Bob is not on it. So, that is a 0 for the numerator. We can update the table accordingly:
+However, in a **bipartite** graph, $l_k = (n_i,m_i)$ would represent an edge from $n_i$ to $m_i$. That is, a link between the *ith* row and the *ith* column. For example, in the graph above, the line $l_k = (n_A,m_1)$ has a value 1 meaning that node *A* in the $N$ node set is connected to node *1* in the $M$ node set.
 
-#### Geodesic Proportions for *Bob*
+## Bipartite Graphs: Properties
 
-|      | Jen |              Tom               | Leaf | Jim |
-|:-----|:---:|:------------------------------:|:----:|:---:|
-| Jen  |     | [0/1]{style="color: #28a88d;"} |      | 1/1 |
-| Tom  |     |                                |      |     |
-| Leaf |     |                                |      |     |
-| Jim  |     |                                |      |     |
+There are several approaches to examining bipartite graphs. Either we can keep the graph bipartite and examine the properties (as discussed below). Or, what is commonly done is that we *project* the graph to one mode (either N or M) and examine the properties. We will examine projection in the next chapter. Here, let's see what properties we can describe for a biparite graph (i.e. a two-mode network).
 
-Finally, what about Jen to Leaf?
+As with unipartite graphs, we can describe the structure of the network in various ways. Examples:
 
-#### Geodesic Proportions for *Bob*
+-   How dense is the graph? (*Density*)
+-   How are the edges distributed over nodes? (*Degree Centrality*)
+-   What is the average centrality score? (*Mean Degree Centrality*)
 
-|      | Jen | Tom |              Leaf              | Jim |
-|:-----|:---:|:---:|:------------------------------:|:---:|
-| Jen  |     | 0/1 | [?/?]{style="color: #28a88d;"} | 1/1 |
-| Tom  |     |     |                                |     |
-| Leaf |     |     |                                |     |
-| Jim  |     |     |                                |     |
+### Density: Bipartite Graphs
 
-Bob is on the geodesic from Jen to Leaf:
+The **density** of a bipartite graph is the number of edges observed $L$, divided by the number of possible pairwise relations between the node sets $N$ and $M$. The number of possible connections between the nodes is $N \times M$. Thus, the density is:
 
-#### Geodesic Proportions for *Bob*
+$$\frac{L}{N \times M}$$
 
-|      | Jen | Tom |              Leaf              | Jim |
-|:-----|:---:|:---:|:------------------------------:|:---:|
-| Jen  |     | 0/1 | [1/1]{style="color: #28a88d;"} | 1/1 |
-| Tom  |     |     |                                |     |
-| Leaf |     |     |                                |     |
-| Jim  |     |     |                                |     |
+What is the *density* of our example network?
 
-Of the geodesics between $Jen,Tom$, $Jen,Leaf$, and $Jen,Tom$, how many include Bob? We just some the ratios across the row. It gives us 2.
-
-#### Geodesic Proportions for *Bob*
-
-|      | Jen | Tom | Leaf | Jim | **SUM** |
-|:-----|:---:|:---:|:----:|:---:|:-------:|
-| Jen  |     | 0/1 | 1/1  | 1/1 |  **2**  |
-| Tom  |     |     |      |     |         |
-| Leaf |     |     |      |     |         |
-| Jim  |     |     |      |     |         |
-
-Now, to finish our calculation for Bob, we need to calculate the geodesics for the rest of the matrix:
-
-#### Geodesic Proportions for *Bob*
-
-|      | Jen | Tom |              Leaf              |              Jim               |
-|:-------------|:------------:|:------------:|:--------------:|:--------------:|
-| Jen  |     | 0/1 |              1/1               |              1/1               |
-| Tom  |     |     | [?/?]{style="color: #28a88d;"} | [?/?]{style="color: #28a88d;"} |
-| Leaf |     |     |                                | [?/?]{style="color: #28a88d;"} |
-| Jim  |     |     |                                |                                |
-
-To aid in this, think about the highlighted paths below:
-
-```{r}
-
-edge_colors1 <- c("grey80", "#28a88d", "#28a88d","#28a88d","#28a88d" )
-E( ugraph )$color1 <- edge_colors1
-
-  ggraph( ugraph, 
-          layout = layout ) +                  
-  geom_edge_link( aes( color = edge_colors1 ), width = 0.8, show.legend = FALSE ) +  
-  geom_node_point( color = "#28a88d", size = 15 ) +
-  geom_node_text( aes( label = name ), 
-                 color = "black", 
-                 size = 5,        
-                 vjust = 0.5,     
-                 hjust = 0.5 ) +
-  ggtitle( "Jen to Tom" ) + 
-  scale_x_continuous( expand = expansion( mult = c( 0.2, 0.2 ) ) ) +
-  scale_y_continuous( expand = expansion( mult = c( 0.2, 0.2 ) ) ) +
-  scale_edge_color_identity() +
-theme_void() 
-
+```{r, fig.cap = "", out.width = "60%"}
+knitr::include_graphics( "images/ch-10-graph-02.jpeg" )
 ```
 
-The sum of all these ratios is Bob's betweenness centrality score:
+First, calculate the number of edges $L$. This is just the sum over the rows and columns of the matrix. In our example, $L = 12$.
 
-$$C_B(Bob) = \sum\limits_{j<k} g_{jk}(Bob) / g_{jk}$$
+Second, we need to calculate the denominator. This is $N \times M = 6 = 5 = 30$.
 
-#### Geodesic Proportions for *Bob*
+Therefore, our calculation for the density is:
 
-|           | Jen | Tom | Leaf | Jim | **SUM** |
-|:---------:|:---:|:---:|:----:|:---:|:-------:|
-|    Jen    |     | 0/1 | 1/1  | 1/1 |  **2**  |
-|    Tom    |     |     | 1/1  | 1/1 |  **2**  |
-|   Leaf    |     |     |      | 0/1 |  **0**  |
-|    Jim    |     |     |      |     |         |
-| **TOTAL** |     |     |      |     |  **4**  |
+$$\frac{L}{N \times M} = \frac{12}{6 \times 5}= \frac{12}{30} = 0.4$$
 
-That sum is 4. Bob's betweenness centrality score is 4. What does this mean? A score of 4 indicates that Bob occupies a position between two nodes on 4 of the geodesics in the graph.
+*What does it mean to say that the density of the network is 0.4?*
 
-*What about Leaf?* We can do the same thing by creating a table of geodesic proportions for *Leaf*.
+It tells us that 40% of the edges that could occur in the network did occur. In other words, 60% of the edges that could have occurred were not observed. 
 
-#### Geodesic Proportions for *Leaf*
+### Degree Centrality: Bipartite Graphs
 
-|           | Jen | Tom | Bob | Jim | **SUM** |
-|:---------:|:---:|:---:|:---:|:---:|:-------:|
-|    Jen    |     | ?/? | ?/? | ?/? |  **?**  |
-|    Tom    |     |     | ?/? | ?/? |  **?**  |
-|    Bob    |     |     |     | ?/? |  **?**  |
-|    Jim    |     |     |     |     |         |
-| **TOTAL** |     |     |     |     |  **?**  |
+Recall from the [Degree Centrality]() chapter that for an undirected graph there is one degree distribution and for a directed graph there are two degree distributions (i.e. *indegree* and *outdegree*). A bipartite graph also has <u>two</u> degree distributions:
 
-```{r}
-u_graph
+-   The distribution of ties over nodes in the first mode, $N$
+-   The distribution of ties over nodes in the second mode, $M$
+  
+We can calculate each degree using the adjacency matrix. The **row sum** for the adjacency matrix gives the degree centrality scores for the *first* mode, $N$. The **column sum** for the adjacency matrix gives the degree centrality scores for the second mode, $M$. Thus, we have:
+
+-   $C_D(N_i) = \sum_j x_{ij}$ and
+-   $C_D(M_i) = \sum_j x_{ji}$
+
+What are the *degree centrality* scores for our example network?
+
+```{r, fig.cap = "", out.width = "60%"}
+knitr::include_graphics( "images/ch-10-graph-02.jpeg" )
 ```
 
-Based on the plot, we can visually see that Leaf's betweenness is going to be zero as he is not on any paths to between two nodes. We can show this mathematically in the table:
+To get the scores for the nodes in $N$, we calculate the row sums. For example, for node *A* in $N$, we sum across the rows:
 
-#### Geodesic Proportions for *Leaf*
+$C_D(N_A) = \sum_j x_{A,j} = x_{A, 1} + x_{A, 2} + x_{A, 3} + x_{A, 4} + x_{A, 5} = 1 + 1 + 0 + 0 + 0 = 2$
 
-|           | Jen | Tom | Bob | Jim | **SUM** |
-|:---------:|:---:|:---:|:---:|:---:|:-------:|
-|    Jen    |     | 0/1 | 0/1 | 0/1 |  **0**  |
-|    Tom    |     |     | 0/1 | 0/1 |  **0**  |
-|    Bob    |     |     |     | 0/1 |  **0**  |
-|    Jim    |     |     |     |     |         |
-| **TOTAL** |     |     |     |     |  **0**  |
+The degree centrality score for node *A* in $N$ is 2. This means that *A* is connected to 2 nodes in $M$. 
 
-Based on the visual inspection of the plot, can you find two other nodes who will have a betweenness centrality score of 0?
+Doing this for all the nodes we get:
 
-The complete scores are:
-
-| Node | Betweenness |
-|:----:|:-----------:|
-| Jen  |      0      |
-| Tom  |      3      |
-| Bob  |      4      |
-| Leaf |      0      |
-| Jim  |      0      |
-
-### Standardization
-
-As discussed in the prior chapters, centrality measures are sensitive to the size of the graph, *g*. In the case of *betweenness* centrality, having to sum over more nodes will make scores from large networks bigger than scores from smaller networks (because you are just summing over more nodes). This means that we can't compare betweenness centrality scores across graphs of different sizes. *Solution*?
-
-Standardize! If we want to compare nodes in different sized graphs, then we just take into account the number of nodes and the maximum possible nodes to which *i* could be connected. For betweenness centrality, we have to go a step further. We need to account for the number of pairs of nodes that do not include *i*. In an undirected graph, this is $(g-1))(g-2)/2$.
-
-Thus, we can calculate a standardized betweenness centrality score for an undirected graph as:
-
-$$C'_B(n_i) = \frac{\sum\limits_{j<k} g_{jk}(n_i) / g_{jk}}{[(g-1)(g-2)/2]} =  \frac{C_B(n_i)}{[(g-1)(g-2)/2]}$$
-
-So, all we are doing is adjusting each betweenness score by $(g-1))(g-2)/2$.
-
-For this graph, the denominator, $(g-1))(g-2)/2=(5-1))(5-2)/2 = 6$. Plugging that in we get: $$C'_B(n_i) = \frac{C_B(n_i)}{6}$$.
-
-When we calculate the *raw* betweenness scores, we get the following table:
-
-| Node | Betweenness | Standardized Betweenness |
-|:----:|:-----------:|:------------------------:|
-| Jen  |      0      |      0 / 6 = 0.000       |
-| Tom  |      3      |      3 / 6 = 0.500       |
-| Bob  |      4      |      4 / 6 = 0.667       |
-| Leaf |      0      |      0 / 6 = 0.000       |
-| Jim  |      0      |      0 / 6 = 0.000       |
-
-### Betweenness Centralization
-
-As we did with *degree centralization* and *closeness centralization*, we can calculate the betweenness centralization of the graph. Recall that centralization measures the extent to which the nodes in a social network differ from one another in their individual centrality scores. Put differently, how much variation is there in the distribution of centrality scores? As with closeness centralization, we use the *standardized* betweenness score (as opposed to the *raw* score).
-
-We can calculate betweenness centralization as:
-
-$$C_B = \frac{\sum\limits_{i=1}^g[C'_B(n^*)-C'_B(n_i)]}{(g-1)} $$
-
-If I lost you in some of the math, don't worry. Let's calculate the betweenness centralization score for our example graph. Recall our table of standardized betweenness scores:
-
-| Node | Betweenness | Standardized Betweenness |
-|:----:|:-----------:|:------------------------:|
-| Jen  |      0      |      0 / 6 = 0.000       |
-| Tom  |      3      |      3 / 6 = 0.500       |
-| Bob  |      4      |      4 / 6 = 0.667       |
-| Leaf |      0      |      0 / 6 = 0.000       |
-| Jim  |      0      |      0 / 6 = 0.000       |
-
-*What is the largest standardized betweenness score?* It is 0.667 for Bob. Also, we have $g-1 = 5 - 1 = 4$. Now, we just plug these into our equation:
-
-$$C_B = \frac{\sum\limits_{i=1}^g[0.667-C'_B(n_i)]}{4} $$
-
-| Node | Betweenness | Standardized Betweenness | Deviations of Betweenness Closeness, $0.667-C'_B(n_i)$ |
-|:-------------:|:-------------:|:-------------:|:---------------------------:|
-| Jen  |      0      |      0 / 6 = 0.000       |                 0.667 - 0.000 = 0.667                  |
-| Tom  |      3      |      3 / 6 = 0.500       |                 0.667 - 0.500 = 0.167                  |
-| Bob  |      4      |      4 / 6 = 0.667       |                 0.667 - 0.667 = 0.000                  |
-| Leaf |      0      |      0 / 6 = 0.000       |                 0.667 - 0.000 = 0.667                  |
-| Jim  |      0      |      0 / 6 = 0.000       |                 0.667 - 0.000 = 0.667                  |
-
-If we total all of the values in the last column we get 2.168. Plugging this in as our numerator, we get:
-
-$$C_B = \frac{2.168}{4} = 0.542$$
-
-So, the betweenness centralization score for our example graph is 0.542. *What does this mean?*
-
-When betweenness centrality is evenly dispersed, meaning that all nodes have the same betweenness score, then the numerator in the equation will be zero and the quotient will be close to 0. When there is considerable inequality in the betweenness centrality scores between nodes, the quotient will be closer to 1. Thus, closer to 1 indicates that the graph is hierarchically structured and closer to 0 means that the graph is more decentralized.
-
-We can see this by examining two additional undirected networks:
-
-```{r}
-grid.arrange( star_graph, nullGrob(), circle_graph, ncol = 3, widths = c( 1, 0.2, 1 ) )
+```{r, fig.cap = "", out.width = "60%"}
+knitr::include_graphics( "images/ch-10-graph-05.jpeg" )
 ```
 
-The betweenness centralization score for the figure on the left is 1, whereas the betweenness centralization score for the figure on the right is 0. This makes sense. In the figure on the left, every node has to go <u>between</u> the node in the middle. The node in the middle is on every geodesic in the graph. In contrast, for the graph on the right, every node has a betweenness centrality score of 1, so ther is no variation in betweenness centrality scores.
+To get the scores for the nodes in $M$, we calculate the column sums. For example, for node *1* in $M$, we sum across the columns:
 
-## Directed Graphs
+$C_D(M_1) = \sum_j x_{1,i} = x_{1, A} + x_{1, B} + x_{1, C} + x_{1, D} + x_{1, E} + x_{1, F} = 1 + 1 + 1 + 0 + 0 + 0 = 3$
 
-As we have seen, when we have a directed graph, we have to consider directionality when evaluating a centrality measure. If we are interested in the betweenness score for Bob, we would do the same thing: create a geodesic proportions table for Bob. The difference is that we want to consider the directionality.
+The degree centrality score for node *1* in $M$ is 3. This means that *1* is connected to # nodes in $N$. 
 
-Let's take the example that we have been working with for directed graphs and change the layout of the edges slightly (the sociomatrix is the same, just curving the edges in the plot). *Is Bob on the geodesic between Jen and Jim? Jen and Leaf? Jen and Tom?* Let's take a look.
+Doing this for all the nodes we get:
 
-```{r}
-
-edge_colors1 <- rep( "grey80", 8 )
-edge_colors1[ c( 1:4 ) ] <- "#1f0321"
-E( digraph )$color1 <- edge_colors1
-
-ggraph( digraph, 
-          layout = dilayout ) +                  
-  geom_node_point( color = "#fc23fc", size = 15 ) +
-  geom_node_text( aes( label = name ), 
-                 color = "black", 
-                 size = 5,        
-                 vjust = 0.5,     
-                 hjust = 0.5) +
-  geom_edge_arc( aes( start_cap = label_rect( node1.name ), 
-                    end_cap = circle( 5, 'mm' ),
-                    color = edge_colors1 ), 
-                arrow = arrow( length = unit( 0.02, "npc" ) ), 
-                width = 0.8,
-                show.legend = FALSE,
-                curvature = 0.18 ) +
-  ggtitle( "Directed Graph" ) + 
-  scale_x_continuous( expand = expansion( mult = c( 0.2, 0.2 ) ) ) +
-  scale_y_continuous( expand = expansion( mult = c( 0.2, 0.2 ) ) ) +
-  scale_edge_color_identity() +
-  theme_void()  
-
+```{r, fig.cap = "", out.width = "60%"}
+knitr::include_graphics( "images/ch-10-graph-06.jpeg" )
 ```
 
-*Is Bob on the geodesic between Jen and Jim?* Yes! Bob is on the geodesic between Jen and Jim. *Is Bob on the geodesic between Jen and Leaf?* Yes. *Jen and Tom?* No.
+#### Standardization
 
-As before, we can put this information in a table of geodesic proportions:
+As discussed in the all the chapters on centrality, centrality scores for each node set depend on the number of nodes in the graph. Larger networks will have a higher maximum possible degree centrality value simply because there are more nodes with whom to connect. *Solution?*
 
-#### Geodesic Proportions for *Bob*
+Standardize! (This should be an automatic response for you by now). As before, we need to adjust the *raw* degree centrality scores to produce a *standardized* degree centrality score. We can account for differences across networks by dividing each degree centrality score by the number of nodes in the opposite set: 
 
-|      | Jen | Tom | Leaf | Jim |
-|:-----|:---:|:---:|:----:|:---:|
-| Jen  |     | 0/1 | 1/1  | 1/1 |
-| Tom  |     |     | 1/1  | 1/1 |
-| Leaf |     |     |      | 0/1 |
-| Jim  |     |     |      |     |
+-   For $N$, we divide by $M$
+-   For $M$, we divide by $N$
 
-Are we done? Not quite yet. Since the graph is **directed** we have to total *all* the rows. The reasons we did not do this for **undirected** graph is because the adjacency matrix is symmetric. Since the matrix for an undirected graph is not symmetric, we have to think of all the ties. Recall from our discussion about adjacency matrices for directed graphs, the rows tell us about outgoing ties or sending whereas the columns tell us about incoming ties or receiving. So, we will need information for the <u>complete</u> table.
+This gives us:
 
-*Why?* Well, think about the table below:
+-   $C'_D(N_i) =  \dfrac{C_D(N_i)}{M}$ and 
+-   $C'_D(M_i) =  \dfrac{C_D(M_i)}{N}$
 
-#### Geodesic Proportions for *Bob*
+What are the standardized degree centrality scores for the nodes in $N$? All we need to do is divide $C_D(N_i)$ by $M$, which is 5.
 
-|           | Jen | Tom | Leaf | Jim | **SUM** |
-|:---------:|:---:|:---:|:----:|:---:|:-------:|
-|    Jen    |     | 0/1 | 1/1  | 1/1 |  **2**  |
-|    Tom    |     |     | 1/1  | 1/1 |  **2**  |
-|   Leaf    |     |     |      | 0/1 |  **0**  |
-|    Jim    |     |     |      |     |         |
-| **TOTAL** |     |     |      |     |  **4**  |
+For node *A* in $N$, we have $C'_D(N_A) = 2 / 5 = 0.4$. *What does this score mean?* 
 
-If we sum this, we get 4. But, note that this does not account for *all* of the edges in the network. We need to complete the matrix:
+A standardized degree centrality score of 0.4 means that node *A* in $N$ is connected to 40% of the nodes in $M$. 
 
-#### Geodesic Proportions for *Bob*
+Let's finish standardizing the rest of the scores:
 
-|           | Jen | Tom | Leaf | Jim | **SUM** |
-|:---------:|:---:|:---:|:----:|:---:|:-------:|
-|    Jen    |     | 0/1 | 1/1  | 1/1 |  **2**  |
-|    Tom    | ?/? |     | 1/1  | 1/1 |  **2**  |
-|   Leaf    | ?/? | ?/? |      | 0/1 |  **0**  |
-|    Jim    | ?/? | ?/? | ?/?  |     |         |
-| **TOTAL** |     |     |      |     |  **4**  |
+| Node | Raw | Standardized |
+|:----:|:---:|:------------:|
+| A    |  2  |  2 / 5 = 0.4 |
+| B    |  1  |  1 / 5 = 0.2 |
+| C    |  2  |  2 / 5 = 0.4 |
+| D    |  4  |  4 / 5 = 0.8 |
+| E    |  1  |  1 / 5 = 0.2 |
+| F    |  2  |  2 / 5 = 0.4 |
 
-To better see this, let's highlight the other edges that we did not focus on above:
+What are the standardized degree centrality scores for the nodes in $M$? All we need to do is divide $C_D(M_i)$ by $N$, which is 6.
 
-```{r}
+For node *1* in $M$, we have $C'_D(M_1) = 3 / 6 = 0.5$. *What does this score mean?* 
 
-edge_colors1 <- rep( "grey80", 8 )
-edge_colors1[ c( 5:8 ) ] <- "#1f0321"
-E( digraph )$color1 <- edge_colors1
+A standardized degree centrality score of 0.5 means that node *1* in $M$ is connected to 50% of the nodes in $N$. 
 
-ggraph( digraph, 
-          layout = dilayout ) +                  
-  geom_node_point( color = "#fc23fc", size = 15 ) +
-  geom_node_text( aes( label = name ), 
-                 color = "black", 
-                 size = 5,        
-                 vjust = 0.5,     
-                 hjust = 0.5) +
-  geom_edge_arc( aes( start_cap = label_rect( node1.name ), 
-                    end_cap = circle( 5, 'mm' ),
-                    color = edge_colors1 ), 
-                arrow = arrow( length = unit( 0.02, "npc" ) ), 
-                width = 0.8,
-                show.legend = FALSE,
-                curvature = 0.18 ) +
-  ggtitle( "Directed Graph" ) + 
-  scale_x_continuous( expand = expansion( mult = c( 0.2, 0.2 ) ) ) +
-  scale_y_continuous( expand = expansion( mult = c( 0.2, 0.2 ) ) ) +
-  scale_edge_color_identity() +
-  theme_void()  
+Let's finish standardizing the rest of the scores:
 
-```
+| Node | Raw | Standardized |
+|:----:|:---:|:------------:|
+| 1    |  3  |  3 / 6 = 0.5 |
+| 2    |  3  |  3 / 6 = 0.5 |
+| 3    |  3  |  3 / 6 = 0.5 |
+| 4    |  1  |  1 / 6 = 0.167 |
+| 5    |  2  |  2 / 6 = 0.334 |
 
-We can know complete our table:
+#### Mean Degree Centrality: Bipartite Graphs
 
-#### Geodesic Proportions for *Bob*
+As discussed in the [Degree Centrality]() chapter, we can summarize degree centrality scores by taking the mean. This tells us, on average, how many edges are incident on a node and helps us get a sense of how connected the network is, overall. With bipartite graphs we can also do this, we simply calculate the mean degree for each node set:
 
-|           | Jen | Tom | Leaf | Jim | **SUM** |
-|:---------:|:---:|:---:|:----:|:---:|:-------:|
-|    Jen    |     | 0/1 | 1/1  | 1/1 |  **2**  |
-|    Tom    | 0/0 |     | 1/1  | 1/1 |  **2**  |
-|   Leaf    | 0/0 | 0/0 |      | 0/1 |  **0**  |
-|    Jim    | 0/0 | 0/0 | 0/1  |     |         |
-| **TOTAL** |     |     |      |     |  **4**  |
+-   For the mean of $N$, or $\bar C_D(N)$, we divide by $\frac{L}{N}$ and
+-   For the mean of $M$, or $\bar C_D(M)$, we divide by $\frac{L}{M}$
 
-*Why are there no geodesics in the lower portion of the table?* Take a look at the plot. Can Tom does not send a tie to Jen, so there is not a geodesic from Tom to Jen. This is the same for Leaf to Jen. There *is* a geodesic from Jim to Leaf, but Bob is not on it. As a consequence, the total is 4.
+Note that for the mean we use the number of nodes in the corresponding node set. Above, when we standardized, we used the opposite node set. Just keep this in mind when doing the calculations.
 
-Go ahead and compute the betweenness scores for the rest of the nodes in the network. You should get this:
+*What is the mean degree centrality score for each node set?*
 
-| Node | Betweenness |
-|:----:|:-----------:|
-| Jen  |      0      |
-| Tom  |      3      |
-| Bob  |      4      |
-| Leaf |      0      |
-| Jim  |      0      |
+To do this we simply take the number of edges, $L$, and divide by the corresponding size of the node sets. We know from our calculation of the density above that $L = 12$. So, that gives us:
 
-### Standardization
+-   $\bar C_D(N) = 12 / 6 = 2$ and
+-   $\bar C_D(M) = 12 / 5 = 2.4$
+  
+*What are we to make of these numbers?* In the node set $N$, the average degree centrality score is 2. In the node set $M$, the average degree centrality score is 2.4. 
 
-We can calculate a standardized betweenness centrality score for a directed graph as:
+Since we have two sets of nodes, we can compare the means. The average node in $M$ has a higher degree than the average node in $N$. This makes sense given that the edge count is the same. As a rule, in bipartite graphs, the node set with more nodes will have a higher mean degree.
 
-$$C'_B(n_i) = \frac{\sum\limits_{j<k} g_{jk}(n_i) / g_{jk}}{[(g-1)(g-2)]} =  \frac{C_B(n_i)}{[(g-1)(g-2)]}$$
-
-So, all we are doing is adjusting each betweenness score by $(g-1))(g-2)$.
-
-For this graph, the denominator, $(g-1))(g-2)/2=(5-1))(5-2) = 12$. Plugging that in we get: $$C'_B(n_i) = \frac{C_B(n_i)}{12}$$.
-
-When we calculate the *raw* betweenness scores, we get the following table:
-
-| Node | Betweenness | Standardized Betweenness |
-|:----:|:-----------:|:------------------------:|
-| Jen  |      0      |      0 / 12 = 0.000      |
-| Tom  |      3      |      3 / 12 = 0.250      |
-| Bob  |      4      |      4 / 12 = 0.333      |
-| Leaf |      0      |      0 / 12 = 0.000      |
-| Jim  |      0      |      0 / 12 = 0.000      |
-
-### Betweenness Centralization
-
-For a directed graph, we can use the following to calculate betweenness centralization (it is the same equation as above for the undirected graph):
-
-$$C_B = \frac{\sum\limits_{i=1}^g[C'_B(n^*)-C'_B(n_i)]}{(g-1)} $$
-
-If I lost you in some of the math, don't worry. Let's calculate the betweenness centralization score for our example graph. Recall our table of standardized betweenness scores:
-
-| Node | Betweenness | Standardized Betweenness |
-|:----:|:-----------:|:------------------------:|
-| Jen  |      0      |      0 / 12 = 0.000      |
-| Tom  |      3      |      3 / 12 = 0.250      |
-| Bob  |      4      |      4 / 12 = 0.333      |
-| Leaf |      0      |      0 / 12 = 0.000      |
-| Jim  |      0      |      0 / 12 = 0.000      |
-
-*What is the largest standardized betweenness score?* It is 0.333 for Bob. Also, we have $g-1 = 5 - 1 = 4$. Now, we just plug these into our equation:
-
-$$C_B = \frac{\sum\limits_{i=1}^g[0.333-C'_B(n_i)]}{4} $$
-
-| Node | Betweenness | Standardized Betweenness | Deviations of Betweenness Closeness, $0.667-C'_B(n_i)$ |
-|:-------------:|:-------------:|:-------------:|:---------------------------:|
-| Jen  |      0      |      0 / 12 = 0.000      |                 0.333 - 0.000 = 0.333                  |
-| Tom  |      3      |      3 / 12 = 0.250      |                 0.333 - 0.250 = 0.083                  |
-| Bob  |      4      |      4 / 12 = 0.333      |                 0.333 - 0.333 = 0.000                  |
-| Leaf |      0      |      0 / 12 = 0.000      |                 0.333 - 0.000 = 0.333                  |
-| Jim  |      0      |      0 / 12 = 0.000      |                 0.333 - 0.000 = 0.333                  |
-
-If we total all of the values in the last column we get 1.082. Plugging this in as our numerator, we get:
-
-$$C_B = \frac{1.082}{4} = 0.271$$
-
-#### Centralization Comparison
-
-We can now compare four different centralization scores for this directed graph: indegree, outdegree, closeness, and betweenness. The scores are:
-
-|             | Centralization |
-|:-----------:|:--------------:|
-|  Indegree   |     0.438      |
-|  Outdegree  |     0.125      |
-|  Closeness  |     0.555      |
-| Betweenness |     0.271      |
-
-What can we say about the closeness centralization scores for each type of centrality? (take a look at the graph if that helps)
-
-```{r}
-d_graph
-```
 
 ## Test your Knowledge
 
--   What distinguishes betweenness centrality from other types of centrality like degree and closeness?
--   How does betweenness centrality help identify key actors in criminal networks, such as those in organized crime?
--   Why might law enforcement focus on individuals with high betweenness centrality when disrupting criminal networks?
--   What are the steps to calculate betweenness centrality for a specific node within an undirected network?
--   Why is it necessary to standardize betweenness centrality when comparing scores across networks of different sizes?
--   How does the calculation of betweenness centrality change when working with directed graphs compared to undirected graphs?
--   Why must you account for directionality when evaluating centrality measures in directed graphs?
--   What does a high betweenness centralization score indicate about the structure of a network? A low score?
+-   What is the primary difference between unipartite and bipartite graphs? Provide an example of each.
+-   Why are bipartite graphs useful for representing certain types of data encountered by crime analysts?
+-   What are the two node sets in a bipartite graph?
+-   How does the adjacency matrix in a bipartite graph differ from the adjacency matrix of a unipartite graph?
+-   What does the density of a bipartite graph measure? Conceptually, what does the density describe?
+-   Consider a two-mode network with $N = 12$, $M = 10$, and $L = 24$. Caalculate the density of this bipartite graph.
+-   Explain how degree centrality is calculated for each node set in a bipartite graph.
+-   Suppose a node has a raw degree centrality score of 5. What does this value represent?
+-   What is the importance of standardizing degree centrality scores in bipartite graphs? How is this done for each node set?
 
 ## Summary
 
-This chapter explored the concept of betweenness centrality as a measure of centrality within social networks, emphasizing its role in identifying actors who bridge disconnected network segments and influence information flow. Unlike degree or closeness centrality, betweenness highlights actors who control connectivity between groups, making it particularly valuable in analyzing criminal networks, where key figures often facilitate collaboration. We covered how to calculate betweenness centrality for individual nodes, standardize these scores for comparison across network sizes, and compute a network-wide betweenness centralization score, which reveals the structural cohesion of a network. Understanding these concepts equips analysts to assess both individual influence and the overall structure of networks.
-
-We have now covered three different ways of conceptualizing centrality: degree, closeness, and betweenness. These are all valuable tools for your crime analyst toolkit!
+This chapter introduced bipartite graphs (also called two-mode networks) as a way to represent relational structures involving two distinct node sets, such as people and events. Unlike unipartite graphs, which focus on a single set of nodes, bipartite graphs allow analysts to conceptualize and operationalize networks where ties exist only between nodes of different sets. Through examples like shared-incident networks among police officers, the chapter illustrated how interactions within these networks can influence attitudes and behaviors, such as the adoption and use of body-worn cameras. Key concepts we covered include representing bipartite networks using adjacency matrices, calculating metrics such as density and degree centrality, and understanding their implications. For crime analysts, mastering bipartite networks is essential for unraveling complex relational data, assessing connections between entities like suspects and criminal events, and gaining insights into the broader social structures influencing crime and enforcement outcomes. In the next chapter, we will examine *projection*, whereby we convert a bipartite graph into a unipqrtite graph. As we will see, after we project the two-mode network to a one-mode network, we can use the tools we have examined in past chapters.
