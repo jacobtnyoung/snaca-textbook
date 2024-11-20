@@ -28,6 +28,7 @@ book:
     - snaca-centrality-degree.qmd
     - snaca-centrality-closeness.qmd
     - snaca-centrality-betweenness.qmd
+    - snaca-bipartite.qmd
     - references.qmd
 
 bibliography: references.bib
