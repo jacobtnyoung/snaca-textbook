@@ -43,7 +43,7 @@ format:
 
       # add a link to report an issue
         - text: "Report an Issue"
-          href: "https://github.com/jacobtnyoung/sna-textbook-revisions/issues"
+          href: "https://github.com/jacobtnyoung/snaca-textbook/issues"
 
     author-meta: "Jacob T.N. Young"
 
