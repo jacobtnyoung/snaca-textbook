@@ -16,7 +16,7 @@ library( sna )       # for the plot
 
 # Projection
 
-In the prior chapter on [Bipartite Graphs/Two-Mode Networks](), saw that not all of the networks we want to examine have a single node set. We discussed how complex relational structures with multiple partitions of node sets can be examined using **bipartite** graphs.
+In the prior chapter on [Bipartite Graphs/Two-Mode Networks](snaca-bipartite.html), saw that not all of the networks we want to examine have a single node set. We discussed how complex relational structures with multiple partitions of node sets can be examined using **bipartite** graphs.
 
 ## Case Study: Body-Worn Cameras, Police Officer Perceptions, and Shared-Incident Networks (revisited)
 
@@ -46,14 +46,14 @@ In this network, the nodes are police officers and the edges represent shared in
 
 ## Projection: Terminology and Conceptual Aspects
 
-Bipartite networks can be represented using an adjacency matrix where the rows and columns correspond to the separate sets of nodes $N$ and $M$, respectively. While the [Bipartite Graphs/Two-Mode Networks]() chapter discussed ways to examine such an adjacency matrix, a very common approach in research is to reduce the bipartite graph to a unipartite graph. This is done for several reasons, but the main reason is that there are more analytic tools available for examining a single set of nodes. **Projection** is the process by which we map the connectivity between modes to a single mode.
+Bipartite networks can be represented using an adjacency matrix where the rows and columns correspond to the separate sets of nodes $N$ and $M$, respectively. While the [Bipartite Graphs/Two-Mode Networks](snaca-bipartite.html) chapter discussed ways to examine such an adjacency matrix, a very common approach in research is to reduce the bipartite graph to a unipartite graph. This is done for several reasons, but the main reason is that there are more analytic tools available for examining a single set of nodes. **Projection** is the process by which we map the connectivity between modes to a single mode.
 
 For example, let's say we have a two-mode network of people ($N$) in groups ($M$). By projecting, we get either:
 
 -   A one-mode network of people connected to people by groups (an $N \times N$ adjacency matrix) and/or
 -   A one-mode network of groups connected by people (an $M \times M$ adjacency matrix).
 
-We can see this graphically by taking a look at our example network from the [Bipartite Graphs/Two-Mode Networks]() chapter:
+We can see this graphically by taking a look at our example network from the [Bipartite Graphs/Two-Mode Networks](snaca-bipartite.html) chapter:
 
 ```{r, fig.cap = "", out.width = "60%"}
 knitr::include_graphics( "images/ch-10-graph-01.jpeg" )
@@ -264,13 +264,13 @@ Note that the off-diagonal cells represent counts of shared nodes in $N$, **not*
 
 ## Dichotomization and Summation
 
-Let's return to our "people" matrix, which is a projected $N \times N$ network. Recall that the adjacency matrix looks like this: 
+Let's return to our "people" matrix, which is a projected $N \times N$ network. Recall that the adjacency matrix looks like this:
 
 ```{r, fig.cap = "", out.width = "60%"}
 knitr::include_graphics( "images/ch-11-figure-09.jpeg" )
 ```
 
-Now we are ready to use the tools we have employed in past chapters, right? Hold up. Note that some the off-diagonal cells are greater than 1. This is new territory for us. Now what? 
+Now we are ready to use the tools we have employed in past chapters, right? Hold up. Note that some the off-diagonal cells are greater than 1. This is new territory for us. Now what?
 
 ### Dichotomization
 
@@ -282,7 +282,7 @@ For the people matrix $P$, we can visualize this process here:
 knitr::include_graphics( "images/ch-11-figure-16.jpeg" )
 ```
 
-However, note that we lose some information when we dichotomize the adjacency matrix. Specifically, we are treating a connections that are greater than 1 as being the same as connections exactly equal to 1. This may make sense in some circumstances. For example, suppose you are only concerned with whether two individuals have ever been arrested together. In this case, the dichotomized matrix makes sense to examine. 
+However, note that we lose some information when we dichotomize the adjacency matrix. Specifically, we are treating a connections that are greater than 1 as being the same as connections exactly equal to 1. This may make sense in some circumstances. For example, suppose you are only concerned with whether two individuals have ever been arrested together. In this case, the dichotomized matrix makes sense to examine.
 
 *But*, what if the number of co-arrests is really important? That is, relationships between individuals who have many co-arrests are fundamentally different than those who only have a single co-arrest. In this case, dichotomizing the adjacency matrix could misrepresent the data.
 

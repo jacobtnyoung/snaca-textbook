@@ -24,7 +24,7 @@ In the prior chapter, we reviewed why social network analysis is a valuable part
 
 ## Organizing Knowledge
 
-As discussed in the chapter [Introduction to Social Network Analysis](https://jacobtnyoung.github.io/snaca-textbook/snaca-introduction.html), network science takes **relational structures** as the primary domain of interest. In so doing, research questions take the following forms:
+As discussed in the chapter [Introduction to Social Network Analysis](snaca-introduction.html), network science takes **relational structures** as the primary domain of interest. In so doing, research questions take the following forms:
 
 -   How does the network matter?
     -   Here the network is an *independent variable*. In the case above, the network of shared incidents was as independent variable that influenced views of body-worn cameras.

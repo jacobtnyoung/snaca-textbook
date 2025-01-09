@@ -156,7 +156,7 @@ It tells us that 40% of the edges that could occur in the network did occur. In 
 
 ### Degree Centrality: Bipartite Graphs
 
-Recall from the [Degree Centrality]() chapter that for an undirected graph there is one degree distribution and for a directed graph there are two degree distributions (i.e. *indegree* and *outdegree*). A bipartite graph also has <u>two</u> degree distributions:
+Recall from the [Degree Centrality](snaca-centrality-degree.html) chapter that for an undirected graph there is one degree distribution and for a directed graph there are two degree distributions (i.e. *indegree* and *outdegree*). A bipartite graph also has <u>two</u> degree distributions:
 
 -   The distribution of ties over nodes in the first mode, $N$
 -   The distribution of ties over nodes in the second mode, $M$
@@ -245,7 +245,7 @@ Let's finish standardizing the rest of the scores:
 
 #### Mean Degree Centrality: Bipartite Graphs
 
-As discussed in the [Degree Centrality]() chapter, we can summarize degree centrality scores by taking the mean. This tells us, on average, how many edges are incident on a node and helps us get a sense of how connected the network is, overall. With bipartite graphs we can also do this, we simply calculate the mean degree for each node set:
+As discussed in the [Degree Centrality](snaca-centrality-degree.html) chapter, we can summarize degree centrality scores by taking the mean. This tells us, on average, how many edges are incident on a node and helps us get a sense of how connected the network is, overall. With bipartite graphs we can also do this, we simply calculate the mean degree for each node set:
 
 -   For the mean of $N$, or $\bar C_D(N)$, we divide by $\frac{L}{N}$ and
 -   For the mean of $M$, or $\bar C_D(M)$, we divide by $\frac{L}{M}$
