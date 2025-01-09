@@ -36,7 +36,7 @@ knitr::include_graphics( "images/ch-04-bridge-01.jpeg" )
 
 Leonard Euler worked on this problem in the mid 18th century, eventually representing the solution with a set of points and lines. For a great overview fo the problem (and some interesting history), check out this [video](https://www.youtube.com/watch?v=nZwSo4vfw6c).
 
-Recall the discussion from the [Introduction to Social Network Analysis for Crime Analysts]() chapter the importance of conceptualizing and operationalizing concepts in network science. *Graph theory* provides a foundation for operationalizing concepts of interest among network scientists.
+Recall the discussion from the [Introduction to Social Network Analysis for Crime Analysts](https://jacobtnyoung.github.io/snaca-textbook/snaca-introduction.html) chapter the importance of conceptualizing and operationalizing concepts in network science. *Graph theory* provides a foundation for operationalizing concepts of interest among network scientists.
 
 -   By the end of the chapter, be able to answer these questions:
 
@@ -51,7 +51,7 @@ Two nodes, $n_i$ and $n_j$ are called **adjacent** if the line $l_k = (n_i, n_j)
 
 ### Node Sets
 
-As discussed in the "Basic Data Elements" section of the [Introduction to Social Network Analysis for Crime Analysts]() chapter, the directionality of of graph indicates whether the edges are **undirected** or **directed**. In an **undirected** graph, the order of the nodes does not matter. In other words, $l_k = (n_i, n_j) = (n_j, n_i)$. This is to say that if there exists a line between nodes *i* and *j*, then a line exists between *j* and *i*. (This may seem obvious, but will make more sense why we talk about it this way when we get to **directed** graphs.)
+As discussed in the "Basic Data Elements" section of the [Introduction to Social Network Analysis for Crime Analysts](https://jacobtnyoung.github.io/snaca-textbook/snaca-introduction.html) chapter, the directionality of of graph indicates whether the edges are **undirected** or **directed**. In an **undirected** graph, the order of the nodes does not matter. In other words, $l_k = (n_i, n_j) = (n_j, n_i)$. This is to say that if there exists a line between nodes *i* and *j*, then a line exists between *j* and *i*. (This may seem obvious, but will make more sense why we talk about it this way when we get to **directed** graphs.)
 
 ```{r, graphs-define}
 
