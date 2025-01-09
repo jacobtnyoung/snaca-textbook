@@ -21,7 +21,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -243,7 +262,7 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>In other words, usually the explanation focuses on something about the person and/or something about the situation. Both of these explanations, though, tend to think about units as independent. For example, police officers endorse body-worn cameras because of their age or because of the characteristics of their beat. This may be true, but the underlying assumption is that officer endorsement is entirely independent from other officers in the department. This is the assumption of <strong>independence across units</strong>.</p>
 <p>In the study of networks, we are interested in the <em>dependence</em> between units as an explanatory tool. That is we are interested in <strong>the network</strong>!</p>
-<p>For example, in a study by <a href="https://journals.sagepub.com/doi/10.1177/1043986214553380">Young &amp; Ready (2015)</a> entitled, <em>Diffusion of Ideas and Technology: The Role of Networks in Influencing the Endorsement and Use of On-Officer Video Cameras</em>, the authors adopted a network perspective to examine two research questions:</p>
+<p>For example, in a study by <span class="citation" data-cites="young2015">Young and Ready (<a href="references.html#ref-young2015" role="doc-biblioref">2015</a>)</span> entitled, <em>Diffusion of Ideas and Technology: The Role of Networks in Influencing the Endorsement and Use of On-Officer Video Cameras</em>, the authors adopted a network perspective to examine two research questions:</p>
 <ul>
 <li>How do police officers “frame” body-worn cameras?</li>
 <li>Is the meaning officers attribute to cameras created and transmitted in groups?</li>
@@ -259,7 +278,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <p>In this model, they argued that police officers views of body-worn cameras influence whether they use their cameras in incidents. But, where do these views come from? The authors proposed a <em>contagion</em> process whereby officers who shared incidents together exchanged views about the legitimacy of body-worn cameras.</p>
-<p>Thus, the network matters! Rather than focusing on differences between individuals in terms of some attribute or situational experience, the study by <a href="https://journals.sagepub.com/doi/10.1177/1043986214553380">Young &amp; Ready (2015)</a> was explicitly focused on the role that relationships between officers play in spreading attitudes, ideas, beliefs, etc. about body-worn cameras. This is thinking about the problem of officer endorsement through the lens of a <strong>network perspective</strong>. This study is an example of what is called <em>Network Science</em>.</p>
+<p>Thus, the network matters! Rather than focusing on differences between individuals in terms of some attribute or situational experience, the study by <span class="citation" data-cites="young2015">Young and Ready (<a href="references.html#ref-young2015" role="doc-biblioref">2015</a>)</span> was explicitly focused on the role that relationships between officers play in spreading attitudes, ideas, beliefs, etc. about body-worn cameras. This is thinking about the problem of officer endorsement through the lens of a <strong>network perspective</strong>. This study is an example of what is called <em>Network Science</em>.</p>
 </section>
 <section id="network-science" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="network-science"><span class="header-section-number">1.2</span> Network Science</h2>
@@ -484,7 +503,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<p>As an example, the network for the study discussed above by <a href="https://journals.sagepub.com/doi/10.1177/1043986214553380">Young &amp; Ready (2015)</a> is shown below:</p>
+<p>As an example, the network for the study discussed above by <span class="citation" data-cites="young2015">Young and Ready (<a href="references.html#ref-young2015" role="doc-biblioref">2015</a>)</span> is shown below:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -495,7 +514,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <p>In this network, incidents (white circles) connect officers (squares and triangles). This is a two-mode/bipartite network because there are two sets of nodes: incidents and officers. The plot shows two types of officers, those who were in the treatment condition of the study (i.e.&nbsp;they were assigned a body-worn camera) and those who were in the control condition (i.e.&nbsp;they did not receive a camera). The focus of the study was how exposure to body-cameras during incidents influenced views, especially for those who were not assigned a camera.</p>
-<p>As another example, <a href="https://link.springer.com/article/10.1007/s12103-017-9395-5">Schjarback &amp; Young (2017)</a> examined the tendency for United States senators to sign different types of legislation. Specifically, the authors were interested in whether crime control legislation was more likely to be signed if individuals were from the same party.</p>
+<p>As another example, <span class="citation" data-cites="Shjarback2018">Shjarback and Young (<a href="references.html#ref-Shjarback2018" role="doc-biblioref">2018</a>)</span> examined the tendency for United States senators to sign different types of legislation. Specifically, the authors were interested in whether crime control legislation was more likely to be signed if individuals were from the same party.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -541,6 +560,14 @@ ul.task-list li input[type="checkbox"] {
 <p>In the next chapter, we will delve deeper into the theoretical background of network science.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-Shjarback2018" class="csl-entry" role="listitem">
+Shjarback, John A., and Jacob T. N. Young. 2018. <span>“The "Tough on Crime" Competition: A Network Approach to Understanding the Social Mechanisms Leading to Federal Crime Control Legislation in the United States from 1973–2014.”</span> <em>American Journal of Criminal Justice</em> 43 (2): 197–221. <a href="https://doi.org/10.1007/s12103-017-9395-5">https://doi.org/10.1007/s12103-017-9395-5</a>.
+</div>
+<div id="ref-young2015" class="csl-entry" role="listitem">
+Young, Jacob T. N., and Justin T. Ready. 2015. <span>“Diffusion of Ideas and Technology: The Role of Networks in Influencing the Endorsement and Use of on-Officer Video Cameras.”</span> <em>Journal of Contemporary Criminal Justice</em> 31 (3): 243–61. <a href="https://doi.org/10.1177/1043986214553380">https://doi.org/10.1177/1043986214553380</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
