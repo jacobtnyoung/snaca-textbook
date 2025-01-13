@@ -16,7 +16,7 @@ library( here )      # for the directory
 
 In the prior chapter, we reviewed why social network analysis is a valuable part of the crime analysts toolkit by introducing the logic of *network science* to help you think about research problems through a network lens. We then examined some of the building blocks of network analysis to get at the question of "what networks look like". In this chapter, we want to spend more time examining how *theory* operates in projects conducted from a network perspective.
 
--   By the end of the chapter, be able to answer these questions:
+-   By the end of the chapter, you should be able to answer these questions:
 
     -   What is the difference between an "explanatory model" and an "explanatory goal"?
 
