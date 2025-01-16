@@ -14,7 +14,7 @@ library( sna )       # for the plot
 
 ```
 
-# Projection
+# Projection {.unnumbered}
 
 In the prior chapter on [Bipartite Graphs/Two-Mode Networks](snaca-bipartite.html), saw that not all of the networks we want to examine have a single node set. We discussed how complex relational structures with multiple partitions of node sets can be examined using **bipartite** graphs.
 

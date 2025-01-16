@@ -18,7 +18,7 @@ library( reshape2 )  # for reshaping the matrix data for a plot
 
 ```
 
-# Betweenness Centrality
+# Betweenness Centrality {.unnumbered}
 
 In the prior chapter, we examined the idea of "centrality" for nodes and "centralization" for graphs, focusing attention on the conceptual aspects of what it means to be *central* as well as the ways in which we can operationalize the concept using *degree centrality* and *closeness centrality*. In this chapter we want to continue thinking about what it means to be central, but through a different conceptual lens: **betweenness**. Betweenness centrality serves as a powerful indicator of actors who bridge otherwise disconnected parts of a network, offering unique control over the flow of information and resources across network boundaries. Unlike *degree* centrality, which emphasizes direct ties, or *closeness* centrality, which identifies actors closest to others, betweenness centrality highlights those who can influence inter-group dynamics. A compelling example is seen in a study by @calderoni2014social, which examined the Italian Mafia network, specifically the Ndrangheta organization. Calderoni found that individuals with high betweenness centrality played pivotal roles in connecting local criminal cells to broader, often international networks. These "connectors" were essential for coordinating illicit activities across regions and facilitating transactions that would otherwise remain confined to isolated groups. For law enforcement, targeting these high-betweenness actors provided a strategic leverage point to disrupt cross-regional collaboration, making them critical targets in efforts to dismantle organized crime networks. By understanding the role of betweenness, crime analysts can better assess how key individuals maintain structural cohesion within social networks.
 
@@ -339,7 +339,7 @@ Now, to finish our calculation for Bob, we need to calculate the geodesics for t
 #### Geodesic Proportions for *Bob*
 
 |      | Jen | Tom |              Leaf              |              Jim               |
-|:------------|:-----------:|:-----------:|:------------------:|:-----------:|
+|:-------------|:------------:|:------------:|:--------------:|:------------:|
 | Jen  |     | 0/1 |              1/1               |              1/1               |
 | Tom  |     |     | [?/?]{style="color: #28a88d;"} | [?/?]{style="color: #28a88d;"} |
 | Leaf |     |     |                                | [?/?]{style="color: #28a88d;"} |
@@ -472,7 +472,7 @@ If I lost you in some of the math, don't worry. Let's calculate the betweenness 
 $$C_B = \frac{\sum\limits_{i=1}^g[0.667-C'_B(n_i)]}{4} $$
 
 | Node | Betweenness | Standardized Betweenness | Deviations of Betweenness Closeness, $0.667-C'_B(n_i)$ |
-|:-----------:|:-----------:|:-----------:|:--------------------------------:|
+|:-------------:|:-------------:|:-------------:|:---------------------------:|
 | Jen  |      0      |      0 / 6 = 0.000       |                 0.667 - 0.000 = 0.667                  |
 | Tom  |      3      |      3 / 6 = 0.500       |                 0.667 - 0.500 = 0.167                  |
 | Bob  |      4      |      4 / 6 = 0.667       |                 0.667 - 0.667 = 0.000                  |
@@ -497,7 +497,7 @@ The betweenness centralization score for the figure on the left is 1, whereas th
 
 ## Directed Graphs
 
-As we have seen, when we have a directed graph, we have to consider directionality when evaluating a centrality measure. If we are interested in the betweenness score for Bob, we would do the same thing: create a geodesic proportions table for Bob. The difference is that we want to consider the directionality. 
+As we have seen, when we have a directed graph, we have to consider directionality when evaluating a centrality measure. If we are interested in the betweenness score for Bob, we would do the same thing: create a geodesic proportions table for Bob. The difference is that we want to consider the directionality.
 
 Let's take the example that we have been working with for directed graphs and change the layout of the edges slightly (the sociomatrix is the same, just curving the edges in the plot). *Is Bob on the geodesic between Jen and Jim? Jen and Leaf? Jen and Tom?* Let's take a look.
 
@@ -530,20 +530,20 @@ ggraph( digraph,
 
 ```
 
-*Is Bob on the geodesic between Jen and Jim?* Yes! Bob is on the geodesic between Jen and Jim. *Is Bob on the geodesic between Jen and Leaf?* Yes. *Jen and Tom?* No. 
+*Is Bob on the geodesic between Jen and Jim?* Yes! Bob is on the geodesic between Jen and Jim. *Is Bob on the geodesic between Jen and Leaf?* Yes. *Jen and Tom?* No.
 
 As before, we can put this information in a table of geodesic proportions:
 
 #### Geodesic Proportions for *Bob*
 
-|      | Jen | Tom | Leaf |  Jim  |
-|:-----|:---:|:---:|:----:|:-----:|
-| Jen  |     | 0/1 | 1/1  | 1/1   |
-| Tom  |     |     | 1/1  | 1/1   |
-| Leaf |     |     |      | 0/1   |
-| Jim  |     |     |      |       |
+|      | Jen | Tom | Leaf | Jim |
+|:-----|:---:|:---:|:----:|:---:|
+| Jen  |     | 0/1 | 1/1  | 1/1 |
+| Tom  |     |     | 1/1  | 1/1 |
+| Leaf |     |     |      | 0/1 |
+| Jim  |     |     |      |     |
 
-Are we done? Not quite yet. Since the graph is **directed** we have to total *all* the rows. The reasons we did not do this for **undirected** graph is because the adjacency matrix is symmetric. Since the matrix for an undirected graph is not symmetric, we have to think of all the ties. Recall from our discussion about adjacency matrices for directed graphs, the rows tell us about outgoing ties or sending whereas the columns tell us about incoming ties or receiving. So, we will need information for the <u>complete</u> table. 
+Are we done? Not quite yet. Since the graph is **directed** we have to total *all* the rows. The reasons we did not do this for **undirected** graph is because the adjacency matrix is symmetric. Since the matrix for an undirected graph is not symmetric, we have to think of all the ties. Recall from our discussion about adjacency matrices for directed graphs, the rows tell us about outgoing ties or sending whereas the columns tell us about incoming ties or receiving. So, we will need information for the <u>complete</u> table.
 
 *Why?* Well, think about the table below:
 
@@ -616,13 +616,13 @@ We can know complete our table:
 
 Go ahead and compute the betweenness scores for the rest of the nodes in the network. You should get this:
 
-| Node  | Betweenness |
-| :---: | :---------: |
-| Jen   | 0           |
-| Tom   | 3           |
-| Bob   | 4           |
-| Leaf  | 0           |
-| Jim   | 0           |
+| Node | Betweenness |
+|:----:|:-----------:|
+| Jen  |      0      |
+| Tom  |      3      |
+| Bob  |      4      |
+| Leaf |      0      |
+| Jim  |      0      |
 
 ### Standardization
 
@@ -638,11 +638,11 @@ When we calculate the *raw* betweenness scores, we get the following table:
 
 | Node | Betweenness | Standardized Betweenness |
 |:----:|:-----------:|:------------------------:|
-| Jen  |      0      |      0 / 12 = 0.000       |
-| Tom  |      3      |      3 / 12 = 0.250       |
-| Bob  |      4      |      4 / 12 = 0.333       |
-| Leaf |      0      |      0 / 12 = 0.000       |
-| Jim  |      0      |      0 / 12 = 0.000       |
+| Jen  |      0      |      0 / 12 = 0.000      |
+| Tom  |      3      |      3 / 12 = 0.250      |
+| Bob  |      4      |      4 / 12 = 0.333      |
+| Leaf |      0      |      0 / 12 = 0.000      |
+| Jim  |      0      |      0 / 12 = 0.000      |
 
 ### Betweenness Centralization
 
@@ -654,23 +654,23 @@ If I lost you in some of the math, don't worry. Let's calculate the betweenness 
 
 | Node | Betweenness | Standardized Betweenness |
 |:----:|:-----------:|:------------------------:|
-| Jen  |      0      |      0 / 12 = 0.000       |
-| Tom  |      3      |      3 / 12 = 0.250       |
-| Bob  |      4      |      4 / 12 = 0.333       |
-| Leaf |      0      |      0 / 12 = 0.000       |
-| Jim  |      0      |      0 / 12 = 0.000       |
+| Jen  |      0      |      0 / 12 = 0.000      |
+| Tom  |      3      |      3 / 12 = 0.250      |
+| Bob  |      4      |      4 / 12 = 0.333      |
+| Leaf |      0      |      0 / 12 = 0.000      |
+| Jim  |      0      |      0 / 12 = 0.000      |
 
 *What is the largest standardized betweenness score?* It is 0.333 for Bob. Also, we have $g-1 = 5 - 1 = 4$. Now, we just plug these into our equation:
 
 $$C_B = \frac{\sum\limits_{i=1}^g[0.333-C'_B(n_i)]}{4} $$
 
-| Node   | Betweenness | Standardized Betweenness | Deviations of Betweenness Closeness, $0.667-C'_B(n_i)$ |
-|:------:|:-----------:|:------------------------:|:------------------------------------------------------:|
-| Jen  |        0      |      0 / 12 = 0.000      |                 0.333 - 0.000 = 0.333                  |
-| Tom  |        3      |      3 / 12 = 0.250      |                 0.333 - 0.250 = 0.083                  |
-| Bob  |        4      |      4 / 12 = 0.333      |                 0.333 - 0.333 = 0.000                  |
-| Leaf |        0      |      0 / 12 = 0.000      |                 0.333 - 0.000 = 0.333                  |
-| Jim  |        0      |      0 / 12 = 0.000      |                 0.333 - 0.000 = 0.333                  |
+| Node | Betweenness | Standardized Betweenness | Deviations of Betweenness Closeness, $0.667-C'_B(n_i)$ |
+|:-----------:|:-----------:|:-----------:|:-------------------------------:|
+| Jen  |      0      |      0 / 12 = 0.000      |                 0.333 - 0.000 = 0.333                  |
+| Tom  |      3      |      3 / 12 = 0.250      |                 0.333 - 0.250 = 0.083                  |
+| Bob  |      4      |      4 / 12 = 0.333      |                 0.333 - 0.333 = 0.000                  |
+| Leaf |      0      |      0 / 12 = 0.000      |                 0.333 - 0.000 = 0.333                  |
+| Jim  |      0      |      0 / 12 = 0.000      |                 0.333 - 0.000 = 0.333                  |
 
 If we total all of the values in the last column we get 1.082. Plugging this in as our numerator, we get:
 
@@ -680,12 +680,12 @@ $$C_B = \frac{1.082}{4} = 0.271$$
 
 We can now compare four different centralization scores for this directed graph: indegree, outdegree, closeness, and betweenness. The scores are:
 
-|              | Centralization |
-| :----------: | :------------: |
-| Indegree     | 0.438          |
-| Outdegree    | 0.125          |
-| Closeness    | 0.555          |
-| Betweenness  | 0.271          |
+|             | Centralization |
+|:-----------:|:--------------:|
+|  Indegree   |     0.438      |
+|  Outdegree  |     0.125      |
+|  Closeness  |     0.555      |
+| Betweenness |     0.271      |
 
 What can we say about the closeness centralization scores for each type of centrality? (take a look at the graph if that helps)
 
@@ -695,17 +695,17 @@ d_graph
 
 ## Test your Knowledge
 
-- What distinguishes betweenness centrality from other types of centrality like degree and closeness?
-- How does betweenness centrality help identify key actors in criminal networks, such as those in organized crime?
-- Why might law enforcement focus on individuals with high betweenness centrality when disrupting criminal networks?
-- What are the steps to calculate betweenness centrality for a specific node within an undirected network?
-- Why is it necessary to standardize betweenness centrality when comparing scores across networks of different sizes?
-- How does the calculation of betweenness centrality change when working with directed graphs compared to undirected graphs?
-- Why must you account for directionality when evaluating centrality measures in directed graphs?
-- What does a high betweenness centralization score indicate about the structure of a network? A low score?
+-   What distinguishes betweenness centrality from other types of centrality like degree and closeness?
+-   How does betweenness centrality help identify key actors in criminal networks, such as those in organized crime?
+-   Why might law enforcement focus on individuals with high betweenness centrality when disrupting criminal networks?
+-   What are the steps to calculate betweenness centrality for a specific node within an undirected network?
+-   Why is it necessary to standardize betweenness centrality when comparing scores across networks of different sizes?
+-   How does the calculation of betweenness centrality change when working with directed graphs compared to undirected graphs?
+-   Why must you account for directionality when evaluating centrality measures in directed graphs?
+-   What does a high betweenness centralization score indicate about the structure of a network? A low score?
 
 ## Summary
 
-This chapter explored the concept of betweenness centrality as a measure of centrality within social networks, emphasizing its role in identifying actors who bridge disconnected network segments and influence information flow. Unlike degree or closeness centrality, betweenness highlights actors who control connectivity between groups, making it particularly valuable in analyzing criminal networks, where key figures often facilitate collaboration. We covered how to calculate betweenness centrality for individual nodes, standardize these scores for comparison across network sizes, and compute a network-wide betweenness centralization score, which reveals the structural cohesion of a network. Understanding these concepts equips analysts to assess both individual influence and the overall structure of networks. 
+This chapter explored the concept of betweenness centrality as a measure of centrality within social networks, emphasizing its role in identifying actors who bridge disconnected network segments and influence information flow. Unlike degree or closeness centrality, betweenness highlights actors who control connectivity between groups, making it particularly valuable in analyzing criminal networks, where key figures often facilitate collaboration. We covered how to calculate betweenness centrality for individual nodes, standardize these scores for comparison across network sizes, and compute a network-wide betweenness centralization score, which reveals the structural cohesion of a network. Understanding these concepts equips analysts to assess both individual influence and the overall structure of networks.
 
 We have now covered three different ways of conceptualizing centrality: degree, closeness, and betweenness. These are all valuable tools for your crime analyst toolkit!

@@ -18,7 +18,7 @@ library( reshape2 )  # for reshaping the matrix data for a plot
 
 ```
 
-# Network Data Structures
+# Network Data Structures {.unnumbered}
 
 ## Motivating Problem
 
@@ -34,7 +34,7 @@ knitr::include_graphics( "images/ch-04-bridge-01.jpeg" )
 
 ### Konigsberg Bridge Problem
 
-Leonard Euler worked on this problem in the mid 18th century, eventually representing the solution with a set of points and lines. For a great overview fo the problem (and some interesting history), check out this [video](https://www.youtube.com/watch?v=nZwSo4vfw6c).
+Leonard Euler worked on this problem in the mid-18th century, eventually representing the solution with a set of points and lines. For a great overview of the problem (and some interesting history), check out this [video](https://www.youtube.com/watch?v=nZwSo4vfw6c).
 
 Recall the discussion from the [Introduction to Social Network Analysis for Crime Analysts](snaca-introduction.html) chapter the importance of conceptualizing and operationalizing concepts in network science. *Graph theory* provides a foundation for operationalizing concepts of interest among network scientists.
 
@@ -51,7 +51,7 @@ Two nodes, $n_i$ and $n_j$ are called **adjacent** if the line $l_k = (n_i, n_j)
 
 ### Node Sets
 
-As discussed in the "Basic Data Elements" section of the [Introduction to Social Network Analysis for Crime Analysts](snaca-introduction.html) chapter, the directionality of of graph indicates whether the edges are **undirected** or **directed**. In an **undirected** graph, the order of the nodes does not matter. In other words, $l_k = (n_i, n_j) = (n_j, n_i)$. This is to say that if there exists a line between nodes *i* and *j*, then a line exists between *j* and *i*. (This may seem obvious, but will make more sense why we talk about it this way when we get to **directed** graphs.)
+As discussed in the "Basic Data Elements" section of the [Introduction to Social Network Analysis for Crime Analysts](snaca-introduction.html) chapter, the directionality of graph indicates whether the edges are **undirected** or **directed**. In an **undirected** graph, the order of the nodes does not matter. In other words, $l_k = (n_i, n_j) = (n_j, n_i)$. This is to say that if there exists a line between nodes *i* and *j*, then a line exists between *j* and *i*. (This may seem obvious, but will make more sense why we talk about it this way when we get to **directed** graphs.)
 
 ```{r, graphs-define}
 
@@ -469,7 +469,7 @@ grid.arrange( d_graph, adj_to_plot, ncol = 2 )
 
 ```
 
-But, in the second row, *j* does not send $X_{21}=0$. The Jen/Tom dyad is **asymmetric**. Directed graphs permit this asymmetric because $l_k1 = (n_i, n_j) \neq (n_j, n_i) = l_k2$.
+But, in the second row, *j* does not send $X_{21}=0$. The Jen/Tom dyad is **asymmetric**. Directed graphs permit this asymmetry because $l_k1 = (n_i, n_j) \neq (n_j, n_i) = l_k2$.
 
 ```{r}
 
@@ -562,7 +562,7 @@ grid.arrange( d_graph, adj_to_plot, ncol = 2 )
 
 ```
 
-Note that, because we are allowing directionality to matter, the total number of edges in the network is just the sum of the entire matrix.
+Note that because we are allowing directionality to matter, the total number of edges in the network is just the sum of the entire matrix.
 
 ## Test your Knowledge
 

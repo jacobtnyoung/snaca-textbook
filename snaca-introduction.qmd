@@ -17,7 +17,7 @@ library( grid )      # to include the null graphical object
 
 ```
 
-# Introduction to Social Network Analysis for Crime Analysts
+# Introduction to Social Network Analysis for Crime Analysts {.unnumbered}
 
 Why add "social network analysis" to your crime analyst toolkit? To answer this question, it probably helps to know what social network analysis is! In this chapter, I want to introduce you to how people who study networks **think** about research problems and the types of data they use to examine these research problems from a network perspective. As such, we have the following *learning goals*:
 
@@ -53,7 +53,7 @@ To answer these questions, they proposed the following model:
 knitr::include_graphics( "images/ch-01-model-figure.jpeg" )
 ```
 
-In this model, they argued that police officers views of body-worn cameras influence whether they use their cameras in incidents. But, where do these views come from? The authors proposed a **contagion** process whereby officers who shared incidents together exchanged views about the legitimacy of body-worn cameras. That is, much like a cold can be spread by contagious people, views about body-cameras are spread between officers. The medium by which these views spread is a social network.
+In this model, they argued that police officers' views of body-worn cameras influence whether they use their cameras in incidents. But, where do these views come from? The authors proposed a **contagion** process whereby officers who shared incidents together exchanged views about the legitimacy of body-worn cameras. That is, much like a cold can be spread by contagious people, views about body-cameras are spread between officers. The medium by which these views spread is a social network.
 
 Thus, the network matters! Rather than focusing on differences between individuals in terms of some attribute or situational experience, the study by @young2015 was explicitly focused on the role that **relationships** between officers play in spreading attitudes, ideas, beliefs, etc. about body-worn cameras. Thinking about the problem in this way is an example of using the lens of a **network perspective** and is characteristic of what is called *Network Science*.
 
@@ -68,10 +68,10 @@ All of these various connections you thought of fit within the domain of study t
 Network science takes these **relational structures** as the primary domain of interest. In so doing, research questions take the following forms:
 
 -   How does the network matter?
-    -   Here the network is an *independent variable*. 
+    -   Here the network is an *independent variable*.
     -   In the case above, the network of shared incidents was as independent variable that influenced views of body-worn cameras.
 -   What effects the network?
-    -   Here, the network is a *dependent variable*. 
+    -   Here, the network is a *dependent variable*.
     -   For example, do younger individuals who are involved in crime have more co-offenders?
 
 Thinking about research problems and crime analysis through a network perspective lens means that we frame our inquiry around these basic questions. That is, "how does the network matter?" and/or "what effects the network?".
@@ -96,7 +96,7 @@ Now, <u>think about this</u>:
 -   Is the causal logic the same?
 -   Are the policy implications the same? What are the variables?
 
-Take some time to think it through? 
+Take some time to think it through?
 
 <br>
 
@@ -302,11 +302,11 @@ grid.arrange( p1, nullGrob(), p2, ncol = 3, widths = c( 1, 0.5, 1 ) )  # Add spa
 
 ```
 
-*How are these structures different?* 
+*How are these structures different?*
 
 In the undirected network (on the left), all information can reach all three groups. To see this, start at any node and you can reach (by tracing) any other node following the lines.
 
-But, in the directed network (on the right), information is "stuck" in the three clusters. Why? 
+But, in the directed network (on the right), information is "stuck" in the three clusters. Why?
 
 This is because information comes from the center node and goes to each cluster. And it does not leave. Even though they all communicate in each cluster, information does not leave the clusters. To see this, start with any node and follow the arrows. Once you get into a single cluster, you cannot leave!
 
@@ -323,7 +323,7 @@ For example, in a friendship network the tie could measure whether we are friend
 
 #### Meanings
 
-Edges can have different meanings and therefore be of different *types*:
+Edges can have different meanings and therefore can be of different *types*:
 
 -   Social relationships (e.g. sister, friend, likes, knows)
 -   Interactions (has sex with, talks to, seeks advice from)
@@ -414,7 +414,7 @@ As another example, @Shjarback2018 examined the tendency for United States senat
 knitr::include_graphics( "images/ch-01-net-07.jpeg" )
 ```
 
-In this network, there are two sets of nodes: bills (crime control and non-control) and senators (Democrats and Republicans). Crime control bills are the black squares and non-crime control bills are the white squares. Republication senators are show as red circles and Democratic senators are shown as blue circles.
+In this network, there are two sets of nodes: bills (crime control and non-control) and senators (Democrats and Republicans). Crime control bills are the black squares and non-crime control bills are the white squares. Republication senators are shown as red circles and Democratic senators are shown as blue circles.
 
 #### Plexity
 
@@ -425,7 +425,7 @@ Networks can also differ with respect to the types of edges.
 
 <br>
 
----
+------------------------------------------------------------------------
 
 ## Test Your Knowledge
 

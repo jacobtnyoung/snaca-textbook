@@ -18,7 +18,7 @@ library( reshape2 )  # for reshaping the matrix data for a plot
 
 ```
 
-# Degree Centrality
+# Degree Centrality{.unnumbered}
 
 When we say a *node* is "central", what do we mean conceptually? As a crime analyst, you probably already know that identifying and understanding who holds the most influence within a group is crucial for effective intervention. For example, in a study of white-collar crime networks, @smith2012corporatefraud identified individuals most connected to others in a corporate fraud scheme, revealing key facilitators who had a disproportionate influence over the flow of information and resources. This allowed the researchers to pinpoint the central figures within the fraud ring, enabling targeted investigative efforts. This chapter will guide you through the conceptualization of **centrality** as it pertains to *degree* centrality, demonstrating how to calculate degree centrality scores for individual nodes and how to assess the overall degree centralization of an entire network. By gaining a conceptual understanding of centrality, and understanding the operationalization of centrality through degree centrality, crime analysts can more effectively identify key targets for investigation and disruption in criminal organizations.
 
@@ -175,7 +175,7 @@ In this and subsequent chapters, we will discuss each of these concepts, how the
 
 It is also important to distinguish between whether we are talking about the centrality of a <u>node</u> or the centrality of a <u>graph</u>:
 
--   The centrality of a node (whether it is measured as degree centrality, betweenness centrality, or closeness centrality) refers to **point** centrality. In other words, the centrality of a particular point on a graph. What we have been calling a node. When we talk about point centrality, we are usually comparing different nodes. For example, is Jim more central than Joan?
+-   The centrality of a node (whether it is measured as degree centrality, betweenness centrality, or closeness centrality) refers to **point** centrality. In other words, the centrality of a particular node in a graph. When we talk about point centrality, we are usually comparing different nodes. For example, is Jim more central than Joan?
 
 -   In addition, we can also describe the centrality of an entire graph, referred to as **graph** centrality. The centrality measure on an entire graph tells us how centrality measures differ between nodes in a graph. As we will see, we can describe how hierarchical or decentralized a graph is based on the *centralization* of the graph.
 
@@ -189,7 +189,7 @@ In an undirected binary graph, *degree centrality* measures the extent to which 
 
 -   $C_D(n_i) = \sum_j x_{ij} = \sum_j x_{ji}$
 
--   Which reads: the degree centrality of node *i* is the sum over the other nodes in the graph (i.e. $\sum_j x_{ij} = \sum_j x_{ji}$). If *i* is connected to *j*, recall that there would be a 1 in the $X_{ij}$ cell, where $X$ is the sociomatrix. If *i* is not connected to *j*, then there would be a 0 in the $X_{ij}$ cell. The equation is just telling us to some all of the entries.
+-   Which reads: the degree centrality of node *i* is the sum over the other nodes in the graph (i.e. $\sum_j x_{ij} = \sum_j x_{ji}$). If *i* is connected to *j*, recall that there would be a 1 in the $X_{ij}$ cell, where $X$ is the sociomatrix. If *i* is not connected to *j*, then there would be a 0 in the $X_{ij}$ cell. The equation is just telling us to sum all of the entries.
 
 Let's take a look at this with some data. Recall our example network with Jen, Tom, Bob, Leaf, and Jim. Let's find the degree centrality score for each node.
 
@@ -228,7 +228,7 @@ grid.arrange( u_graph, adj_to_plot, ncol = 2 )
 
 ```
 
-Recall from above that in an undirected network the degree centrality score is either the sum of the row **or** the sum of the column. Let's calculate the score for Jen. If we look across the row (that is, horizontally) we see that the cells values are: 0, 1, 0, 0, 0. If we add these we get 1. That is, Jen's degree centrality score is 1. If we look across the column, we get the same information: 0, 1, 0, 0, 0. Put another way: $C_D(Jen) = \sum_j x_{ij} = x_{Jen, Tom} + x_{Jen, Bob} + x_{Jen, Leaf} + x_{Jen, Jim} = 1 + 0 + 0 + 0 = 1$.
+Recall from above that in an undirected network the degree centrality score is either the sum of the row **or** the sum of the column. Let's calculate the score for Jen. If we look across the row (that is, horizontally) we see that the cell's values are: 0, 1, 0, 0, 0. If we add these we get 1. That is, Jen's degree centrality score is 1. If we look across the column, we get the same information: 0, 1, 0, 0, 0. Put another way: $C_D(Jen) = \sum_j x_{ij} = x_{Jen, Tom} + x_{Jen, Bob} + x_{Jen, Leaf} + x_{Jen, Jim} = 1 + 0 + 0 + 0 = 1$.
 
 Jen's degree centrality score is 1, meaning that she has 1 tie. Notice in the calculation that we didn't include $x_{ii}$ which is $x_{Jen, Jen}$ because this is zero. Be careful when you do the calculations that you don't confuse these. Since self-nominations are usually set to zero, this is not a problem when we use the row or column totals. Just something to keep in mind.
 
@@ -276,7 +276,7 @@ So, we just adjust the *raw* scores by standardizing by the denominator:
 -   Leaf = $C'_D(Leaf) = \dfrac{C_D(2)}{4} = 0.50$
 -   Jim = $C'_D(Jim) = \dfrac{C_D(2)}{4} = 0.50$
 
-How is this to be interpreted? The standardized degree centrality score gives us is the proportion of the network members with ties to actor *i*. So, a score of 0.25 for Jen means that Jen has ties to 25% of the nodes that she could potentially have ties to in the network. In other words, of the four people she could have ties with, she only has ties with one node.
+How is this to be interpreted? The standardized degree centrality score gives us the proportion of the network members with ties to actor *i*. So, a score of 0.25 for Jen means that Jen has ties to 25% of the nodes that she could potentially have ties to in the network. In other words, of the four people she could have ties with, she only has ties with one node.
 
 ### Mean Degree
 

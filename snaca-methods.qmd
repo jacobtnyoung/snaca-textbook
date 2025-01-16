@@ -12,7 +12,7 @@ library( here )      # for the directory
 
 ```
 
-# Network Data Collection
+# Network Data Collection {.unnumbered}
 
 So far, we have discussed why social network analysis is an essential part of a crime analyst's toolkit by introducing the fundamental concepts of network science, helping you see crime problems through a network lens. We have also introduced the theoretical aspects of network science, paying attention to how networks matter as a cause (or an effect). In this chapter, we'll shift focus to the practical side of network analysis: how to collect network data effectively. Understanding the types of data you need, how to gather them, and the challenges involved in network data collection is crucial for conducting effective network analysis as a crime analyst.
 
@@ -40,7 +40,7 @@ Network data can come from MANY sources. For example, data can be:
 
 ## Boundary Specification
 
-While there are various ways that network data can be collected, an important consideration is the issue of *boundary specification*. This concerns the theoretical and methodological challenge of determining the appropriate set of actors and connections to analyze in order to identify the relevant social network within a given context. When we collect data on a network we impose a particular boundary. For example, suppose we ask adolescents in a school who their friends are, but we only have a list of people in that school. The boundary would be those friends that are in the school. Does the boundary really exists? What about friendships that are outside of the school? Is the boundary imposed to conduct the research? 
+While there are various ways that network data can be collected, an important consideration is the issue of *boundary specification*. This concerns the theoretical and methodological challenge of determining the appropriate set of actors and connections to analyze in order to identify the relevant social network within a given context. When we collect data on a network we impose a particular boundary. For example, suppose we ask adolescents in a school who their friends are, but we only have a list of people in that school. The boundary would be those friends that are in the school. Does the boundary really exist? What about friendships that are outside of the school? Is the boundary imposed to conduct the research?
 
 This is an important question to consider when collecting network data and when you are analyzing it. This can be a particular challenge for crime analysts given the types of data involved in our work. Defining clear boundaries influences the accuracy and effectiveness of the resulting analysis, which may have important implications for the policies that we identify from these analyses.
 
@@ -48,7 +48,7 @@ Consider another example where a crime analyst is mapping the social network of 
 
 ## Instruments and Design
 
--   Instruments are the tools used to elicit information from respondents. Some common examples are name-generators and rosters. 
+-   Instruments are the tools used to elicit information from respondents. Some common examples are name-generators and rosters.
 
 -   Design corresponds to the protocol for determining how information should be elicited, who should be sampled, and so on. Some examples are: ego-centric networks, partial networks, and complete/global networks
 
@@ -58,11 +58,11 @@ With ego-centric designs, data on a focal actor (ego) and ties to neighbors (alt
 
 ### Partial Networks
 
-Partial networks extent data collection from the ego-centric design. Specifically, ego-centric data are collected, plus some amount of tracing to reach contacts of contacts. The instrument is a "tracing mechanism" whereby the network is "traced" by contacting those in ego's network. For example, @klovdahl1994social used a link-tracing design to examine HIV risk networks, particularly focusing on drug users and their sexual partners. The project started with a purposively selected group of drug users. These individuals were asked to identify their sexual partners and drug-sharing contacts, who were then recruited into the study. The study aimed to understand how HIV spreads within networks of drug users, examining both direct and indirect relationships. The use of link-tracing was critical for reaching hidden or hard-to-reach populations, such as injection drug users and their social and sexual networks, which are often not accessible through traditional sampling methods.
+Partial networks extend data collection from the ego-centric design. Specifically, ego-centric data are collected, plus some amount of tracing to reach contacts of contacts. The instrument is a "tracing mechanism" whereby the network is "traced" by contacting those in ego's network. For example, @klovdahl1994social used a link-tracing design to examine HIV risk networks, particularly focusing on drug users and their sexual partners. The project started with a purposively selected group of drug users. These individuals were asked to identify their sexual partners and drug-sharing contacts, who were then recruited into the study. The study aimed to understand how HIV spreads within networks of drug users, examining both direct and indirect relationships. The use of link-tracing was critical for reaching hidden or hard-to-reach populations, such as injection drug users and their social and sexual networks, which are often not accessible through traditional sampling methods.
 
 ### Complete/Global Network
 
-A final approach is to take a census of the network. In these situations, data on all actors within a particular (defined) boundary are known. The instrument can be a roster (e.g. "For each of the following persons, please indicate whom you trust to share personal information with?") or perhaps a free response (e.g. "Who are the people in this prison that you trust with person information about you?"). We most commonly encounter this design when there it is clear what the sampling frame is, such as a school or a prison, and a roster of members of the setting is known.
+A final approach is to take a census of the network. In these situations, data on all actors within a particular (defined) boundary are known. The instrument can be a roster (e.g. "For each of the following persons, please indicate whom you trust to share personal information with?") or perhaps a free response (e.g. "Who are the people in this prison that you trust with person information about you?"). We most commonly encounter this design when there is an identifiable sampling frame, such as a school or a prison, and a roster of members of the setting is known.
 
 ### Things to Consider
 
@@ -76,7 +76,7 @@ As you may have guessed, collecting network data involves a lot of questions and
 
 <br>
 
----
+------------------------------------------------------------------------
 
 ## Test your Knowledge
 

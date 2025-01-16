@@ -18,7 +18,7 @@ library( reshape2 )  # for reshaping the matrix data for a plot
 
 ```
 
-# Closeness Centrality
+# Closeness Centrality {.unnumbered}
 
 In the prior chapter, we examined the idea of "centrality" for nodes and "centralization" for graphs, focusing attention on the conceptual aspects of what it means to be *central* as well as the ways in which we can operationalize the concept using *degree centrality*. In this chapter we want to continue thinking about what it means to be central, but through a different conceptual lens: **closeness**. As a crime analyst, examining closeness centrality can provide crucial insights into the efficiency and influence of individuals within a group that may go beyond what you can glean from examining degree centrality. For instance, @bright2015illuminating study of drug trafficking networks illustrates how closeness centrality played a pivotal role in understanding the structure and function of illicit organizations. In this study, @bright2015illuminating examined an Australian drug trafficking network and found that individuals with higher closeness centrality were not necessarily the most visible or directly connected (in terms of degree centrality), but held critical positions because of their proximity to others in the network. These individuals could quickly access and disseminate information across the group, making them key actors in maintaining the flow of drugs, money, and communication. By identifying those with high closeness centrality, law enforcement was able to target individuals who had the potential to disrupt the network's operations more effectively than simply targeting those with the most connections.
 
@@ -527,7 +527,7 @@ Recall our table of standardized closeness scores:
 $$C_C = \frac{\sum\limits_{i=1}^g[0.800-C'_C(n_i)]}{[(5-2)(5-1)]/(2*5-3)}$$
 
 | Node | Distance |  Closeness  | Standardized Closeness | Deviations of Standardized Closeness $0.800-C'_C(n_i)$ |
-|:------------:|:------------:|:------------:|:------------:|:---------------:|
+|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
 | Jen  |    9     | 1/9 = 0.111 |    0.111\*4 = 0.444    |                 0.800 - 0.444 = 0.356                  |
 | Tom  |    6     | 1/6 = 0.167 |    0.167\*4 = 0.668    |                 0.800 - 0.668 = 0.132                  |
 | Bob  |    5     | 1/5 = 0.200 |    0.200\*4 = 0.800    |                 0.800 - 0.800 = 0.000                  |

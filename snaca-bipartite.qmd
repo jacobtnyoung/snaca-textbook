@@ -18,7 +18,7 @@ library( reshape2 )  # for reshaping the matrix data for a plot
 
 ```
 
-# Bipartite Graphs/Two-Mode Networks
+# Bipartite Graphs/Two-Mode Networks {.unnumbered}
 
 In the prior chapters, we have mainly focused our attention on networks that have a single set of nodes. As discussed in the introductory chapter, these sort of graphs are referred to as *unipartite*. This term means "one partition" and is in reference to the fact that there is only one partition of the node set. But, not all of the networks you encounter as a crime analyst will be unipartite (also called "one mode"). In fact, most of the data you will examine will be more complex in how it is structured.
 
