@@ -263,6 +263,8 @@ To do this we simply take the number of edges, $L$, and divide by the correspond
 
 Since we have two sets of nodes, we can compare the means. The average node in $M$ has a higher degree than the average node in $N$. This makes sense given that the edge count is the same. As a rule, in bipartite graphs, the node set with more nodes will have a higher mean degree.
 
+<br>
+
 ## Test your Knowledge
 
 -   What is the primary difference between unipartite and bipartite graphs? Provide an example of each.

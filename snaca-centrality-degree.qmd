@@ -569,6 +569,8 @@ An outdegree centralization score close to 1 indicates that the outdegrees in th
 
 The indegree centralization score, $C_I$, is 0.438 and the outdegree centralization score, $C_O$, is 0.125. *What does the difference tell us?* It tells us that the outdegrees are more decentralized than the indegrees. Put another way, the indegrees are more centralized than are the outdegrees. *Make sense?* Think of it this way: there is more inequality in the way the indegrees are distributed than the way the outdegrees are distributed.
 
+<br>
+
 ## Test your Knowledge
 
 -   What does it mean for a node to be "central" in a network? Provide an example where centrality may play a critical role in a criminal investigation.

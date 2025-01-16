@@ -96,8 +96,6 @@ knitr::include_graphics( "images/ch-02-table-02.jpeg" )
 
 <br>
 
-------------------------------------------------------------------------
-
 ## Test Your Knowledge
 
 -   In a few words, how would you describe the difference between "network theories" and "theories of networks"?

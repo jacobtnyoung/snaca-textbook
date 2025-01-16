@@ -564,6 +564,8 @@ grid.arrange( d_graph, adj_to_plot, ncol = 2 )
 
 Note that because we are allowing directionality to matter, the total number of edges in the network is just the sum of the entire matrix.
 
+<br>
+
 ## Test your Knowledge
 
 -   What was the key question behind the Konigsberg bridge problem? How did Euler represent this problem using points and lines? What was the significance of this representation?

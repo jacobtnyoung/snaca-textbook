@@ -76,8 +76,6 @@ As you may have guessed, collecting network data involves a lot of questions and
 
 <br>
 
-------------------------------------------------------------------------
-
 ## Test your Knowledge
 
 -   Compare and contrast observational data, archival data, and questionnaire-based data collection methods for social networks. For each, provide an example that you may encounter as a crime analyst.

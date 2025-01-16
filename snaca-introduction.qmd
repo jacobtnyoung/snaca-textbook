@@ -425,8 +425,6 @@ Networks can also differ with respect to the types of edges.
 
 <br>
 
-------------------------------------------------------------------------
-
 ## Test Your Knowledge
 
 -   What is the difference between conceptualization and operationalization?

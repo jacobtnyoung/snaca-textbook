@@ -237,6 +237,8 @@ Now, what is the *diameter* of the network? To figure this out, we would identif
 
 Paths with *directed graphs* can be a bit tricky to comprehend due to the directionality of the ties. For example, for how many steps is $A$ from $B$ in this graph, $B \rightarrow D \rightarrow C \rightarrow A$? If we focus on the direction of the ties, then $A$ cannot reach $B$. But, if we **ignore** the direction of the ties, then $A$ is 3 steps from $B$.
 
+<br>
+
 ## Test your Knowledge
 
 -   What are the key features of a network that crime analysts can focus on for identifying trends and prioritizing interventions?

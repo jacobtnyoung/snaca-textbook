@@ -910,6 +910,8 @@ d_graph
 
 For the graph above, we can compare the centralization scores based on the different measures of centrality. The indegree centralization score is 0.428, the outdegree centralization score is 0.125, and the closeness centralization score is 0.556. What can we say about the closeness centralization scores for each type of centrality?
 
+<br>
+
 ## Test your Knowledge
 
 -   What does "closeness centrality" measure in a network?

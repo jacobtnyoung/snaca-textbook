@@ -8,7 +8,7 @@
 
 <meta name="author" content="Jacob T.N. Young">
 
-<title>Social Network Analysis for Crime Analysts - 1&nbsp; Degree Centrality{.unnumbered}</title>
+<title>Social Network Analysis for Crime Analysts - Degree Centrality</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -95,7 +95,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./snaca-centrality-degree.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Degree Centrality{.unnumbered}</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./snaca-centrality-degree.html">Degree Centrality</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -167,7 +167,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./snaca-centrality-degree.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Degree Centrality{.unnumbered}</span></span></a>
+ <span class="menu-text">Degree Centrality</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -210,25 +210,25 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#case-study-disrupting-hate-speech-online" id="toc-case-study-disrupting-hate-speech-online" class="nav-link active" data-scroll-target="#case-study-disrupting-hate-speech-online"><span class="header-section-number">1.1</span> Case Study: Disrupting Hate Speech Online</a></li>
-  <li><a href="#concepts-and-operationalization" id="toc-concepts-and-operationalization" class="nav-link" data-scroll-target="#concepts-and-operationalization"><span class="header-section-number">1.2</span> Concepts and Operationalization</a>
+  <li><a href="#case-study-disrupting-hate-speech-online" id="toc-case-study-disrupting-hate-speech-online" class="nav-link active" data-scroll-target="#case-study-disrupting-hate-speech-online">Case Study: Disrupting Hate Speech Online</a></li>
+  <li><a href="#concepts-and-operationalization" id="toc-concepts-and-operationalization" class="nav-link" data-scroll-target="#concepts-and-operationalization">Concepts and Operationalization</a>
   <ul class="collapse">
-  <li><a href="#conceptualization" id="toc-conceptualization" class="nav-link" data-scroll-target="#conceptualization"><span class="header-section-number">1.2.1</span> Conceptualization</a></li>
+  <li><a href="#conceptualization" id="toc-conceptualization" class="nav-link" data-scroll-target="#conceptualization">Conceptualization</a></li>
   </ul></li>
-  <li><a href="#undirected-graphs" id="toc-undirected-graphs" class="nav-link" data-scroll-target="#undirected-graphs"><span class="header-section-number">1.3</span> Undirected Graphs</a>
+  <li><a href="#undirected-graphs" id="toc-undirected-graphs" class="nav-link" data-scroll-target="#undirected-graphs">Undirected Graphs</a>
   <ul class="collapse">
-  <li><a href="#degree-centrality" id="toc-degree-centrality" class="nav-link" data-scroll-target="#degree-centrality"><span class="header-section-number">1.3.1</span> Degree Centrality</a></li>
-  <li><a href="#mean-degree" id="toc-mean-degree" class="nav-link" data-scroll-target="#mean-degree"><span class="header-section-number">1.3.2</span> Mean Degree</a></li>
-  <li><a href="#degree-centralization" id="toc-degree-centralization" class="nav-link" data-scroll-target="#degree-centralization"><span class="header-section-number">1.3.3</span> Degree Centralization</a></li>
+  <li><a href="#degree-centrality" id="toc-degree-centrality" class="nav-link" data-scroll-target="#degree-centrality">Degree Centrality</a></li>
+  <li><a href="#mean-degree" id="toc-mean-degree" class="nav-link" data-scroll-target="#mean-degree">Mean Degree</a></li>
+  <li><a href="#degree-centralization" id="toc-degree-centralization" class="nav-link" data-scroll-target="#degree-centralization">Degree Centralization</a></li>
   </ul></li>
-  <li><a href="#directed-graphs" id="toc-directed-graphs" class="nav-link" data-scroll-target="#directed-graphs"><span class="header-section-number">1.4</span> Directed Graphs</a>
+  <li><a href="#directed-graphs" id="toc-directed-graphs" class="nav-link" data-scroll-target="#directed-graphs">Directed Graphs</a>
   <ul class="collapse">
-  <li><a href="#degree-centrality-1" id="toc-degree-centrality-1" class="nav-link" data-scroll-target="#degree-centrality-1"><span class="header-section-number">1.4.1</span> Degree Centrality</a></li>
-  <li><a href="#mean-degree-1" id="toc-mean-degree-1" class="nav-link" data-scroll-target="#mean-degree-1"><span class="header-section-number">1.4.2</span> Mean Degree</a></li>
-  <li><a href="#degree-centralization-1" id="toc-degree-centralization-1" class="nav-link" data-scroll-target="#degree-centralization-1"><span class="header-section-number">1.4.3</span> Degree Centralization</a></li>
+  <li><a href="#degree-centrality-1" id="toc-degree-centrality-1" class="nav-link" data-scroll-target="#degree-centrality-1">Degree Centrality</a></li>
+  <li><a href="#mean-degree-1" id="toc-mean-degree-1" class="nav-link" data-scroll-target="#mean-degree-1">Mean Degree</a></li>
+  <li><a href="#degree-centralization-1" id="toc-degree-centralization-1" class="nav-link" data-scroll-target="#degree-centralization-1">Degree Centralization</a></li>
   </ul></li>
-  <li><a href="#test-your-knowledge" id="toc-test-your-knowledge" class="nav-link" data-scroll-target="#test-your-knowledge"><span class="header-section-number">1.5</span> Test your Knowledge</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">1.6</span> Summary</a></li>
+  <li><a href="#test-your-knowledge" id="toc-test-your-knowledge" class="nav-link" data-scroll-target="#test-your-knowledge">Test your Knowledge</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jacobtnyoung/snaca-textbook/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -237,7 +237,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Degree Centrality{.unnumbered}</span></h1>
+<h1 class="title">Degree Centrality</h1>
 </div>
 
 
@@ -259,8 +259,8 @@ div.csl-indent {
 <li>Calculate degree centrality scores for a set of nodes.</li>
 <li>Calculate a degree centralization score for a graph.</li>
 </ul>
-<section id="case-study-disrupting-hate-speech-online" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="case-study-disrupting-hate-speech-online"><span class="header-section-number">1.1</span> Case Study: Disrupting Hate Speech Online</h2>
+<section id="case-study-disrupting-hate-speech-online" class="level2">
+<h2 class="anchored" data-anchor-id="case-study-disrupting-hate-speech-online">Case Study: Disrupting Hate Speech Online</h2>
 <p>As has been noted by many concerned citizens and scholars, hate speech in online forums has become a salient issue. If you are an organization who hosts such sites, what can you do to reduce hate speech? One approach is to “deplatform” particular individuals. This approach is a type of <em>strategic network disruption</em> whereby select individuals are removed from the network with the goal of reducing hate speech among those who are still using the platform. The logic is that these individuals are critical links that connect others and their absence will reduce hateful content. Does it work?</p>
 <p>This is the question that <span class="citation" data-cites="thomas2023disrupting">Thomas and Wahedi (<a href="references.html#ref-thomas2023disrupting" role="doc-biblioref">2023</a>)</span> sought to address when they identified hate organizations on Facebook and evaluated whether removing central individuals reduced hate speech in those organizations.</p>
 <div class="cell" data-layout-align="center">
@@ -275,8 +275,8 @@ div.csl-indent {
 <p>Yes! As shown in the figure above (by the way, this is <a href="https://www.pnas.org/doi/full/10.1073/pnas.2214080120">Figure 1</a> from the article), the authors found that hate speech declined in the organizations after the intervention. The overall finding is that deplatforming can be effective at reducing online hate speech. For our purposes here, it illustrates the role that centrality plays in thinking about networks. The authors examined a situation where central actors were removed as an intervention.</p>
 <p>Now, let’s start from the beginning and really be precise with our thinking about <em>centrality</em>.</p>
 </section>
-<section id="concepts-and-operationalization" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="concepts-and-operationalization"><span class="header-section-number">1.2</span> Concepts and Operationalization</h2>
+<section id="concepts-and-operationalization" class="level2">
+<h2 class="anchored" data-anchor-id="concepts-and-operationalization">Concepts and Operationalization</h2>
 <p>When we say a <em>node</em> is “central”, what do we mean conceptually? If your thinking what I’m thinking, it probably has something to to with a node being <strong>important</strong>. When we talk about centrality, then we are talking about the importance of a node.</p>
 <p>Speaking generally, network position should be interesting and important:</p>
 <ul>
@@ -284,8 +284,8 @@ div.csl-indent {
 <li>And as a description of an <em>entire network</em></li>
 </ul>
 <p>We will review centrality for individual nodes as well as how centrality can be used to describe an entire network (hint: we call it <em>centralization</em>).</p>
-<section id="conceptualization" class="level3" data-number="1.2.1">
-<h3 data-number="1.2.1" class="anchored" data-anchor-id="conceptualization"><span class="header-section-number">1.2.1</span> Conceptualization</h3>
+<section id="conceptualization" class="level3">
+<h3 class="anchored" data-anchor-id="conceptualization">Conceptualization</h3>
 <blockquote class="blockquote">
 <p>“Everyone agrees, it seems, that centrality is an important structural attribute of networks. All concede that it is related to a high degree to other important group properties and processes. But there consensus ends.” (<span class="citation" data-cites="freeman1979centrality">Freeman (<a href="references.html#ref-freeman1979centrality" role="doc-biblioref">1978/1979</a>)</span>: 217)</p>
 </blockquote>
@@ -305,10 +305,10 @@ div.csl-indent {
 <p>As with prior chapters, we will start with undirected graphs and then move to directed graphs.</p>
 </section>
 </section>
-<section id="undirected-graphs" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="undirected-graphs"><span class="header-section-number">1.3</span> Undirected Graphs</h2>
-<section id="degree-centrality" class="level3" data-number="1.3.1">
-<h3 data-number="1.3.1" class="anchored" data-anchor-id="degree-centrality"><span class="header-section-number">1.3.1</span> Degree Centrality</h3>
+<section id="undirected-graphs" class="level2">
+<h2 class="anchored" data-anchor-id="undirected-graphs">Undirected Graphs</h2>
+<section id="degree-centrality" class="level3">
+<h3 class="anchored" data-anchor-id="degree-centrality">Degree Centrality</h3>
 <p>In an undirected binary graph, <em>degree centrality</em> measures the extent to which a node connects to all other nodes in a network. In other words, the number of edges incident with a node. This is symbolized as: <span class="math inline">\(d(n_i)\)</span> and this reads “degree for the <span class="math inline">\(i_{th}\)</span> node”. For an undirected binary graph, the degree, <span class="math inline">\(d(n_i)\)</span>, is simply the row <strong>or</strong> column sum. We can express this formally as:</p>
 <ul>
 <li><p><span class="math inline">\(C_D(n_i) = \sum_j x_{ij} = \sum_j x_{ji}\)</span></p></li>
@@ -333,8 +333,8 @@ div.csl-indent {
 <li>Leaf = <span class="math inline">\(C_D(Leaf) = \sum_j x_{ij} = x_{Leaf, Jen} + x_{Leaf, Tom} + x_{Leaf, Bob} + x_{Leaf, Jim} = 0 + 0 + 1 + 1 = 2\)</span></li>
 <li>Jim = <span class="math inline">\(C_D(Jim) = \sum_j x_{ij} = x_{Jim, Jen} + x_{Jim, Tom} + x_{Jim, Bob} + x_{Jim, Jim} = 0 + 0 + 1 + 1 = 2\)</span></li>
 </ul>
-<section id="standardization" class="level4" data-number="1.3.1.1">
-<h4 data-number="1.3.1.1" class="anchored" data-anchor-id="standardization"><span class="header-section-number">1.3.1.1</span> Standardization</h4>
+<section id="standardization" class="level4">
+<h4 class="anchored" data-anchor-id="standardization">Standardization</h4>
 <p>Actor degree centrality not only reflects each node’s connectivity to other nodes but also depends on the size of the network, <em>g</em>. Larger networks will have a higher maximum possible degree centrality value. This is called a <em>raw</em> score. How can we use nodes from different sized networks?</p>
 <p>Standardize! If we want to compare nodes in different sized networks, then we just take into account the number of nodes and the maximum possible nodes to which <em>i</em> could be connected. In an undirected graph, this is <em>g-1</em>.</p>
 <p>Thus, we can calculate a standardized degree centrality for an undirected graph as:</p>
@@ -369,8 +369,8 @@ div.csl-indent {
 <p>How is this to be interpreted? The standardized degree centrality score gives us the proportion of the network members with ties to actor <em>i</em>. So, a score of 0.25 for Jen means that Jen has ties to 25% of the nodes that she could potentially have ties to in the network. In other words, of the four people she could have ties with, she only has ties with one node.</p>
 </section>
 </section>
-<section id="mean-degree" class="level3" data-number="1.3.2">
-<h3 data-number="1.3.2" class="anchored" data-anchor-id="mean-degree"><span class="header-section-number">1.3.2</span> Mean Degree</h3>
+<section id="mean-degree" class="level3">
+<h3 class="anchored" data-anchor-id="mean-degree">Mean Degree</h3>
 <p>We can examine the summary statistics for degree centrality by inspecting the <strong>mean</strong>. The average degree is an important property of a network. <em>Why? What does a network with a high average degree look like? A low average degree?</em></p>
 <p>The mean degree for an undirected network is:</p>
 <p><span class="math display">\[\bar C_D =  \dfrac{\sum\limits_{i=1}^g C_D(n_i)}{g} = \dfrac{2L}{g}\]</span></p>
@@ -382,8 +382,8 @@ div.csl-indent {
 <p>What is the mean degree for our example network? Well, we have <span class="math inline">\(L=5\)</span> and <span class="math inline">\(g = 5\)</span>, so plugging the numbers we get:</p>
 <p><span class="math display">\[\bar C_D =  \dfrac{\sum\limits_{i=1}^g C_D(n_i)}{g} = \dfrac{2L}{g} = \dfrac{2*5}{5} = \dfrac{10}{5} = 2\]</span> The average degree for this graph is 2. In other words, on average, a node has two edges.</p>
 </section>
-<section id="degree-centralization" class="level3" data-number="1.3.3">
-<h3 data-number="1.3.3" class="anchored" data-anchor-id="degree-centralization"><span class="header-section-number">1.3.3</span> Degree Centralization</h3>
+<section id="degree-centralization" class="level3">
+<h3 class="anchored" data-anchor-id="degree-centralization">Degree Centralization</h3>
 <p>In addition to summarizing the graph with the <em>mean degree</em>, we can also calculate the centralization of the graph. Centralization measures the extent to which the nodes in a social network differ from one another in their individual centrality scores. Put differently, how much variation is there in the distribution of centrality scores?</p>
 <p>We can calculate this as:</p>
 <p><span class="math display">\[C_A =  \dfrac{\sum\limits_{i=1}^g [C_A(n^*) - C_A(n_i)]}{max \sum\limits_{i=1}^g [C_A(n^*) - C_A(n_i)]}\]</span></p>
@@ -438,10 +438,10 @@ div.csl-indent {
 <p><span class="math display">\[C_D =  \dfrac{\sum\limits_{i=1}^g [C_D(n^*) - C_D(n_i)]}{[(g-1)(g-2)]} = \dfrac{(2-2)+(2-2)+(2-2)+(2-2)+(2-2)}{(5-1)(5-2)} = \dfrac{0+0+0+0+0}{4*3}= \dfrac{0}{12}= 0.0\]</span></p>
 </section>
 </section>
-<section id="directed-graphs" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="directed-graphs"><span class="header-section-number">1.4</span> Directed Graphs</h2>
-<section id="degree-centrality-1" class="level3" data-number="1.4.1">
-<h3 data-number="1.4.1" class="anchored" data-anchor-id="degree-centrality-1"><span class="header-section-number">1.4.1</span> Degree Centrality</h3>
+<section id="directed-graphs" class="level2">
+<h2 class="anchored" data-anchor-id="directed-graphs">Directed Graphs</h2>
+<section id="degree-centrality-1" class="level3">
+<h3 class="anchored" data-anchor-id="degree-centrality-1">Degree Centrality</h3>
 <p>In a directed binary graph, degree centrality can be broken down into <em>indegree</em> and <em>outdegree</em> centrality:</p>
 <ul>
 <li>Indegree, <span class="math inline">\(C_I(n_i)\)</span>, measures the number of ties that <em>i</em> receives. For the sociomatrix <span class="math inline">\(X_{ij}\)</span>, the indegree for <em>i</em> is the <strong>column</strong> sum:</li>
@@ -461,8 +461,8 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<section id="indegree" class="level4" data-number="1.4.1.1">
-<h4 data-number="1.4.1.1" class="anchored" data-anchor-id="indegree"><span class="header-section-number">1.4.1.1</span> Indegree</h4>
+<section id="indegree" class="level4">
+<h4 class="anchored" data-anchor-id="indegree">Indegree</h4>
 <p>Let’s start with the indegree. As stated above, indegree, <span class="math inline">\(CI(n_i)\)</span>, measures the number of ties that <em>i</em> receives. For the sociomatrix <span class="math inline">\(X_{ij}\)</span>, the indegree for <em>i</em> is the <strong>column</strong> sum: <span class="math inline">\(C_I(n_i) = \sum_j x_{ji}\)</span>. So, to get the indegree for each node, we just sum over the columns. Recall that columns are vertical.</p>
 <p>Let’s calculate the indegree for Jen: <span class="math inline">\(C_I(Jen) = \sum_j x_{j,Jen} = x_{Tom,Jen} + x_{Bob,Jen} + x_{Leaf,Jen} + x_{Jim,Jen} = 0+0+0+0 = 0\)</span></p>
 <p>Jen’s <u>indegree</u> is 0 because she doesn’t receive <em>any</em> ties from other nodes. Let’s calculate the indegree for the rest of the nodes:</p>
@@ -473,8 +473,8 @@ div.csl-indent {
 <li><span class="math inline">\(C_I(Jim) = \sum_j x_{j,Jim} = x_{Jen,Jim} + x_{Tom,Jim} + x_{Bob,Jim} + x_{Leaf,Jim} = 0+0+1+1 = 2\)</span></li>
 </ul>
 </section>
-<section id="outdegree" class="level4" data-number="1.4.1.2">
-<h4 data-number="1.4.1.2" class="anchored" data-anchor-id="outdegree"><span class="header-section-number">1.4.1.2</span> Outdegree</h4>
+<section id="outdegree" class="level4">
+<h4 class="anchored" data-anchor-id="outdegree">Outdegree</h4>
 <p>Let’s now look at the outdegree. With indegree, we are looking at the ties coming into a node. But, with outdegree we are doing the opposite, looking at the ties that are coming from the node. As stated above, Outdegree, <span class="math inline">\(CO(n_i)\)</span>, measures the number of ties that <em>i</em> sends. For the sociomatrix <span class="math inline">\(X_{ij}\)</span>, the outdegree for <em>i</em> is the <strong>row</strong> sum <span class="math inline">\(C_O(n_i) = \sum_j x_{ij}\)</span>. So, to get the outdegree for each node, we just sum over the rows. Recall that rows are horizontal.</p>
 <p>Let’s calculate the <u>outdegree</u> for Jen: <span class="math inline">\(C_O(Jen) = \sum_j x_{Jen,j} = x_{Jen,Tom} + x_{Jen,Bob} + x_{Jen,Leaf} + x_{Jen,Jim} = 1+0+0+0 = 1\)</span></p>
 <p>Let’s calculate the outdegree for the rest of the nodes:</p>
@@ -533,8 +533,8 @@ div.csl-indent {
 </table>
 <p>Note that both the indegree and outdegree total to the same amount. This makes sense because there are <span class="math inline">\(L=8\)</span> edges in the graph.</p>
 </section>
-<section id="standardization-1" class="level4" data-number="1.4.1.3">
-<h4 data-number="1.4.1.3" class="anchored" data-anchor-id="standardization-1"><span class="header-section-number">1.4.1.3</span> Standardization</h4>
+<section id="standardization-1" class="level4">
+<h4 class="anchored" data-anchor-id="standardization-1">Standardization</h4>
 <p>Recall that indegree/outdegree centrality not only reflects each node’s connectivity to other nodes but also depends on the size of the graph, <em>g</em>. Larger networks will have a higher maximum possible degree centrality value. We can standardize, or normalize, the same way by dividing by <em>g-1</em>.</p>
 <p>For our example graph, <span class="math inline">\(g-1 = 4\)</span> and that our raw scores:</p>
 <ul>
@@ -575,8 +575,8 @@ div.csl-indent {
 <p>How is this to be interpreted? The standardized outdegree centrality score gives us is the proportion of the network members for whom node <em>i</em> has sent a tie. A score of 0.25 for Tom means that Tom sends ties to 25% of the nodes that he could potentially have sent ties to in the network.</p>
 </section>
 </section>
-<section id="mean-degree-1" class="level3" data-number="1.4.2">
-<h3 data-number="1.4.2" class="anchored" data-anchor-id="mean-degree-1"><span class="header-section-number">1.4.2</span> Mean Degree</h3>
+<section id="mean-degree-1" class="level3">
+<h3 class="anchored" data-anchor-id="mean-degree-1">Mean Degree</h3>
 <p>As before, we can examine the summary statistics for indegree/outdegree centrality by inspecting the <strong>mean</strong>:</p>
 <p><span class="math display">\[\bar d =  \dfrac{\sum\limits_{i=1}^g C_I(n_i)}{g} = \dfrac{\sum\limits_{i=1}^g C_O(n_i)}{g} = \dfrac{L}{g}\]</span> We just take the number of edges in the graph, <span class="math inline">\(L\)</span>, and divide it by the number of nodes in the graph, <span class="math inline">\(g\)</span>.</p>
 <p>As it turns out, the mean indegree and mean outdegree are equal. This is because we are counting up, for the numerator, the number of edges.</p>
@@ -593,12 +593,12 @@ div.csl-indent {
 <p><span class="math display">\[\bar d =  \dfrac{C_I(n_i)}{g} = \dfrac{C_O(n_i)}{g} = \dfrac{L}{g} = \dfrac{8}{5} = 1.6\]</span></p>
 <p>This means that, on average, a node sends 1.6 ties and receives 1.6 ties.</p>
 </section>
-<section id="degree-centralization-1" class="level3" data-number="1.4.3">
-<h3 data-number="1.4.3" class="anchored" data-anchor-id="degree-centralization-1"><span class="header-section-number">1.4.3</span> Degree Centralization</h3>
+<section id="degree-centralization-1" class="level3">
+<h3 class="anchored" data-anchor-id="degree-centralization-1">Degree Centralization</h3>
 <p>As with the undirected graph, we can also calculate how centralized the edges are in the graph. Recall that degree centralization measures the extent to which the nodes in a graph differ from one another in their individual degree centrality scores. For a directed graph, the difference is that the denominator is <span class="math inline">\((g-1)^2\)</span> or <span class="math inline">\((g-1)(g-1)\)</span>. The difference is due to the directional nature of the graph. So, this gives us the following equation for either the indegree centralization score or the outdegree centralization score:</p>
 <p><span class="math display">\[C_D =  \dfrac{\sum\limits_{i=1}^g [C_D(n^*) - C_D(n_i)]}{[(g-1)^2]}\]</span></p>
-<section id="indegree-centralization" class="level4" data-number="1.4.3.1">
-<h4 data-number="1.4.3.1" class="anchored" data-anchor-id="indegree-centralization"><span class="header-section-number">1.4.3.1</span> Indegree Centralization</h4>
+<section id="indegree-centralization" class="level4">
+<h4 class="anchored" data-anchor-id="indegree-centralization">Indegree Centralization</h4>
 <p>Let’s calculate the indegree centralization score for our example graph. Recall our raw indegree scores:</p>
 <ul>
 <li>Jen = 0</li>
@@ -614,8 +614,8 @@ div.csl-indent {
 <p>Recall that when degree centrality is evenly dispersed, meaning that all nodes have the same degree, then the numerator in the equation will be zero and the quotient will be close to 0. When there is considerable inequality in the degree centrality scores between nodes, the quotient will be closer to 1. Thus, closer to 1 indicates that the graph is hierarchically structured and closer to 0 means that the graph is more decentralized.</p>
 <p>When we introduce directionality, we have to alter our language a bit. When indegree centrality is evenly dispersed, meaning that all nodes receive the same number of ties, then the numerator in the equation will be zero and the quotient will be close to 0. Thus, closer to 1 indicates that the indegrees in the graph are hierarchically structured and closer to 0 means that the indegrees for the graph are more decentralized.</p>
 </section>
-<section id="outdegree-centralization" class="level4" data-number="1.4.3.2">
-<h4 data-number="1.4.3.2" class="anchored" data-anchor-id="outdegree-centralization"><span class="header-section-number">1.4.3.2</span> Outdegree Centralization</h4>
+<section id="outdegree-centralization" class="level4">
+<h4 class="anchored" data-anchor-id="outdegree-centralization">Outdegree Centralization</h4>
 <p>Now, let’s calculate the outdegree centralization score for our example graph. Recall our raw outdegree scores:</p>
 <ul>
 <li>Jen = 1</li>
@@ -629,15 +629,16 @@ div.csl-indent {
 <p><span class="math display">\[C_O =  \dfrac{\sum\limits_{i=1}^g [C_O(n^*) - C_O(n_i)]}{[(g-1)(g-1)]} = \dfrac{(2-1)+(2-1)+(2-2)+(2-2)+(2-2)}{(5-1)(5-1)} = \dfrac{1+1+0+0+0}{4*4}= \dfrac{2}{16}= 0.125\]</span></p>
 <p>The outdegree centralization score for our example graph is 0.125. <em>What does this mean?</em></p>
 <p>An outdegree centralization score close to 1 indicates that the outdegrees in the graph are hierarchically structured and closer to 0 means that the outdegrees for the graph are more decentralized.</p>
-<section id="comparing-indegree-and-outdegree-centralization" class="level5" data-number="1.4.3.2.1">
-<h5 data-number="1.4.3.2.1" class="anchored" data-anchor-id="comparing-indegree-and-outdegree-centralization"><span class="header-section-number">1.4.3.2.1</span> Comparing Indegree and Outdegree Centralization</h5>
+<section id="comparing-indegree-and-outdegree-centralization" class="level5">
+<h5 class="anchored" data-anchor-id="comparing-indegree-and-outdegree-centralization">Comparing Indegree and Outdegree Centralization</h5>
 <p>The indegree centralization score, <span class="math inline">\(C_I\)</span>, is 0.438 and the outdegree centralization score, <span class="math inline">\(C_O\)</span>, is 0.125. <em>What does the difference tell us?</em> It tells us that the outdegrees are more decentralized than the indegrees. Put another way, the indegrees are more centralized than are the outdegrees. <em>Make sense?</em> Think of it this way: there is more inequality in the way the indegrees are distributed than the way the outdegrees are distributed.</p>
+<p><br></p>
 </section>
 </section>
 </section>
 </section>
-<section id="test-your-knowledge" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="test-your-knowledge"><span class="header-section-number">1.5</span> Test your Knowledge</h2>
+<section id="test-your-knowledge" class="level2">
+<h2 class="anchored" data-anchor-id="test-your-knowledge">Test your Knowledge</h2>
 <ul>
 <li>What does it mean for a node to be “central” in a network? Provide an example where centrality may play a critical role in a criminal investigation.</li>
 <li>How is degree centrality calculated in an undirected binary graph? How does this differ for a directed graph?</li>
@@ -647,8 +648,8 @@ div.csl-indent {
 <li>Suppose the outdegree centralization score is higher than the indegree centralization score in a graph. What does this tell us about the structure of the network?</li>
 </ul>
 </section>
-<section id="summary" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="summary"><span class="header-section-number">1.6</span> Summary</h2>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
 <p>In this chapter, we explored the concept of centrality, focusing specifically on degree centrality and its critical role in understanding network structures. We learned that degree centrality measures the number of direct connections a node has within a network, providing insights into which individuals or entities hold the most influence. Through examples like white-collar crime networks and online hate speech deplatforming, we saw how identifying central actors can inform targeted interventions. We also discussed the importance of standardizing degree centrality to compare nodes across different network sizes and examined how centralization reflects the overall structure and hierarchy of a network. Understanding both node-level and graph-level centrality allows crime analysts to more effectively analyze social networks, identify key players, and develop strategies for effective interventions. By mastering these concepts, crime analysts can apply degree centrality to real-world problems, enhancing their investigative capabilities. In the next chapter we will focus on a different conceptualization and operationalization of centrality: <em>closeness</em>.</p>
 
 

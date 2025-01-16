@@ -355,6 +355,8 @@ gplot( onemode,
 
 We may be inclined to always keep the network weighted (i.e. not dichotomize the adjacency matrix), but there are far fewer tools for weighted networks. As you continue your work as a crime analyst, be sure to keep in mind what options you have for handling projections.
 
+<br>
+
 ## Test your Knowledge
 
 -   What are the two types of projections that can be created from a bipartite graph? Provide an example of each.
