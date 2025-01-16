@@ -18,7 +18,7 @@ library( reshape2 )  # for reshaping the matrix data for a plot
 
 ```
 
-# Degree Centrality{.unnumbered}
+# Degree Centrality {.unnumbered}
 
 When we say a *node* is "central", what do we mean conceptually? As a crime analyst, you probably already know that identifying and understanding who holds the most influence within a group is crucial for effective intervention. For example, in a study of white-collar crime networks, @smith2012corporatefraud identified individuals most connected to others in a corporate fraud scheme, revealing key facilitators who had a disproportionate influence over the flow of information and resources. This allowed the researchers to pinpoint the central figures within the fraud ring, enabling targeted investigative efforts. This chapter will guide you through the conceptualization of **centrality** as it pertains to *degree* centrality, demonstrating how to calculate degree centrality scores for individual nodes and how to assess the overall degree centralization of an entire network. By gaining a conceptual understanding of centrality, and understanding the operationalization of centrality through degree centrality, crime analysts can more effectively identify key targets for investigation and disruption in criminal organizations.
 

@@ -8,7 +8,7 @@
 
 <meta name="author" content="Jacob T.N. Young">
 
-<title>Social Network Analysis for Crime Analysts - 8&nbsp; Betweenness Centrality</title>
+<title>Social Network Analysis for Crime Analysts - Betweenness Centrality</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -95,7 +95,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./snaca-centrality-betweenness.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Betweenness Centrality</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./snaca-centrality-betweenness.html">Betweenness Centrality</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -137,61 +137,61 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./snaca-introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Social Network Analysis for Crime Analysts</span></span></a>
+ <span class="menu-text">Introduction to Social Network Analysis for Crime Analysts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./snaca-theory.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Network Theory and Theory of Networks</span></span></a>
+ <span class="menu-text">Network Theory and Theory of Networks</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./snaca-methods.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Network Data Collection</span></span></a>
+ <span class="menu-text">Network Data Collection</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./snaca-net-data-structures.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Network Data Structures</span></span></a>
+ <span class="menu-text">Network Data Structures</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./snaca-net-description.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Network Description</span></span></a>
+ <span class="menu-text">Network Description</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./snaca-centrality-degree.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Degree Centrality</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Degree Centrality{.unnumbered}</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./snaca-centrality-closeness.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Closeness Centrality</span></span></a>
+ <span class="menu-text">Closeness Centrality</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./snaca-centrality-betweenness.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Betweenness Centrality</span></span></a>
+ <span class="menu-text">Betweenness Centrality</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./snaca-bipartite.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Bipartite Graphs/Two-Mode Networks</span></span></a>
+ <span class="menu-text">Bipartite Graphs/Two-Mode Networks</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./snaca-projection.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Projection</span></span></a>
+ <span class="menu-text">Projection</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -210,21 +210,21 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#case-study-money-laundering-and-betweenness" id="toc-case-study-money-laundering-and-betweenness" class="nav-link active" data-scroll-target="#case-study-money-laundering-and-betweenness"><span class="header-section-number">8.1</span> Case Study: Money-Laundering and Betweenness</a></li>
-  <li><a href="#betweenness-centrality-definition" id="toc-betweenness-centrality-definition" class="nav-link" data-scroll-target="#betweenness-centrality-definition"><span class="header-section-number">8.2</span> Betweenness Centrality Definition</a></li>
-  <li><a href="#undirected-graphs" id="toc-undirected-graphs" class="nav-link" data-scroll-target="#undirected-graphs"><span class="header-section-number">8.3</span> Undirected Graphs</a>
+  <li><a href="#case-study-money-laundering-and-betweenness" id="toc-case-study-money-laundering-and-betweenness" class="nav-link active" data-scroll-target="#case-study-money-laundering-and-betweenness">Case Study: Money-Laundering and Betweenness</a></li>
+  <li><a href="#betweenness-centrality-definition" id="toc-betweenness-centrality-definition" class="nav-link" data-scroll-target="#betweenness-centrality-definition">Betweenness Centrality Definition</a></li>
+  <li><a href="#undirected-graphs" id="toc-undirected-graphs" class="nav-link" data-scroll-target="#undirected-graphs">Undirected Graphs</a>
   <ul class="collapse">
-  <li><a href="#betweenness-centrality" id="toc-betweenness-centrality" class="nav-link" data-scroll-target="#betweenness-centrality"><span class="header-section-number">8.3.1</span> Betweenness Centrality</a></li>
-  <li><a href="#standardization" id="toc-standardization" class="nav-link" data-scroll-target="#standardization"><span class="header-section-number">8.3.2</span> Standardization</a></li>
-  <li><a href="#betweenness-centralization" id="toc-betweenness-centralization" class="nav-link" data-scroll-target="#betweenness-centralization"><span class="header-section-number">8.3.3</span> Betweenness Centralization</a></li>
+  <li><a href="#betweenness-centrality" id="toc-betweenness-centrality" class="nav-link" data-scroll-target="#betweenness-centrality">Betweenness Centrality</a></li>
+  <li><a href="#standardization" id="toc-standardization" class="nav-link" data-scroll-target="#standardization">Standardization</a></li>
+  <li><a href="#betweenness-centralization" id="toc-betweenness-centralization" class="nav-link" data-scroll-target="#betweenness-centralization">Betweenness Centralization</a></li>
   </ul></li>
-  <li><a href="#directed-graphs" id="toc-directed-graphs" class="nav-link" data-scroll-target="#directed-graphs"><span class="header-section-number">8.4</span> Directed Graphs</a>
+  <li><a href="#directed-graphs" id="toc-directed-graphs" class="nav-link" data-scroll-target="#directed-graphs">Directed Graphs</a>
   <ul class="collapse">
-  <li><a href="#standardization-1" id="toc-standardization-1" class="nav-link" data-scroll-target="#standardization-1"><span class="header-section-number">8.4.1</span> Standardization</a></li>
-  <li><a href="#betweenness-centralization-1" id="toc-betweenness-centralization-1" class="nav-link" data-scroll-target="#betweenness-centralization-1"><span class="header-section-number">8.4.2</span> Betweenness Centralization</a></li>
+  <li><a href="#standardization-1" id="toc-standardization-1" class="nav-link" data-scroll-target="#standardization-1">Standardization</a></li>
+  <li><a href="#betweenness-centralization-1" id="toc-betweenness-centralization-1" class="nav-link" data-scroll-target="#betweenness-centralization-1">Betweenness Centralization</a></li>
   </ul></li>
-  <li><a href="#test-your-knowledge" id="toc-test-your-knowledge" class="nav-link" data-scroll-target="#test-your-knowledge"><span class="header-section-number">8.5</span> Test your Knowledge</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">8.6</span> Summary</a></li>
+  <li><a href="#test-your-knowledge" id="toc-test-your-knowledge" class="nav-link" data-scroll-target="#test-your-knowledge">Test your Knowledge</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jacobtnyoung/snaca-textbook/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -233,7 +233,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Betweenness Centrality</span></h1>
+<h1 class="title">Betweenness Centrality</h1>
 </div>
 
 
@@ -255,18 +255,18 @@ div.csl-indent {
 <li>Calculate betweenness centrality scores for a set of nodes.</li>
 <li>Calculate a betweenness centralization score for a graph.</li>
 </ul>
-<section id="case-study-money-laundering-and-betweenness" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="case-study-money-laundering-and-betweenness"><span class="header-section-number">8.1</span> Case Study: Money-Laundering and Betweenness</h2>
+<section id="case-study-money-laundering-and-betweenness" class="level2">
+<h2 class="anchored" data-anchor-id="case-study-money-laundering-and-betweenness">Case Study: Money-Laundering and Betweenness</h2>
 <p>In a case study examining the role of betweenness centrality in criminal networks, <span class="citation" data-cites="malm2011using">Malm and Bichler (<a href="references.html#ref-malm2011using" role="doc-biblioref">2011</a>)</span> analyzed money-laundering to understand how different actors influenced network cohesion and resource flow. Analyzing data from intelligence reports, the authors found that the majority of money-laundering in this drug market was self-laundering (where individuals laundered their own illicit earnings), rather than employing specialized professionals. Using betweenness centrality to assess how well-positioned launderers were within the network, <span class="citation" data-cites="malm2011using">Malm and Bichler (<a href="references.html#ref-malm2011using" role="doc-biblioref">2011</a>)</span> found that self-launderers generally exhibited higher betweenness centrality, showing they often acted as key brokers facilitating information flow and transactions across different parts of the network. The findings suggested that targeting individuals with high betweenness centrality, particularly those involved in self-laundering, may be most effective for disrupting drug networks.</p>
 </section>
-<section id="betweenness-centrality-definition" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="betweenness-centrality-definition"><span class="header-section-number">8.2</span> Betweenness Centrality Definition</h2>
+<section id="betweenness-centrality-definition" class="level2">
+<h2 class="anchored" data-anchor-id="betweenness-centrality-definition">Betweenness Centrality Definition</h2>
 <p><em>Betweenness</em> centrality is based on the number of <u>shortest</u> paths between two nodes, <em>j</em> and <em>k</em>, that node <em>i</em> resides on. Recall that a <strong>path</strong> is an edge or sequence of edges that connect two nodes and a <strong>geodesic</strong> is the shortest path between two nodes.</p>
 </section>
-<section id="undirected-graphs" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="undirected-graphs"><span class="header-section-number">8.3</span> Undirected Graphs</h2>
-<section id="betweenness-centrality" class="level3" data-number="8.3.1">
-<h3 data-number="8.3.1" class="anchored" data-anchor-id="betweenness-centrality"><span class="header-section-number">8.3.1</span> Betweenness Centrality</h3>
+<section id="undirected-graphs" class="level2">
+<h2 class="anchored" data-anchor-id="undirected-graphs">Undirected Graphs</h2>
+<section id="betweenness-centrality" class="level3">
+<h3 class="anchored" data-anchor-id="betweenness-centrality">Betweenness Centrality</h3>
 <p>For an undirected binary graph, betweenness centrality is:</p>
 <p><span class="math display">\[C_B(n_i) = \sum\limits_{j&lt;k} g_{jk}(n_i) / g_{jk}\]</span></p>
 <p>This equation is a bit different from those for degree and closeness centrality. Let’s unpack it:</p>
@@ -305,8 +305,8 @@ div.csl-indent {
 </div>
 <p>Note that Bob is on both of those paths. He is <em>between</em> Jen and Jim on both paths. Note, however, that only one of the paths is a <u>geodesic path</u> (the Jen-&gt;Tom-&gt;Bob-&gt;Jim path). That is because it is shorter.</p>
 <p>Now, let’s calculate the betweenness centrality for Bob. The <strong>first</strong> thing we need to find are the geodesic paths. Then, figure out how many of those geodesic paths contain Bob. We do this be creating a table of geodesic proportions for Bob.</p>
-<section id="geodesic-proportions-for-bob" class="level4" data-number="8.3.1.1">
-<h4 data-number="8.3.1.1" class="anchored" data-anchor-id="geodesic-proportions-for-bob"><span class="header-section-number">8.3.1.1</span> Geodesic Proportions for <em>Bob</em></h4>
+<section id="geodesic-proportions-for-bob" class="level4">
+<h4 class="anchored" data-anchor-id="geodesic-proportions-for-bob">Geodesic Proportions for <em>Bob</em></h4>
 <table class="table">
 <thead>
 <tr class="header">
@@ -350,8 +350,8 @@ div.csl-indent {
 </table>
 <p><em>How many geodesics from Jen to Jim?</em> There is 1 geodesic from <strong>Jen</strong> to <strong>Jim</strong>. So, we would just add that to our table:</p>
 </section>
-<section id="geodesic-proportions-for-bob-1" class="level4" data-number="8.3.1.2">
-<h4 data-number="8.3.1.2" class="anchored" data-anchor-id="geodesic-proportions-for-bob-1"><span class="header-section-number">8.3.1.2</span> Geodesic Proportions for <em>Bob</em></h4>
+<section id="geodesic-proportions-for-bob-1" class="level4">
+<h4 class="anchored" data-anchor-id="geodesic-proportions-for-bob-1">Geodesic Proportions for <em>Bob</em></h4>
 <table class="table">
 <thead>
 <tr class="header">
@@ -395,8 +395,8 @@ div.csl-indent {
 </table>
 <p>Now, how many geodesics from <strong>Jen</strong> to <strong>Jim</strong> include <strong>Bob</strong>? Bob is <u>on</u> the <em>only</em> geodesic from Jen to Jim. So, we would just add that to our table:</p>
 </section>
-<section id="geodesic-proportions-for-bob-2" class="level4" data-number="8.3.1.3">
-<h4 data-number="8.3.1.3" class="anchored" data-anchor-id="geodesic-proportions-for-bob-2"><span class="header-section-number">8.3.1.3</span> Geodesic Proportions for <em>Bob</em></h4>
+<section id="geodesic-proportions-for-bob-2" class="level4">
+<h4 class="anchored" data-anchor-id="geodesic-proportions-for-bob-2">Geodesic Proportions for <em>Bob</em></h4>
 <table class="table">
 <thead>
 <tr class="header">
@@ -449,8 +449,8 @@ div.csl-indent {
 </div>
 </div>
 </section>
-<section id="geodesic-proportions-for-bob-3" class="level4" data-number="8.3.1.4">
-<h4 data-number="8.3.1.4" class="anchored" data-anchor-id="geodesic-proportions-for-bob-3"><span class="header-section-number">8.3.1.4</span> Geodesic Proportions for <em>Bob</em></h4>
+<section id="geodesic-proportions-for-bob-3" class="level4">
+<h4 class="anchored" data-anchor-id="geodesic-proportions-for-bob-3">Geodesic Proportions for <em>Bob</em></h4>
 <table class="table">
 <thead>
 <tr class="header">
@@ -494,8 +494,8 @@ div.csl-indent {
 </table>
 <p>There is 1 geodesic from Jen to Tom, <u>and</u> Bob is not on it. So, that is a 0 for the numerator. We can update the table accordingly:</p>
 </section>
-<section id="geodesic-proportions-for-bob-4" class="level4" data-number="8.3.1.5">
-<h4 data-number="8.3.1.5" class="anchored" data-anchor-id="geodesic-proportions-for-bob-4"><span class="header-section-number">8.3.1.5</span> Geodesic Proportions for <em>Bob</em></h4>
+<section id="geodesic-proportions-for-bob-4" class="level4">
+<h4 class="anchored" data-anchor-id="geodesic-proportions-for-bob-4">Geodesic Proportions for <em>Bob</em></h4>
 <table class="table">
 <thead>
 <tr class="header">
@@ -539,8 +539,8 @@ div.csl-indent {
 </table>
 <p>Finally, what about Jen to Leaf?</p>
 </section>
-<section id="geodesic-proportions-for-bob-5" class="level4" data-number="8.3.1.6">
-<h4 data-number="8.3.1.6" class="anchored" data-anchor-id="geodesic-proportions-for-bob-5"><span class="header-section-number">8.3.1.6</span> Geodesic Proportions for <em>Bob</em></h4>
+<section id="geodesic-proportions-for-bob-5" class="level4">
+<h4 class="anchored" data-anchor-id="geodesic-proportions-for-bob-5">Geodesic Proportions for <em>Bob</em></h4>
 <table class="table">
 <thead>
 <tr class="header">
@@ -584,8 +584,8 @@ div.csl-indent {
 </table>
 <p>Bob is on the geodesic from Jen to Leaf:</p>
 </section>
-<section id="geodesic-proportions-for-bob-6" class="level4" data-number="8.3.1.7">
-<h4 data-number="8.3.1.7" class="anchored" data-anchor-id="geodesic-proportions-for-bob-6"><span class="header-section-number">8.3.1.7</span> Geodesic Proportions for <em>Bob</em></h4>
+<section id="geodesic-proportions-for-bob-6" class="level4">
+<h4 class="anchored" data-anchor-id="geodesic-proportions-for-bob-6">Geodesic Proportions for <em>Bob</em></h4>
 <table class="table">
 <thead>
 <tr class="header">
@@ -629,8 +629,8 @@ div.csl-indent {
 </table>
 <p>Of the geodesics between <span class="math inline">\(Jen,Tom\)</span>, <span class="math inline">\(Jen,Leaf\)</span>, and <span class="math inline">\(Jen,Tom\)</span>, how many include Bob? We just some the ratios across the row. It gives us 2.</p>
 </section>
-<section id="geodesic-proportions-for-bob-7" class="level4" data-number="8.3.1.8">
-<h4 data-number="8.3.1.8" class="anchored" data-anchor-id="geodesic-proportions-for-bob-7"><span class="header-section-number">8.3.1.8</span> Geodesic Proportions for <em>Bob</em></h4>
+<section id="geodesic-proportions-for-bob-7" class="level4">
+<h4 class="anchored" data-anchor-id="geodesic-proportions-for-bob-7">Geodesic Proportions for <em>Bob</em></h4>
 <table class="table">
 <thead>
 <tr class="header">
@@ -679,15 +679,15 @@ div.csl-indent {
 </table>
 <p>Now, to finish our calculation for Bob, we need to calculate the geodesics for the rest of the matrix:</p>
 </section>
-<section id="geodesic-proportions-for-bob-8" class="level4" data-number="8.3.1.9">
-<h4 data-number="8.3.1.9" class="anchored" data-anchor-id="geodesic-proportions-for-bob-8"><span class="header-section-number">8.3.1.9</span> Geodesic Proportions for <em>Bob</em></h4>
+<section id="geodesic-proportions-for-bob-8" class="level4">
+<h4 class="anchored" data-anchor-id="geodesic-proportions-for-bob-8">Geodesic Proportions for <em>Bob</em></h4>
 <table class="table">
 <colgroup>
-<col style="width: 18%">
-<col style="width: 18%">
-<col style="width: 18%">
-<col style="width: 27%">
-<col style="width: 18%">
+<col style="width: 19%">
+<col style="width: 19%">
+<col style="width: 19%">
+<col style="width: 22%">
+<col style="width: 19%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -742,8 +742,8 @@ div.csl-indent {
 <p>The sum of all these ratios is Bob’s betweenness centrality score:</p>
 <p><span class="math display">\[C_B(Bob) = \sum\limits_{j&lt;k} g_{jk}(Bob) / g_{jk}\]</span></p>
 </section>
-<section id="geodesic-proportions-for-bob-9" class="level4" data-number="8.3.1.10">
-<h4 data-number="8.3.1.10" class="anchored" data-anchor-id="geodesic-proportions-for-bob-9"><span class="header-section-number">8.3.1.10</span> Geodesic Proportions for <em>Bob</em></h4>
+<section id="geodesic-proportions-for-bob-9" class="level4">
+<h4 class="anchored" data-anchor-id="geodesic-proportions-for-bob-9">Geodesic Proportions for <em>Bob</em></h4>
 <table class="table">
 <thead>
 <tr class="header">
@@ -801,8 +801,8 @@ div.csl-indent {
 <p>That sum is 4. Bob’s betweenness centrality score is 4. What does this mean? A score of 4 indicates that Bob occupies a position between two nodes on 4 of the geodesics in the graph.</p>
 <p><em>What about Leaf?</em> We can do the same thing by creating a table of geodesic proportions for <em>Leaf</em>.</p>
 </section>
-<section id="geodesic-proportions-for-leaf" class="level4" data-number="8.3.1.11">
-<h4 data-number="8.3.1.11" class="anchored" data-anchor-id="geodesic-proportions-for-leaf"><span class="header-section-number">8.3.1.11</span> Geodesic Proportions for <em>Leaf</em></h4>
+<section id="geodesic-proportions-for-leaf" class="level4">
+<h4 class="anchored" data-anchor-id="geodesic-proportions-for-leaf">Geodesic Proportions for <em>Leaf</em></h4>
 <table class="table">
 <thead>
 <tr class="header">
@@ -868,8 +868,8 @@ div.csl-indent {
 </div>
 <p>Based on the plot, we can visually see that Leaf’s betweenness is going to be zero as he is not on any paths to between two nodes. We can show this mathematically in the table:</p>
 </section>
-<section id="geodesic-proportions-for-leaf-1" class="level4" data-number="8.3.1.12">
-<h4 data-number="8.3.1.12" class="anchored" data-anchor-id="geodesic-proportions-for-leaf-1"><span class="header-section-number">8.3.1.12</span> Geodesic Proportions for <em>Leaf</em></h4>
+<section id="geodesic-proportions-for-leaf-1" class="level4">
+<h4 class="anchored" data-anchor-id="geodesic-proportions-for-leaf-1">Geodesic Proportions for <em>Leaf</em></h4>
 <table class="table">
 <thead>
 <tr class="header">
@@ -958,8 +958,8 @@ div.csl-indent {
 </table>
 </section>
 </section>
-<section id="standardization" class="level3" data-number="8.3.2">
-<h3 data-number="8.3.2" class="anchored" data-anchor-id="standardization"><span class="header-section-number">8.3.2</span> Standardization</h3>
+<section id="standardization" class="level3">
+<h3 class="anchored" data-anchor-id="standardization">Standardization</h3>
 <p>As discussed in the prior chapters, centrality measures are sensitive to the size of the graph, <em>g</em>. In the case of <em>betweenness</em> centrality, having to sum over more nodes will make scores from large networks bigger than scores from smaller networks (because you are just summing over more nodes). This means that we can’t compare betweenness centrality scores across graphs of different sizes. <em>Solution</em>?</p>
 <p>Standardize! If we want to compare nodes in different sized graphs, then we just take into account the number of nodes and the maximum possible nodes to which <em>i</em> could be connected. For betweenness centrality, we have to go a step further. We need to account for the number of pairs of nodes that do not include <em>i</em>. In an undirected graph, this is <span class="math inline">\((g-1))(g-2)/2\)</span>.</p>
 <p>Thus, we can calculate a standardized betweenness centrality score for an undirected graph as:</p>
@@ -1004,8 +1004,8 @@ div.csl-indent {
 </tbody>
 </table>
 </section>
-<section id="betweenness-centralization" class="level3" data-number="8.3.3">
-<h3 data-number="8.3.3" class="anchored" data-anchor-id="betweenness-centralization"><span class="header-section-number">8.3.3</span> Betweenness Centralization</h3>
+<section id="betweenness-centralization" class="level3">
+<h3 class="anchored" data-anchor-id="betweenness-centralization">Betweenness Centralization</h3>
 <p>As we did with <em>degree centralization</em> and <em>closeness centralization</em>, we can calculate the betweenness centralization of the graph. Recall that centralization measures the extent to which the nodes in a social network differ from one another in their individual centrality scores. Put differently, how much variation is there in the distribution of centrality scores? As with closeness centralization, we use the <em>standardized</em> betweenness score (as opposed to the <em>raw</em> score).</p>
 <p>We can calculate betweenness centralization as:</p>
 <p><span class="math display">\[C_B = \frac{\sum\limits_{i=1}^g[C'_B(n^*)-C'_B(n_i)]}{(g-1)} \]</span></p>
@@ -1050,10 +1050,10 @@ div.csl-indent {
 <p><span class="math display">\[C_B = \frac{\sum\limits_{i=1}^g[0.667-C'_B(n_i)]}{4} \]</span></p>
 <table class="table">
 <colgroup>
-<col style="width: 17%">
-<col style="width: 17%">
-<col style="width: 17%">
-<col style="width: 46%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 39%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1113,8 +1113,8 @@ div.csl-indent {
 <p>The betweenness centralization score for the figure on the left is 1, whereas the betweenness centralization score for the figure on the right is 0. This makes sense. In the figure on the left, every node has to go <u>between</u> the node in the middle. The node in the middle is on every geodesic in the graph. In contrast, for the graph on the right, every node has a betweenness centrality score of 1, so ther is no variation in betweenness centrality scores.</p>
 </section>
 </section>
-<section id="directed-graphs" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="directed-graphs"><span class="header-section-number">8.4</span> Directed Graphs</h2>
+<section id="directed-graphs" class="level2">
+<h2 class="anchored" data-anchor-id="directed-graphs">Directed Graphs</h2>
 <p>As we have seen, when we have a directed graph, we have to consider directionality when evaluating a centrality measure. If we are interested in the betweenness score for Bob, we would do the same thing: create a geodesic proportions table for Bob. The difference is that we want to consider the directionality.</p>
 <p>Let’s take the example that we have been working with for directed graphs and change the layout of the edges slightly (the sociomatrix is the same, just curving the edges in the plot). <em>Is Bob on the geodesic between Jen and Jim? Jen and Leaf? Jen and Tom?</em> Let’s take a look.</p>
 <div class="cell" data-layout-align="center">
@@ -1126,10 +1126,10 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p><em>Is Bob on the geodesic between Jen and Jim?</em> Yes! Bob is on the geodesic between Jen and Jim. <em>Is Bob on the geodesic between Jen and Leaf?</em> Yes. <em>Jen and Tom?</em> No.&nbsp;</p>
+<p><em>Is Bob on the geodesic between Jen and Jim?</em> Yes! Bob is on the geodesic between Jen and Jim. <em>Is Bob on the geodesic between Jen and Leaf?</em> Yes. <em>Jen and Tom?</em> No.</p>
 <p>As before, we can put this information in a table of geodesic proportions:</p>
-<section id="geodesic-proportions-for-bob-10" class="level4" data-number="8.4.0.1">
-<h4 data-number="8.4.0.1" class="anchored" data-anchor-id="geodesic-proportions-for-bob-10"><span class="header-section-number">8.4.0.1</span> Geodesic Proportions for <em>Bob</em></h4>
+<section id="geodesic-proportions-for-bob-10" class="level4">
+<h4 class="anchored" data-anchor-id="geodesic-proportions-for-bob-10">Geodesic Proportions for <em>Bob</em></h4>
 <table class="table">
 <thead>
 <tr class="header">
@@ -1174,8 +1174,8 @@ div.csl-indent {
 <p>Are we done? Not quite yet. Since the graph is <strong>directed</strong> we have to total <em>all</em> the rows. The reasons we did not do this for <strong>undirected</strong> graph is because the adjacency matrix is symmetric. Since the matrix for an undirected graph is not symmetric, we have to think of all the ties. Recall from our discussion about adjacency matrices for directed graphs, the rows tell us about outgoing ties or sending whereas the columns tell us about incoming ties or receiving. So, we will need information for the <u>complete</u> table.</p>
 <p><em>Why?</em> Well, think about the table below:</p>
 </section>
-<section id="geodesic-proportions-for-bob-11" class="level4" data-number="8.4.0.2">
-<h4 data-number="8.4.0.2" class="anchored" data-anchor-id="geodesic-proportions-for-bob-11"><span class="header-section-number">8.4.0.2</span> Geodesic Proportions for <em>Bob</em></h4>
+<section id="geodesic-proportions-for-bob-11" class="level4">
+<h4 class="anchored" data-anchor-id="geodesic-proportions-for-bob-11">Geodesic Proportions for <em>Bob</em></h4>
 <table class="table">
 <thead>
 <tr class="header">
@@ -1232,8 +1232,8 @@ div.csl-indent {
 </table>
 <p>If we sum this, we get 4. But, note that this does not account for <em>all</em> of the edges in the network. We need to complete the matrix:</p>
 </section>
-<section id="geodesic-proportions-for-bob-12" class="level4" data-number="8.4.0.3">
-<h4 data-number="8.4.0.3" class="anchored" data-anchor-id="geodesic-proportions-for-bob-12"><span class="header-section-number">8.4.0.3</span> Geodesic Proportions for <em>Bob</em></h4>
+<section id="geodesic-proportions-for-bob-12" class="level4">
+<h4 class="anchored" data-anchor-id="geodesic-proportions-for-bob-12">Geodesic Proportions for <em>Bob</em></h4>
 <table class="table">
 <thead>
 <tr class="header">
@@ -1300,8 +1300,8 @@ div.csl-indent {
 </div>
 <p>We can know complete our table:</p>
 </section>
-<section id="geodesic-proportions-for-bob-13" class="level4" data-number="8.4.0.4">
-<h4 data-number="8.4.0.4" class="anchored" data-anchor-id="geodesic-proportions-for-bob-13"><span class="header-section-number">8.4.0.4</span> Geodesic Proportions for <em>Bob</em></h4>
+<section id="geodesic-proportions-for-bob-13" class="level4">
+<h4 class="anchored" data-anchor-id="geodesic-proportions-for-bob-13">Geodesic Proportions for <em>Bob</em></h4>
 <table class="table">
 <thead>
 <tr class="header">
@@ -1389,8 +1389,8 @@ div.csl-indent {
 </tbody>
 </table>
 </section>
-<section id="standardization-1" class="level3" data-number="8.4.1">
-<h3 data-number="8.4.1" class="anchored" data-anchor-id="standardization-1"><span class="header-section-number">8.4.1</span> Standardization</h3>
+<section id="standardization-1" class="level3">
+<h3 class="anchored" data-anchor-id="standardization-1">Standardization</h3>
 <p>We can calculate a standardized betweenness centrality score for a directed graph as:</p>
 <p><span class="math display">\[C'_B(n_i) = \frac{\sum\limits_{j&lt;k} g_{jk}(n_i) / g_{jk}}{[(g-1)(g-2)]} =  \frac{C_B(n_i)}{[(g-1)(g-2)]}\]</span></p>
 <p>So, all we are doing is adjusting each betweenness score by <span class="math inline">\((g-1))(g-2)\)</span>.</p>
@@ -1433,8 +1433,8 @@ div.csl-indent {
 </tbody>
 </table>
 </section>
-<section id="betweenness-centralization-1" class="level3" data-number="8.4.2">
-<h3 data-number="8.4.2" class="anchored" data-anchor-id="betweenness-centralization-1"><span class="header-section-number">8.4.2</span> Betweenness Centralization</h3>
+<section id="betweenness-centralization-1" class="level3">
+<h3 class="anchored" data-anchor-id="betweenness-centralization-1">Betweenness Centralization</h3>
 <p>For a directed graph, we can use the following to calculate betweenness centralization (it is the same equation as above for the undirected graph):</p>
 <p><span class="math display">\[C_B = \frac{\sum\limits_{i=1}^g[C'_B(n^*)-C'_B(n_i)]}{(g-1)} \]</span></p>
 <p>If I lost you in some of the math, don’t worry. Let’s calculate the betweenness centralization score for our example graph. Recall our table of standardized betweenness scores:</p>
@@ -1478,10 +1478,10 @@ div.csl-indent {
 <p><span class="math display">\[C_B = \frac{\sum\limits_{i=1}^g[0.333-C'_B(n_i)]}{4} \]</span></p>
 <table class="table">
 <colgroup>
-<col style="width: 7%">
-<col style="width: 12%">
-<col style="width: 25%">
-<col style="width: 54%">
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 45%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1526,8 +1526,8 @@ div.csl-indent {
 </table>
 <p>If we total all of the values in the last column we get 1.082. Plugging this in as our numerator, we get:</p>
 <p><span class="math display">\[C_B = \frac{1.082}{4} = 0.271\]</span></p>
-<section id="centralization-comparison" class="level4" data-number="8.4.2.1">
-<h4 data-number="8.4.2.1" class="anchored" data-anchor-id="centralization-comparison"><span class="header-section-number">8.4.2.1</span> Centralization Comparison</h4>
+<section id="centralization-comparison" class="level4">
+<h4 class="anchored" data-anchor-id="centralization-comparison">Centralization Comparison</h4>
 <p>We can now compare four different centralization scores for this directed graph: indegree, outdegree, closeness, and betweenness. The scores are:</p>
 <table class="table">
 <thead>
@@ -1568,8 +1568,8 @@ div.csl-indent {
 </section>
 </section>
 </section>
-<section id="test-your-knowledge" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="test-your-knowledge"><span class="header-section-number">8.5</span> Test your Knowledge</h2>
+<section id="test-your-knowledge" class="level2">
+<h2 class="anchored" data-anchor-id="test-your-knowledge">Test your Knowledge</h2>
 <ul>
 <li>What distinguishes betweenness centrality from other types of centrality like degree and closeness?</li>
 <li>How does betweenness centrality help identify key actors in criminal networks, such as those in organized crime?</li>
@@ -1581,8 +1581,8 @@ div.csl-indent {
 <li>What does a high betweenness centralization score indicate about the structure of a network? A low score?</li>
 </ul>
 </section>
-<section id="summary" class="level2" data-number="8.6">
-<h2 data-number="8.6" class="anchored" data-anchor-id="summary"><span class="header-section-number">8.6</span> Summary</h2>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
 <p>This chapter explored the concept of betweenness centrality as a measure of centrality within social networks, emphasizing its role in identifying actors who bridge disconnected network segments and influence information flow. Unlike degree or closeness centrality, betweenness highlights actors who control connectivity between groups, making it particularly valuable in analyzing criminal networks, where key figures often facilitate collaboration. We covered how to calculate betweenness centrality for individual nodes, standardize these scores for comparison across network sizes, and compute a network-wide betweenness centralization score, which reveals the structural cohesion of a network. Understanding these concepts equips analysts to assess both individual influence and the overall structure of networks.</p>
 <p>We have now covered three different ways of conceptualizing centrality: degree, closeness, and betweenness. These are all valuable tools for your crime analyst toolkit!</p>
 
@@ -1834,12 +1834,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./snaca-centrality-closeness.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Closeness Centrality</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Closeness Centrality</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./snaca-bipartite.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Bipartite Graphs/Two-Mode Networks</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text">Bipartite Graphs/Two-Mode Networks</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
