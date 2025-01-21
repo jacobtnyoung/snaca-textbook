@@ -36,22 +36,22 @@ knitr::include_graphics( "images/ch-04-bridge-01.jpeg" )
 
 Leonard Euler worked on this problem in the mid-18th century, eventually representing the solution with a set of points and lines. For a great overview of the problem (and some interesting history), check out this [video](https://www.youtube.com/watch?v=nZwSo4vfw6c).
 
-Recall the discussion from the [Introduction to Social Network Analysis for Crime Analysts](snaca-introduction.html) chapter the importance of conceptualizing and operationalizing concepts in network science. *Graph theory* provides a foundation for operationalizing concepts of interest among network scientists.
+Recall the discussion from the [Introduction to Social Network Analysis for Crime Analysts](snaca-introduction.html) chapter regarding the importance of conceptualization and operationalization in Network Science and how *graph theory* provides a foundation for operationalizing concepts of interest among network scientists.
 
--   By the end of the chapter, be able to answer these questions:
+-   By the end of the chapter, you should be able to answer these questions:
 
     -   How can we represent networks using graphs and graph notation?
     -   How can we represent undirected and directed networks using matrices?
 
 ## Graph Notation
 
-Definition of a *graph* is $G = (N,L)$, where $N = {n_1, n_2..., n_g}$ defines the set of nodes and $L = {l_1, l_2..., l_L}$ defines the set of edges. This definition simply states that there are $N$ nodes and $L$ edges in a graph.
+Let's start with some definitions. The definition of a *graph* is $G = (N,L)$, where $N = {n_1, n_2..., n_g}$ defines the set of nodes and $L = {l_1, l_2..., l_L}$ defines the set of edges. This definition simply states that there are $N$ nodes and $L$ edges in a graph.
 
 Two nodes, $n_i$ and $n_j$ are called **adjacent** if the line $l_k = (n_i, n_j)$. What this means is that in the graph, there exists a line between nodes *i* and *j*.
 
 ### Node Sets
 
-As discussed in the "Basic Data Elements" section of the [Introduction to Social Network Analysis for Crime Analysts](snaca-introduction.html) chapter, the directionality of graph indicates whether the edges are **undirected** or **directed**. In an **undirected** graph, the order of the nodes does not matter. In other words, $l_k = (n_i, n_j) = (n_j, n_i)$. This is to say that if there exists a line between nodes *i* and *j*, then a line exists between *j* and *i*. (This may seem obvious, but will make more sense why we talk about it this way when we get to **directed** graphs.)
+As discussed in the "Basic Data Elements" section of the [Introduction to Social Network Analysis for Crime Analysts](snaca-introduction.html) chapter, the directionality of a graph indicates whether the edges are **undirected** or **directed**. In an **undirected** graph, the order of the nodes does not matter. In other words, $l_k = (n_i, n_j) = (n_j, n_i)$. This is to say that if there exists a line between nodes *i* and *j*, then a line exists between *j* and *i*. (This may seem obvious, but will make more sense why we talk about it this way when we get to **directed** graphs.)
 
 ```{r, graphs-define}
 
@@ -135,16 +135,16 @@ grid.arrange( u_graph, nullGrob(), d_graph, ncol = 3, widths = c( 1, 0.2, 1 ) )
 
 ### Adjacency
 
-Two nodes, $n_i$ and $n_j$ are **adjacent** if the link $l_k = (n_i,n_j)$. This is to say that in the graph, there exists an edge between nodes *i* and *j*. For a set of relations, $X$, we can define a matrix which represents these relations. We commonly use an **adjacency matrix**, where each node is listed on the row and the column. The $i_{th}$ row and the $j_{th}$ column of $X_{ij}$ records the value of a tie from *i* to *j*. In this approach, $X$, can be thought of as a variable. The presence or absence of values in the cells represent variation.
+Two nodes, $n_i$ and $n_j$ are **adjacent** if the link $l_k = (n_i,n_j)$. This is to say that in the graph, there exists an edge between nodes *i* and *j*. For a set of relations, $X$, we can define a matrix which represents these relations. We commonly use an **adjacency matrix**, where each node is listed on the row and the column. The $i_{th}$ row and the $j_{th}$ column of $X_{ij}$ records the value of a tie from *i* to *j*. In this approach, $X$, can be thought of as a variable. The presence or absence of values in the cells represent variation. In the [Introduction to Social Network Analysis for Crime Analysts](snaca-introduction.html) chapter we covered "structural variables". The data object $X$ is how we go about examining structural variables.
 
 Here are some important definitions that we will come across as we talk about network data structures:
 
--   Scalar: a single number
--   Column vector: a column of numbers
--   Row vector: a row of numbers
--   Matrix: a rectangular array of numbers
--   Order: number of rows and columns defining the matrix
--   Square matrix: number of rows and columns of matrix are equal
+-   Scalar-a single number
+-   Column vector-a column of numbers
+-   Row vector-a row of numbers
+-   Matrix-a rectangular array of numbers
+-   Order-number of rows and columns defining the matrix
+-   Square matrix-number of rows and columns of matrix are equal
 
 #### Undirected, Binary Graphs
 
@@ -226,7 +226,7 @@ grid.arrange( u_graph, adj_to_plot, ncol = 2 )
 
 ```
 
-In the first row, *i* sends to the second row only: $X_{12}=1; X_{15}=0$ (where $X_{ij}$ refers to the $i^{th}$ row and the $j^{th}$ column of the matrix).
+In the first row, *i* is connected to the second row only: $X_{12}=1; X_{15}=0$ (where $X_{ij}$ refers to the $i^{th}$ row and the $j^{th}$ column of the matrix).
 
 ```{r}
 
@@ -562,7 +562,7 @@ grid.arrange( d_graph, adj_to_plot, ncol = 2 )
 
 ```
 
-Note that because we are allowing directionality to matter, the total number of edges in the network is just the sum of the entire matrix.
+Note that because we are allowing directionality to matter, the total number of edges in the network is just the sum of the entire matrix (which is different from undirected graphs where we divide that sum by 2).
 
 <br>
 

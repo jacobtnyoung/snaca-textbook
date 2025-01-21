@@ -20,9 +20,9 @@ library( reshape2 )  # for reshaping the matrix data for a plot
 
 # Network Description {.unnumbered}
 
-Understanding the basic structure of a network is the first step toward making informed, data-driven decisions in crime analysis. Networks, whether simple or complex, contain key features that offer valuable insights into relationships, patterns, and points of vulnerability. As crime analysts, the ability to describe these features (such as the number of connections), the centrality of nodes, and the overall shape of the network, is essential for identifying trends and prioritizing interventions. But how do we translate raw data into these insights?
+Understanding the basic structure of a network is the first step toward making informed, data-driven decisions in crime analysis. Networks, whether simple or complex, contain key features that offer valuable insights into relationships, patterns, and points of vulnerability. As crime analysts, the ability to describe these features (such as the number of connections), the centrality of nodes, and the overall shape of the network, is essential for identifying trends and prioritizing interventions. But how do we translate raw data into these insights? Before we get too deep into analysis, we should start by doing some basic description of a network to get our hands dirty.
 
-By the end of the chapter, be able to answer this question:
+By the end of the chapter, you should be able to answer this question:
 
 -   How can I describe some simple features of a network?
 
@@ -142,7 +142,7 @@ d_graph
 
 ```
 
-First we identify the quantities: $L$ is 8 and $g$ is 5. Why is $L$ 8? Since the graph is directed, a dyad (or two nodes) can have two ties. For example, there is a tie from Jim to Leaf and a tie from Leaf to Jim. If we count up all the arrowheads, we get to 8.Now, let's just plug through the math: $$\frac{L}{g(g-1)} = \frac{8}{5*(5-1)} = \frac{8}{20} = 0.4$$ So, 0.4 of the ties that could occur in this network did occur.
+First we identify the quantities: $L$ is 8 and $g$ is 5. Why is $L$ 8? Since the graph is directed, a dyad (or two nodes) can have two ties. For example, there is a tie from Jim to Leaf and a tie from Leaf to Jim. If we count up all the arrowheads, we get to 8. Now, let's just plug through the math: $$\frac{L}{g(g-1)} = \frac{8}{5*(5-1)} = \frac{8}{20} = 0.4$$ So, 0.4 of the ties that could occur in this network did occur.
 
 ### Components
 
@@ -200,13 +200,13 @@ comp_graph
 
 To figure it out, just count up the number of separate subgraphs (or different colors of nodes). In this plot, there are 15 components. Note that the components are not all the same. Some are larger than others. In a graph that has different size components, the *first component* is the subgraph (i.e. component) with the most nodes. In this plot, the nodes in the first component are labeled "1". The *second component* of a graph is the component that has the second-most nodes and the *third component* has the third most nodes (and so on). In the plot, what are the *second* and *third* components?
 
-The components of a graph are a useful tool for helping us think conceptually about what our network means. For example, @papachristos2014network conducted a study of homicide, examining how individuals may be disproportionately exposed to violence. Research has shown that violence often spreads between components through a small number of brokers who connect otherwise isolated factions. Identifying and targeting these brokers or the most violent components can significantly reduce retaliatory violence. Isolated components also offer opportunities for more focused community interventions. By understanding these network structures, law enforcement can prevent the spread of violence and effectively target interventions.
+The components of a graph are a useful tool for helping us think conceptually about what our network means. For example, @papachristos2014network conducted a study of homicide, examining how individuals may be disproportionately exposed to violence. Violence often spreads between components through a small number of brokers who connect otherwise isolated factions. Identifying and targeting these brokers or the most violent components can significantly reduce retaliatory violence. Isolated components also offer opportunities for more focused community interventions. By understanding these network structures, law enforcement can prevent the spread of violence and effectively target interventions.
 
 ### Diameter
 
 A final question we can ask is how *compact* is the network? In other words, can nodes reach other nodes directly and indirectly fairly easily? Or, are nodes really far from each other?
 
-To understand diameter, let's set up a definition: A *step* is movement along an edge. Let's think about it how this works. For example, take two nodes $A$ and $B$ who are directly connected. How many steps is $A$ from $B$? Since $A$ is directly tied to $B$, the number of steps is 1. Now, take another example where $A$ and $B$ are *not* directly connected. Rather, suppose $A$ is connected to $D$, who is connected to $C$, who is connected to $B$, like this: $A-D-C-B$. How many steps is $A$ from $B$? Well, how many edges are there between them? There are 3 edges.
+To understand diameter, let's set up a definition: A *step* is movement along an edge. Let's think about how this works. For example, take two nodes $A$ and $B$ who are directly connected. How many steps is $A$ from $B$? Since $A$ is directly tied to $B$, the number of steps is 1. Now, take another example where $A$ and $B$ are *not* directly connected. Rather, suppose $A$ is connected to $D$, whom is connected to $C$, whom is connected to $B$, like this: $A-D-C-B$. How many steps is $A$ from $B$? Well, how many edges are there between them? There are 3 edges.
 
 We can extend this to an entire graph by calculating the steps for every pair of nodes (i.e. dyads) in the graph. When we do this, we can define two other terms:
 
@@ -231,11 +231,11 @@ To answer this question, we need to first figure out what the paths are, then fi
 
 The second path, $Leaf-Bob-Tom-Jen$, is the shortest path.
 
-Now, what is the *diameter* of the network? To figure this out, we would identify the shortest paths for all pairs of nodes, then see which is the largest. So, taking a look at this plot? What is the *diameter*? It is 3. The longest shortest paths (I know, it sounds confusing) are $Leaf-Bob-Tom-Jen$ and $Jim-Bob-Tom-Jen$. Both are of length 3.
+Now, what is the *diameter* of the network? To figure this out, we would identify the shortest paths for all pairs of nodes, then see which is the largest. So, taking a look at this plot, what is the *diameter*? It is 3. The longest shortest paths (I know, it sounds confusing) are $Leaf-Bob-Tom-Jen$ and $Jim-Bob-Tom-Jen$. Both are of length 3.
 
 #### Directed Graph
 
-Paths with *directed graphs* can be a bit tricky to comprehend due to the directionality of the ties. For example, for how many steps is $A$ from $B$ in this graph, $B \rightarrow D \rightarrow C \rightarrow A$? If we focus on the direction of the ties, then $A$ cannot reach $B$. But, if we **ignore** the direction of the ties, then $A$ is 3 steps from $B$.
+Paths with *directed graphs* can be a bit tricky to comprehend due to the directionality of the ties. For example, for how many steps is $A$ from $B$ in this graph, $B \rightarrow D \rightarrow C \rightarrow A$? If we focus on the direction of the ties, then $A$ cannot reach $B$. But, if we **ignore** the direction of the ties, then $A$ is 3 steps from $B$. Often, we ignore the directionality of a network to calculate the diameter. But, in some cases it might not make sense to do so. Just keep this in mind as you are working with different networks as a crime analyst.
 
 <br>
 
