@@ -324,7 +324,7 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>Recall from above that in an undirected network the degree centrality score is either the sum of the row <strong>or</strong> the sum of the column. Let’s calculate the score for Jen. If we look across the row (that is, horizontally) we see that the cell’s values are: 0, 1, 0, 0, 0. If we add these we get 1. That is, Jen’s degree centrality score is 1. If we look across the column, we get the same information: 0, 1, 0, 0, 0. Put another way: <span class="math inline">\(C_D(Jen) = \sum_j x_{ij} = x_{Jen, Tom} + x_{Jen, Bob} + x_{Jen, Leaf} + x_{Jen, Jim} = 1 + 0 + 0 + 0 = 1\)</span>.</p>
+<p>Recall from above that in an undirected network the degree centrality score is either the sum of the row <strong>or</strong> the sum of the column. Let’s calculate the score for Jen. If we look across the row (that is, horizontally) we see that the cell values are: 0, 1, 0, 0, 0. If we add these we get 1. That is, Jen’s degree centrality score is 1. If we look across the column, we get the same information: 0, 1, 0, 0, 0. Put another way: <span class="math inline">\(C_D(Jen) = \sum_j x_{ij} = x_{Jen, Tom} + x_{Jen, Bob} + x_{Jen, Leaf} + x_{Jen, Jim} = 1 + 0 + 0 + 0 = 1\)</span>.</p>
 <p>Jen’s degree centrality score is 1, meaning that she has 1 tie. Notice in the calculation that we didn’t include <span class="math inline">\(x_{ii}\)</span> which is <span class="math inline">\(x_{Jen, Jen}\)</span> because this is zero. Be careful when you do the calculations that you don’t confuse these. Since self-nominations are usually set to zero, this is not a problem when we use the row or column totals. Just something to keep in mind.</p>
 <p>What about the rest of the nodes? Let’s do the calculations:</p>
 <ul>
@@ -339,7 +339,7 @@ div.csl-indent {
 <p>Standardize! If we want to compare nodes in different sized networks, then we just take into account the number of nodes and the maximum possible nodes to which <em>i</em> could be connected. In an undirected graph, this is <em>g-1</em>.</p>
 <p>Thus, we can calculate a standardized degree centrality for an undirected graph as:</p>
 <p><span class="math display">\[C'_D(n_i) =  \dfrac{C_D(n_i)}{g-1} = \dfrac{\sum\limits_{j} x_{ij}}{g-1}\]</span></p>
-<p>What this gives us is the proportion of the network members with ties to actor <em>i</em>. A convenient feature of standardizing in this way is that it means the index varies between 0 (no connections; isolate) to 1 (ties to every actor). Again, let’s take a look at our example network:</p>
+<p>What this gives us the proportion of the network members with ties to actor <em>i</em>. A convenient feature of standardizing in this way is that it means the index varies between 0 (no connections; isolate) to 1 (ties to every actor). Again, let’s take a look at our example network:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">

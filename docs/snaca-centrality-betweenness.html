@@ -210,7 +210,7 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#case-study-money-laundering-and-betweenness" id="toc-case-study-money-laundering-and-betweenness" class="nav-link active" data-scroll-target="#case-study-money-laundering-and-betweenness">Case Study: Money-Laundering and Betweenness</a></li>
+  <li><a href="#case-study-money-laundering-and-betweenness" id="toc-case-study-money-laundering-and-betweenness" class="nav-link active" data-scroll-target="#case-study-money-laundering-and-betweenness">Case Study: Money Laundering and Betweenness</a></li>
   <li><a href="#betweenness-centrality-definition" id="toc-betweenness-centrality-definition" class="nav-link" data-scroll-target="#betweenness-centrality-definition">Betweenness Centrality Definition</a></li>
   <li><a href="#undirected-graphs" id="toc-undirected-graphs" class="nav-link" data-scroll-target="#undirected-graphs">Undirected Graphs</a>
   <ul class="collapse">
@@ -256,8 +256,8 @@ div.csl-indent {
 <li>Calculate a betweenness centralization score for a graph.</li>
 </ul>
 <section id="case-study-money-laundering-and-betweenness" class="level2">
-<h2 class="anchored" data-anchor-id="case-study-money-laundering-and-betweenness">Case Study: Money-Laundering and Betweenness</h2>
-<p>In a case study examining the role of betweenness centrality in criminal networks, <span class="citation" data-cites="malm2011using">Malm and Bichler (<a href="references.html#ref-malm2011using" role="doc-biblioref">2011</a>)</span> analyzed money-laundering to understand how different actors influenced network cohesion and resource flow. Analyzing data from intelligence reports, the authors found that the majority of money-laundering in this drug market was self-laundering (where individuals laundered their own illicit earnings), rather than employing specialized professionals. Using betweenness centrality to assess how well-positioned launderers were within the network, <span class="citation" data-cites="malm2011using">Malm and Bichler (<a href="references.html#ref-malm2011using" role="doc-biblioref">2011</a>)</span> found that self-launderers generally exhibited higher betweenness centrality, showing they often acted as key brokers facilitating information flow and transactions across different parts of the network. The findings suggested that targeting individuals with high betweenness centrality, particularly those involved in self-laundering, may be most effective for disrupting drug networks.</p>
+<h2 class="anchored" data-anchor-id="case-study-money-laundering-and-betweenness">Case Study: Money Laundering and Betweenness</h2>
+<p>In a case study examining the role of betweenness centrality in criminal networks, <span class="citation" data-cites="malm2011using">Malm and Bichler (<a href="references.html#ref-malm2011using" role="doc-biblioref">2011</a>)</span> analyzed money laundering to understand how different actors influenced network cohesion and resource flow. Analyzing data from intelligence reports, the authors found that the majority of money laundering in this drug market was self-laundering (where individuals laundered their own illicit earnings), rather than employing specialized professionals. Using betweenness centrality to assess how well-positioned launderers were within the network, <span class="citation" data-cites="malm2011using">Malm and Bichler (<a href="references.html#ref-malm2011using" role="doc-biblioref">2011</a>)</span> found that self-launderers generally exhibited higher betweenness centrality, showing they often acted as key brokers facilitating information flow and transactions across different parts of the network. The findings suggested that targeting individuals with high betweenness centrality, particularly those involved in self-laundering, may be most effective for disrupting drug networks.</p>
 </section>
 <section id="betweenness-centrality-definition" class="level2">
 <h2 class="anchored" data-anchor-id="betweenness-centrality-definition">Betweenness Centrality Definition</h2>
@@ -304,7 +304,7 @@ div.csl-indent {
 </div>
 </div>
 <p>Note that Bob is on both of those paths. He is <em>between</em> Jen and Jim on both paths. Note, however, that only one of the paths is a <u>geodesic path</u> (the Jen-&gt;Tom-&gt;Bob-&gt;Jim path). That is because it is shorter.</p>
-<p>Now, let’s calculate the betweenness centrality for Bob. The <strong>first</strong> thing we need to find are the geodesic paths. Then, figure out how many of those geodesic paths contain Bob. We do this be creating a table of geodesic proportions for Bob.</p>
+<p>Now, let’s calculate the betweenness centrality for Bob. The <strong>first</strong> thing we need to find are the geodesic paths. Then, figure out how many of those geodesic paths contain Bob. We do this by creating a table of geodesic proportions for Bob.</p>
 <section id="geodesic-proportions-for-bob" class="level4">
 <h4 class="anchored" data-anchor-id="geodesic-proportions-for-bob">Geodesic Proportions for <em>Bob</em></h4>
 <table class="table">
@@ -627,7 +627,7 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<p>Of the geodesics between <span class="math inline">\(Jen,Tom\)</span>, <span class="math inline">\(Jen,Leaf\)</span>, and <span class="math inline">\(Jen,Tom\)</span>, how many include Bob? We just some the ratios across the row. It gives us 2.</p>
+<p>Of the geodesics between <span class="math inline">\(Jen,Tom\)</span>, <span class="math inline">\(Jen,Leaf\)</span>, and <span class="math inline">\(Jen,Tom\)</span>, how many include Bob? We just sum the ratios across the row. It gives us 2.</p>
 </section>
 <section id="geodesic-proportions-for-bob-7" class="level4">
 <h4 class="anchored" data-anchor-id="geodesic-proportions-for-bob-7">Geodesic Proportions for <em>Bob</em></h4>
@@ -683,11 +683,11 @@ div.csl-indent {
 <h4 class="anchored" data-anchor-id="geodesic-proportions-for-bob-8">Geodesic Proportions for <em>Bob</em></h4>
 <table class="table">
 <colgroup>
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 28%">
+<col style="width: 28%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -866,7 +866,7 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>Based on the plot, we can visually see that Leaf’s betweenness is going to be zero as he is not on any paths to between two nodes. We can show this mathematically in the table:</p>
+<p>Based on the plot, we can visually see that Leaf’s betweenness is going to be zero as he is not on any paths between two nodes. We can show this mathematically in the table:</p>
 </section>
 <section id="geodesic-proportions-for-leaf-1" class="level4">
 <h4 class="anchored" data-anchor-id="geodesic-proportions-for-leaf-1">Geodesic Proportions for <em>Leaf</em></h4>
@@ -1050,10 +1050,10 @@ div.csl-indent {
 <p><span class="math display">\[C_B = \frac{\sum\limits_{i=1}^g[0.667-C'_B(n_i)]}{4} \]</span></p>
 <table class="table">
 <colgroup>
-<col style="width: 21%">
-<col style="width: 21%">
-<col style="width: 21%">
-<col style="width: 34%">
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 45%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1110,7 +1110,7 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>The betweenness centralization score for the figure on the left is 1, whereas the betweenness centralization score for the figure on the right is 0. This makes sense. In the figure on the left, every node has to go <u>between</u> the node in the middle. The node in the middle is on every geodesic in the graph. In contrast, for the graph on the right, every node has a betweenness centrality score of 1, so ther is no variation in betweenness centrality scores.</p>
+<p>The betweenness centralization score for the figure on the left is 1, whereas the betweenness centralization score for the figure on the right is 0. This makes sense. In the figure on the left, every node has to go <u>between</u> the node in the middle. The node in the middle is on every geodesic in the graph. In contrast, for the graph on the right, every node has a betweenness centrality score of 1, so there is no variation in betweenness centrality scores.</p>
 </section>
 </section>
 <section id="directed-graphs" class="level2">
@@ -1298,7 +1298,7 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>We can know complete our table:</p>
+<p>We can now complete our table:</p>
 </section>
 <section id="geodesic-proportions-for-bob-13" class="level4">
 <h4 class="anchored" data-anchor-id="geodesic-proportions-for-bob-13">Geodesic Proportions for <em>Bob</em></h4>
@@ -1478,10 +1478,10 @@ div.csl-indent {
 <p><span class="math display">\[C_B = \frac{\sum\limits_{i=1}^g[0.333-C'_B(n_i)]}{4} \]</span></p>
 <table class="table">
 <colgroup>
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 39%">
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 45%">
 </colgroup>
 <thead>
 <tr class="header">

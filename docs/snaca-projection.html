@@ -248,7 +248,7 @@ div.csl-indent {
 
 </header>
 
-<p>In the prior chapter on <a href="snaca-bipartite.html">Bipartite Graphs/Two-Mode Networks</a>, saw that not all of the networks we want to examine have a single node set. We discussed how complex relational structures with multiple partitions of node sets can be examined using <strong>bipartite</strong> graphs.</p>
+<p>In the prior chapter on <a href="snaca-bipartite.html">Bipartite Graphs/Two-Mode Networks</a>, we saw that not all of the networks we want to examine have a single node set. We discussed how complex relational structures with multiple partitions of node sets can be examined using <strong>bipartite</strong> graphs.</p>
 <section id="case-study-body-worn-cameras-police-officer-perceptions-and-shared-incident-networks-revisited" class="level2">
 <h2 class="anchored" data-anchor-id="case-study-body-worn-cameras-police-officer-perceptions-and-shared-incident-networks-revisited">Case Study: Body-Worn Cameras, Police Officer Perceptions, and Shared-Incident Networks (revisited)</h2>
 <p>Let’s revisit the study by <span class="citation" data-cites="young2015">Young and Ready (<a href="references.html#ref-young2015" role="doc-biblioref">2015</a>)</span> discussed in the previous chapter. Recall that the researchers sought to examine two research questions:</p>
@@ -266,7 +266,7 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>To study how police officer’s views of body cameras were influenced by those with whom they shared incidents, <span class="citation" data-cites="young2015">Young and Ready (<a href="references.html#ref-young2015" role="doc-biblioref">2015</a>)</span> <em>actually</em> examined this network:</p>
+<p>To study how police officers’ views of body cameras were influenced by those with whom they shared incidents, <span class="citation" data-cites="young2015">Young and Ready (<a href="references.html#ref-young2015" role="doc-biblioref">2015</a>)</span> <em>actually</em> examined this network:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -443,7 +443,7 @@ div.csl-indent {
 <p>Let’s take a look at each of these points.</p>
 <section id="diagonal-cells" class="level4">
 <h4 class="anchored" data-anchor-id="diagonal-cells">Diagonal Cells</h4>
-<p>The diagonal tells us the count of count of ties that a specific node in <span class="math inline">\(N\)</span> has with nodes in <span class="math inline">\(M\)</span>. Using the language of “groups” to refer to the <span class="math inline">\(M\)</span> node set, the diagonal is the count of groups to which a node in <span class="math inline">\(N\)</span> is connected.</p>
+<p>The diagonal tells us the count of ties that a specific node in <span class="math inline">\(N\)</span> has with nodes in <span class="math inline">\(M\)</span>. Using the language of “groups” to refer to the <span class="math inline">\(M\)</span> node set, the diagonal is the count of groups to which a node in <span class="math inline">\(N\)</span> is connected.</p>
 <p>For example, in the figure below, <em>D</em> is in 4 groups:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -487,7 +487,7 @@ div.csl-indent {
 </section>
 <section id="group-matrix" class="level3">
 <h3 class="anchored" data-anchor-id="group-matrix">“Group” Matrix</h3>
-<p>To create the “group” matrix, <span class="math inline">\(G\)</span>, which connects nodes in the the set <span class="math inline">\(M\)</span>, we perform the following matrix multiplication for our adjacency matrix <span class="math inline">\(A\)</span>:</p>
+<p>To create the “group” matrix, <span class="math inline">\(G\)</span>, which connects nodes in the set <span class="math inline">\(M\)</span>, we perform the following matrix multiplication for our adjacency matrix <span class="math inline">\(A\)</span>:</p>
 <p><span class="math display">\[A^T \times A = G\]</span> After multiplication we get:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -507,7 +507,7 @@ div.csl-indent {
 <p>Let’s take a look at each of these points.</p>
 <section id="diagonal-cells-1" class="level4">
 <h4 class="anchored" data-anchor-id="diagonal-cells-1">Diagonal Cells</h4>
-<p>The diagonal tells us the count of count of ties that a specific node in <span class="math inline">\(M\)</span> has with nodes in <span class="math inline">\(N\)</span>. Using the language of “people” to refer to the <span class="math inline">\(N\)</span> node set, the diagonal is the count of people to which a node in <span class="math inline">\(M\)</span> is connected.</p>
+<p>The diagonal tells us the count of ties that a specific node in <span class="math inline">\(M\)</span> has with nodes in <span class="math inline">\(N\)</span>. Using the language of “people” to refer to the <span class="math inline">\(N\)</span> node set, the diagonal is the count of people to which a node in <span class="math inline">\(M\)</span> is connected.</p>
 <p>For example, in the figure below, <em>2</em> is in 3 groups:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -554,7 +554,7 @@ div.csl-indent {
 <p>Now we are ready to use the tools we have employed in past chapters, right? Hold up. Note that some the off-diagonal cells are greater than 1. This is new territory for us. Now what?</p>
 <section id="dichotomization" class="level3">
 <h3 class="anchored" data-anchor-id="dichotomization">Dichotomization</h3>
-<p>The most common solution is to define any tie greater than 0 in the adjacency matrix as a 1. That is, we would recode values greater than 1 to just be 1. Then, we recode the diagonal elements to be 0. That would then give us an adjacency matrix of 0s and 1s and we could go about our business as crime analysts. This is called <strong>dichotomizing</strong> the adjacency matrix and is the most common way of handling projections. The consequence is an <u>binary</u>, undirected, unipartite graph. What a mouthful!</p>
+<p>The most common solution is to define any tie greater than 0 in the adjacency matrix as a 1. That is, we would recode values greater than 1 to just be 1. Then, we recode the diagonal elements to be 0. That would then give us an adjacency matrix of 0s and 1s and we could go about our business as crime analysts. This is called <strong>dichotomizing</strong> the adjacency matrix and is the most common way of handling projections. The consequence is a <u>binary</u>, undirected, unipartite graph. What a mouthful!</p>
 <p>For the people matrix <span class="math inline">\(P\)</span>, we can visualize this process here:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -565,7 +565,7 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>However, note that we lose some information when we dichotomize the adjacency matrix. Specifically, we are treating a connections that are greater than 1 as being the same as connections exactly equal to 1. This may make sense in some circumstances. For example, suppose you are only concerned with whether two individuals have ever been arrested together. In this case, the dichotomized matrix makes sense to examine.</p>
+<p>However, note that we lose some information when we dichotomize the adjacency matrix. Specifically, we are treating connections that are greater than 1 as being the same as connections exactly equal to 1. This may make sense in some circumstances. For example, suppose you are only concerned with whether two individuals have ever been arrested together. In this case, the dichotomized matrix makes sense to examine.</p>
 <p><em>But</em>, what if the number of co-arrests is really important? That is, relationships between individuals who have many co-arrests are fundamentally different than those who only have a single co-arrest. In this case, dichotomizing the adjacency matrix could misrepresent the data.</p>
 </section>
 <section id="summation" class="level3">
@@ -609,7 +609,7 @@ div.csl-indent {
 </section>
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
-<p>This chapter showed how to projecting bipartite networks into unipartite graphs. Projection is a useful technique for crime analysts to employ when they need to simplify complex relationships for analysis while retaining critical relational insights. By transforming two-mode data (e.g., individuals and groups) into one-mode networks, analysts can focus on relationships within a single node set, such as connections between co-offenders or shared affiliations between groups. We focused our attention also on the distinction between dichotomized and weighted projections, which allow analysts a way to tailor their approach based on whether binary connections or tie strengths are more relevant to the investigation. The tools and concepts presented, including adjacency matrices, matrix multiplication, and the implications of symmetric matrices, provide foundational methods for analyzing complex relational structures. For crime analysts, mastering these techniques enhances their ability to uncover patterns, predict interactions, and inform data-driven decision-making.</p>
+<p>This chapter showed how to project bipartite networks into unipartite graphs. Projection is a useful technique for crime analysts to employ when they need to simplify complex relationships for analysis while retaining critical relational insights. By transforming two-mode data (e.g., individuals and groups) into one-mode networks, analysts can focus on relationships within a single node set, such as connections between co-offenders or shared affiliations between groups. We focused our attention also on the distinction between dichotomized and weighted projections, which allow analysts a way to tailor their approach based on whether binary connections or tie strengths are more relevant to the investigation. The tools and concepts presented, including adjacency matrices, matrix multiplication, and the implications of symmetric matrices, provide foundational methods for analyzing complex relational structures. For crime analysts, mastering these techniques enhances their ability to uncover patterns, predict interactions, and inform data-driven decision-making.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">

@@ -264,14 +264,14 @@ div.csl-indent {
 <p><span class="citation" data-cites="sageman2004understanding">Sageman (<a href="references.html#ref-sageman2004understanding" role="doc-biblioref">2004</a>)</span> studied global Islamist terrorist networks and demonstrated how individuals with high closeness centrality played a key role in maintaining the cohesion and communication efficiency within these decentralized groups. These key players, even though they may not have had the most direct connections (high degree centrality), were crucial in maintaining the operational efficiency of the network. By targeting those with high closeness centrality, counter-terrorism efforts were able to more effectively disrupt communication channels and reduce the operational capabilities of the group.</p>
 <section id="closeness-centrality-terms" class="level3">
 <h3 class="anchored" data-anchor-id="closeness-centrality-terms">Closeness Centrality Terms</h3>
-<p>How <em>close</em> is a node to other nodes? <em>Closeness</em> centrality measures how near a node is to the other nodes in the network. That is, how “close” the nodes are. What we mean by “close” will differ based on whether the graph is undirected or directed. By the conceptual definition is the same. How close nodes are in a graph is based on the inverse of the distance of each node to every other node.</p>
+<p>How <em>close</em> is a node to other nodes? <em>Closeness</em> centrality measures how near a node is to the other nodes in the network. That is, how “close” the nodes are. What we mean by “close” will differ based on whether the graph is undirected or directed. But the conceptual definition is the same. How close nodes are in a graph is based on the inverse of the distance of each node to every other node.</p>
 <p>Terminology:</p>
 <ul>
 <li>A <strong>path</strong> is an edge or sequence of edges that connect two nodes.</li>
 <li>A <strong>geodesic</strong> is the shortest path between two nodes.</li>
 <li>The <strong>distance</strong>, <span class="math inline">\(d(n_i,n_j)\)</span>, is the length of the path between <em>i</em> and <em>j</em>.</li>
 </ul>
-<p>Another way of saying this is that if we now how “far apart” two nodes are (i.e.&nbsp;the distance), then we can take the inverse of that and know how “close” the nodes are to each other.</p>
+<p>Another way of saying this is that if we know how “far apart” two nodes are (i.e.&nbsp;the distance), then we can take the inverse of that and know how “close” the nodes are to each other.</p>
 </section>
 </section>
 <section id="undirected-graphs" class="level2">
@@ -335,7 +335,7 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>Now, it we take the sum of the rows, this gives us <span class="math inline">\(\sum\limits_{j=1}^g d(n_i,n_j)\)</span>. Note that since the graph is undirected, the column sum would give us the same values. Since we have <span class="math inline">\(\sum\limits_{j=1}^g d(n_i,n_j)\)</span>, all we need to do now is take the reciprocal by dividing 1 by <span class="math inline">\(\sum\limits_{j=1}^g d(n_i,n_j)\)</span>:</p>
+<p>Now, if we take the sum of the rows, this gives us <span class="math inline">\(\sum\limits_{j=1}^g d(n_i,n_j)\)</span>. Note that since the graph is undirected, the column sum would give us the same values. Since we have <span class="math inline">\(\sum\limits_{j=1}^g d(n_i,n_j)\)</span>, all we need to do now is take the reciprocal by dividing 1 by <span class="math inline">\(\sum\limits_{j=1}^g d(n_i,n_j)\)</span>:</p>
 <p><span class="math display">\[C_C(n_i) =  \frac{1}{[\sum\limits_{j=1}^g d(n_i,n_j)]}\]</span></p>
 <p>That gives us the closeness centrality score for each individual:</p>
 <table class="table">
@@ -458,7 +458,7 @@ div.csl-indent {
 </section>
 <section id="closeness-centralization" class="level3">
 <h3 class="anchored" data-anchor-id="closeness-centralization">Closeness Centralization</h3>
-<p>In the prior chapter we discussed <em>graph centralization</em>, which measures the extent to which the nodes in a network differ from one another in their individual centrality scores. Put differently, how much variation is there in the distribution of centrality scores? As with degree centralization, we can can calculate the closeness centralization of the graph. A key difference, however, is that for closeness centralization, we use the standardized closeness score.</p>
+<p>In the prior chapter we discussed <em>graph centralization</em>, which measures the extent to which the nodes in a network differ from one another in their individual centrality scores. Put differently, how much variation is there in the distribution of centrality scores? As with degree centralization, we can calculate the closeness centralization of the graph. A key difference, however, is that for closeness centralization, we use the standardized closeness score.</p>
 <p>We can calculate closeness centralization as:</p>
 <p><span class="math display">\[C_C = \frac{\sum\limits_{i=1}^g[C'_C(n^*)-C'_C(n_i)]}{[(g-2)(g-1)]/(2g-3)}\]</span></p>
 <p>This may look imposing, but we can decompose it to see what it is doing:</p>
@@ -655,7 +655,7 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>How far is Bob from Jen? Bob, is “infinite distance” from Jen because there is not a directed path by when he can reach her. This is also the case for the distance from Bob to Tom. But, Bob does have directed ties to Jim and Leaf. With directionality in mind, they are unreachable. But, Bob is 1 step from Leaf and 1 step from Jim along a directed path:</p>
+<p>How far is Bob from Jen? Bob, is “infinite distance” from Jen because there is not a directed path by which he can reach her. This is also the case for the distance from Bob to Tom. But, Bob does have directed ties to Jim and Leaf. With directionality in mind, they are unreachable. But, Bob is 1 step from Leaf and 1 step from Jim along a directed path:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -717,7 +717,7 @@ div.csl-indent {
 </table>
 <section id="standardization-1" class="level4">
 <h4 class="anchored" data-anchor-id="standardization-1">Standardization</h4>
-<p>Don’t, forget: raw centrality scores are sensitive to the size of the graph. So, as before, we can standardize our closeness score as:</p>
+<p>Don’t forget: raw centrality scores are sensitive to the size of the graph. So, as before, we can standardize our closeness score as:</p>
 <p><span class="math display">\[C'_C(n_i) = [\sum\limits_{j=1}^g d(n_i,n_j)]^{-1} \times [g-1]\]</span></p>
 <table class="table">
 <thead>
@@ -765,7 +765,7 @@ div.csl-indent {
 </section>
 <section id="indegree" class="level3">
 <h3 class="anchored" data-anchor-id="indegree">Indegree</h3>
-<p>Note that in the prior section we were looking at <em>outdegree</em>. When we are looking at <em>outgoing</em> ties the closeness scores reflect how close a <u>you</u> are to other nodes. For example, Tom’s distance to Leaf is 2, meaning that it takes 2 outgoing ties to reach Leaf. What about the other way around? We can reverse this and look at the <em>incoming</em> ties by focusing on <em>indegree</em>. Remember, <em>column</em> sums are the <em>indegree</em>, so column distance tells you how close <u>others</u> are to you. That is, how many steps it takes a <u>node</u> to reach you. The difference is a bit nuanced, but meaningful. In this case, instead of summing the rows as we did above, we could sum the columns.</p>
+<p>Note that in the prior section we were looking at <em>outdegree</em>. When we are looking at <em>outgoing</em> ties the closeness scores reflect how close <u>you</u> are to other nodes. For example, Tom’s distance to Leaf is 2, meaning that it takes 2 outgoing ties to reach Leaf. What about the other way around? We can reverse this and look at the <em>incoming</em> ties by focusing on <em>indegree</em>. Remember, <em>column</em> sums are the <em>indegree</em>, so column distance tells you how close <u>others</u> are to you. That is, how many steps it takes a <u>node</u> to reach you. The difference is a bit nuanced, but meaningful. In this case, instead of summing the rows as we did above, we could sum the columns.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
