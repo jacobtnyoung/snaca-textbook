@@ -16,7 +16,7 @@ library( sna )       # for the plot
 
 # Projection {.unnumbered}
 
-In the prior chapter on [Bipartite Graphs/Two-Mode Networks](snaca-bipartite.html), saw that not all of the networks we want to examine have a single node set. We discussed how complex relational structures with multiple partitions of node sets can be examined using **bipartite** graphs.
+In the prior chapter on [Bipartite Graphs/Two-Mode Networks](snaca-bipartite.html), we saw that not all of the networks we want to examine have a single node set. We discussed how complex relational structures with multiple partitions of node sets can be examined using **bipartite** graphs.
 
 ## Case Study: Body-Worn Cameras, Police Officer Perceptions, and Shared-Incident Networks (revisited)
 
@@ -31,7 +31,7 @@ To answer these questions, @young2015 studied the two-mode network of shared inc
 knitr::include_graphics( "images/young-ready-bipartite-figure.jpeg" )
 ```
 
-To study how police officer's views of body cameras were influenced by those with whom they shared incidents, @young2015 *actually* examined this network:
+To study how police officers' views of body cameras were influenced by those with whom they shared incidents, @young2015 *actually* examined this network:
 
 ```{r, fig.cap = "", out.width = "60%"}
 knitr::include_graphics( "images/young-ready-projection-figure.jpeg" )
@@ -181,7 +181,7 @@ Let's take a look at each of these points.
 
 #### Diagonal Cells
 
-The diagonal tells us the count of count of ties that a specific node in $N$ has with nodes in $M$. Using the language of "groups" to refer to the $M$ node set, the diagonal is the count of groups to which a node in $N$ is connected.
+The diagonal tells us the count of ties that a specific node in $N$ has with nodes in $M$. Using the language of "groups" to refer to the $M$ node set, the diagonal is the count of groups to which a node in $N$ is connected.
 
 For example, in the figure below, *D* is in 4 groups:
 
@@ -217,7 +217,7 @@ Note, the off-diagonal cells represent counts of shared nodes in $M$, **not** co
 
 ### "Group" Matrix
 
-To create the "group" matrix, $G$, which connects nodes in the the set $M$, we perform the following matrix multiplication for our adjacency matrix $A$:
+To create the "group" matrix, $G$, which connects nodes in the set $M$, we perform the following matrix multiplication for our adjacency matrix $A$:
 
 $$A^T \times A = G$$ After multiplication we get:
 
@@ -236,7 +236,7 @@ Let's take a look at each of these points.
 
 #### Diagonal Cells
 
-The diagonal tells us the count of count of ties that a specific node in $M$ has with nodes in $N$. Using the language of "people" to refer to the $N$ node set, the diagonal is the count of people to which a node in $M$ is connected.
+The diagonal tells us the count of ties that a specific node in $M$ has with nodes in $N$. Using the language of "people" to refer to the $N$ node set, the diagonal is the count of people to which a node in $M$ is connected.
 
 For example, in the figure below, *2* is in 3 groups:
 
@@ -274,7 +274,7 @@ Now we are ready to use the tools we have employed in past chapters, right? Hold
 
 ### Dichotomization
 
-The most common solution is to define any tie greater than 0 in the adjacency matrix as a 1. That is, we would recode values greater than 1 to just be 1. Then, we recode the diagonal elements to be 0. That would then give us an adjacency matrix of 0s and 1s and we could go about our business as crime analysts. This is called **dichotomizing** the adjacency matrix and is the most common way of handling projections. The consequence is an <u>binary</u>, undirected, unipartite graph. What a mouthful!
+The most common solution is to define any tie greater than 0 in the adjacency matrix as a 1. That is, we would recode values greater than 1 to just be 1. Then, we recode the diagonal elements to be 0. That would then give us an adjacency matrix of 0s and 1s and we could go about our business as crime analysts. This is called **dichotomizing** the adjacency matrix and is the most common way of handling projections. The consequence is a <u>binary</u>, undirected, unipartite graph. What a mouthful!
 
 For the people matrix $P$, we can visualize this process here:
 
@@ -282,7 +282,7 @@ For the people matrix $P$, we can visualize this process here:
 knitr::include_graphics( "images/ch-11-figure-16.jpeg" )
 ```
 
-However, note that we lose some information when we dichotomize the adjacency matrix. Specifically, we are treating a connections that are greater than 1 as being the same as connections exactly equal to 1. This may make sense in some circumstances. For example, suppose you are only concerned with whether two individuals have ever been arrested together. In this case, the dichotomized matrix makes sense to examine.
+However, note that we lose some information when we dichotomize the adjacency matrix. Specifically, we are treating connections that are greater than 1 as being the same as connections exactly equal to 1. This may make sense in some circumstances. For example, suppose you are only concerned with whether two individuals have ever been arrested together. In this case, the dichotomized matrix makes sense to examine.
 
 *But*, what if the number of co-arrests is really important? That is, relationships between individuals who have many co-arrests are fundamentally different than those who only have a single co-arrest. In this case, dichotomizing the adjacency matrix could misrepresent the data.
 
@@ -369,4 +369,4 @@ We may be inclined to always keep the network weighted (i.e. not dichotomize the
 
 ## Summary
 
-This chapter showed how to projecting bipartite networks into unipartite graphs. Projection is a useful technique for crime analysts to employ when they need to simplify complex relationships for analysis while retaining critical relational insights. By transforming two-mode data (e.g., individuals and groups) into one-mode networks, analysts can focus on relationships within a single node set, such as connections between co-offenders or shared affiliations between groups. We focused our attention also on the distinction between dichotomized and weighted projections, which allow analysts a way to tailor their approach based on whether binary connections or tie strengths are more relevant to the investigation. The tools and concepts presented, including adjacency matrices, matrix multiplication, and the implications of symmetric matrices, provide foundational methods for analyzing complex relational structures. For crime analysts, mastering these techniques enhances their ability to uncover patterns, predict interactions, and inform data-driven decision-making.
+This chapter showed how to project bipartite networks into unipartite graphs. Projection is a useful technique for crime analysts to employ when they need to simplify complex relationships for analysis while retaining critical relational insights. By transforming two-mode data (e.g., individuals and groups) into one-mode networks, analysts can focus on relationships within a single node set, such as connections between co-offenders or shared affiliations between groups. We focused our attention also on the distinction between dichotomized and weighted projections, which allow analysts a way to tailor their approach based on whether binary connections or tie strengths are more relevant to the investigation. The tools and concepts presented, including adjacency matrices, matrix multiplication, and the implications of symmetric matrices, provide foundational methods for analyzing complex relational structures. For crime analysts, mastering these techniques enhances their ability to uncover patterns, predict interactions, and inform data-driven decision-making.

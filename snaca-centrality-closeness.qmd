@@ -140,7 +140,7 @@ d_graph <-
 
 ### Closeness Centrality Terms
 
-How *close* is a node to other nodes? *Closeness* centrality measures how near a node is to the other nodes in the network. That is, how "close" the nodes are. What we mean by "close" will differ based on whether the graph is undirected or directed. By the conceptual definition is the same. How close nodes are in a graph is based on the inverse of the distance of each node to every other node.
+How *close* is a node to other nodes? *Closeness* centrality measures how near a node is to the other nodes in the network. That is, how "close" the nodes are. What we mean by "close" will differ based on whether the graph is undirected or directed. But the conceptual definition is the same. How close nodes are in a graph is based on the inverse of the distance of each node to every other node.
 
 Terminology:
 
@@ -148,7 +148,7 @@ Terminology:
 -   A **geodesic** is the shortest path between two nodes.
 -   The **distance**, $d(n_i,n_j)$, is the length of the path between *i* and *j*.
 
-Another way of saying this is that if we now how "far apart" two nodes are (i.e. the distance), then we can take the inverse of that and know how "close" the nodes are to each other.
+Another way of saying this is that if we know how "far apart" two nodes are (i.e. the distance), then we can take the inverse of that and know how "close" the nodes are to each other.
 
 ## Undirected Graphs
 
@@ -334,7 +334,7 @@ grid.arrange( u_graph, d_to_plot, ncol = 2 )
 
 ```
 
-Now, it we take the sum of the rows, this gives us $\sum\limits_{j=1}^g d(n_i,n_j)$. Note that since the graph is undirected, the column sum would give us the same values. Since we have $\sum\limits_{j=1}^g d(n_i,n_j)$, all we need to do now is take the reciprocal by dividing 1 by $\sum\limits_{j=1}^g d(n_i,n_j)$:
+Now, if we take the sum of the rows, this gives us $\sum\limits_{j=1}^g d(n_i,n_j)$. Note that since the graph is undirected, the column sum would give us the same values. Since we have $\sum\limits_{j=1}^g d(n_i,n_j)$, all we need to do now is take the reciprocal by dividing 1 by $\sum\limits_{j=1}^g d(n_i,n_j)$:
 
 $$C_C(n_i) =  \frac{1}{[\sum\limits_{j=1}^g d(n_i,n_j)]}$$
 
@@ -491,7 +491,7 @@ grid.arrange( p1s, nullGrob(), p2s, ncol = 3, widths = c( 1, 0.2, 1 ) )
 
 ### Closeness Centralization
 
-In the prior chapter we discussed *graph centralization*, which measures the extent to which the nodes in a network differ from one another in their individual centrality scores. Put differently, how much variation is there in the distribution of centrality scores? As with degree centralization, we can can calculate the closeness centralization of the graph. A key difference, however, is that for closeness centralization, we use the standardized closeness score.
+In the prior chapter we discussed *graph centralization*, which measures the extent to which the nodes in a network differ from one another in their individual centrality scores. Put differently, how much variation is there in the distribution of centrality scores? As with degree centralization, we can calculate the closeness centralization of the graph. A key difference, however, is that for closeness centralization, we use the standardized closeness score.
 
 We can calculate closeness centralization as:
 
@@ -744,7 +744,7 @@ grid.arrange( d_graph, d_to_plot, ncol = 2 )
 
 ```
 
-How far is Bob from Jen? Bob, is "infinite distance" from Jen because there is not a directed path by when he can reach her. This is also the case for the distance from Bob to Tom. But, Bob does have directed ties to Jim and Leaf. With directionality in mind, they are unreachable. But, Bob is 1 step from Leaf and 1 step from Jim along a directed path:
+How far is Bob from Jen? Bob, is "infinite distance" from Jen because there is not a directed path by which he can reach her. This is also the case for the distance from Bob to Tom. But, Bob does have directed ties to Jim and Leaf. With directionality in mind, they are unreachable. But, Bob is 1 step from Leaf and 1 step from Jim along a directed path:
 
 ```{r}
 
@@ -830,7 +830,7 @@ Going through the rest of the matrix, we get a closeness centrality score for ea
 
 #### Standardization
 
-Don't, forget: raw centrality scores are sensitive to the size of the graph. So, as before, we can standardize our closeness score as:
+Don't forget: raw centrality scores are sensitive to the size of the graph. So, as before, we can standardize our closeness score as:
 
 $$C'_C(n_i) = [\sum\limits_{j=1}^g d(n_i,n_j)]^{-1} \times [g-1]$$
 
@@ -844,7 +844,7 @@ $$C'_C(n_i) = [\sum\limits_{j=1}^g d(n_i,n_j)]^{-1} \times [g-1]$$
 
 ### Indegree
 
-Note that in the prior section we were looking at *outdegree*. When we are looking at *outgoing* ties the closeness scores reflect how close a <u>you</u> are to other nodes. For example, Tom's distance to Leaf is 2, meaning that it takes 2 outgoing ties to reach Leaf. What about the other way around? We can reverse this and look at the *incoming* ties by focusing on *indegree*. Remember, *column* sums are the *indegree*, so column distance tells you how close <u>others</u> are to you. That is, how many steps it takes a <u>node</u> to reach you. The difference is a bit nuanced, but meaningful. In this case, instead of summing the rows as we did above, we could sum the columns.
+Note that in the prior section we were looking at *outdegree*. When we are looking at *outgoing* ties the closeness scores reflect how close <u>you</u> are to other nodes. For example, Tom's distance to Leaf is 2, meaning that it takes 2 outgoing ties to reach Leaf. What about the other way around? We can reverse this and look at the *incoming* ties by focusing on *indegree*. Remember, *column* sums are the *indegree*, so column distance tells you how close <u>others</u> are to you. That is, how many steps it takes a <u>node</u> to reach you. The difference is a bit nuanced, but meaningful. In this case, instead of summing the rows as we did above, we could sum the columns.
 
 ```{r}
 

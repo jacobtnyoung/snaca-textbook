@@ -135,9 +135,9 @@ d_graph <-
 
 ```
 
-## Case Study: Money-Laundering and Betweenness
+## Case Study: Money Laundering and Betweenness
 
-In a case study examining the role of betweenness centrality in criminal networks, @malm2011using analyzed money-laundering to understand how different actors influenced network cohesion and resource flow. Analyzing data from intelligence reports, the authors found that the majority of money-laundering in this drug market was self-laundering (where individuals laundered their own illicit earnings), rather than employing specialized professionals. Using betweenness centrality to assess how well-positioned launderers were within the network, @malm2011using found that self-launderers generally exhibited higher betweenness centrality, showing they often acted as key brokers facilitating information flow and transactions across different parts of the network. The findings suggested that targeting individuals with high betweenness centrality, particularly those involved in self-laundering, may be most effective for disrupting drug networks.
+In a case study examining the role of betweenness centrality in criminal networks, @malm2011using analyzed money laundering to understand how different actors influenced network cohesion and resource flow. Analyzing data from intelligence reports, the authors found that the majority of money laundering in this drug market was self-laundering (where individuals laundered their own illicit earnings), rather than employing specialized professionals. Using betweenness centrality to assess how well-positioned launderers were within the network, @malm2011using found that self-launderers generally exhibited higher betweenness centrality, showing they often acted as key brokers facilitating information flow and transactions across different parts of the network. The findings suggested that targeting individuals with high betweenness centrality, particularly those involved in self-laundering, may be most effective for disrupting drug networks.
 
 ## Betweenness Centrality Definition
 
@@ -224,7 +224,7 @@ grid.arrange( plot1, plot2, ncol = 2 )
 
 Note that Bob is on both of those paths. He is *between* Jen and Jim on both paths. Note, however, that only one of the paths is a <u>geodesic path</u> (the Jen-\>Tom-\>Bob-\>Jim path). That is because it is shorter.
 
-Now, let's calculate the betweenness centrality for Bob. The **first** thing we need to find are the geodesic paths. Then, figure out how many of those geodesic paths contain Bob. We do this be creating a table of geodesic proportions for Bob.
+Now, let's calculate the betweenness centrality for Bob. The **first** thing we need to find are the geodesic paths. Then, figure out how many of those geodesic paths contain Bob. We do this by creating a table of geodesic proportions for Bob.
 
 #### Geodesic Proportions for *Bob*
 
@@ -323,7 +323,7 @@ Bob is on the geodesic from Jen to Leaf:
 | Leaf |     |     |                                |     |
 | Jim  |     |     |                                |     |
 
-Of the geodesics between $Jen,Tom$, $Jen,Leaf$, and $Jen,Tom$, how many include Bob? We just some the ratios across the row. It gives us 2.
+Of the geodesics between $Jen,Tom$, $Jen,Leaf$, and $Jen,Tom$, how many include Bob? We just sum the ratios across the row. It gives us 2.
 
 #### Geodesic Proportions for *Bob*
 
@@ -339,7 +339,7 @@ Now, to finish our calculation for Bob, we need to calculate the geodesics for t
 #### Geodesic Proportions for *Bob*
 
 |      | Jen | Tom |              Leaf              |              Jim               |
-|:--------------|:-------------:|:-------------:|:-------------:|:-------------:|
+|:----------|:---------:|:---------:|:-------------------:|:-------------------:|
 | Jen  |     | 0/1 |              1/1               |              1/1               |
 | Tom  |     |     | [?/?]{style="color: #28a88d;"} | [?/?]{style="color: #28a88d;"} |
 | Leaf |     |     |                                | [?/?]{style="color: #28a88d;"} |
@@ -401,7 +401,7 @@ That sum is 4. Bob's betweenness centrality score is 4. What does this mean? A s
 u_graph
 ```
 
-Based on the plot, we can visually see that Leaf's betweenness is going to be zero as he is not on any paths to between two nodes. We can show this mathematically in the table:
+Based on the plot, we can visually see that Leaf's betweenness is going to be zero as he is not on any paths between two nodes. We can show this mathematically in the table:
 
 #### Geodesic Proportions for *Leaf*
 
@@ -472,7 +472,7 @@ If I lost you in some of the math, don't worry. Let's calculate the betweenness 
 $$C_B = \frac{\sum\limits_{i=1}^g[0.667-C'_B(n_i)]}{4} $$
 
 | Node | Betweenness | Standardized Betweenness | Deviations of Betweenness Closeness, $0.667-C'_B(n_i)$ |
-|:--------------:|:--------------:|:--------------:|:-----------------------:|
+|:-----------:|:-----------:|:-----------:|:-------------------------------:|
 | Jen  |      0      |      0 / 6 = 0.000       |                 0.667 - 0.000 = 0.667                  |
 | Tom  |      3      |      3 / 6 = 0.500       |                 0.667 - 0.500 = 0.167                  |
 | Bob  |      4      |      4 / 6 = 0.667       |                 0.667 - 0.667 = 0.000                  |
@@ -493,7 +493,7 @@ We can see this by examining two additional undirected networks:
 grid.arrange( star_graph, nullGrob(), circle_graph, ncol = 3, widths = c( 1, 0.2, 1 ) )
 ```
 
-The betweenness centralization score for the figure on the left is 1, whereas the betweenness centralization score for the figure on the right is 0. This makes sense. In the figure on the left, every node has to go <u>between</u> the node in the middle. The node in the middle is on every geodesic in the graph. In contrast, for the graph on the right, every node has a betweenness centrality score of 1, so ther is no variation in betweenness centrality scores.
+The betweenness centralization score for the figure on the left is 1, whereas the betweenness centralization score for the figure on the right is 0. This makes sense. In the figure on the left, every node has to go <u>between</u> the node in the middle. The node in the middle is on every geodesic in the graph. In contrast, for the graph on the right, every node has a betweenness centrality score of 1, so there is no variation in betweenness centrality scores.
 
 ## Directed Graphs
 
@@ -600,7 +600,7 @@ ggraph( digraph,
 
 ```
 
-We can know complete our table:
+We can now complete our table:
 
 #### Geodesic Proportions for *Bob*
 
@@ -665,7 +665,7 @@ If I lost you in some of the math, don't worry. Let's calculate the betweenness 
 $$C_B = \frac{\sum\limits_{i=1}^g[0.333-C'_B(n_i)]}{4} $$
 
 | Node | Betweenness | Standardized Betweenness | Deviations of Betweenness Closeness, $0.667-C'_B(n_i)$ |
-|:-------------:|:-------------:|:-------------:|:---------------------------:|
+|:-----------:|:-----------:|:-----------:|:-------------------------------:|
 | Jen  |      0      |      0 / 12 = 0.000      |                 0.333 - 0.000 = 0.333                  |
 | Tom  |      3      |      3 / 12 = 0.250      |                 0.333 - 0.250 = 0.083                  |
 | Bob  |      4      |      4 / 12 = 0.333      |                 0.333 - 0.333 = 0.000                  |
