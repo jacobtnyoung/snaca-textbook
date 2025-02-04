@@ -449,6 +449,28 @@ When we calculate the *raw* betweenness scores, we get the following table:
 | Leaf |      0      |      0 / 6 = 0.000       |
 | Jim  |      0      |      0 / 6 = 0.000       |
 
+### Mean Betweenness
+
+We can examine the summary statistics for betweenness centrality by inspecting the **mean**. The average betweenness is an important property of a network. *Why? What does a network with a high average betweenness look like? A low average closeness?*
+
+The mean betweenness for an undirected network is:
+
+$$\bar C_B =  \dfrac{\sum\limits_{i=1}^g C_B(n_i)}{g}$$
+
+This equation, $\dfrac{\sum\limits_{i=1}^g C_B(n_i)}{g}$, just says to sum up the betweeness scores for each node and then divide by the number of nodes, *g*.
+
+What is the mean betweenness for our example network? We can pull these from the table above:
+
+| Node | Betweenness | Standardized Betweenness |
+|:----:|:-----------:|:------------------------:|
+| Jen  |      0      |      0 / 6 = 0.000       |
+| Tom  |      3      |      3 / 6 = 0.500       |
+| Bob  |      4      |      4 / 6 = 0.667       |
+| Leaf |      0      |      0 / 6 = 0.000       |
+| Jim  |      0      |      0 / 6 = 0.000       |
+
+$$\bar C_B =  \dfrac{\sum\limits_{i=1}^g C_B(n_i)}{g} = \dfrac{0 + 3 + 4 + 0 + 0}{5} = \dfrac{7}{5} = 1.4$$ The average betweenness for this graph is 1.4, which tells us that the average node occupies just over 1 path which other nodes have to go through.
+
 ### Betweenness Centralization
 
 As we did with *degree centralization* and *closeness centralization*, we can calculate the betweenness centralization of the graph. Recall that centralization measures the extent to which the nodes in a social network differ from one another in their individual centrality scores. Put differently, how much variation is there in the distribution of centrality scores? As with closeness centralization, we use the *standardized* betweenness score (as opposed to the *raw* score).
@@ -612,7 +634,7 @@ We can now complete our table:
 |    Jim    | 0/0 | 0/0 | 0/1  |     |         |
 | **TOTAL** |     |     |      |     |  **4**  |
 
-*Why are there no geodesics in the lower portion of the table?* Take a look at the plot. Can Tom does not send a tie to Jen, so there is not a geodesic from Tom to Jen. This is the same for Leaf to Jen. There *is* a geodesic from Jim to Leaf, but Bob is not on it. As a consequence, the total is 4.
+*Why are there no geodesics in the lower portion of the table?* Take a look at the plot. Tom does not send a tie to Jen, so there is not a geodesic from Tom to Jen. This is the same for Leaf to Jen. There *is* a geodesic from Jim to Leaf, but Bob is not on it. As a consequence, the total is 4.
 
 Go ahead and compute the betweenness scores for the rest of the nodes in the network. You should get this:
 
