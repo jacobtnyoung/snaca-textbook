@@ -489,6 +489,30 @@ grid.arrange( p1s, nullGrob(), p2s, ncol = 3, widths = c( 1, 0.2, 1 ) )
 
 ```
 
+### Mean Closeness
+
+We can examine the summary statistics for closeness centrality by inspecting the **mean**. The average closeness is an important property of a network. *Why? What does a network with a high average closeness look like? A low average closeness?*
+
+The mean closeness for an undirected network is:
+
+$$\bar C_C =  \dfrac{\sum\limits_{i=1}^g C_C(n_i)}{g}$$
+
+This equation, $\dfrac{\sum\limits_{i=1}^g C_C(n_i)}{g}$, just says to sum up the closeness scores for each node and then divide by the number of nodes, *g*.
+
+What is the mean closeness for our example network? We can pull these from the table above:
+
+| Node | Distance |  Closeness  |
+|:----:|:--------:|:-----------:|
+| Jen  |    9     | 1/9 = 0.111 |
+| Tom  |    6     | 1/6 = 0.167 |
+| Bob  |    5     | 1/5 = 0.200 |
+| Leaf |    7     | 1/7 = 0.143 |
+| Jim  |    7     | 1/7 = 0.143 |
+
+$$\bar C_C =  \dfrac{\sum\limits_{i=1}^g C_C(n_i)}{g} = \dfrac{0.111 + 0.167 + 0.200 + 0.143 + 0.143}{5} = \dfrac{0.764}{5} = 0.153$$ The average closeness for this graph is 0.153. In other words, on average, a node has a closeness score of 0.153. But what does this mean?
+
+One way to interpret this score is to convert the score to a distance. We can do this be taking 1 as the numerator and our mean closeness score as the denominator: $$\dfrac{1}{0.153} = 6.536$$, which tells us that the average node is 6.5 links away from all the other nodes in the graph. 
+
 ### Closeness Centralization
 
 In the prior chapter we discussed *graph centralization*, which measures the extent to which the nodes in a network differ from one another in their individual centrality scores. Put differently, how much variation is there in the distribution of centrality scores? As with degree centralization, we can calculate the closeness centralization of the graph. A key difference, however, is that for closeness centralization, we use the standardized closeness score.
@@ -496,7 +520,6 @@ In the prior chapter we discussed *graph centralization*, which measures the ext
 We can calculate closeness centralization as:
 
 $$C_C = \frac{\sum\limits_{i=1}^g[C'_C(n^*)-C'_C(n_i)]}{[(g-2)(g-1)]/(2g-3)}$$
-
 This may look imposing, but we can decompose it to see what it is doing:
 
 -   $C'_C(n^*)$ is the largest standardized closeness score
@@ -527,7 +550,7 @@ Recall our table of standardized closeness scores:
 $$C_C = \frac{\sum\limits_{i=1}^g[0.800-C'_C(n_i)]}{[(5-2)(5-1)]/(2*5-3)}$$
 
 | Node | Distance |  Closeness  | Standardized Closeness | Deviations of Standardized Closeness $0.800-C'_C(n_i)$ |
-|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
+|:---------:|:---------:|:---------:|:---------:|:---------------------------:|
 | Jen  |    9     | 1/9 = 0.111 |    0.111\*4 = 0.444    |                 0.800 - 0.444 = 0.356                  |
 | Tom  |    6     | 1/6 = 0.167 |    0.167\*4 = 0.668    |                 0.800 - 0.668 = 0.132                  |
 | Bob  |    5     | 1/5 = 0.200 |    0.200\*4 = 0.800    |                 0.800 - 0.800 = 0.000                  |
@@ -841,6 +864,30 @@ $$C'_C(n_i) = [\sum\limits_{j=1}^g d(n_i,n_j)]^{-1} \times [g-1]$$
 | Bob  |    2     | 1/2 = 0.500 |    0.500\*4 = 0.200    |
 | Leaf |    2     | 1/2 = 0.500 |    0.500\*4 = 0.200    |
 | Jim  |    2     | 1/2 = 0.500 |    0.500\*4 = 0.200    |
+
+### Mean Clonessness
+
+As we did above for an undirected graph, we can examine the average closeness for a directed graph, as this is an important property of a network. *Why? What does a network with a high average closeness look like? A low average closeness?*
+
+The mean closeness for an directed network is:
+
+$$\bar C_C =  \dfrac{\sum\limits_{i=1}^g C_C(n_i)}{g}$$
+
+This equation, $\dfrac{\sum\limits_{i=1}^g C_C(n_i)}{g}$, just says to sum up the closeness scores for each node and then divide by the number of nodes, *g*.
+
+What is the mean closeness for our example network? We can pull these from the table above:
+
+| Node | Distance |  Closeness  |
+|:----:|:--------:|:-----------:|
+| Jen  |    9     | 1/9 = 0.111 |
+| Tom  |    5     | 1/5 = 0.200 |
+| Bob  |    2     | 1/2 = 0.500 |
+| Leaf |    2     | 1/2 = 0.500 |
+| Jim  |    2     | 1/2 = 0.500 |
+
+$$\bar C_C =  \dfrac{\sum\limits_{i=1}^g C_C(n_i)}{g} = \dfrac{0.111 + 0.200 + 0.500 + 0.500 + 0.500}{5} = \dfrac{1.811}{5} = 0.362$$ The average closeness for this graph is 0.362. In other words, on average, a node has a closeness score of 0.362. But what does this mean?
+
+Again, one way to interpret this score is to convert the score to a distance. We can do this be taking 1 as the numerator and our mean closeness score as the denominator: $$\dfrac{1}{0.362} = 2.762$$, which tells us that the average node is nearly links away from all the other nodes in the graph. 
 
 ### Indegree
 
