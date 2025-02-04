@@ -216,6 +216,7 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#betweenness-centrality" id="toc-betweenness-centrality" class="nav-link" data-scroll-target="#betweenness-centrality">Betweenness Centrality</a></li>
   <li><a href="#standardization" id="toc-standardization" class="nav-link" data-scroll-target="#standardization">Standardization</a></li>
+  <li><a href="#mean-betweenness" id="toc-mean-betweenness" class="nav-link" data-scroll-target="#mean-betweenness">Mean Betweenness</a></li>
   <li><a href="#betweenness-centralization" id="toc-betweenness-centralization" class="nav-link" data-scroll-target="#betweenness-centralization">Betweenness Centralization</a></li>
   </ul></li>
   <li><a href="#directed-graphs" id="toc-directed-graphs" class="nav-link" data-scroll-target="#directed-graphs">Directed Graphs</a>
@@ -1004,6 +1005,51 @@ div.csl-indent {
 </tbody>
 </table>
 </section>
+<section id="mean-betweenness" class="level3">
+<h3 class="anchored" data-anchor-id="mean-betweenness">Mean Betweenness</h3>
+<p>We can examine the summary statistics for betweenness centrality by inspecting the <strong>mean</strong>. The average betweenness is an important property of a network. <em>Why? What does a network with a high average betweenness look like? A low average closeness?</em></p>
+<p>The mean betweenness for an undirected network is:</p>
+<p><span class="math display">\[\bar C_B =  \dfrac{\sum\limits_{i=1}^g C_B(n_i)}{g}\]</span></p>
+<p>This equation, <span class="math inline">\(\dfrac{\sum\limits_{i=1}^g C_B(n_i)}{g}\)</span>, just says to sum up the betweeness scores for each node and then divide by the number of nodes, <em>g</em>.</p>
+<p>What is the mean betweenness for our example network? We can pull these from the table above:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Node</th>
+<th style="text-align: center;">Betweenness</th>
+<th style="text-align: center;">Standardized Betweenness</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Jen</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0 / 6 = 0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Tom</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">3 / 6 = 0.500</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Bob</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">4 / 6 = 0.667</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Leaf</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0 / 6 = 0.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Jim</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0 / 6 = 0.000</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math display">\[\bar C_B =  \dfrac{\sum\limits_{i=1}^g C_B(n_i)}{g} = \dfrac{0 + 3 + 4 + 0 + 0}{5} = \dfrac{7}{5} = 1.4\]</span> The average betweenness for this graph is 1.4, which tells us that the average node occupies just over 1 path which other nodes have to go through.</p>
+</section>
 <section id="betweenness-centralization" class="level3">
 <h3 class="anchored" data-anchor-id="betweenness-centralization">Betweenness Centralization</h3>
 <p>As we did with <em>degree centralization</em> and <em>closeness centralization</em>, we can calculate the betweenness centralization of the graph. Recall that centralization measures the extent to which the nodes in a social network differ from one another in their individual centrality scores. Put differently, how much variation is there in the distribution of centrality scores? As with closeness centralization, we use the <em>standardized</em> betweenness score (as opposed to the <em>raw</em> score).</p>
@@ -1356,7 +1402,7 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<p><em>Why are there no geodesics in the lower portion of the table?</em> Take a look at the plot. Can Tom does not send a tie to Jen, so there is not a geodesic from Tom to Jen. This is the same for Leaf to Jen. There <em>is</em> a geodesic from Jim to Leaf, but Bob is not on it. As a consequence, the total is 4.</p>
+<p><em>Why are there no geodesics in the lower portion of the table?</em> Take a look at the plot. Tom does not send a tie to Jen, so there is not a geodesic from Tom to Jen. This is the same for Leaf to Jen. There <em>is</em> a geodesic from Jim to Leaf, but Bob is not on it. As a consequence, the total is 4.</p>
 <p>Go ahead and compute the betweenness scores for the rest of the nodes in the network. You should get this:</p>
 <table class="table">
 <thead>

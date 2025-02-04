@@ -218,11 +218,13 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#closeness-centrality" id="toc-closeness-centrality" class="nav-link" data-scroll-target="#closeness-centrality">Closeness Centrality</a></li>
   <li><a href="#standardization" id="toc-standardization" class="nav-link" data-scroll-target="#standardization">Standardization</a></li>
+  <li><a href="#mean-closeness" id="toc-mean-closeness" class="nav-link" data-scroll-target="#mean-closeness">Mean Closeness</a></li>
   <li><a href="#closeness-centralization" id="toc-closeness-centralization" class="nav-link" data-scroll-target="#closeness-centralization">Closeness Centralization</a></li>
   </ul></li>
   <li><a href="#directed-graphs" id="toc-directed-graphs" class="nav-link" data-scroll-target="#directed-graphs">Directed Graphs</a>
   <ul class="collapse">
   <li><a href="#outdegree" id="toc-outdegree" class="nav-link" data-scroll-target="#outdegree">Outdegree</a></li>
+  <li><a href="#mean-clonessness" id="toc-mean-clonessness" class="nav-link" data-scroll-target="#mean-clonessness">Mean Clonessness</a></li>
   <li><a href="#indegree" id="toc-indegree" class="nav-link" data-scroll-target="#indegree">Indegree</a></li>
   <li><a href="#conversion-to-undirected-graph" id="toc-conversion-to-undirected-graph" class="nav-link" data-scroll-target="#conversion-to-undirected-graph">Conversion to Undirected Graph</a></li>
   <li><a href="#closeness-centralization-1" id="toc-closeness-centralization-1" class="nav-link" data-scroll-target="#closeness-centralization-1">Closeness Centralization</a></li>
@@ -456,12 +458,57 @@ div.csl-indent {
 </div>
 </div>
 </section>
+<section id="mean-closeness" class="level3">
+<h3 class="anchored" data-anchor-id="mean-closeness">Mean Closeness</h3>
+<p>We can examine the summary statistics for closeness centrality by inspecting the <strong>mean</strong>. The average closeness is an important property of a network. <em>Why? What does a network with a high average closeness look like? A low average closeness?</em></p>
+<p>The mean closeness for an undirected network is:</p>
+<p><span class="math display">\[\bar C_C =  \dfrac{\sum\limits_{i=1}^g C_C(n_i)}{g}\]</span></p>
+<p>This equation, <span class="math inline">\(\dfrac{\sum\limits_{i=1}^g C_C(n_i)}{g}\)</span>, just says to sum up the closeness scores for each node and then divide by the number of nodes, <em>g</em>.</p>
+<p>What is the mean closeness for our example network? We can pull these from the table above:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Node</th>
+<th style="text-align: center;">Distance</th>
+<th style="text-align: center;">Closeness</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Jen</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">1/9 = 0.111</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Tom</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">1/6 = 0.167</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Bob</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1/5 = 0.200</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Leaf</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">1/7 = 0.143</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Jim</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">1/7 = 0.143</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math display">\[\bar C_C =  \dfrac{\sum\limits_{i=1}^g C_C(n_i)}{g} = \dfrac{0.111 + 0.167 + 0.200 + 0.143 + 0.143}{5} = \dfrac{0.764}{5} = 0.153\]</span> The average closeness for this graph is 0.153. In other words, on average, a node has a closeness score of 0.153. But what does this mean?</p>
+<p>One way to interpret this score is to convert the score to a distance. We can do this be taking 1 as the numerator and our mean closeness score as the denominator: <span class="math display">\[\dfrac{1}{0.153} = 6.536\]</span>, which tells us that the average node is 6.5 links away from all the other nodes in the graph.</p>
+</section>
 <section id="closeness-centralization" class="level3">
 <h3 class="anchored" data-anchor-id="closeness-centralization">Closeness Centralization</h3>
 <p>In the prior chapter we discussed <em>graph centralization</em>, which measures the extent to which the nodes in a network differ from one another in their individual centrality scores. Put differently, how much variation is there in the distribution of centrality scores? As with degree centralization, we can calculate the closeness centralization of the graph. A key difference, however, is that for closeness centralization, we use the standardized closeness score.</p>
 <p>We can calculate closeness centralization as:</p>
-<p><span class="math display">\[C_C = \frac{\sum\limits_{i=1}^g[C'_C(n^*)-C'_C(n_i)]}{[(g-2)(g-1)]/(2g-3)}\]</span></p>
-<p>This may look imposing, but we can decompose it to see what it is doing:</p>
+<p><span class="math display">\[C_C = \frac{\sum\limits_{i=1}^g[C'_C(n^*)-C'_C(n_i)]}{[(g-2)(g-1)]/(2g-3)}\]</span> This may look imposing, but we can decompose it to see what it is doing:</p>
 <ul>
 <li><span class="math inline">\(C'_C(n^*)\)</span> is the largest standardized closeness score</li>
 <li><span class="math inline">\(C'_C(n_i)\)</span> is the standardized closeness score for node <em>i</em></li>
@@ -525,11 +572,11 @@ div.csl-indent {
 <p><span class="math display">\[C_C = \frac{\sum\limits_{i=1}^g[0.800-C'_C(n_i)]}{[(5-2)(5-1)]/(2*5-3)}\]</span></p>
 <table class="table">
 <colgroup>
-<col style="width: 5%">
-<col style="width: 9%">
-<col style="width: 11%">
-<col style="width: 22%">
-<col style="width: 51%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 39%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -762,6 +809,52 @@ div.csl-indent {
 </tbody>
 </table>
 </section>
+</section>
+<section id="mean-clonessness" class="level3">
+<h3 class="anchored" data-anchor-id="mean-clonessness">Mean Clonessness</h3>
+<p>As we did above for an undirected graph, we can examine the average closeness for a directed graph, as this is an important property of a network. <em>Why? What does a network with a high average closeness look like? A low average closeness?</em></p>
+<p>The mean closeness for an directed network is:</p>
+<p><span class="math display">\[\bar C_C =  \dfrac{\sum\limits_{i=1}^g C_C(n_i)}{g}\]</span></p>
+<p>This equation, <span class="math inline">\(\dfrac{\sum\limits_{i=1}^g C_C(n_i)}{g}\)</span>, just says to sum up the closeness scores for each node and then divide by the number of nodes, <em>g</em>.</p>
+<p>What is the mean closeness for our example network? We can pull these from the table above:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Node</th>
+<th style="text-align: center;">Distance</th>
+<th style="text-align: center;">Closeness</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Jen</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">1/9 = 0.111</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Tom</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1/5 = 0.200</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Bob</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1/2 = 0.500</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Leaf</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1/2 = 0.500</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Jim</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1/2 = 0.500</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math display">\[\bar C_C =  \dfrac{\sum\limits_{i=1}^g C_C(n_i)}{g} = \dfrac{0.111 + 0.200 + 0.500 + 0.500 + 0.500}{5} = \dfrac{1.811}{5} = 0.362\]</span> The average closeness for this graph is 0.362. In other words, on average, a node has a closeness score of 0.362. But what does this mean?</p>
+<p>Again, one way to interpret this score is to convert the score to a distance. We can do this be taking 1 as the numerator and our mean closeness score as the denominator: <span class="math display">\[\dfrac{1}{0.362} = 2.762\]</span>, which tells us that the average node is nearly links away from all the other nodes in the graph.</p>
 </section>
 <section id="indegree" class="level3">
 <h3 class="anchored" data-anchor-id="indegree">Indegree</h3>
