@@ -338,7 +338,7 @@ And recall our raw scores:
 -   Leaf = 2
 -   Jim = 2
 
-Bob has the largest degree at 3. This means that $C_D(n^*) = 5$. Finally, recall that $g = 5$ since we have 5 nodes.
+Bob has the largest degree at 3. This means that $C_D(n^*) = 3$. Finally, recall that $g = 5$ since we have 5 nodes.
 
 Now, all we have to do is plug in the values:
 
