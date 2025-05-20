@@ -8,7 +8,7 @@
 
 <meta name="author" content="Jacob T.N. Young">
 
-<title>Social Network Analysis for Crime Analysts</title>
+<title>Network Theory and Theory of Networks – Social Network Analysis for Crime Analysts</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -51,7 +51,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./snaca-introduction.html" rel="next">
+<link href="./snaca-methods.html" rel="next">
+<link href="./snaca-introduction.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -101,7 +102,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./snaca-theory.html">Network Theory and Theory of Networks</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -136,7 +137,7 @@ div.csl-indent {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
@@ -148,7 +149,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./snaca-theory.html" class="sidebar-item-text sidebar-link">
+  <a href="./snaca-theory.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Network Theory and Theory of Networks</span></a>
   </div>
 </li>
@@ -216,7 +217,18 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a></li>
+  <li><a href="#organizing-knowledge" id="toc-organizing-knowledge" class="nav-link active" data-scroll-target="#organizing-knowledge">Organizing Knowledge</a></li>
+  <li><a href="#mechanisms-in-network-theory" id="toc-mechanisms-in-network-theory" class="nav-link" data-scroll-target="#mechanisms-in-network-theory">Mechanisms in Network Theory</a>
+  <ul class="collapse">
+  <li><a href="#capitalization" id="toc-capitalization" class="nav-link" data-scroll-target="#capitalization">Capitalization</a></li>
+  <li><a href="#contagion" id="toc-contagion" class="nav-link" data-scroll-target="#contagion">Contagion</a></li>
+  <li><a href="#cooperation" id="toc-cooperation" class="nav-link" data-scroll-target="#cooperation">Cooperation</a></li>
+  <li><a href="#convergence" id="toc-convergence" class="nav-link" data-scroll-target="#convergence">Convergence</a></li>
+  <li><a href="#theories-of-networks" id="toc-theories-of-networks" class="nav-link" data-scroll-target="#theories-of-networks">Theories of Networks</a></li>
+  </ul></li>
+  <li><a href="#putting-it-all-together" id="toc-putting-it-all-together" class="nav-link" data-scroll-target="#putting-it-all-together">Putting it all together</a></li>
+  <li><a href="#test-your-knowledge" id="toc-test-your-knowledge" class="nav-link" data-scroll-target="#test-your-knowledge">Test Your Knowledge</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jacobtnyoung/snaca-textbook/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -225,7 +237,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Social Network Analysis for Crime Analysts</h1>
+<h1 class="title">Network Theory and Theory of Networks</h1>
 </div>
 
 
@@ -242,31 +254,141 @@ div.csl-indent {
 </header>
 
 
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered">Preface</h1>
-<p>In 2011, law enforcement agencies in the United States faced mounting pressure to dismantle a sprawling drug trafficking operation that spanned multiple cities and involved various criminal subgroups. Traditional investigative methods, such as surveillance and wiretaps, had led to dozens of arrests, but the core leadership of the network remained insulated and elusive. With the organization’s adaptability and ability to replace arrested members, authorities struggled to make meaningful headway. This criminal enterprise, structured in decentralized cells, continued to thrive by exploiting its hidden communication channels and relying on intermediaries to shield the leaders from direct exposure.</p>
-<p>Recognizing the limitations of conventional approaches, investigators turned to social network analysis (SNA) to map out the complex web of relationships within the organization. Using SNA, they were able to identify not just the individuals who were visible through direct criminal activities but also those who occupied critical structural positions within the network. SNA revealed that a handful of individuals, who had previously appeared minor in traditional investigations, were in fact <em>brokers</em> who facilitated communication between isolated cells and the core leadership. These brokers operated at the intersection of different subgroups, acting as the glue that held the organization together <span class="citation" data-cites="Morselli2009">(<a href="references.html#ref-Morselli2009" role="doc-biblioref">Morselli 2009</a>)</span>. By strategically targeting these brokers, law enforcement disrupted key communication pathways and destabilized the network. The arrest of these intermediaries created confusion within the organization and led to further information leaks, ultimately exposing the previously hidden leadership structure. Authorities were able to make high-profile arrests, effectively crippling the operation <span class="citation" data-cites="malm2011using">(<a href="references.html#ref-malm2011using" role="doc-biblioref">Malm and Bichler 2011</a>)</span>.</p>
-<p>This case exemplified the power of SNA to reveal otherwise invisible roles and relationships within criminal organizations, offering law enforcement a data-driven approach to strategically dismantling large-scale criminal enterprises. In today’s increasingly interconnected world, the study of social networks has become an essential tool for understanding crime. Why? Crime does not happen in isolation. Individuals involved in criminal activities are often embedded within broader social networks that can influence and even facilitate their behaviors. By understanding these networks, crime analysts can uncover hidden relationships between individuals, identify key players, and predict the movement of illicit information or resources. SNA encompasses a powerful set of tools (both theoretical and analytical) that help analysts move beyond simply tracking individual offenders to mapping the structures that support criminal behavior. This shift from a focus on individual actors to the entire system allows for a more nuanced understanding of how crime operates in communities and institutions, facilitates positive impacts on criminal apprehension, crime reduction, and long-term prevention efforts.</p>
-<p>But SNA is not limited to analysts working within a law enforcement context. On the contrary, SNA has applicability to multiple problems faced across a variety of criminal justice agencies:</p>
+<p>In the prior chapter, we reviewed why social network analysis is a valuable part of the crime analyst’s toolkit by introducing the logic of <em>network science</em> to help you think about research problems through a network lens. We then examined some of the building blocks of network analysis to get at the question of “what networks look like”. In this chapter, we want to spend more time examining how <em>theory</em> operates in projects conducted from a network perspective.</p>
 <ul>
-<li><p><strong>Prisons</strong>: Inside prisons, social networks influence everything from inmate behavior to contraband smuggling and gang activity. SNA helps identify inmate leaders, those at risk of victimization, and potential sources of conflict. Understanding these dynamics can improve safety and reduce violence.</p></li>
-<li><p><strong>Probation and Parole Officers</strong>: SNA can help officers understand the social networks of individuals on supervision, which may include influences that either support or undermine rehabilitation. By identifying pro-social networks, officers can encourage engagement with positive social influences, while also identifying risk factors related to recidivism, such as association with former criminal peers.</p></li>
-<li><p><strong>Prosecutors Defense Attorneys, and Judges</strong>: SNA can be used in building cases, particularly in conspiracy or organized crime prosecutions. It helps prosecutors demonstrate the relationships and communication patterns between co-conspirators, providing clearer evidence of a criminal enterprise or joint activity. For defense attorneys, SNA can be used to identify alternative explanations for their client’s involvement in a criminal network or to challenge the prosecution’s portrayal of their client’s role. If the client is not a central figure in the network, this could be used to argue for lesser charges or reduced sentences. Finally, judges can use SNA to help understand a defendant’s social network and can provide insights into the likelihood of recidivism or flight risk.</p></li>
-<li><p><strong>Policy Makers and Criminal Justice Reform Advocates</strong>: Policy makers can use SNA to understand the broader social dynamics that contribute to crime, such as how poverty, unemployment, and social exclusion fuel criminal networks. This can guide the development of crime prevention policies that target root causes and dismantle harmful networks, while promoting pro-social ones.</p></li>
+<li><p>By the end of the chapter, you should be able to answer these questions:</p>
+<ul>
+<li><p>What is the difference between an “explanatory model” and an “explanatory goal”?</p></li>
+<li><p>How is “network theory” different from “theory of networks”?</p></li>
+</ul></li>
 </ul>
 <p><br></p>
-<p>The <a href="https://jacobtnyoung.github.io/snaca-textbook/">Social Network Analysis for Crime Analysts (SNACA)</a> textbook introduces the foundational concepts and techniques of social network analysis, providing a comprehensive framework for crime analysts to apply in their day-to-day work. Whether you are currently working in a criminal justice agency, or plan to do so in the future, the content of this textbook will prepare you to excel in such a role through the application of SNA. You will learn to map out criminal networks and analyze the roles of individuals within them. Through this lens, you will gain the ability to assess which individuals or nodes in a network are most critical to disrupting criminal activities. Moreover, these techniques will allow you to develop targeted strategies for crime and disorder reduction. By focusing on the most influential players within criminal networks, you can maximize the effectiveness of apprehension efforts, creating tangible outcomes that can dismantle harmful networks and reduce violence or other forms of crime in the community.</p>
-<p>Beyond tactical benefits, social network analysis empowers crime analysts to adopt a more preventive approach. By identifying patterns of association and influence within a network, you will be equipped to contribute to crime prevention strategies before criminal behavior escalates. For instance, by identifying vulnerable individuals on the periphery of a network, you can help law enforcement intervene early to redirect them away from criminal pathways. Additionally, the evaluation skills you gain will help you measure the effectiveness of these interventions, ensuring that existing strategies evolve to meet the unique challenges of crime and disorder. By the end, you will be well-prepared to make a meaningful contribution to criminal apprehension, crime and disorder reduction, prevention strategies, and the ongoing evaluation of those efforts.</p>
-<p>This textbook is designed to introduce you to basic concepts used in SNA. The textbook is divided into chapters that cover a variety of these concepts. At the end of each chapter is a “Test your Knowledge” section that includes questions to determine whether you feel comfortable discussing the material. I would encourage you to think through these prompts after you read the chapter, but also come back to them occasionally to refresh your memory. The textbook is not exhaustive, but most of the major topics are discussed.</p>
-<p>For those readers who are new to SNA, I would suggest starting at the beginning and working through in chronological order. For those readers who are already familiar with SNA, feel free to skip through the chapters.</p>
+<section id="organizing-knowledge" class="level2">
+<h2 class="anchored" data-anchor-id="organizing-knowledge">Organizing Knowledge</h2>
+<p>As discussed in the <a href="snaca-introduction.html">introductory chapter</a>, network science takes <strong>relational structures</strong> as the primary domain of interest. In so doing, research questions take the following forms:</p>
+<ul>
+<li>How does the network matter?
+<ul>
+<li>Here the network is an <em>independent variable</em>. In the case above, the network of shared incidents was an independent variable that influenced views of body-worn cameras.</li>
+</ul></li>
+<li>What affects the network?
+<ul>
+<li>Here, the network is a <em>dependent variable</em>. Do younger individuals who are involved in crime have more co-offenders?</li>
+</ul></li>
+</ul>
+<p>Building from this, we can think about organizing social network analyses around the following general classification of ideas:</p>
+<ul>
+<li>Network Theories (networks as “cause”)</li>
+<li>Theories of Networks (networks as “effect”)</li>
+</ul>
+<p>We can further classify studies based on the <strong>Explanatory Model</strong> (what is the metaphor for the network?) and the <strong>Explanatory Goal</strong> (what are we trying to explain?).</p>
+<p>The Explanatory model differentiates between two different metaphors for what networks do: <em>flow</em> (where “stuff” flows through a network like a pipe) and <em>coordination</em> (network ties are like bonds in that they coordinate action)</p>
+<p>The Explanatory goal differentiates between what we are trying to understand: <em>social capital/performance</em> (what are the benefits of a position? How does it render advantage?), <em>homogeneity</em> (why are nodes similar?), and <em>network structure</em> (why is the network like this?).</p>
+<p>These dimensions give as a 2x3 table where to better classify studies:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/network-theory-table.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We just covered A LOT of terminology and jargon. Let’s unpack each of these and work through an example.</p>
+</section>
+<section id="mechanisms-in-network-theory" class="level2">
+<h2 class="anchored" data-anchor-id="mechanisms-in-network-theory">Mechanisms in Network Theory</h2>
+<section id="capitalization" class="level3">
+<h3 class="anchored" data-anchor-id="capitalization">Capitalization</h3>
+<p>Model: Flow<br>
+Goal: Social Capital/Performance</p>
+<p>This mechanism explains the benefits of social ties as providing resources. That is, individuals are able to capitalize on their ties, and this produces variation in resources. For example, consider the question: why do some individuals avoid recidivism upon reentry into the community after incarceration? Research on desistance highlights the critical role of social support systems in this process. Individuals who can draw on a diverse set of resources—such as employment opportunities, housing, and emotional support—from their social networks are better positioned to navigate the challenges of life post-release. A study by <span class="citation" data-cites="visher2003transitions">Visher and Travis (<a href="references.html#ref-visher2003transitions" role="doc-biblioref">2003</a>)</span> found that those with strong, positive social ties, particularly to family and community organizations, were less likely to reoffend, as these connections facilitated access to essential resources and a sense of stability during the reintegration process. Put differently, resources flow through these relationships producing differences in individuals’ experiences with reentry.</p>
+</section>
+<section id="contagion" class="level3">
+<h3 class="anchored" data-anchor-id="contagion">Contagion</h3>
+<p>Model: Flow<br>
+Goal: Homogeneity</p>
+<p>This mechanism explains homogeneity among nodes as the result of an “infection” process. That is, individuals become similar due to their exposure within their social network. For example, consider the question: why do some individuals become victims of gun violence? Research suggests that exposure to specific behavioral environments significantly increases the risk of gun violence victimization. In particular, individuals who are embedded in networks with others who have been victims of gun violence are more likely to become victims themselves. This phenomenon can be understood in epidemiological terms, where violence spreads through networks much like a contagious disease. <span class="citation" data-cites="papachristos2015tragic">Papachristos, Wildeman, and Roberto (<a href="references.html#ref-papachristos2015tragic" role="doc-biblioref">2015</a>)</span> found that individuals’ proximity to others who have been shot dramatically increases their own likelihood of becoming a victim, illustrating the “social contagion” model of gun violence. That is, these individuals become similar (in this case victimization experience) due to the flow of violence through their network.</p>
+</section>
+<section id="cooperation" class="level3">
+<h3 class="anchored" data-anchor-id="cooperation">Cooperation</h3>
+<p>Model: Coordination<br>
+Goal: Social Capital/Performance</p>
+<p>Ties facilitate coordination to solve collective problems. For example, why can some groups effectively enforce norms? According to <span class="citation" data-cites="coleman1990foundations">Coleman (<a href="references.html#ref-coleman1990foundations" role="doc-biblioref">1990</a>)</span>, network closure strengthens group identity and distributes the costs of sanctioning, allowing groups with these properties to maintain social control. In the context of crime, <span class="citation" data-cites="papachristos2009murder">Papachristos (<a href="references.html#ref-papachristos2009murder" role="doc-biblioref">2009</a>)</span> argues that criminal groups, such as gangs, can enforce norms and regulate violence within their territories through network closure and strong internal ties. These groups rely on social capital built from dense, closed networks, which allows them to effectively coordinate behaviors, sanction rule-breakers, and maintain order within their communities.</p>
+</section>
+<section id="convergence" class="level3">
+<h3 class="anchored" data-anchor-id="convergence">Convergence</h3>
+<p>Model: Coordination<br>
+Goal: Homogeneity</p>
+<p>Nodes respond to or adapt to their environment, and homogeneity is often a consequence of this structural similarity. For example, who is most likely to engage in relational violence? Research suggests that adolescents in the middle of the friendship hierarchy (not at the top or bottom) are more likely to engage in relational violence as a way to maintain their social position and navigate the hierarchy. <span class="citation" data-cites="faris2011status">Faris and Felmlee (<a href="references.html#ref-faris2011status" role="doc-biblioref">2011</a>)</span> found that adolescents in these middle positions tend to engage in aggressive behaviors like bullying or relational violence to protect or improve their social standing. Similarly, in gang networks, mid-ranking members—those not at the top of the leadership structure but not at the bottom—are often the ones most likely to engage in violent behaviors. According to <span class="citation" data-cites="densley2012hierarchy">Densley (<a href="references.html#ref-densley2012hierarchy" role="doc-biblioref">2012</a>)</span>, gang members in this mid-tier position often use violence as a strategy to solidify their standing within the group and prove their loyalty to more senior members, thereby navigating the social hierarchy within the gang.</p>
+</section>
+<section id="theories-of-networks" class="level3">
+<h3 class="anchored" data-anchor-id="theories-of-networks">Theories of Networks</h3>
+<p><strong>Network Theory</strong> focuses on networks as an <em>independent</em> variable, where the network matters for some outcome. However, many studies focus on the network itself as a <em>dependent</em> variable, seeking to understand why a network structure exists as it does and/or how it may change as a consequence of some variable (e.g.&nbsp;an intervention). These studies usually adopt one of the metaphors (i.e.&nbsp;network flow or network coordination) to address the question, “why is the network this way?” For example, <span class="citation" data-cites="bright2013evolution">Bright and Delaney (<a href="references.html#ref-bright2013evolution" role="doc-biblioref">2013</a>)</span> examine the evolution of a drug trafficking network, analyzing how its structure and function shifted as a result of external pressures such as law enforcement interventions. In this example, the network’s evolution is treated as the dependent variable, highlighting the impact of these forces on its adaptability and resilience. Similarly, <span class="citation" data-cites="rostami2015complexity">Rostami and Mondani (<a href="references.html#ref-rostami2015complexity" role="doc-biblioref">2015</a>)</span> focus on the complexity of crime network data, investigating how network structure, centrality, and cohesiveness change over time. They also consider how interventions, such as law enforcement actions, influence these changes. Both studies illustrate how thinking of the network as a <em>dependent</em> variable offers valuable insights into the adaptability and transformation of networks under various pressures, emphasizing the role of external interventions in shaping network dynamics.</p>
+</section>
+</section>
+<section id="putting-it-all-together" class="level2">
+<h2 class="anchored" data-anchor-id="putting-it-all-together">Putting it all together</h2>
+<p>The table below summarizes the major approaches to organizing social network analyses:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/network-theory-table.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="test-your-knowledge" class="level2">
+<h2 class="anchored" data-anchor-id="test-your-knowledge">Test Your Knowledge</h2>
+<ul>
+<li><p>In a few words, how would you describe the difference between “network theories” and “theories of networks”?</p></li>
+<li><p>Think of a study examining criminal networks. What is the explanatory “model”? What is the explanatory “goal”?</p></li>
+<li><p>In a study by <span class="citation" data-cites="carley2002destabilizing">Carley, Lee, and Krackhardt (<a href="references.html#ref-carley2002destabilizing" role="doc-biblioref">2002</a>)</span>, the authors examined the structure and evolution of the Al Qaeda terrorist network. They identified key nodes and relationships within the network, showing how the removal of certain individuals would impact the network’s operational efficiency and adaptability. What are the metaphor(s) used in this example?</p></li>
+<li><p><span class="citation" data-cites="walker2019misconduct">Walker, Wasserman, and Wellman (<a href="references.html#ref-walker2019misconduct" role="doc-biblioref">2019</a>)</span>, examined how social networks of police officers influenced patterns of misconduct in the Chicago Police Department. They found that officers who were connected to others with histories of misconduct were more likely to engage in similar behavior, demonstrating how network ties can perpetuate unethical practices within law enforcement. What are the metaphor(s) used in this example?</p></li>
+<li><p>What is the ‘social contagion’ model of gun violence, and how does it explain victimization patterns?</p></li>
+<li><p>How does the hierarchical position of individuals within social networks influence their likelihood of engaging in violence, such as in gang networks?</p></li>
+<li><p>How can external pressures, such as law enforcement interventions, impact the structure and adaptability of criminal networks over time?</p></li>
+</ul>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>In this chapter we focused on the role of <strong>theory</strong> in understanding networks. Specifically, we distinguished between “network theories” (which consider networks as a cause) and “theories of networks” (which view networks as an effect). Studies can be classified based on their explanatory model (how networks operate, such as flow or coordination) and their explanatory goal (what the study aims to explain, like social capital or homogeneity). Mechanisms like capitalization, contagion, cooperation, and convergence further explain how networks function in various contexts, such as criminal behavior and social control.</p>
+<p>In the next chapter, we will examine how network data are collected.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-malm2011using" class="csl-entry" role="listitem">
-Malm, Aili, and Gisela Bichler. 2011. <span>“Using Friends for Money: The Positional Importance of Money-Launderers in Organized Crime.”</span> <em>Trends in Organized Crime</em> 14 (4): 272–93.
+<div id="ref-bright2013evolution" class="csl-entry" role="listitem">
+Bright, David A, and JJ Delaney. 2013. <span>“Evolution of a Drug Trafficking Network: Mapping Changes in Network Structure and Function Across Time.”</span> <em>Global Crime</em> 14 (2-3): 238–60.
 </div>
-<div id="ref-Morselli2009" class="csl-entry" role="listitem">
-Morselli, Carlo. 2009. <em>Inside Criminal Networks</em>. New York: Springer.
+<div id="ref-carley2002destabilizing" class="csl-entry" role="listitem">
+Carley, Kathleen M, Ju-Sung Lee, and David Krackhardt. 2002. <span>“Destabilizing Dynamic Covert Networks.”</span> <em>Proceedings of the 8th International Command and Control Research and Technology Symposium</em>, 1–10.
+</div>
+<div id="ref-coleman1990foundations" class="csl-entry" role="listitem">
+Coleman, James S. 1990. <em>Foundations of Social Theory</em>. Cambridge, MA: Harvard University Press.
+</div>
+<div id="ref-densley2012hierarchy" class="csl-entry" role="listitem">
+Densley, James A. 2012. <span>“The Organisation of London’s Street Gangs.”</span> <em>Global Crime</em> 13 (1): 42–64.
+</div>
+<div id="ref-faris2011status" class="csl-entry" role="listitem">
+Faris, Robert, and Diane Felmlee. 2011. <span>“Status Struggles: Network Centrality and Gender Segregation in Same- and Cross-Gender Aggression.”</span> <em>American Sociological Review</em> 76 (1): 48–73.
+</div>
+<div id="ref-papachristos2009murder" class="csl-entry" role="listitem">
+Papachristos, Andrew V. 2009. <span>“Murder by Structure: Dominance Relations and the Social Structure of Gang Homicide.”</span> <em>American Journal of Sociology</em> 115 (1): 74–128.
+</div>
+<div id="ref-papachristos2015tragic" class="csl-entry" role="listitem">
+Papachristos, Andrew V., Christopher Wildeman, and Elizabeth Roberto. 2015. <span>“Tragic, but Not Random: The Social Contagion of Nonfatal Gunshot Injuries.”</span> <em>Social Science &amp; Medicine</em> 125: 139–50.
+</div>
+<div id="ref-rostami2015complexity" class="csl-entry" role="listitem">
+Rostami, Amir, and Hernan Mondani. 2015. <span>“The Complexity of Crime Network Data: A Case Study of Its Consequences for Crime Control and the Study of Networks.”</span> <em>PLOS ONE</em> 10 (3): e0119309.
+</div>
+<div id="ref-visher2003transitions" class="csl-entry" role="listitem">
+Visher, Christy A., and Jeremy Travis. 2003. <span>“Transitions from Prison to Community: Understanding Individual Pathways.”</span> <em>Annual Review of Sociology</em> 29: 89–113.
+</div>
+<div id="ref-walker2019misconduct" class="csl-entry" role="listitem">
+Walker, Samuel, Stanley Wasserman, and Barry Wellman. 2019. <span>“The Small World of Misconduct: Network Analysis of Police Officers’ Complaints and Their Misconduct Networks.”</span> <em>Criminal Justice Review</em> 44 (1): 22–45.
 </div>
 </div>
 </section>
@@ -691,10 +813,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./snaca-introduction.html" class="pagination-link" aria-label="Introduction to Social Network Analysis for Crime Analysts">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introduction to Social Network Analysis for Crime Analysts</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./snaca-introduction.html" class="pagination-link" aria-label="Introduction to Social Network Analysis for Crime Analysts">
-        <span class="nav-page-text">Introduction to Social Network Analysis for Crime Analysts</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./snaca-methods.html" class="pagination-link" aria-label="Network Data Collection">
+        <span class="nav-page-text">Network Data Collection</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

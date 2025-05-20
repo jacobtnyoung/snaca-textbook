@@ -28,13 +28,13 @@ Let's revisit the study by @young2015 discussed in the previous chapter. Recall 
 To answer these questions, @young2015 studied the two-mode network of shared incidents between police officers:
 
 ```{r, fig.cap = "", out.width = "60%"}
-knitr::include_graphics( "images/young-ready-bipartite-figure.jpeg" )
+knitr::include_graphics( "images/young-ready-bipartite-figure.png" )
 ```
 
 To study how police officers' views of body cameras were influenced by those with whom they shared incidents, @young2015 *actually* examined this network:
 
 ```{r, fig.cap = "", out.width = "60%"}
-knitr::include_graphics( "images/young-ready-projection-figure.jpeg" )
+knitr::include_graphics( "images/young-ready-projection-figure.png" )
 ```
 
 In this network, the nodes are police officers and the edges represent shared incidents. The width of the edges represents the number of shared incidents in that wider edges between two nodes mean that more incidents were shared between those nodes. So if two officers have a thick edge connecting them, it means that they were present at multiple incidents at the same time. This network is the "weighted, unipartite projection" of the bipartite graph.

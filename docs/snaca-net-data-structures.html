@@ -8,7 +8,7 @@
 
 <meta name="author" content="Jacob T.N. Young">
 
-<title>Social Network Analysis for Crime Analysts</title>
+<title>Network Data Structures – Social Network Analysis for Crime Analysts</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,27 +21,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -51,7 +31,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./snaca-introduction.html" rel="next">
+<link href="./snaca-net-description.html" rel="next">
+<link href="./snaca-methods.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -89,6 +70,35 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -101,7 +111,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./snaca-net-data-structures.html">Network Data Structures</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -136,7 +146,7 @@ div.csl-indent {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
@@ -160,7 +170,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./snaca-net-data-structures.html" class="sidebar-item-text sidebar-link">
+  <a href="./snaca-net-data-structures.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Network Data Structures</span></a>
   </div>
 </li>
@@ -216,7 +226,17 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a></li>
+  <li><a href="#motivating-problem" id="toc-motivating-problem" class="nav-link active" data-scroll-target="#motivating-problem">Motivating Problem</a>
+  <ul class="collapse">
+  <li><a href="#konigsberg-bridge-problem" id="toc-konigsberg-bridge-problem" class="nav-link" data-scroll-target="#konigsberg-bridge-problem">Konigsberg Bridge Problem</a></li>
+  </ul></li>
+  <li><a href="#graph-notation" id="toc-graph-notation" class="nav-link" data-scroll-target="#graph-notation">Graph Notation</a>
+  <ul class="collapse">
+  <li><a href="#node-sets" id="toc-node-sets" class="nav-link" data-scroll-target="#node-sets">Node Sets</a></li>
+  <li><a href="#adjacency" id="toc-adjacency" class="nav-link" data-scroll-target="#adjacency">Adjacency</a></li>
+  </ul></li>
+  <li><a href="#test-your-knowledge" id="toc-test-your-knowledge" class="nav-link" data-scroll-target="#test-your-knowledge">Test your Knowledge</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jacobtnyoung/snaca-textbook/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -225,7 +245,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Social Network Analysis for Crime Analysts</h1>
+<h1 class="title">Network Data Structures</h1>
 </div>
 
 
@@ -242,33 +262,214 @@ div.csl-indent {
 </header>
 
 
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered">Preface</h1>
-<p>In 2011, law enforcement agencies in the United States faced mounting pressure to dismantle a sprawling drug trafficking operation that spanned multiple cities and involved various criminal subgroups. Traditional investigative methods, such as surveillance and wiretaps, had led to dozens of arrests, but the core leadership of the network remained insulated and elusive. With the organization’s adaptability and ability to replace arrested members, authorities struggled to make meaningful headway. This criminal enterprise, structured in decentralized cells, continued to thrive by exploiting its hidden communication channels and relying on intermediaries to shield the leaders from direct exposure.</p>
-<p>Recognizing the limitations of conventional approaches, investigators turned to social network analysis (SNA) to map out the complex web of relationships within the organization. Using SNA, they were able to identify not just the individuals who were visible through direct criminal activities but also those who occupied critical structural positions within the network. SNA revealed that a handful of individuals, who had previously appeared minor in traditional investigations, were in fact <em>brokers</em> who facilitated communication between isolated cells and the core leadership. These brokers operated at the intersection of different subgroups, acting as the glue that held the organization together <span class="citation" data-cites="Morselli2009">(<a href="references.html#ref-Morselli2009" role="doc-biblioref">Morselli 2009</a>)</span>. By strategically targeting these brokers, law enforcement disrupted key communication pathways and destabilized the network. The arrest of these intermediaries created confusion within the organization and led to further information leaks, ultimately exposing the previously hidden leadership structure. Authorities were able to make high-profile arrests, effectively crippling the operation <span class="citation" data-cites="malm2011using">(<a href="references.html#ref-malm2011using" role="doc-biblioref">Malm and Bichler 2011</a>)</span>.</p>
-<p>This case exemplified the power of SNA to reveal otherwise invisible roles and relationships within criminal organizations, offering law enforcement a data-driven approach to strategically dismantling large-scale criminal enterprises. In today’s increasingly interconnected world, the study of social networks has become an essential tool for understanding crime. Why? Crime does not happen in isolation. Individuals involved in criminal activities are often embedded within broader social networks that can influence and even facilitate their behaviors. By understanding these networks, crime analysts can uncover hidden relationships between individuals, identify key players, and predict the movement of illicit information or resources. SNA encompasses a powerful set of tools (both theoretical and analytical) that help analysts move beyond simply tracking individual offenders to mapping the structures that support criminal behavior. This shift from a focus on individual actors to the entire system allows for a more nuanced understanding of how crime operates in communities and institutions, facilitates positive impacts on criminal apprehension, crime reduction, and long-term prevention efforts.</p>
-<p>But SNA is not limited to analysts working within a law enforcement context. On the contrary, SNA has applicability to multiple problems faced across a variety of criminal justice agencies:</p>
+<section id="motivating-problem" class="level2">
+<h2 class="anchored" data-anchor-id="motivating-problem">Motivating Problem</h2>
+<p>Review the figure below, and consider the following problem: Devise a route in which you could cross all seven bridges.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/konigsberg-bridge-problem.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><em>Now</em>, consider a different problem: Devise a route in which you could cross all seven bridges, <strong>but</strong> crossing each of the seven bridges <u>only once</u>.</p>
+<p><strong>Did you figure it out?</strong></p>
+<section id="konigsberg-bridge-problem" class="level3">
+<h3 class="anchored" data-anchor-id="konigsberg-bridge-problem">Konigsberg Bridge Problem</h3>
+<p>Leonard Euler worked on this problem in the mid-18th century, eventually representing the solution with a set of points and lines. For a great overview of the problem (and some interesting history), check out this <a href="https://www.youtube.com/watch?v=nZwSo4vfw6c">video</a>.</p>
+<p>Recall the discussion from the <a href="snaca-introduction.html">Introduction to Social Network Analysis for Crime Analysts</a> chapter regarding the importance of conceptualization and operationalization in Network Science and how <em>graph theory</em> provides a foundation for operationalizing concepts of interest among network scientists.</p>
 <ul>
-<li><p><strong>Prisons</strong>: Inside prisons, social networks influence everything from inmate behavior to contraband smuggling and gang activity. SNA helps identify inmate leaders, those at risk of victimization, and potential sources of conflict. Understanding these dynamics can improve safety and reduce violence.</p></li>
-<li><p><strong>Probation and Parole Officers</strong>: SNA can help officers understand the social networks of individuals on supervision, which may include influences that either support or undermine rehabilitation. By identifying pro-social networks, officers can encourage engagement with positive social influences, while also identifying risk factors related to recidivism, such as association with former criminal peers.</p></li>
-<li><p><strong>Prosecutors Defense Attorneys, and Judges</strong>: SNA can be used in building cases, particularly in conspiracy or organized crime prosecutions. It helps prosecutors demonstrate the relationships and communication patterns between co-conspirators, providing clearer evidence of a criminal enterprise or joint activity. For defense attorneys, SNA can be used to identify alternative explanations for their client’s involvement in a criminal network or to challenge the prosecution’s portrayal of their client’s role. If the client is not a central figure in the network, this could be used to argue for lesser charges or reduced sentences. Finally, judges can use SNA to help understand a defendant’s social network and can provide insights into the likelihood of recidivism or flight risk.</p></li>
-<li><p><strong>Policy Makers and Criminal Justice Reform Advocates</strong>: Policy makers can use SNA to understand the broader social dynamics that contribute to crime, such as how poverty, unemployment, and social exclusion fuel criminal networks. This can guide the development of crime prevention policies that target root causes and dismantle harmful networks, while promoting pro-social ones.</p></li>
+<li><p>By the end of the chapter, you should be able to answer these questions:</p>
+<ul>
+<li>How can we represent networks using graphs and graph notation?</li>
+<li>How can we represent undirected and directed networks using matrices?</li>
+</ul></li>
 </ul>
+</section>
+</section>
+<section id="graph-notation" class="level2">
+<h2 class="anchored" data-anchor-id="graph-notation">Graph Notation</h2>
+<p>Let’s start with some definitions. The definition of a <em>graph</em> is <span class="math inline">\(G = (N,L)\)</span>, where <span class="math inline">\(N = {n_1, n_2..., n_g}\)</span> defines the set of nodes and <span class="math inline">\(L = {l_1, l_2..., l_L}\)</span> defines the set of edges. This definition simply states that there are <span class="math inline">\(N\)</span> nodes and <span class="math inline">\(L\)</span> edges in a graph.</p>
+<p>Two nodes, <span class="math inline">\(n_i\)</span> and <span class="math inline">\(n_j\)</span> are called <strong>adjacent</strong> if the line <span class="math inline">\(l_k = (n_i, n_j)\)</span>. What this means is that in the graph, there exists a line between nodes <em>i</em> and <em>j</em>.</p>
+<section id="node-sets" class="level3">
+<h3 class="anchored" data-anchor-id="node-sets">Node Sets</h3>
+<p>As discussed in the “Basic Data Elements” section of the <a href="snaca-introduction.html">Introduction to Social Network Analysis for Crime Analysts</a> chapter, the directionality of a graph indicates whether the edges are <strong>undirected</strong> or <strong>directed</strong>. In an <strong>undirected</strong> graph, the order of the nodes does not matter. In other words, <span class="math inline">\(l_k = (n_i, n_j) = (n_j, n_i)\)</span>. This is to say that if there exists a line between nodes <em>i</em> and <em>j</em>, then a line exists between <em>j</em> and <em>i</em>. (This may seem obvious, but will make more sense why we talk about it this way when we get to <strong>directed</strong> graphs.)</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-data-structures_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="adjacency" class="level3">
+<h3 class="anchored" data-anchor-id="adjacency">Adjacency</h3>
+<p>Two nodes, <span class="math inline">\(n_i\)</span> and <span class="math inline">\(n_j\)</span> are <strong>adjacent</strong> if the link <span class="math inline">\(l_k = (n_i,n_j)\)</span>. This is to say that in the graph, there exists an edge between nodes <em>i</em> and <em>j</em>. For a set of relations, <span class="math inline">\(X\)</span>, we can define a matrix which represents these relations. We commonly use an <strong>adjacency matrix</strong>, where each node is listed on the row and the column. The <span class="math inline">\(i_{th}\)</span> row and the <span class="math inline">\(j_{th}\)</span> column of <span class="math inline">\(X_{ij}\)</span> records the value of a tie from <em>i</em> to <em>j</em>. In this approach, <span class="math inline">\(X\)</span>, can be thought of as a variable. The presence or absence of values in the cells represent variation. In the <a href="snaca-introduction.html">Introduction to Social Network Analysis for Crime Analysts</a> chapter we covered “structural variables”. The data object <span class="math inline">\(X\)</span> is how we go about examining structural variables.</p>
+<p>Here are some important definitions that we will come across as we talk about network data structures:</p>
+<ul>
+<li>Scalar-a single number</li>
+<li>Column vector-a column of numbers</li>
+<li>Row vector-a row of numbers</li>
+<li>Matrix-a rectangular array of numbers</li>
+<li>Order-number of rows and columns defining the matrix</li>
+<li>Square matrix-number of rows and columns of matrix are equal</li>
+</ul>
+<section id="undirected-binary-graphs" class="level4">
+<h4 class="anchored" data-anchor-id="undirected-binary-graphs">Undirected, Binary Graphs</h4>
+<p>A plot of a network is sometimes referred to as a <em>sociogram</em>. Here is a sociogram for an undirected network where the ties are represented as zeros and ones:</p>
+<p>We can represent the graph as a matrix using an adjacency matrix (sometimes called a <em>sociomatrix</em>):</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-data-structures_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In most instances, we do not allow self-nominations, so the diagonal of the matrix is usually undefined or set to zero. In networks that allow self-nominations, you can have values on the diagonal. These are referred to as loops.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-data-structures_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In the first row, <em>i</em> is connected to the second row only: <span class="math inline">\(X_{12}=1; X_{15}=0\)</span> (where <span class="math inline">\(X_{ij}\)</span> refers to the <span class="math inline">\(i^{th}\)</span> row and the <span class="math inline">\(j^{th}\)</span> column of the matrix).</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-data-structures_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Since this graph is <em>undirected</em>, it is <strong>symmetric</strong> about the diagonal. This means that <span class="math inline">\(X_{ij} = X_{ji}\)</span> or that the <span class="math inline">\(i^{th}\)</span> column is the transposition of the <span class="math inline">\(j^{th}\)</span> row, as shown in the figure.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-data-structures_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now, what does the rest of the matrix look like? Fill in the values in the matrix based on the graph.</p>
+<p>Done? It should look like this:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-data-structures_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The highlighted section here is called the <strong>upper triangle</strong> of the matrix. The <em>sum</em> of the upper triangle should equal the number of edges in the graph.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-data-structures_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The other highlighted section here is called the <strong>lower triangle</strong> of the matrix. The <em>sum</em> of the lower triangle should also equal the number of edges in the graph.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-data-structures_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Alternatively, we could sum all the elements and divide by 2.</p>
+</section>
+<section id="directed-binary-graphs" class="level4">
+<h4 class="anchored" data-anchor-id="directed-binary-graphs">Directed, Binary Graphs</h4>
+<p>In a <strong>directed</strong> graph, the order of the nodes <u>does</u> matter. Specifically, <span class="math inline">\(l_k1 = (n_i, n_j) \neq (n_j, n_i) = l_k2\)</span>. As we did above, we can use an adjacency matrix to represent this information in matrix form.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-data-structures_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>What is different in our matrix when the graph is directed?</p>
+<p>In the first row, <em>i</em> sends to the second row: <span class="math inline">\(X_{12}=1\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-data-structures_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>But, in the second row, <em>j</em> does not send <span class="math inline">\(X_{21}=0\)</span>. The Jen/Tom dyad is <strong>asymmetric</strong>. Directed graphs permit this asymmetry because <span class="math inline">\(l_k1 = (n_i, n_j) \neq (n_j, n_i) = l_k2\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-data-structures_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>What about the Leaf/Bob dyad? Is it <em>asymmetric</em> or is it <em>symmetric</em>?</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-data-structures_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now, what does the rest of the matrix look like? Fill in the values in the matrix based on the graph.</p>
+<p>Done? It should look like this:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-data-structures_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Note that because we are allowing directionality to matter, the total number of edges in the network is just the sum of the entire matrix (which is different from undirected graphs where we divide that sum by 2).</p>
 <p><br></p>
-<p>The <a href="https://jacobtnyoung.github.io/snaca-textbook/">Social Network Analysis for Crime Analysts (SNACA)</a> textbook introduces the foundational concepts and techniques of social network analysis, providing a comprehensive framework for crime analysts to apply in their day-to-day work. Whether you are currently working in a criminal justice agency, or plan to do so in the future, the content of this textbook will prepare you to excel in such a role through the application of SNA. You will learn to map out criminal networks and analyze the roles of individuals within them. Through this lens, you will gain the ability to assess which individuals or nodes in a network are most critical to disrupting criminal activities. Moreover, these techniques will allow you to develop targeted strategies for crime and disorder reduction. By focusing on the most influential players within criminal networks, you can maximize the effectiveness of apprehension efforts, creating tangible outcomes that can dismantle harmful networks and reduce violence or other forms of crime in the community.</p>
-<p>Beyond tactical benefits, social network analysis empowers crime analysts to adopt a more preventive approach. By identifying patterns of association and influence within a network, you will be equipped to contribute to crime prevention strategies before criminal behavior escalates. For instance, by identifying vulnerable individuals on the periphery of a network, you can help law enforcement intervene early to redirect them away from criminal pathways. Additionally, the evaluation skills you gain will help you measure the effectiveness of these interventions, ensuring that existing strategies evolve to meet the unique challenges of crime and disorder. By the end, you will be well-prepared to make a meaningful contribution to criminal apprehension, crime and disorder reduction, prevention strategies, and the ongoing evaluation of those efforts.</p>
-<p>This textbook is designed to introduce you to basic concepts used in SNA. The textbook is divided into chapters that cover a variety of these concepts. At the end of each chapter is a “Test your Knowledge” section that includes questions to determine whether you feel comfortable discussing the material. I would encourage you to think through these prompts after you read the chapter, but also come back to them occasionally to refresh your memory. The textbook is not exhaustive, but most of the major topics are discussed.</p>
-<p>For those readers who are new to SNA, I would suggest starting at the beginning and working through in chronological order. For those readers who are already familiar with SNA, feel free to skip through the chapters.</p>
+</section>
+</section>
+</section>
+<section id="test-your-knowledge" class="level2">
+<h2 class="anchored" data-anchor-id="test-your-knowledge">Test your Knowledge</h2>
+<ul>
+<li><p>What was the key question behind the Konigsberg bridge problem? How did Euler represent this problem using points and lines? What was the significance of this representation?</p></li>
+<li><p>How is a graph represented in terms of nodes and edges? What does the notation <span class="math inline">\(G = (N,L)\)</span> mean?</p></li>
+<li><p>What does it mean for two nodes to be <strong>adjacent</strong> in a graph?</p></li>
+<li><p>In an undirected graph, how are the connections between nodes represented? How is this different from a directed graph?</p></li>
+<li><p>In an adjacency matrix, what does the value in the <span class="math inline">\(i^{th}\)</span> row and <span class="math inline">\(j^{th}\)</span> column represent?</p></li>
+<li><p>What is the difference between an <strong>undirected</strong> and a <strong>directed</strong> adjacency matrix? In an <strong>undirected</strong> graph, is the <span class="math inline">\(i^{th}\)</span> row equal to the <span class="math inline">\(j^{th}\)</span> column? What about for a <strong>directed</strong> graph?</p></li>
+<li><p>Define the following terms as they relate to matrices: Scalar, Column vector, Row vector, Matrix, Square matrix, Order of a matrix.</p></li>
+</ul>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>This chapter has how to represent networks using matrices. In the next chapter, we will start looking at how to analyze these matrices.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-malm2011using" class="csl-entry" role="listitem">
-Malm, Aili, and Gisela Bichler. 2011. <span>“Using Friends for Money: The Positional Importance of Money-Launderers in Organized Crime.”</span> <em>Trends in Organized Crime</em> 14 (4): 272–93.
-</div>
-<div id="ref-Morselli2009" class="csl-entry" role="listitem">
-Morselli, Carlo. 2009. <em>Inside Criminal Networks</em>. New York: Springer.
-</div>
-</div>
 </section>
 
 </main> <!-- /main -->
@@ -691,10 +892,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./snaca-methods.html" class="pagination-link" aria-label="Network Data Collection">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Network Data Collection</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./snaca-introduction.html" class="pagination-link" aria-label="Introduction to Social Network Analysis for Crime Analysts">
-        <span class="nav-page-text">Introduction to Social Network Analysis for Crime Analysts</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./snaca-net-description.html" class="pagination-link" aria-label="Network Description">
+        <span class="nav-page-text">Network Description</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
