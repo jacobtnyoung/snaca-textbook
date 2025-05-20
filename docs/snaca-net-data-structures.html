@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jacob T.N. Young">
+
+<title>Social Network Analysis for Crime Analysts - Network Data Structures</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./snaca-net-description.html" rel="next">
+<link href="./snaca-methods.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./snaca-net-data-structures.html">Network Data Structures</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Social Network Analysis for Crime Analysts</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/jacobtnyoung/snaca-textbook" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./snaca-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Social Network Analysis for Crime Analysts</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./snaca-theory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Network Theory and Theory of Networks</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./snaca-methods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Network Data Collection</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./snaca-net-data-structures.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Network Data Structures</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./snaca-net-description.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Network Description</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./snaca-centrality-degree.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Degree Centrality</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./snaca-centrality-closeness.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Closeness Centrality</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./snaca-centrality-betweenness.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Betweenness Centrality</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./snaca-bipartite.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bipartite Graphs/Two-Mode Networks</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./snaca-projection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projection</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#motivating-problem" id="toc-motivating-problem" class="nav-link active" data-scroll-target="#motivating-problem">Motivating Problem</a>
+  <ul class="collapse">
+  <li><a href="#konigsberg-bridge-problem" id="toc-konigsberg-bridge-problem" class="nav-link" data-scroll-target="#konigsberg-bridge-problem">Konigsberg Bridge Problem</a></li>
+  </ul></li>
+  <li><a href="#graph-notation" id="toc-graph-notation" class="nav-link" data-scroll-target="#graph-notation">Graph Notation</a>
+  <ul class="collapse">
+  <li><a href="#node-sets" id="toc-node-sets" class="nav-link" data-scroll-target="#node-sets">Node Sets</a></li>
+  <li><a href="#adjacency" id="toc-adjacency" class="nav-link" data-scroll-target="#adjacency">Adjacency</a></li>
+  </ul></li>
+  <li><a href="#test-your-knowledge" id="toc-test-your-knowledge" class="nav-link" data-scroll-target="#test-your-knowledge">Test your Knowledge</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jacobtnyoung/snaca-textbook/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Network Data Structures</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="motivating-problem" class="level2">
+<h2 class="anchored" data-anchor-id="motivating-problem">Motivating Problem</h2>
+<p>Review the figure below, and consider the following problem: Devise a route in which you could cross all seven bridges.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ch-04-bridge-01.jpeg" class="img-fluid figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><em>Now</em>, consider a different problem: Devise a route in which you could cross all seven bridges, <strong>but</strong> crossing each of the seven bridges <u>only once</u>.</p>
+<p><strong>Did you figure it out?</strong></p>
+<section id="konigsberg-bridge-problem" class="level3">
+<h3 class="anchored" data-anchor-id="konigsberg-bridge-problem">Konigsberg Bridge Problem</h3>
+<p>Leonard Euler worked on this problem in the mid-18th century, eventually representing the solution with a set of points and lines. For a great overview of the problem (and some interesting history), check out this <a href="https://www.youtube.com/watch?v=nZwSo4vfw6c">video</a>.</p>
+<p>Recall the discussion from the <a href="snaca-introduction.html">Introduction to Social Network Analysis for Crime Analysts</a> chapter regarding the importance of conceptualization and operationalization in Network Science and how <em>graph theory</em> provides a foundation for operationalizing concepts of interest among network scientists.</p>
+<ul>
+<li><p>By the end of the chapter, you should be able to answer these questions:</p>
+<ul>
+<li>How can we represent networks using graphs and graph notation?</li>
+<li>How can we represent undirected and directed networks using matrices?</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="graph-notation" class="level2">
+<h2 class="anchored" data-anchor-id="graph-notation">Graph Notation</h2>
+<p>Let’s start with some definitions. The definition of a <em>graph</em> is <span class="math inline">\(G = (N,L)\)</span>, where <span class="math inline">\(N = {n_1, n_2..., n_g}\)</span> defines the set of nodes and <span class="math inline">\(L = {l_1, l_2..., l_L}\)</span> defines the set of edges. This definition simply states that there are <span class="math inline">\(N\)</span> nodes and <span class="math inline">\(L\)</span> edges in a graph.</p>
+<p>Two nodes, <span class="math inline">\(n_i\)</span> and <span class="math inline">\(n_j\)</span> are called <strong>adjacent</strong> if the line <span class="math inline">\(l_k = (n_i, n_j)\)</span>. What this means is that in the graph, there exists a line between nodes <em>i</em> and <em>j</em>.</p>
+<section id="node-sets" class="level3">
+<h3 class="anchored" data-anchor-id="node-sets">Node Sets</h3>
+<p>As discussed in the “Basic Data Elements” section of the <a href="snaca-introduction.html">Introduction to Social Network Analysis for Crime Analysts</a> chapter, the directionality of a graph indicates whether the edges are <strong>undirected</strong> or <strong>directed</strong>. In an <strong>undirected</strong> graph, the order of the nodes does not matter. In other words, <span class="math inline">\(l_k = (n_i, n_j) = (n_j, n_i)\)</span>. This is to say that if there exists a line between nodes <em>i</em> and <em>j</em>, then a line exists between <em>j</em> and <em>i</em>. (This may seem obvious, but will make more sense why we talk about it this way when we get to <strong>directed</strong> graphs.)</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-data-structures_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="adjacency" class="level3">
+<h3 class="anchored" data-anchor-id="adjacency">Adjacency</h3>
+<p>Two nodes, <span class="math inline">\(n_i\)</span> and <span class="math inline">\(n_j\)</span> are <strong>adjacent</strong> if the link <span class="math inline">\(l_k = (n_i,n_j)\)</span>. This is to say that in the graph, there exists an edge between nodes <em>i</em> and <em>j</em>. For a set of relations, <span class="math inline">\(X\)</span>, we can define a matrix which represents these relations. We commonly use an <strong>adjacency matrix</strong>, where each node is listed on the row and the column. The <span class="math inline">\(i_{th}\)</span> row and the <span class="math inline">\(j_{th}\)</span> column of <span class="math inline">\(X_{ij}\)</span> records the value of a tie from <em>i</em> to <em>j</em>. In this approach, <span class="math inline">\(X\)</span>, can be thought of as a variable. The presence or absence of values in the cells represent variation. In the <a href="snaca-introduction.html">Introduction to Social Network Analysis for Crime Analysts</a> chapter we covered “structural variables”. The data object <span class="math inline">\(X\)</span> is how we go about examining structural variables.</p>
+<p>Here are some important definitions that we will come across as we talk about network data structures:</p>
+<ul>
+<li>Scalar-a single number</li>
+<li>Column vector-a column of numbers</li>
+<li>Row vector-a row of numbers</li>
+<li>Matrix-a rectangular array of numbers</li>
+<li>Order-number of rows and columns defining the matrix</li>
+<li>Square matrix-number of rows and columns of matrix are equal</li>
+</ul>
+<section id="undirected-binary-graphs" class="level4">
+<h4 class="anchored" data-anchor-id="undirected-binary-graphs">Undirected, Binary Graphs</h4>
+<p>A plot of a network is sometimes referred to as a <em>sociogram</em>. Here is a sociogram for an undirected network where the ties are represented as zeros and ones:</p>
+<p>We can represent the graph as a matrix using an adjacency matrix (sometimes called a <em>sociomatrix</em>):</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-data-structures_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In most instances, we do not allow self-nominations, so the diagonal of the matrix is usually undefined or set to zero. In networks that allow self-nominations, you can have values on the diagonal. These are referred to as loops.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-data-structures_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In the first row, <em>i</em> is connected to the second row only: <span class="math inline">\(X_{12}=1; X_{15}=0\)</span> (where <span class="math inline">\(X_{ij}\)</span> refers to the <span class="math inline">\(i^{th}\)</span> row and the <span class="math inline">\(j^{th}\)</span> column of the matrix).</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-data-structures_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Since this graph is <em>undirected</em>, it is <strong>symmetric</strong> about the diagonal. This means that <span class="math inline">\(X_{ij} = X_{ji}\)</span> or that the <span class="math inline">\(i^{th}\)</span> column is the transposition of the <span class="math inline">\(j^{th}\)</span> row, as shown in the figure.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-data-structures_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now, what does the rest of the matrix look like? Fill in the values in the matrix based on the graph.</p>
+<p>Done? It should look like this:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-data-structures_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The highlighted section here is called the <strong>upper triangle</strong> of the matrix. The <em>sum</em> of the upper triangle should equal the number of edges in the graph.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-data-structures_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The other highlighted section here is called the <strong>lower triangle</strong> of the matrix. The <em>sum</em> of the lower triangle should also equal the number of edges in the graph.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-data-structures_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Alternatively, we could sum all the elements and divide by 2.</p>
+</section>
+<section id="directed-binary-graphs" class="level4">
+<h4 class="anchored" data-anchor-id="directed-binary-graphs">Directed, Binary Graphs</h4>
+<p>In a <strong>directed</strong> graph, the order of the nodes <u>does</u> matter. Specifically, <span class="math inline">\(l_k1 = (n_i, n_j) \neq (n_j, n_i) = l_k2\)</span>. As we did above, we can use an adjacency matrix to represent this information in matrix form.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-data-structures_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>What is different in our matrix when the graph is directed?</p>
+<p>In the first row, <em>i</em> sends to the second row: <span class="math inline">\(X_{12}=1\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-data-structures_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>But, in the second row, <em>j</em> does not send <span class="math inline">\(X_{21}=0\)</span>. The Jen/Tom dyad is <strong>asymmetric</strong>. Directed graphs permit this asymmetry because <span class="math inline">\(l_k1 = (n_i, n_j) \neq (n_j, n_i) = l_k2\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-data-structures_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>What about the Leaf/Bob dyad? Is it <em>asymmetric</em> or is it <em>symmetric</em>?</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-data-structures_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now, what does the rest of the matrix look like? Fill in the values in the matrix based on the graph.</p>
+<p>Done? It should look like this:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-net-data-structures_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Note that because we are allowing directionality to matter, the total number of edges in the network is just the sum of the entire matrix (which is different from undirected graphs where we divide that sum by 2).</p>
+<p><br></p>
+</section>
+</section>
+</section>
+<section id="test-your-knowledge" class="level2">
+<h2 class="anchored" data-anchor-id="test-your-knowledge">Test your Knowledge</h2>
+<ul>
+<li><p>What was the key question behind the Konigsberg bridge problem? How did Euler represent this problem using points and lines? What was the significance of this representation?</p></li>
+<li><p>How is a graph represented in terms of nodes and edges? What does the notation <span class="math inline">\(G = (N,L)\)</span> mean?</p></li>
+<li><p>What does it mean for two nodes to be <strong>adjacent</strong> in a graph?</p></li>
+<li><p>In an undirected graph, how are the connections between nodes represented? How is this different from a directed graph?</p></li>
+<li><p>In an adjacency matrix, what does the value in the <span class="math inline">\(i^{th}\)</span> row and <span class="math inline">\(j^{th}\)</span> column represent?</p></li>
+<li><p>What is the difference between an <strong>undirected</strong> and a <strong>directed</strong> adjacency matrix? In an <strong>undirected</strong> graph, is the <span class="math inline">\(i^{th}\)</span> row equal to the <span class="math inline">\(j^{th}\)</span> column? What about for a <strong>directed</strong> graph?</p></li>
+<li><p>Define the following terms as they relate to matrices: Scalar, Column vector, Row vector, Matrix, Square matrix, Order of a matrix.</p></li>
+</ul>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>This chapter has how to represent networks using matrices. In the next chapter, we will start looking at how to analyze these matrices.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./snaca-methods.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Network Data Collection</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./snaca-net-description.html" class="pagination-link">
+        <span class="nav-page-text">Network Description</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Social Network Analysis for Crime Analysts was written by <a href="https://jacobtnyoung.github.io/">Jacob T.N. Young</a></div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a>.</div>
+  </div>
+</footer>
+
+
+
+</body></html>

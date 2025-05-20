@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jacob T.N. Young">
+
+<title>Social Network Analysis for Crime Analysts - Network Data Collection</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./snaca-net-data-structures.html" rel="next">
+<link href="./snaca-theory.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./snaca-methods.html">Network Data Collection</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Social Network Analysis for Crime Analysts</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/jacobtnyoung/snaca-textbook" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./snaca-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Social Network Analysis for Crime Analysts</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./snaca-theory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Network Theory and Theory of Networks</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./snaca-methods.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Network Data Collection</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./snaca-net-data-structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Network Data Structures</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./snaca-net-description.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Network Description</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./snaca-centrality-degree.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Degree Centrality</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./snaca-centrality-closeness.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Closeness Centrality</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./snaca-centrality-betweenness.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Betweenness Centrality</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./snaca-bipartite.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bipartite Graphs/Two-Mode Networks</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./snaca-projection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projection</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#case-study-network-data-collection-in-a-gang-crime-investigation" id="toc-case-study-network-data-collection-in-a-gang-crime-investigation" class="nav-link active" data-scroll-target="#case-study-network-data-collection-in-a-gang-crime-investigation">Case Study: Network Data Collection in a Gang Crime Investigation</a></li>
+  <li><a href="#types-of-network-data-collection" id="toc-types-of-network-data-collection" class="nav-link" data-scroll-target="#types-of-network-data-collection">Types of Network Data Collection</a></li>
+  <li><a href="#boundary-specification" id="toc-boundary-specification" class="nav-link" data-scroll-target="#boundary-specification">Boundary Specification</a></li>
+  <li><a href="#instruments-and-design" id="toc-instruments-and-design" class="nav-link" data-scroll-target="#instruments-and-design">Instruments and Design</a>
+  <ul class="collapse">
+  <li><a href="#ego-centric-networks" id="toc-ego-centric-networks" class="nav-link" data-scroll-target="#ego-centric-networks">Ego-Centric Networks</a></li>
+  <li><a href="#partial-networks" id="toc-partial-networks" class="nav-link" data-scroll-target="#partial-networks">Partial Networks</a></li>
+  <li><a href="#completeglobal-network" id="toc-completeglobal-network" class="nav-link" data-scroll-target="#completeglobal-network">Complete/Global Network</a></li>
+  <li><a href="#things-to-consider" id="toc-things-to-consider" class="nav-link" data-scroll-target="#things-to-consider">Things to Consider</a></li>
+  </ul></li>
+  <li><a href="#test-your-knowledge" id="toc-test-your-knowledge" class="nav-link" data-scroll-target="#test-your-knowledge">Test your Knowledge</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jacobtnyoung/snaca-textbook/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Network Data Collection</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>So far, we have discussed why social network analysis is an essential part of a crime analyst’s toolkit by introducing the fundamental concepts of network science, helping you see crime problems through a network lens. We have also introduced the theoretical aspects of network science, paying attention to how networks matter as a cause (or an effect). In this chapter, we’ll shift focus to the practical side of network analysis: how to collect network data effectively. Understanding the types of data you need, how to gather them, and the challenges involved in network data collection is crucial for conducting effective network analysis as a crime analyst.</p>
+<ul>
+<li><p>By the end of the chapter, you will be able to answer these questions:</p>
+<ul>
+<li>What are various ways network data can be collected?</li>
+</ul></li>
+</ul>
+<section id="case-study-network-data-collection-in-a-gang-crime-investigation" class="level2">
+<h2 class="anchored" data-anchor-id="case-study-network-data-collection-in-a-gang-crime-investigation">Case Study: Network Data Collection in a Gang Crime Investigation</h2>
+<p>Let’s start with a case study. In a study of gang networks in Chicago, <span class="citation" data-cites="papachristos2013corner">Papachristos, Hureau, and Braga (<a href="references.html#ref-papachristos2013corner" role="doc-biblioref">2013</a>)</span> sought to understand how violence spread within and between gangs. Their research focused on the impact of social networks on gun violence, identifying how specific individuals played a crucial role in coordinating violent activities. The study utilized network data to map the relationships between gang members and trace the diffusion of violence across the network.</p>
+<p>Researchers collected network data from several sources: arrest records (links between individuals arrested together), homicide and shooting data (links between individuals and gun violence incidents), and social ties and rivalries (information on known affiliations and rivalries between gang members). Each edge represented an interaction, allowing the researchers to construct a network of gang members linked through criminal activity or social ties. By incorporating both official records and street-level knowledge of gang relationships, the study created a comprehensive map of the social network driving gun violence in the city.</p>
+<p>This case is an example that illustrates the diversity of data that can be used to build social networks. For crime analysts, comprehensive data collection is an important goal so as to ensure that all relevant ties and individuals are included (to the extent possible), as missing data could lead to incomplete or misleading conclusions about the network being analyzed.</p>
+</section>
+<section id="types-of-network-data-collection" class="level2">
+<h2 class="anchored" data-anchor-id="types-of-network-data-collection">Types of Network Data Collection</h2>
+<p>Network data can come from MANY sources. For example, data can be:</p>
+<ul>
+<li><p>Observational - Information about network ties are created by observing the links. An illustration of this is the <a href="https://ccj.asu.edu/revisiting-roxbury-project">Miller Project</a>, which focused on youth gang affiliations in an urban environment. A key feature of the study was the collection of data by fieldworkers who conducted observations in public spaces where youth frequently interacted (parks, community centers, street corners). They documented social interactions, identifying key individuals who frequently connected otherwise disconnected groups. In a study by <span class="citation" data-cites="young2018boston">Young, Decker, and Sweeten (<a href="references.html#ref-young2018boston" role="doc-biblioref">2018</a>)</span>, the researchers reconstructed these observational data to create social networks.</p></li>
+<li><p>Archival - Data can also be collected through reconstructing historical data that exists in archives. For example, <span class="citation" data-cites="papachristos2012small">Papachristos and Smith (<a href="references.html#ref-papachristos2012small" role="doc-biblioref">2012</a>)</span> conducted a detailed study of <a href="https://en.wikipedia.org/wiki/Al_Capone">Al Capone</a>’s criminal organization by reviewing records from law enforcement, newspapers, court and legal documents, and several other historical sources. The researchers were able to create a detailed sociogram of Capone’s criminal network, identifying the key actors and the strength of ties between them. The network revealed the presence of core members and peripheral associates, showing how resources and influence flowed through the organization.</p></li>
+<li><p>Questionnaire - Network data can also come from questionnaire’s where someone asks somebody about their ties. For example, the <a href="https://pure.psu.edu/en/projects/the-prison-inmate-networks-study-pins">Prison Inmate Network Studies (PINS)</a> are a series of research studies focused on understanding social networks within prison environments (see <span class="citation" data-cites="kreager2020prison">Kreager et al. (<a href="references.html#ref-kreager2020prison" role="doc-biblioref">2020</a>)</span>). Networks among incarcerated men and women were created by interviewing individuals about their social relationships in prison.</p></li>
+</ul>
+</section>
+<section id="boundary-specification" class="level2">
+<h2 class="anchored" data-anchor-id="boundary-specification">Boundary Specification</h2>
+<p>While there are various ways that network data can be collected, an important consideration is the issue of <em>boundary specification</em>. This concerns the theoretical and methodological challenge of determining the appropriate set of actors and connections to analyze in order to identify the relevant social network within a given context. When we collect data on a network we impose a particular boundary. For example, suppose we ask adolescents in a school who their friends are, but we only have a list of people in that school. The boundary would be those friends that are in the school. Does the boundary really exist? What about friendships that are outside of the school? Is the boundary imposed to conduct the research?</p>
+<p>This is an important question to consider when collecting network data and when you are analyzing it. This can be a particular challenge for crime analysts given the types of data involved in our work. Defining clear boundaries influences the accuracy and effectiveness of the resulting analysis, which may have important implications for the policies that we identify from these analyses.</p>
+<p>Consider another example where a crime analyst is mapping the social network of a local gang involved in drug trafficking. In defining the network, the crime analyst has to decide whether to include only core gang members (e.g., those officially identified by law enforcement) or to also include associates who interact frequently with gang members. If the analyst focuses only on individuals with arrest records, they may overlook influential associates (e.g., suppliers, informants). However, including individuals without strong connections to the gang’s criminal activities might dilute the network’s focus. Another important consideration is the temporal aspect of boundary specification. Should the network only reflect current interactions, or include historical data? A network constructed over a multi-year period allows the analyst to observe changes over time. However, using a long time frame can introduce challenges in identifying which relationships remain relevant to current criminal activities. Finally, the sources used to define the network also impact boundary specification. In this example, we may base the network on co-arrest data. But, a crime analyst could also use informant reports, social media activity, or surveillance footage. Relying too heavily on one source (e.g., arrest records) could bias the analysis toward individuals already under law enforcement scrutiny.</p>
+</section>
+<section id="instruments-and-design" class="level2">
+<h2 class="anchored" data-anchor-id="instruments-and-design">Instruments and Design</h2>
+<ul>
+<li><p>Instruments are the tools used to elicit information from respondents. Some common examples are name-generators and rosters.</p></li>
+<li><p>Design corresponds to the protocol for determining how information should be elicited, who should be sampled, and so on. Some examples are: ego-centric networks, partial networks, and complete/global networks</p></li>
+</ul>
+<section id="ego-centric-networks" class="level3">
+<h3 class="anchored" data-anchor-id="ego-centric-networks">Ego-Centric Networks</h3>
+<p>With ego-centric designs, data on a focal actor (ego) and ties to neighbors (alters) and the ties among the alters. The instrument is a “name generator” where individuals are prompted to elicit names that pertain to a connection of interest. For example, the <a href="https://gss.norc.org/">General Social Survey (GSS)</a> is a sociological survey that collects data on demographic characteristics, behaviors, and attitudes of residents in the United States that has been conducted since 1972. The GSS includes a social network measure that asks people the following question: “who are the people with whom you discuss important matters?” For each person named, the respondent is given the prompt “which of these individuals discuss important matters”?</p>
+</section>
+<section id="partial-networks" class="level3">
+<h3 class="anchored" data-anchor-id="partial-networks">Partial Networks</h3>
+<p>Partial networks extend data collection from the ego-centric design. Specifically, ego-centric data are collected, plus some amount of tracing to reach contacts of contacts. The instrument is a “tracing mechanism” whereby the network is “traced” by contacting those in ego’s network. For example, <span class="citation" data-cites="klovdahl1994social">Klovdahl et al. (<a href="references.html#ref-klovdahl1994social" role="doc-biblioref">1994</a>)</span> used a link-tracing design to examine HIV risk networks, particularly focusing on drug users and their sexual partners. The project started with a purposively selected group of drug users. These individuals were asked to identify their sexual partners and drug-sharing contacts, who were then recruited into the study. The study aimed to understand how HIV spreads within networks of drug users, examining both direct and indirect relationships. The use of link-tracing was critical for reaching hidden or hard-to-reach populations, such as injection drug users and their social and sexual networks, which are often not accessible through traditional sampling methods.</p>
+</section>
+<section id="completeglobal-network" class="level3">
+<h3 class="anchored" data-anchor-id="completeglobal-network">Complete/Global Network</h3>
+<p>A final approach is to take a census of the network. In these situations, data on all actors within a particular (defined) boundary are known. The instrument can be a roster (e.g.&nbsp;“For each of the following persons, please indicate whom you trust to share personal information with?”) or perhaps a free response (e.g.&nbsp;“Who are the people in this prison that you trust with person information about you?”). We most commonly encounter this design when there is an identifiable sampling frame, such as a school or a prison, and a roster of members of the setting is known.</p>
+</section>
+<section id="things-to-consider" class="level3">
+<h3 class="anchored" data-anchor-id="things-to-consider">Things to Consider</h3>
+<p>As you may have guessed, collecting network data involves a lot of questions and can sometimes seem a bit overwhelming. But, as you think about analyses you may do or are evaluating existing studies, think about the following areas:</p>
+<ul>
+<li>Domain - what type of network is this?</li>
+<li>Sample - what is the population of interest and how was it sampled?</li>
+<li>Temporality - are the data cross-sectional or longitudinal? Is it a panel or continuous measurement?</li>
+<li>Tie meaning - are ties discrete events or enduring states?</li>
+<li>Instrument - how was the information collected?</li>
+</ul>
+<p><br></p>
+</section>
+</section>
+<section id="test-your-knowledge" class="level2">
+<h2 class="anchored" data-anchor-id="test-your-knowledge">Test your Knowledge</h2>
+<ul>
+<li>Compare and contrast observational data, archival data, and questionnaire-based data collection methods for social networks. For each, provide an example that you may encounter as a crime analyst.</li>
+<li>Explain the concept of boundary specification in network data collection. Why is it important to define clear boundaries, and what challenges might arise when defining them in crime network analysis?</li>
+<li>Find a study or research report using network data on a topic that interests you. Then, reflect on the issues of domain, sample, temporality, tie meaning, and instrument.</li>
+</ul>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>This chapter has provided a brief introduction to network data collection in the context of crime analysis, focusing on the practical methods of gathering and analyzing network data. In the next chapter, we will cover the basics of what network data are and how we go about actually doing network analysis!</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-klovdahl1994social" class="csl-entry" role="listitem">
+Klovdahl, Alden S., John J. Potterat, Donald E. Woodhouse, Stephen Q. Muth, John B. Muth, and William W. Darrow. 1994. <span>“Social Networks and Infectious Disease: The Colorado Springs Study.”</span> <em>Social Science &amp; Medicine</em> 38 (1): 79–88.
+</div>
+<div id="ref-kreager2020prison" class="csl-entry" role="listitem">
+Kreager, Derek, Gary Zajac, Dana L. Haynie, David Schaefer, Martin Bouchard, and Jacob Young. 2020. <span>“The Prison Inmate Network Study, United States, 2015.”</span> Inter-university Consortium for Political; Social Research [distributor]. <a href="https://doi.org/10.3886/ICPSR37514.v2">https://doi.org/10.3886/ICPSR37514.v2</a>.
+</div>
+<div id="ref-papachristos2013corner" class="csl-entry" role="listitem">
+Papachristos, Andrew V., David M. Hureau, and Anthony A. Braga. 2013. <span>“The Corner and the Crew: The Influence of Geography and Social Networks on Gang Violence.”</span> <em>American Sociological Review</em> 78 (3): 417–47.
+</div>
+<div id="ref-papachristos2012small" class="csl-entry" role="listitem">
+Papachristos, Andrew V., and Chris Smith. 2012. <span>“The Small World of Al Capone: The Embedded and Multiplex Nature of Organized Crime.”</span> <em>SSRN Electronic Journal</em>. <a href="https://doi.org/10.2139/ssrn.2159899">https://doi.org/10.2139/ssrn.2159899</a>.
+</div>
+<div id="ref-young2018boston" class="csl-entry" role="listitem">
+Young, Jacob T. N., Scott H. Decker, and Gary Sweeten. 2018. <span>“The Boston Special Youth Project Affiliation Dataset.”</span> <em>Connections</em> 37 (1&amp;2): 85–88.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./snaca-theory.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Network Theory and Theory of Networks</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./snaca-net-data-structures.html" class="pagination-link">
+        <span class="nav-page-text">Network Data Structures</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Social Network Analysis for Crime Analysts was written by <a href="https://jacobtnyoung.github.io/">Jacob T.N. Young</a></div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a>.</div>
+  </div>
+</footer>
+
+
+
+</body></html>

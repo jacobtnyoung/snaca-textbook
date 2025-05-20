@@ -1,0 +1,587 @@
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(
+  echo = FALSE, 
+  message=FALSE, 
+  warning=FALSE, 
+  fig.width = 10,
+  fig.align = "center"
+  )
+
+library( here )      # for the directory
+library( ggraph )    # for plotting
+library( igraph )    # for working with graphs
+library( ggplot2 )   # for plotting
+library( gridExtra ) # for plotting multiple plots
+library( grid )      # to include the null graphical object
+library( reshape2 )  # for reshaping the matrix data for a plot
+
+```
+
+# Network Data Structures {.unnumbered}
+
+## Motivating Problem
+
+Review the figure below, and consider the following problem: Devise a route in which you could cross all seven bridges.
+
+```{r, fig.cap = "", out.width = "60%"}
+knitr::include_graphics( "images/konigsberg-bridge-problem.png" )
+```
+
+*Now*, consider a different problem: Devise a route in which you could cross all seven bridges, **but** crossing each of the seven bridges <u>only once</u>.
+
+**Did you figure it out?**
+
+### Konigsberg Bridge Problem
+
+Leonard Euler worked on this problem in the mid-18th century, eventually representing the solution with a set of points and lines. For a great overview of the problem (and some interesting history), check out this [video](https://www.youtube.com/watch?v=nZwSo4vfw6c).
+
+Recall the discussion from the [Introduction to Social Network Analysis for Crime Analysts](snaca-introduction.html) chapter regarding the importance of conceptualization and operationalization in Network Science and how *graph theory* provides a foundation for operationalizing concepts of interest among network scientists.
+
+-   By the end of the chapter, you should be able to answer these questions:
+
+    -   How can we represent networks using graphs and graph notation?
+    -   How can we represent undirected and directed networks using matrices?
+
+## Graph Notation
+
+Let's start with some definitions. The definition of a *graph* is $G = (N,L)$, where $N = {n_1, n_2..., n_g}$ defines the set of nodes and $L = {l_1, l_2..., l_L}$ defines the set of edges. This definition simply states that there are $N$ nodes and $L$ edges in a graph.
+
+Two nodes, $n_i$ and $n_j$ are called **adjacent** if the line $l_k = (n_i, n_j)$. What this means is that in the graph, there exists a line between nodes *i* and *j*.
+
+### Node Sets
+
+As discussed in the "Basic Data Elements" section of the [Introduction to Social Network Analysis for Crime Analysts](snaca-introduction.html) chapter, the directionality of a graph indicates whether the edges are **undirected** or **directed**. In an **undirected** graph, the order of the nodes does not matter. In other words, $l_k = (n_i, n_j) = (n_j, n_i)$. This is to say that if there exists a line between nodes *i* and *j*, then a line exists between *j* and *i*. (This may seem obvious, but will make more sense why we talk about it this way when we get to **directed** graphs.)
+
+```{r, graphs-define}
+
+# ----
+# This creates the graphs for the plots below
+
+# Create the graph objects
+graph  <- graph_from_data_frame( 
+  data.frame( 
+    from = c( 1, 2, 3, 3, 4 ),
+    to   = c( 2, 3, 4, 5, 5 ) ), 
+  directed = FALSE )
+
+digraph  <- graph_from_data_frame( 
+  data.frame( 
+    from = c( 1, 2, 3, 3, 4, 4, 5, 5  ),
+    to   = c( 2, 3, 4, 5, 3, 5, 3, 4  ) ), 
+  directed = TRUE )
+
+# Set the random seed to render the same plot
+set.seed( 507 )
+
+# Set a fixed layout using the Fruchterman-Reingold layout
+layout <- layout_with_fr( graph )
+dilayout <- layout_with_fr( digraph )
+
+# Set the labels
+custom_labels <- c( "Jen","Tom","Bob","Leaf","Jim" )
+
+# Assign the labels to the graph nodes
+V( graph )$name <- custom_labels
+V( digraph )$name <- custom_labels
+
+```
+
+```{r, plots-define}
+
+# create the undirected graph
+u_graph <-
+  ggraph( graph, 
+          layout = layout ) +                  
+  geom_edge_link( color = "black", width = 0.8 ) +  
+  geom_node_point( color = "#28a88d", size = 15 ) +
+  geom_node_text( aes( label = name ), 
+                 color = "black", 
+                 size = 5,        
+                 vjust = 0.5,     
+                 hjust = 0.5 ) +
+  ggtitle( "Undirected Graph" ) + 
+  scale_x_continuous( expand = expansion( mult = c( 0.2, 0.2 ) ) ) +
+  scale_y_continuous( expand = expansion( mult = c( 0.2, 0.2 ) ) ) +
+theme_void() 
+
+# create the directed graph
+d_graph <- 
+  ggraph( digraph, 
+          layout = dilayout ) +                  
+  geom_node_point( color = "#fc23fc", size = 15 ) +
+  geom_node_text( aes( label = name ), 
+                 color = "black", 
+                 size = 5,        
+                 vjust = 0.5,     
+                 hjust = 0.5) +
+  geom_edge_link( aes( start_cap = label_rect( node1.name ), 
+                     end_cap = circle( 5, 'mm' ) ),
+                 arrow = arrow( length = unit( 0.02, "npc" ) ), 
+                 color = "black", width = 0.8) +
+  ggtitle( "Directed Graph" ) + 
+  scale_x_continuous( expand = expansion( mult = c( 0.2, 0.2 ) ) ) +
+  scale_y_continuous( expand = expansion( mult = c( 0.2, 0.2 ) ) ) +
+  theme_void()  
+
+```
+
+```{r}
+
+# Display the plots side by side
+grid.arrange( u_graph, nullGrob(), d_graph, ncol = 3, widths = c( 1, 0.2, 1 ) )
+
+```
+
+### Adjacency
+
+Two nodes, $n_i$ and $n_j$ are **adjacent** if the link $l_k = (n_i,n_j)$. This is to say that in the graph, there exists an edge between nodes *i* and *j*. For a set of relations, $X$, we can define a matrix which represents these relations. We commonly use an **adjacency matrix**, where each node is listed on the row and the column. The $i_{th}$ row and the $j_{th}$ column of $X_{ij}$ records the value of a tie from *i* to *j*. In this approach, $X$, can be thought of as a variable. The presence or absence of values in the cells represent variation. In the [Introduction to Social Network Analysis for Crime Analysts](snaca-introduction.html) chapter we covered "structural variables". The data object $X$ is how we go about examining structural variables.
+
+Here are some important definitions that we will come across as we talk about network data structures:
+
+-   Scalar-a single number
+-   Column vector-a column of numbers
+-   Row vector-a row of numbers
+-   Matrix-a rectangular array of numbers
+-   Order-number of rows and columns defining the matrix
+-   Square matrix-number of rows and columns of matrix are equal
+
+#### Undirected, Binary Graphs
+
+A plot of a network is sometimes referred to as a *sociogram*. Here is a sociogram for an undirected network where the ties are represented as zeros and ones:
+
+We can represent the graph as a matrix using an adjacency matrix (sometimes called a *sociomatrix*):
+
+```{r}
+
+# create an adjacency matrix from the graph
+adj_matrix <- as_adjacency_matrix( graph, sparse = FALSE )
+
+# melt the matrix into a long format suitable for ggplot
+df <- melt( adj_matrix )
+
+# Reverse the order of the y-axis labels so they aren't backwards
+df$Var2 <- factor( df$Var2, levels = rev( rownames( adj_matrix ) ) )
+
+```
+
+```{r}
+
+# plot the blank adjacency matrix
+adj_to_plot <- ggplot( df, aes( Var1, Var2 ) ) +
+  geom_tile( color = "black", fill = "white" ) +
+  coord_fixed() +
+  theme_minimal() + 
+  theme(panel.background = element_rect(fill = "white", color = NA),
+        panel.grid.major = element_line(color = "gray"),  
+        panel.grid.minor = element_line(color = "lightgray"),
+        axis.text.x = element_text(hjust = 0.5, vjust = 0.5),
+        axis.text.y = element_text(hjust = 0.5, vjust = 0.5),
+        axis.title = element_blank(),
+        axis.text.x.top = element_text(hjust = 0.5, vjust = 0.5),
+        axis.ticks = element_blank()) + 
+  labs(x = NULL, y = NULL) +  
+  scale_y_discrete(position = "left") +
+  scale_x_discrete(position = "top")  +
+  ggtitle( "Adjacency Matrix for\n Undirected Graph" )
+
+```
+
+```{r}
+
+# plot the network and the adjacency matrix
+grid.arrange( u_graph, adj_to_plot, ncol = 2 )
+
+```
+
+In most instances, we do not allow self-nominations, so the diagonal of the matrix is usually undefined or set to zero. In networks that allow self-nominations, you can have values on the diagonal. These are referred to as loops.
+
+```{r}
+
+# set a value for the diagonal and plot it
+df$diagonal <- ifelse( df$Var1 == df$Var2, "diagonal", "off_diagonal" )
+
+# plot the blank adjacency matrix
+adj_to_plot <- ggplot( df, aes( Var1, Var2 ) ) +
+  geom_tile( aes( fill = diagonal ), color = "black" ) +
+  geom_text( aes( label = ifelse( Var1 == Var2, 0, "" ) ), color = "black" ) +
+  scale_fill_manual(values = c("diagonal" = "#28a88d", "off_diagonal" = "white"), guide = "none") + 
+  coord_fixed() +
+  theme_minimal() + 
+  theme(panel.background = element_rect(fill = "white", color = NA),
+        panel.grid.major = element_line(color = "gray"),  
+        panel.grid.minor = element_line(color = "lightgray"),
+        axis.text.x = element_text(hjust = 0.5, vjust = 0.5),
+        axis.text.y = element_text(hjust = 0.5, vjust = 0.5),
+        axis.title = element_blank(),
+        axis.text.x.top = element_text(hjust = 0.5, vjust = 0.5),
+        axis.ticks = element_blank()) + 
+  labs(x = NULL, y = NULL) +  
+  scale_y_discrete(position = "left") +
+  scale_x_discrete(position = "top")  +
+  ggtitle( "Adjacency Matrix for\n Undirected Graph" )
+
+# plot the network and the adjacency matrix
+grid.arrange( u_graph, adj_to_plot, ncol = 2 )
+
+```
+
+In the first row, *i* is connected to the second row only: $X_{12}=1; X_{15}=0$ (where $X_{ij}$ refers to the $i^{th}$ row and the $j^{th}$ column of the matrix).
+
+```{r}
+
+# Add a new column to mark specific cells that should be colored
+df$first_column <- ifelse( df$Var2 == df$Var2[1], "first_column", df$diagonal )
+
+# plot the blank adjacency matrix
+adj_to_plot <- ggplot( df, aes( Var1, Var2 ) ) +
+  geom_tile( aes( fill = first_column ), color = "black" ) +
+    geom_text( aes( label = ifelse( Var2 == Var2[1], value, 
+                           ifelse( Var1 == Var2, 0, "" ) ) ), color = "black" ) + 
+  scale_fill_manual( 
+    values = c( "diagonal" = "#28a88d", 
+                "first_column" = "#28a88d", 
+                "off_diagonal" =  "white"), guide = "none" ) + 
+  coord_fixed() +
+  theme_minimal() + 
+  theme(panel.background = element_rect( fill = "white", color = NA ),
+        panel.grid.major = element_line( color = "gray" ),  
+        panel.grid.minor = element_line( color = "lightgray" ),
+        axis.text.x = element_text( hjust = 0.5, vjust = 0.5 ),
+        axis.text.y = element_text( hjust = 0.5, vjust = 0.5 ),
+        axis.title = element_blank(),
+        axis.text.x.top = element_text( hjust = 0.5, vjust = 0.5 ),
+        axis.ticks = element_blank() ) + 
+  labs( x = NULL, y = NULL ) +  
+  scale_y_discrete( position = "left" ) +
+  scale_x_discrete( position = "top" )  +
+  ggtitle( "Adjacency Matrix for\n Undirected Graph" )
+
+# plot the network and the adjacency matrix
+grid.arrange( u_graph, adj_to_plot, ncol = 2 )
+
+```
+
+Since this graph is *undirected*, it is **symmetric** about the diagonal. This means that $X_{ij} = X_{ji}$ or that the $i^{th}$ column is the transposition of the $j^{th}$ row, as shown in the figure.
+
+```{r}
+
+# Add a new row to mark specific cells that should be colored
+df$highlight <- ifelse(df$Var1 == df$Var2, "diagonal", "off_diagonal")
+df$highlight <- ifelse(df$Var1 == df$Var1[1], "first_row", df$highlight)
+df$highlight <- ifelse(df$Var2 == df$Var2[1], "first_column", df$highlight)
+
+# plot the blank adjacency matrix
+adj_to_plot <- ggplot( df, aes( Var1, Var2 ) ) +
+  geom_tile( aes( fill = highlight ), color = "black" ) +
+      geom_text( aes( 
+        label = ifelse( Var1 == Var1[1] | Var2 == Var2[1], 
+                        value, 
+                        ifelse( Var1 == Var2, 0, "") ) ), color = "black" ) +
+  scale_fill_manual( values = c("diagonal" = "#28a88d", 
+                                "first_row" = "#28a88d", 
+                                "first_column" = "#28a88d", "off_diagonal" = "white"), 
+                     guide = "none") +  
+  coord_fixed() +
+  theme_minimal() + 
+  theme(panel.background = element_rect( fill = "white", color = NA ),
+        panel.grid.major = element_line( color = "gray" ),  
+        panel.grid.minor = element_line( color = "lightgray" ),
+        axis.text.x = element_text( hjust = 0.5, vjust = 0.5 ),
+        axis.text.y = element_text( hjust = 0.5, vjust = 0.5 ),
+        axis.title = element_blank(),
+        axis.text.x.top = element_text( hjust = 0.5, vjust = 0.5 ),
+        axis.ticks = element_blank() ) + 
+  labs( x = NULL, y = NULL ) +  
+  scale_y_discrete( position = "left" ) +
+  scale_x_discrete( position = "top" )  +
+  ggtitle( "Adjacency Matrix for\n Undirected Graph" )
+
+# plot the network and the adjacency matrix
+grid.arrange( u_graph, adj_to_plot, ncol = 2 )
+
+```
+
+Now, what does the rest of the matrix look like? Fill in the values in the matrix based on the graph.
+
+Done? It should look like this:
+
+```{r}
+
+# plot the adjacency matrix
+adj_to_plot <- ggplot( df, aes( Var1, Var2 ) ) +
+  geom_tile( color = "black", fill = "white" ) +
+  geom_text( aes( label = value ), color = "black" ) +
+  coord_fixed() +
+  theme_minimal() + 
+  theme(panel.background = element_rect(fill = "white", color = NA),
+        panel.grid.major = element_line(color = "gray"),  
+        panel.grid.minor = element_line(color = "lightgray"),
+        axis.text.x = element_text(hjust = 0.5, vjust = 0.5),
+        axis.text.y = element_text(hjust = 0.5, vjust = 0.5),
+        axis.title = element_blank(),
+        axis.text.x.top = element_text(hjust = 0.5, vjust = 0.5),
+        axis.ticks = element_blank()) + 
+  labs(x = NULL, y = NULL) +  
+  scale_y_discrete(position = "left") +
+  scale_x_discrete(position = "top")  +
+  ggtitle( "Adjacency Matrix for\n Undirected Graph" )
+
+# plot the network and the adjacency matrix
+grid.arrange( u_graph, adj_to_plot, ncol = 2 )
+
+```
+
+The highlighted section here is called the **upper triangle** of the matrix. The *sum* of the upper triangle should equal the number of edges in the graph.
+
+```{r}
+
+df$upper_triangle <- ifelse( rownames( df ) %in% c( 2:5,8:10,14,15,20 ), "upper", "lower" )
+ 
+# plot the adjacency matrix
+adj_to_plot <- ggplot( df, aes( Var1, Var2 ) ) +
+  geom_tile( aes( fill = upper_triangle ), color = "black" ) +
+  geom_text( aes( label = value ), color = "black" ) +
+  scale_fill_manual(values = c("upper" = "#28a88d", "lower" = "white"), guide = "none") +
+  coord_fixed() +
+  theme_minimal() + 
+  theme(panel.background = element_rect(fill = "white", color = NA),
+        panel.grid.major = element_line(color = "gray"),  
+        panel.grid.minor = element_line(color = "lightgray"),
+        axis.text.x = element_text(hjust = 0.5, vjust = 0.5),
+        axis.text.y = element_text(hjust = 0.5, vjust = 0.5),
+        axis.title = element_blank(),
+        axis.text.x.top = element_text(hjust = 0.5, vjust = 0.5),
+        axis.ticks = element_blank()) + 
+  labs(x = NULL, y = NULL) +  
+  scale_y_discrete(position = "left") +
+  scale_x_discrete(position = "top")  +
+  ggtitle( "Adjacency Matrix for\n Undirected Graph" )
+
+# plot the network and the adjacency matrix
+grid.arrange( u_graph, adj_to_plot, ncol = 2 )
+
+```
+
+The other highlighted section here is called the **lower triangle** of the matrix. The *sum* of the lower triangle should also equal the number of edges in the graph.
+
+```{r}
+
+df$lower_triangle <- ifelse( rownames( df ) %in% c( 6,11,12,16:18,21:24 ), "lower", "upper" )
+
+
+# plot the adjacency matrix
+adj_to_plot <- ggplot( df, aes( Var1, Var2 ) ) +
+  geom_tile( aes( fill = lower_triangle ), color = "black" ) +
+  geom_text( aes( label = value ), color = "black" ) +
+  scale_fill_manual( values = c("lower" = "#28a88d", "upper" = "white"), guide = "none") +
+  coord_fixed() +
+  theme_minimal() + 
+  theme(panel.background = element_rect(fill = "white", color = NA),
+        panel.grid.major = element_line(color = "gray"),  
+        panel.grid.minor = element_line(color = "lightgray"),
+        axis.text.x = element_text(hjust = 0.5, vjust = 0.5),
+        axis.text.y = element_text(hjust = 0.5, vjust = 0.5),
+        axis.title = element_blank(),
+        axis.text.x.top = element_text(hjust = 0.5, vjust = 0.5),
+        axis.ticks = element_blank()) + 
+  labs(x = NULL, y = NULL) +  
+  scale_y_discrete(position = "left") +
+  scale_x_discrete(position = "top")  +
+  ggtitle( "Adjacency Matrix for Undirected Graph" )
+
+# plot the network and the adjacency matrix
+grid.arrange( u_graph, adj_to_plot, ncol = 2 )
+
+```
+
+Alternatively, we could sum all the elements and divide by 2.
+
+#### Directed, Binary Graphs
+
+In a **directed** graph, the order of the nodes <u>does</u> matter. Specifically, $l_k1 = (n_i, n_j) \neq (n_j, n_i) = l_k2$. As we did above, we can use an adjacency matrix to represent this information in matrix form.
+
+```{r}
+
+# create an adjacency matrix from the digraph
+# note that you have to take the transpose for this to work correctly in the table
+d_adj_matrix <- as_adjacency_matrix( t( digraph ), sparse = FALSE )
+
+# melt the matrix into a long format suitable for ggplot
+dfd <- melt( d_adj_matrix )
+
+# Reverse the order of the y-axis labels so they aren't backwards
+dfd$Var2 <- factor( dfd$Var2, levels = rev( rownames( d_adj_matrix ) ) )
+
+# plot the blank adjacency matrix
+adj_to_plot <- ggplot( dfd, aes( Var1, Var2 ) ) +
+  geom_tile( color = "black", fill = "white" ) +
+  coord_fixed() +
+  theme_minimal() + 
+  theme(panel.background = element_rect( fill = "white", color = NA ),
+        panel.grid.major = element_line( color = "gray" ),  
+        panel.grid.minor = element_line( color = "lightgray" ),
+        axis.text.x = element_text( hjust = 0.5, vjust = 0.5 ),
+        axis.text.y = element_text( hjust = 0.5, vjust = 0.5 ),
+        axis.title = element_blank(),
+        axis.text.x.top = element_text(hjust = 0.5, vjust = 0.5),
+        axis.ticks = element_blank()) + 
+  labs(x = NULL, y = NULL) +  
+  scale_y_discrete(position = "left") +
+  scale_x_discrete(position = "top")  +
+  ggtitle( "Adjacency Matrix for Directed Graph" )
+
+# plot the network and the adjacency matrix
+grid.arrange( d_graph, adj_to_plot, ncol = 2 )
+
+```
+
+What is different in our matrix when the graph is directed?
+
+In the first row, *i* sends to the second row: $X_{12}=1$.
+
+```{r}
+
+dfd$JenTom <- ifelse( dfd$Var1 == "Tom" & dfd$Var2 == "Jen", "highlight", "not" )
+
+# plot the adjacency matrix with one cell shown
+adj_to_plot <- ggplot( dfd, aes( Var1, Var2 ) ) +
+  geom_tile( aes( fill = JenTom ), color = "black" ) +
+  geom_text(aes( label = ifelse( JenTom == "highlight", value, "" ) ), color = "black" ) + 
+  scale_fill_manual( values = c( "highlight" = "#fc23fc", "not" = "white" ), guide = "none" ) +
+  coord_fixed() +
+  theme_minimal() + 
+  theme(panel.background = element_rect( fill = "white", color = NA ),
+        panel.grid.major = element_line( color = "gray" ),  
+        panel.grid.minor = element_line( color = "lightgray" ),
+        axis.text.x = element_text( hjust = 0.5, vjust = 0.5 ),
+        axis.text.y = element_text( hjust = 0.5, vjust = 0.5 ),
+        axis.title = element_blank(),
+        axis.text.x.top = element_text(hjust = 0.5, vjust = 0.5),
+        axis.ticks = element_blank()) + 
+  labs(x = NULL, y = NULL) +  
+  scale_y_discrete(position = "left") +
+  scale_x_discrete(position = "top")  +
+  ggtitle( "Adjacency Matrix for Directed Graph" )
+
+# plot the network and the adjacency matrix
+grid.arrange( d_graph, adj_to_plot, ncol = 2 )
+
+```
+
+But, in the second row, *j* does not send $X_{21}=0$. The Jen/Tom dyad is **asymmetric**. Directed graphs permit this asymmetry because $l_k1 = (n_i, n_j) \neq (n_j, n_i) = l_k2$.
+
+```{r}
+
+dfd$TomJen <- ifelse( dfd$Var1 == "Jen" & dfd$Var2 == "Tom", "highlight", "not" )
+
+# plot the adjacency matrix with one cell shown
+adj_to_plot <- ggplot( dfd, aes( Var1, Var2 ) ) +
+  geom_tile( aes( fill = TomJen ), color = "black" ) +
+  geom_text(aes( label = ifelse( TomJen == "highlight", value, "" ) ), color = "black" ) + 
+  scale_fill_manual( values = c( "highlight" = "#fc23fc", "not" = "white" ), guide = "none" ) +
+  coord_fixed() +
+  theme_minimal() + 
+  theme(panel.background = element_rect( fill = "white", color = NA ),
+        panel.grid.major = element_line( color = "gray" ),  
+        panel.grid.minor = element_line( color = "lightgray" ),
+        axis.text.x = element_text( hjust = 0.5, vjust = 0.5 ),
+        axis.text.y = element_text( hjust = 0.5, vjust = 0.5 ),
+        axis.title = element_blank(),
+        axis.text.x.top = element_text(hjust = 0.5, vjust = 0.5),
+        axis.ticks = element_blank()) + 
+  labs(x = NULL, y = NULL) +  
+  scale_y_discrete(position = "left") +
+  scale_x_discrete(position = "top")  +
+  ggtitle( "Adjacency Matrix for\n Directed Graph" )
+
+# plot the network and the adjacency matrix
+grid.arrange( d_graph, adj_to_plot, ncol = 2 )
+
+```
+
+What about the Leaf/Bob dyad? Is it *asymmetric* or is it *symmetric*?
+
+```{r}
+
+dfd$LeafBob <- ifelse( dfd$Var1 == "Leaf" &  dfd$Var2 == "Bob" |
+                         dfd$Var1 == "Bob" & dfd$Var2 == "Leaf", "highlight", "not" )
+
+# plot the adjacency matrix with one cell shown
+adj_to_plot <- ggplot( dfd, aes( Var1, Var2 ) ) +
+  geom_tile( aes( fill = LeafBob ), color = "black" ) +
+  geom_text(aes( label = ifelse( LeafBob == "highlight", value, "" ) ), color = "black" ) + 
+  scale_fill_manual( values = c( "highlight" = "#fc23fc", "not" = "white" ), guide = "none" ) +
+  coord_fixed() +
+  theme_minimal() + 
+  theme(panel.background = element_rect( fill = "white", color = NA ),
+        panel.grid.major = element_line( color = "gray" ),  
+        panel.grid.minor = element_line( color = "lightgray" ),
+        axis.text.x = element_text( hjust = 0.5, vjust = 0.5 ),
+        axis.text.y = element_text( hjust = 0.5, vjust = 0.5 ),
+        axis.title = element_blank(),
+        axis.text.x.top = element_text(hjust = 0.5, vjust = 0.5),
+        axis.ticks = element_blank()) + 
+  labs(x = NULL, y = NULL) +  
+  scale_y_discrete(position = "left") +
+  scale_x_discrete(position = "top")  +
+  ggtitle( "Adjacency Matrix for\n Directed Graph" )
+
+# plot the network and the adjacency matrix
+grid.arrange( d_graph, adj_to_plot, ncol = 2 )
+
+```
+
+Now, what does the rest of the matrix look like? Fill in the values in the matrix based on the graph.
+
+Done? It should look like this:
+
+```{r}
+
+# plot the adjacency matrix
+adj_to_plot <- ggplot( dfd, aes( Var1, Var2 ) ) +
+  geom_tile( color = "black", fill = "white" ) +
+  geom_text( aes( label = value ), color = "black" ) +
+  coord_fixed() +
+  theme_minimal() + 
+  theme(panel.background = element_rect(fill = "white", color = NA),
+        panel.grid.major = element_line(color = "gray"),  
+        panel.grid.minor = element_line(color = "lightgray"),
+        axis.text.x = element_text(hjust = 0.5, vjust = 0.5),
+        axis.text.y = element_text(hjust = 0.5, vjust = 0.5),
+        axis.title = element_blank(),
+        axis.text.x.top = element_text(hjust = 0.5, vjust = 0.5),
+        axis.ticks = element_blank()) + 
+  labs(x = NULL, y = NULL) +  
+  scale_y_discrete(position = "left") +
+  scale_x_discrete(position = "top")  +
+  ggtitle( "Adjacency Matrix for Directed Graph" )
+
+# plot the network and the adjacency matrix
+grid.arrange( d_graph, adj_to_plot, ncol = 2 )
+
+```
+
+Note that because we are allowing directionality to matter, the total number of edges in the network is just the sum of the entire matrix (which is different from undirected graphs where we divide that sum by 2).
+
+<br>
+
+## Test your Knowledge
+
+-   What was the key question behind the Konigsberg bridge problem? How did Euler represent this problem using points and lines? What was the significance of this representation?
+
+-   How is a graph represented in terms of nodes and edges? What does the notation $G = (N,L)$ mean?
+
+-   What does it mean for two nodes to be **adjacent** in a graph?
+
+-   In an undirected graph, how are the connections between nodes represented? How is this different from a directed graph?
+
+-   In an adjacency matrix, what does the value in the $i^{th}$ row and $j^{th}$ column represent?
+
+-   What is the difference between an **undirected** and a **directed** adjacency matrix? In an **undirected** graph, is the $i^{th}$ row equal to the $j^{th}$ column? What about for a **directed** graph?
+
+-   Define the following terms as they relate to matrices: Scalar, Column vector, Row vector, Matrix, Square matrix, Order of a matrix.
+
+## Summary
+
+This chapter has how to represent networks using matrices. In the next chapter, we will start looking at how to analyze these matrices.
