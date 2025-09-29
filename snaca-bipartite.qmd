@@ -20,16 +20,16 @@ library( reshape2 )  # for reshaping the matrix data for a plot
 
 # Bipartite Graphs/Two-Mode Networks {.unnumbered}
 
-In the prior chapters, we have mainly focused our attention on networks that have a single set of nodes. As discussed in the introductory chapter, these sort of graphs are referred to as *unipartite*. This term means "one partition" and is in reference to the fact that there is only one partition of the node set. But, not all of the networks you encounter as a crime analyst will be unipartite (also called "one mode"). In fact, most of the data you will examine will be more complex in how it is structured.
+In the prior chapters, we have mainly focused our attention on networks that have a single set of nodes. As discussed in the introductory chapter, these sorts of graphs are referred to as *unipartite*. This term means "one partition" and is in reference to the fact that there is only one partition of the node set. But, not all of the networks you encounter as a crime analyst will be unipartite (also called "one mode"). In fact, most of the data you will examine will be more complex in how it is structured.
 
-But, not all of the networks we want to examine have a single node set. More complex relational structures have multiple partitions of node sets (i.e. *n*-mode). **Bipartite** graphs allow us to represent networks that have two partitions of nodes. In many instances, data are structured such that nodes come from two separate classes. Some examples include:
+But not all of the networks we want to examine have a single node set. More complex relational structures have multiple partitions of node sets (i.e., *n*-mode). **Bipartite** graphs allow us to represent networks that have two partitions of nodes. In many instances, data are structured such that nodes come from two separate classes. Some examples include:
 
 -   Members of various groups
 -   Authors of papers
 -   Students in courses
 -   Participants in an event
 
-In all these examples, there are not direct ties between the nodes. For example, students who attend the same courses are not connected directly through some tie like friendship. Rather, they are connected through their shared course taking. It is the *courses* that connect them.
+In all these examples, there are no direct ties between the nodes. For example, students who attend the same courses are not connected directly through some tie like friendship. Rather, they are connected through their shared course-taking. It is the *courses* that connect them.
 
 In contrast to *unipartite* graphs, this is a very different way of **conceptualizing** and **operationalizing** social structure.
 
@@ -39,7 +39,7 @@ Let's revisit an empirical question from the introductory chapter of this book:
 
 *What determines whether a police officer endorses the use of body-worn cameras and whether they activate their body-camera during an incident?*
 
-Rather than focus on individual characteristics (e.g. age, experience) or situational characteristics (e.g. time of day, incident), a study by @young2015 entitled, *Diffusion of Ideas and Technology: The Role of Networks in Influencing the Endorsement and Use of On-Officer Video Cameras*, focused on the **network** among police officers. Specifically, they examined two research questions:
+Rather than focus on individual characteristics (e.g., age, experience) or situational characteristics (e.g., time of day, incident), a study by @young2015 entitled, *Diffusion of Ideas and Technology: The Role of Networks in Influencing the Endorsement and Use of On-Officer Video Cameras*, focused on the **network** among police officers. Specifically, they examined two research questions:
 
 -   How do police officers "frame" body-worn cameras?
 -   Is the meaning officers attribute to cameras created and transmitted in groups?
@@ -60,7 +60,7 @@ The network @young2015 analyzed is shown below:
 knitr::include_graphics( "images/young-ready-bipartite-figure.png" )
 ```
 
-In this network, incidents (white circles) connect officers (squares and triangles). This is a bipartite graph because there are two sets of nodes: incidents and officers. The plot shows two types of officers, those who were in the treatment condition of the study (i.e. they were assigned a body-worn camera) and those who were in the control condition (i.e. they did not receive a camera). The focus of the study was how exposure to body-cameras during incidents influenced views, especially for those who were not assigned a camera. What @young2015 found was that officers' views of body-cameras changed based on who they interacted with in the shared-incident network.
+In this network, incidents (white circles) connect officers (squares and triangles). This is a bipartite graph because there are two sets of nodes: incidents and officers. The plot shows two types of officers: those who were in the treatment condition of the study (i.e., they were assigned a body-worn camera) and those who were in the control condition (i.e., they did not receive a camera). The focus of the study was how exposure to body-cameras during incidents influenced views, especially for those who were not assigned a camera. What @young2015 found was that officers' views of body-cameras changed based on who they interacted with in the shared-incident network.
 
 Data such as this are what we are going to examine in this chapter. By the end of this chapter, you should be able to:
 
@@ -70,7 +70,7 @@ Data such as this are what we are going to examine in this chapter. By the end o
 
 ## Bipartite Graphs: Notation
 
-A **bipartite** graph has two partitions of nodes (called *modes*), and edges only occur between these partitions (i.e. not within). The definition of a bipartite graph is the following: $G = (N,M,L)$ where $G$ is the graph and is defined by:
+A **bipartite** graph has two partitions of nodes (called *modes*), and edges only occur between these partitions (i.e., not within). The definition of a bipartite graph is the following: $G = (N,M,L)$ where $G$ is the graph and is defined by:
 
 -   Node set $N = \{n_1, n_2…, n_g\}$
 -   Node set: $M = \{m_1, m_2…, m_g\}$
@@ -84,7 +84,7 @@ We can visualize an example as:
 knitr::include_graphics( "images/ch-10-graph-01.jpeg" )
 ```
 
-In this example, we can define all of pieces of the graph using our definition above:
+In this example, we can define all of the pieces of the graph using our definition above:
 
 -   Node set $N = \{n_A, n_B, n_C, n_D, n_E, n_F \}$
 -   Node set: $M = \{m_1, m_2, m_3, m_4, m_5 \}$
@@ -116,13 +116,13 @@ knitr::include_graphics( "images/ch-10-graph-04.jpeg" )
 
 Here is a question: what does $l_k = (n_i,n_i)$ represent in a **unipartite** graph? What does $l_k = (n_i,m_i)$ represent in a **bipartite** graph?
 
-In a **unipartite** graph, $l_k = (n_i,n_i)$ would represent an edge from $n_i$ to $n_i$. This is called a *loop* and it represents a self-nomination. Recall from the chapter on [unipartite data structures]() that we usually set these elements of the matrix to zero.
+In a **unipartite** graph, $l_k = (n_i,n_i)$ would represent an edge from $n_i$ to $n_i$. This is called a *loop,* and it represents a self-nomination. Recall from the chapter on [unipartite data structures]() that we usually set these elements of the matrix to zero.
 
-However, in a **bipartite** graph, $l_k = (n_i,m_i)$ would represent an edge from $n_i$ to $m_i$. That is, a link between the *ith* row and the *ith* column. For example, in the graph above, the line $l_k = (n_A,m_1)$ has a value 1 meaning that node *A* in the $N$ node set is connected to node *1* in the $M$ node set.
+However, in a **bipartite** graph, $l_k = (n_i,m_i)$ would represent an edge from $n_i$ to $m_i$. That is, a link between the *ith* row and the *ith* column. For example, in the graph above, the line $l_k = (n_A,m_1)$ has a value 1, meaning that node *A* in the $N$ node set is connected to node *1* in the $M$ node set.
 
 ## Bipartite Graphs: Properties
 
-There are several approaches to examining bipartite graphs. Either we can keep the graph bipartite and examine the properties (as discussed below). Or, what is commonly done is that we *project* the graph to one mode (either N or M) and examine the properties. We will examine projection in the next chapter. Here, let's see what properties we can describe for a biparite graph (i.e. a two-mode network).
+There are several approaches to examining bipartite graphs. Either we can keep the graph bipartite and examine the properties (as discussed below). Or, what is commonly done is that we *project* the graph to one mode (either N or M) and examine the properties. We will examine projection in the next chapter. Here, let's see what properties we can describe for a bipartite graph (i.e., a two-mode network).
 
 As with unipartite graphs, we can describe the structure of the network in various ways. Examples:
 
@@ -156,7 +156,7 @@ It tells us that 40% of the edges that could occur in the network did occur. In 
 
 ### Degree Centrality: Bipartite Graphs
 
-Recall from the [Degree Centrality](snaca-centrality-degree.html) chapter that for an undirected graph there is one degree distribution and for a directed graph there are two degree distributions (i.e. *indegree* and *outdegree*). A bipartite graph also has <u>two</u> degree distributions:
+Recall from the [Degree Centrality](snaca-centrality-degree.html) chapter that for an undirected graph, there is one degree distribution, and for a directed graph, there are two degree distributions (i.e., *indegree* and *outdegree*). A bipartite graph also has <u>two</u> degree distributions:
 
 -   The distribution of ties over nodes in the first mode, $N$
 -   The distribution of ties over nodes in the second mode, $M$
@@ -178,7 +178,7 @@ $C_D(N_A) = \sum_j x_{A,j} = x_{A, 1} + x_{A, 2} + x_{A, 3} + x_{A, 4} + x_{A, 5
 
 The degree centrality score for node *A* in $N$ is 2. This means that *A* is connected to 2 nodes in $M$.
 
-Doing this for all the nodes we get:
+Doing this for all the nodes, we get:
 
 ```{r, fig.cap = "", out.width = "60%"}
 knitr::include_graphics( "images/ch-10-graph-05.jpeg" )
@@ -200,7 +200,7 @@ knitr::include_graphics( "images/ch-10-graph-06.jpeg" )
 
 As discussed in all the chapters on centrality, centrality scores for each node set depend on the number of nodes in the graph. Larger networks will have a higher maximum possible degree centrality value simply because there are more nodes with whom to connect. *Solution?*
 
-Standardize! (This should be an automatic response for you by now). As before, we need to adjust the *raw* degree centrality scores to produce a *standardized* degree centrality score. We can account for differences across networks by dividing each degree centrality score by the number of nodes in the opposite set:
+Standardize! (This should be an automatic response for you by now.) As before, we need to adjust the *raw* degree centrality scores to produce a *standardized* degree centrality score. We can account for differences across networks by dividing each degree centrality score by the number of nodes in the opposite set:
 
 -   For $N$, we divide by $M$
 -   For $M$, we divide by $N$
@@ -245,16 +245,16 @@ Let's finish standardizing the rest of the scores:
 
 #### Mean Degree Centrality: Bipartite Graphs
 
-As discussed in the [Degree Centrality](snaca-centrality-degree.html) chapter, we can summarize degree centrality scores by taking the mean. This tells us, on average, how many edges are incident on a node and helps us get a sense of how connected the network is, overall. With bipartite graphs we can also do this, we simply calculate the mean degree for each node set:
+As discussed in the [Degree Centrality](snaca-centrality-degree.html) chapter, we can summarize degree centrality scores by taking the mean. This tells us, on average, how many edges are incident on a node and helps us get a sense of how connected the network is, overall. With bipartite graphs, we can also do this; we simply calculate the mean degree for each node set:
 
 -   For the mean of $N$, or $\bar C_D(N)$, we divide by $\frac{L}{N}$ and
 -   For the mean of $M$, or $\bar C_D(M)$, we divide by $\frac{L}{M}$
 
-Note that for the mean we use the number of nodes in the corresponding node set. Above, when we standardized, we used the opposite node set. Just keep this in mind when doing the calculations.
+Note that for the mean, we use the number of nodes in the corresponding node set. Above, when we standardized, we used the opposite node set. Just keep this in mind when doing the calculations.
 
 *What is the mean degree centrality score for each node set?*
 
-To do this we simply take the number of edges, $L$, and divide by the corresponding size of the node sets. We know from our calculation of the density above that $L = 12$. So, that gives us:
+To do this, we simply take the number of edges, $L$, and divide by the corresponding size of the node sets. We know from our calculation of the density above that $L = 12$. So, that gives us:
 
 -   $\bar C_D(N) = 12 / 6 = 2$ and
 -   $\bar C_D(M) = 12 / 5 = 2.4$
@@ -270,7 +270,7 @@ Since we have two sets of nodes, we can compare the means. The average node in $
 -   What is the primary difference between unipartite and bipartite graphs? Provide an example of each.
 -   Why are bipartite graphs useful for representing certain types of data encountered by crime analysts?
 -   What are the two node sets in a bipartite graph?
--   How does the adjacency matrix in a bipartite graph differ from the adjacency matrix of a unipartite graph?
+-   How does the adjacency matrix of a bipartite graph differ from the adjacency matrix of a unipartite graph?
 -   What does the density of a bipartite graph measure? Conceptually, what does the density describe?
 -   Consider a two-mode network with $N = 12$, $M = 10$, and $L = 24$. Calculate the density of this bipartite graph.
 -   Explain how degree centrality is calculated for each node set in a bipartite graph.

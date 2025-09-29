@@ -20,7 +20,7 @@ library( reshape2 )  # for reshaping the matrix data for a plot
 
 # Closeness Centrality {.unnumbered}
 
-In the prior chapter, we examined the idea of "centrality" for nodes and "centralization" for graphs, focusing attention on the conceptual aspects of what it means to be *central* as well as the ways in which we can operationalize the concept using *degree centrality*. In this chapter we want to continue thinking about what it means to be central, but through a different conceptual lens: **closeness**. As a crime analyst, examining closeness centrality can provide crucial insights into the efficiency and influence of individuals within a group that may go beyond what you can glean from examining degree centrality. For instance, @bright2015illuminating study of drug trafficking networks illustrates how closeness centrality played a pivotal role in understanding the structure and function of illicit organizations. In this study, @bright2015illuminating examined an Australian drug trafficking network and found that individuals with higher closeness centrality were not necessarily the most visible or directly connected (in terms of degree centrality), but held critical positions because of their proximity to others in the network. These individuals could quickly access and disseminate information across the group, making them key actors in maintaining the flow of drugs, money, and communication. By identifying those with high closeness centrality, law enforcement was able to target individuals who had the potential to disrupt the network's operations more effectively than simply targeting those with the most connections.
+In the prior chapter, we examined the idea of "centrality" for nodes and "centralization" for graphs, focusing attention on the conceptual aspects of what it means to be *central* as well as the ways in which we can operationalize the concept using *degree centrality*. In this chapter, we want to continue thinking about what it means to be central, but through a different conceptual lens: **closeness**. As a crime analyst, examining closeness centrality can provide crucial insights into the efficiency and influence of individuals within a group that may go beyond what you can glean from examining degree centrality. For instance, @bright2015illuminating study of drug trafficking networks illustrates how closeness centrality played a pivotal role in understanding the structure and function of illicit organizations. In this study, @bright2015illuminating examined an Australian drug trafficking network and found that individuals with higher closeness centrality were not necessarily the most visible or directly connected (in terms of degree centrality), but held critical positions because of their proximity to others in the network. These individuals could quickly access and disseminate information across the group, making them key actors in maintaining the flow of drugs, money, and communication. By identifying those with high closeness centrality, law enforcement was able to target individuals who had the potential to disrupt the network's operations more effectively than simply targeting those with the most connections.
 
 By the end of this chapter, you should be able to:
 
@@ -144,11 +144,11 @@ How *close* is a node to other nodes? *Closeness* centrality measures how near a
 
 Terminology:
 
--   A **path** is an edge or sequence of edges that connect two nodes.
+-   A **path** is an edge or sequence of edges that connects two nodes.
 -   A **geodesic** is the shortest path between two nodes.
 -   The **distance**, $d(n_i,n_j)$, is the length of the path between *i* and *j*.
 
-Another way of saying this is that if we know how "far apart" two nodes are (i.e. the distance), then we can take the inverse of that and know how "close" the nodes are to each other.
+Another way of saying this is that if we know how "far apart" two nodes are (i.e., the distance), then we can take the inverse of that and know how "close" the nodes are to each other.
 
 ## Undirected Graphs
 
@@ -166,7 +166,7 @@ $$C_C(n_i) = [\sum\limits_{j=1}^g d(n_i,n_j)]^{-1} = \frac{1}{[\sum\limits_{j=1}
 
 In words, the closeness is 1 divided by the sum of the distances (called the *reciprocal*).
 
-To find the closeness centrality score, we need to first find the distances between each node. We can express these distances using a matrix, just like we did with the sociomatrix before.
+To find the closeness centrality score, we first need to find the distances between each node. We can express these distances using a matrix, just like we did with the sociomatrix before.
 
 Let's take a look at this with some data. Recall our example network with Jen, Tom, Bob, Leaf, and Jim:
 
@@ -206,7 +206,7 @@ adj_to_plot <- ggplot( df, aes( Var1, Var2 ) ) +
 u_graph
 ```
 
-How far is Jen from Tom? How far is Jen from Bob? In other words, how many edges do we count in going from Jen to Tom? From Jen to Bob?
+How far is Jen from Tom? How far is Jen from Bob? In other words, how many edges do we count when going from Jen to Tom? From Jen to Bob?
 
 ```{r}
 
@@ -242,7 +242,7 @@ grid.arrange( u_graph, d_to_plot, ncol = 2 )
 
 ```
 
-For our graph, we want to first build a *distance matrix* which shows the value of the geodesic (i.e. shortest path) from *i* to *j*. We can do this by looking at each node and seeing the fewest steps that are needed to reach another node. We can see that Jen can reach Tom in 1 step (i.e. $L_{Jen,Tom}$) and that Jen can reach Bob in 2 steps (i.e. $L_{Jen,Tom}$ & $L_{Tom,Bob}$).
+For our graph, we want to first build a *distance matrix* that shows the value of the geodesic (i.e., the shortest path) from *i* to *j*. We can do this by looking at each node and seeing the fewest steps that are needed to reach another node. We can see that Jen can reach Tom in 1 step (i.e., $L_{Jen,Tom}$) and that Jen can reach Bob in 2 steps (i.e., $L_{Jen,Tom}$ & $L_{Tom,Bob}$).
 
 ```{r}
 
@@ -350,9 +350,9 @@ That gives us the closeness centrality score for each individual:
 
 ### Standardization
 
-As discussed in the prior chapter, centrality measures are sensitive to the size of the graph, *g*. In the case of *closeness* centrality, having to sum over more nodes will push scores closer to zero. Think about it: if we added more rows and columns to our distance matrix, that will increase the denominator, making the quotient smaller. This means that we can't compare closeness centrality scores across graphs of different sizes. *Solution*?
+As discussed in the prior chapter, centrality measures are sensitive to the size of the graph, *g*. In the case of *closeness* centrality, having to sum over more nodes will push scores closer to zero. Think about it: if we added more rows and columns to our distance matrix, that would increase the denominator, making the quotient smaller. This means that we can't compare closeness centrality scores across graphs of different sizes. *Solution*?
 
-Standardize! If we want to compare nodes in different sized networks, then we just take into account the number of nodes and the maximum possible nodes to which *i* could be connected. In an undirected graph, this is *g-1*.
+Standardize! If we want to compare nodes in different-sized networks, then we just take into account the number of nodes and the maximum possible nodes to which *i* could be connected. In an undirected graph, this is *g-1*.
 
 Thus, we can calculate a standardized closeness centrality for an undirected graph as:
 
@@ -368,7 +368,7 @@ For this graph, the denominator, *g-1* is $5 - 1 = 4$. Plugging that in we get: 
 | Leaf |    7     | 1/7 = 0.143 |    0.143\*4 = 0.572    |
 | Jim  |    7     | 1/7 = 0.143 |    0.143\*4 = 0.572    |
 
-Standardization is particularly important with *closeness* centrality because of the sensitivity of the measure to the size of the network. Take for example, the following networks:
+Standardization is particularly important with *closeness* centrality because of the sensitivity of the measure to the size of the network. Take, for example, the following networks:
 
 ```{r}
 
@@ -511,16 +511,15 @@ What is the mean closeness for our example network? We can pull these from the t
 
 $$\bar C_C =  \dfrac{\sum\limits_{i=1}^g C_C(n_i)}{g} = \dfrac{0.111 + 0.167 + 0.200 + 0.143 + 0.143}{5} = \dfrac{0.764}{5} = 0.153$$ The average closeness for this graph is 0.153. In other words, on average, a node has a closeness score of 0.153. But what does this mean?
 
-One way to interpret this score is to convert the score to a distance. We can do this be taking 1 as the numerator and our mean closeness score as the denominator: $$\dfrac{1}{0.153} = 6.536$$, which tells us that the average node is 6.5 links away from all the other nodes in the graph. 
+One way to interpret this score is to convert the score to a distance. We can do this by taking 1 as the numerator and our mean closeness score as the denominator: $$\dfrac{1}{0.153} = 6.536$$, which tells us that the average node is 6.5 links away from all the other nodes in the graph.
 
 ### Closeness Centralization
 
-In the prior chapter we discussed *graph centralization*, which measures the extent to which the nodes in a network differ from one another in their individual centrality scores. Put differently, how much variation is there in the distribution of centrality scores? As with degree centralization, we can calculate the closeness centralization of the graph. A key difference, however, is that for closeness centralization, we use the standardized closeness score.
+In the prior chapter, we discussed *graph centralization*, which measures the extent to which the nodes in a network differ from one another in their individual centrality scores. Put differently, how much variation is there in the distribution of centrality scores? As with degree centralization, we can calculate the closeness centralization of the graph. A key difference, however, is that for closeness centralization, we use the standardized closeness score.
 
 We can calculate closeness centralization as:
 
-$$C_C = \frac{\sum\limits_{i=1}^g[C'_C(n^*)-C'_C(n_i)]}{[(g-2)(g-1)]/(2g-3)}$$
-This may look imposing, but we can decompose it to see what it is doing:
+$$C_C = \frac{\sum\limits_{i=1}^g[C'_C(n^*)-C'_C(n_i)]}{[(g-2)(g-1)]/(2g-3)}$$ This may look imposing, but we can decompose it to see what it is doing:
 
 -   $C'_C(n^*)$ is the largest standardized closeness score
 -   $C'_C(n_i)$ is the standardized closeness score for node *i*
@@ -549,21 +548,21 @@ Recall our table of standardized closeness scores:
 
 $$C_C = \frac{\sum\limits_{i=1}^g[0.800-C'_C(n_i)]}{[(5-2)(5-1)]/(2*5-3)}$$
 
-| Node | Distance |  Closeness  | Standardized Closeness | Deviations of Standardized Closeness $0.800-C'_C(n_i)$ |
-|:---------:|:---------:|:---------:|:---------:|:---------------------------:|
-| Jen  |    9     | 1/9 = 0.111 |    0.111\*4 = 0.444    |                 0.800 - 0.444 = 0.356                  |
-| Tom  |    6     | 1/6 = 0.167 |    0.167\*4 = 0.668    |                 0.800 - 0.668 = 0.132                  |
-| Bob  |    5     | 1/5 = 0.200 |    0.200\*4 = 0.800    |                 0.800 - 0.800 = 0.000                  |
-| Leaf |    7     | 1/7 = 0.143 |    0.143\*4 = 0.572    |                 0.800 - 0.572 = 0.228                  |
-| Jim  |    7     | 1/7 = 0.143 |    0.143\*4 = 0.572    |                 0.800 - 0.572 = 0.228                  |
+| Node | Distance | Closeness | Standardized Closeness | Deviations of Standardized Closeness $0.800-C'_C(n_i)$ |
+|:-----------:|:-----------:|:-----------:|:-----------:|:--------------------:|
+| Jen | 9 | 1/9 = 0.111 | 0.111\*4 = 0.444 | 0.800 - 0.444 = 0.356 |
+| Tom | 6 | 1/6 = 0.167 | 0.167\*4 = 0.668 | 0.800 - 0.668 = 0.132 |
+| Bob | 5 | 1/5 = 0.200 | 0.200\*4 = 0.800 | 0.800 - 0.800 = 0.000 |
+| Leaf | 7 | 1/7 = 0.143 | 0.143\*4 = 0.572 | 0.800 - 0.572 = 0.228 |
+| Jim | 7 | 1/7 = 0.143 | 0.143\*4 = 0.572 | 0.800 - 0.572 = 0.228 |
 
-Now, if we total all of the values in the last column we get 0.944. Plugging this in as our numerator, we get:
+Now, if we total all of the values in the last column, we get 0.944. Plugging this in as our numerator, we get:
 
 $$C_C = \frac{0.944}{[(5-2)(5-1)]/(2*5-3)} = \frac{0.944}{1.714} = 0.5507585 \approx 0.551$$
 
 So, the closeness centralization score for our example graph is 0.551. *What does this mean?*
 
-When closeness centrality is evenly dispersed, meaning that all nodes have the same closeness score, then the numerator in the equation will be zero and the quotient will be close to 0. When there is considerable inequality in the closeness centrality scores between nodes, the quotient will be closer to 1. Thus, closer to 1 indicates that the graph is hierarchically structured and closer to 0 means that the graph is more decentralized.
+When closeness centrality is evenly dispersed, meaning that all nodes have the same closeness score, then the numerator in the equation will be zero, and the quotient will be close to 0. When there is considerable inequality in the closeness centrality scores between nodes, the quotient will be closer to 1. Thus, closer to 1 indicates that the graph is hierarchically structured, and closer to 0 means that the graph is more decentralized.
 
 We can see this by examining two additional undirected networks:
 
@@ -613,7 +612,7 @@ adj_to_plot <- ggplot( dfd, aes( Var1, Var2 ) ) +
 d_graph
 ```
 
-To answer this question, let's think again about what closeness measures. It is the inverse of the distance matrix. So, if we are looking at outgoing ties (i.e. $L(n_i,n_j)$) then our equation is the same for the undirected graph:
+To answer this question, let's think again about what closeness measures. It is the inverse of the distance matrix. So, if we are looking at outgoing ties (i.e., $L(n_i,n_j)$), then our equation is the same for the undirected graph:
 
 $$C_C(n_i) = [\sum\limits_{j=1}^g d(n_i,n_j)]^{-1} = \frac{1}{[\sum\limits_{j=1}^g d(n_i,n_j)]}$$
 
@@ -621,9 +620,9 @@ Note, however, that the distance of *i* to *j*, $d(n_i,n_j)$, does not necessari
 
 ### Outdegree
 
-Closeness centrality in directed graphs usually focuses on the send network (i.e. outgoing ties). Remember, *row* sums are the *outdegree*, so row distance tells you how close <u>you</u> are to others. That is, how many steps it takes <u>you</u> to reach another node.
+Closeness centrality in directed graphs usually focuses on the send network (i.e., outgoing ties). Remember, *row* sums are the *outdegree*, so row distance tells you how close <u>you</u> are to others. That is, how many steps it takes <u>you</u> to reach another node.
 
-As before, we want to first build a *distance matrix* which shows the value of the geodesic (i.e. shortest path) from *i* to *j*.
+As before, we want to first build a *distance matrix* that shows the value of the geodesic (i.e., shortest path) from *i* to *j*.
 
 ```{r}
 
@@ -767,7 +766,7 @@ grid.arrange( d_graph, d_to_plot, ncol = 2 )
 
 ```
 
-How far is Bob from Jen? Bob, is "infinite distance" from Jen because there is not a directed path by which he can reach her. This is also the case for the distance from Bob to Tom. But, Bob does have directed ties to Jim and Leaf. With directionality in mind, they are unreachable. But, Bob is 1 step from Leaf and 1 step from Jim along a directed path:
+How far is Bob from Jen? Bob is at an "infinite distance" from Jen because there is no directed path by which he can reach her. This is also the case for the distance from Bob to Tom. But, Bob does have directed ties to Jim and Leaf. With directionality in mind, they are unreachable. But, Bob is 1 step from Leaf and 1 step from Jim along a directed path:
 
 ```{r}
 
@@ -869,7 +868,7 @@ $$C'_C(n_i) = [\sum\limits_{j=1}^g d(n_i,n_j)]^{-1} \times [g-1]$$
 
 As we did above for an undirected graph, we can examine the average closeness for a directed graph, as this is an important property of a network. *Why? What does a network with a high average closeness look like? A low average closeness?*
 
-The mean closeness for an directed network is:
+The mean closeness for a directed network is:
 
 $$\bar C_C =  \dfrac{\sum\limits_{i=1}^g C_C(n_i)}{g}$$
 
@@ -887,11 +886,11 @@ What is the mean closeness for our example network? We can pull these from the t
 
 $$\bar C_C =  \dfrac{\sum\limits_{i=1}^g C_C(n_i)}{g} = \dfrac{0.111 + 0.200 + 0.500 + 0.500 + 0.500}{5} = \dfrac{1.811}{5} = 0.362$$ The average closeness for this graph is 0.362. In other words, on average, a node has a closeness score of 0.362. But what does this mean?
 
-Again, one way to interpret this score is to convert the score to a distance. We can do this be taking 1 as the numerator and our mean closeness score as the denominator: $$\dfrac{1}{0.362} = 2.762$$, which tells us that the average node is nearly links away from all the other nodes in the graph. 
+Again, one way to interpret this score is to convert the score to a distance. We can do this by taking 1 as the numerator and our mean closeness score as the denominator: $$\dfrac{1}{0.362} = 2.762$$, which tells us that the average node is nearly links away from all the other nodes in the graph.
 
 ### Indegree
 
-Note that in the prior section we were looking at *outdegree*. When we are looking at *outgoing* ties the closeness scores reflect how close <u>you</u> are to other nodes. For example, Tom's distance to Leaf is 2, meaning that it takes 2 outgoing ties to reach Leaf. What about the other way around? We can reverse this and look at the *incoming* ties by focusing on *indegree*. Remember, *column* sums are the *indegree*, so column distance tells you how close <u>others</u> are to you. That is, how many steps it takes a <u>node</u> to reach you. The difference is a bit nuanced, but meaningful. In this case, instead of summing the rows as we did above, we could sum the columns.
+Note that in the prior section, we were looking at *outdegree*. When we are looking at *outgoing* ties the closeness scores reflect how close <u>you</u> are to other nodes. For example, Tom's distance to Leaf is 2, meaning that it takes 2 outgoing ties to reach Leaf. What about the other way around? We can reverse this and look at the *incoming* ties by focusing on *indegree*. Remember, *column* sums are the *indegree*, so column distance tells you how close <u>others</u> are to you. That is, how many steps it takes a <u>node</u> to reach you. The difference is a bit nuanced, but meaningful. In this case, instead of summing the rows as we did above, we could sum the columns.
 
 ```{r}
 
@@ -945,11 +944,11 @@ $$C'_C(n_i) = [\sum\limits_{j=1}^g d(n_i,n_j)]^{-1} \times [g-1]$$
 
 ### Conversion to Undirected Graph
 
-**NOTE**: While these are correct, mathematically, they are far less intuitive than the scores we calculated based on the *outgoing* ties. For example, Tom's closeness score is 1. But, Bob, Leaf, and Jim cannot reach him. Also, note that Tom's standardized score is greater than 1. For these reasons, we often convert the directed graph to an undirected graph and calculate the scores on the undirected graph. In this case, the directed graph we have here would revert to the undirected graph we examined above in the section on undirected graphs.
+**NOTE**: While these are correct, mathematically, they are far less intuitive than the scores we calculated based on the *outgoing* ties. For example, Tom's closeness score is 1. But Bob, Leaf, and Jim cannot reach him. Also, note that Tom's standardized score is greater than 1. For these reasons, we often convert the directed graph to an undirected graph and calculate the scores on the undirected graph. In this case, the directed graph we have here would revert to the undirected graph we examined above in the section on undirected graphs.
 
 ### Closeness Centralization
 
-The denominator for group closeness centralization is not defined for directed graphs. To get a centralization score, we would just convert it to an undirected graph and calculate the score. Note that, unlike with degree centralization which has two scores (i.e. indegree centralization and outdegree centralization), there is only a single centralization score for a directed graph.
+The denominator for group closeness centralization is not defined for directed graphs. To get a centralization score, we would just convert it to an undirected graph and calculate the score. Note that, unlike with degree centralization, which has two scores (i.e., indegree centralization and outdegree centralization), there is only a single centralization score for a directed graph.
 
 ```{r}
 d_graph
@@ -971,4 +970,4 @@ For the graph above, we can compare the centralization scores based on the diffe
 
 ## Summary
 
-In this chapter we focused on closeness centrality. This concept is particularly useful for understanding the efficiency of information flow in a network. Unlike degree centrality, which measures direct connections, closeness centrality provides insight into the influence and access a node has through indirect connections. Studies, such as the analysis of drug trafficking and terrorist networks, have shown that individuals with high closeness centrality, though not necessarily the most directly connected, play crucial roles in maintaining communication and operational efficiency. In the next chapter we will focus on a final conceptualization and operationalization of centrality: *betweenness*.
+In this chapter, we focused on closeness centrality. This concept is particularly useful for understanding the efficiency of information flow in a network. Unlike degree centrality, which measures direct connections, closeness centrality provides insight into the influence and access a node has through indirect connections. Studies, such as the analysis of drug trafficking and terrorist networks, have shown that individuals with high closeness centrality, though not necessarily the most directly connected, play crucial roles in maintaining communication and operational efficiency. In the next chapter, we will focus on a final conceptualization and operationalization of centrality: *betweenness*.
