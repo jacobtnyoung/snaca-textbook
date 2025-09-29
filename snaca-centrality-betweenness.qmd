@@ -565,7 +565,11 @@ As before, we can put this information in a table of geodesic proportions:
 | Leaf |     |     |      | 0/1 |
 | Jim  |     |     |      |     |
 
+<<<<<<< Updated upstream
 Are we done? Not quite yet. Since the graph is **directed,** we have to total *all* the rows. The reason we did not do this for an **undirected** graph is that the adjacency matrix is symmetric. Since the matrix for an undirected graph is not symmetric, we have to think of all the ties. Recall from our discussion about adjacency matrices for directed graphs, the rows tell us about outgoing ties or sending, whereas the columns tell us about incoming ties or receiving. So, we will need information for the <u>complete</u> table.
+=======
+Are we done? Not quite yet. Since the graph is **directed,** we have to total *all* the rows. The reason we did not do this for an **undirected** graph is because the adjacency matrix is symmetric. Since the matrix for an undirected graph is not symmetric, we have to think of all the ties. Recall from our discussion about adjacency matrices for directed graphs, the rows tell us about outgoing ties or sending, whereas the columns tell us about incoming ties or receiving. So, we will need information for the <u>complete</u> table.
+>>>>>>> Stashed changes
 
 *Why?* Well, think about the table below:
 
