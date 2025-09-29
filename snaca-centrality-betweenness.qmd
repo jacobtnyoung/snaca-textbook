@@ -20,7 +20,7 @@ library( reshape2 )  # for reshaping the matrix data for a plot
 
 # Betweenness Centrality {.unnumbered}
 
-In the prior chapter, we examined the idea of "centrality" for nodes and "centralization" for graphs, focusing attention on the conceptual aspects of what it means to be *central* as well as the ways in which we can operationalize the concept using *degree centrality* and *closeness centrality*. In this chapter we want to continue thinking about what it means to be central, but through a different conceptual lens: **betweenness**. Betweenness centrality serves as a powerful indicator of actors who bridge otherwise disconnected parts of a network, offering unique control over the flow of information and resources across network boundaries. Unlike *degree* centrality, which emphasizes direct ties, or *closeness* centrality, which identifies actors closest to others, betweenness centrality highlights those who can influence inter-group dynamics. A compelling example is seen in a study by @calderoni2014social, which examined the Italian Mafia network, specifically the Ndrangheta organization. Calderoni found that individuals with high betweenness centrality played pivotal roles in connecting local criminal cells to broader, often international networks. These "connectors" were essential for coordinating illicit activities across regions and facilitating transactions that would otherwise remain confined to isolated groups. For law enforcement, targeting these high-betweenness actors provided a strategic leverage point to disrupt cross-regional collaboration, making them critical targets in efforts to dismantle organized crime networks. By understanding the role of betweenness, crime analysts can better assess how key individuals maintain structural cohesion within social networks.
+In the prior chapter, we examined the idea of "centrality" for nodes and "centralization" for graphs, focusing attention on the conceptual aspects of what it means to be *central* as well as the ways in which we can operationalize the concept using *degree centrality* and *closeness centrality*. In this chapter, we want to continue thinking about what it means to be central, but through a different conceptual lens: **betweenness**. Betweenness centrality serves as a powerful indicator of actors who bridge otherwise disconnected parts of a network, offering unique control over the flow of information and resources across network boundaries. Unlike *degree* centrality, which emphasizes direct ties, or *closeness* centrality, which identifies actors closest to others, betweenness centrality highlights those who can influence inter-group dynamics. A compelling example is seen in a study by @calderoni2014social, which examined the Italian Mafia network, specifically the Ndrangheta organization. Calderoni found that individuals with high betweenness centrality played pivotal roles in connecting local criminal cells to broader, often international networks. These "connectors" were essential for coordinating illicit activities across regions and facilitating transactions that would otherwise remain confined to isolated groups. For law enforcement, targeting these high-betweenness actors provided a strategic leverage point to disrupt cross-regional collaboration, making them critical targets in efforts to dismantle organized crime networks. By understanding the role of betweenness, crime analysts can better assess how key individuals maintain structural cohesion within social networks.
 
 By the end of this chapter, you should be able to:
 
@@ -141,7 +141,7 @@ In a case study examining the role of betweenness centrality in criminal network
 
 ## Betweenness Centrality Definition
 
-*Betweenness* centrality is based on the number of <u>shortest</u> paths between two nodes, *j* and *k*, that node *i* resides on. Recall that a **path** is an edge or sequence of edges that connect two nodes and a **geodesic** is the shortest path between two nodes.
+*Betweenness* centrality is based on the number of <u>shortest</u> paths between two nodes, *j* and *k*, that node *i* resides on. Recall that a **path** is an edge or sequence of edges that connects two nodes, and a **geodesic** is the shortest path between two nodes.
 
 ## Undirected Graphs
 
@@ -224,7 +224,7 @@ grid.arrange( plot1, plot2, ncol = 2 )
 
 Note that Bob is on both of those paths. He is *between* Jen and Jim on both paths. Note, however, that only one of the paths is a <u>geodesic path</u> (the Jen-\>Tom-\>Bob-\>Jim path). That is because it is shorter.
 
-Now, let's calculate the betweenness centrality for Bob. The **first** thing we need to find are the geodesic paths. Then, figure out how many of those geodesic paths contain Bob. We do this by creating a table of geodesic proportions for Bob.
+Now, let's calculate the betweenness centrality for Bob. The **first** thing we need to find is the geodesic paths. Then, figure out how many of those geodesic paths contain Bob. We do this by creating a table of geodesic proportions for Bob.
 
 #### Geodesic Proportions for *Bob*
 
@@ -235,7 +235,7 @@ Now, let's calculate the betweenness centrality for Bob. The **first** thing we 
 | Leaf |     |     |      |                               |
 | Jim  |     |     |      |                               |
 
-*How many geodesics from Jen to Jim?* There is 1 geodesic from **Jen** to **Jim**. So, we would just add that to our table:
+*How many geodesics are there from Jen to Jim?* There is 1 geodesic from **Jen** to **Jim**. So, we would just add that to our table:
 
 #### Geodesic Proportions for *Bob*
 
@@ -339,7 +339,7 @@ Now, to finish our calculation for Bob, we need to calculate the geodesics for t
 #### Geodesic Proportions for *Bob*
 
 |      | Jen | Tom |              Leaf              |              Jim               |
-|:----------|:---------:|:---------:|:-------------------:|:-------------------:|
+|:-------------|:------------:|:------------:|:--------------:|:--------------:|
 | Jen  |     | 0/1 |              1/1               |              1/1               |
 | Tom  |     |     | [?/?]{style="color: #28a88d;"} | [?/?]{style="color: #28a88d;"} |
 | Leaf |     |     |                                | [?/?]{style="color: #28a88d;"} |
@@ -413,7 +413,7 @@ Based on the plot, we can visually see that Leaf's betweenness is going to be ze
 |    Jim    |     |     |     |     |         |
 | **TOTAL** |     |     |     |     |  **0**  |
 
-Based on the visual inspection of the plot, can you find two other nodes who will have a betweenness centrality score of 0?
+Based on the visual inspection of the plot, can you find two other nodes that will have a betweenness centrality score of 0?
 
 The complete scores are:
 
@@ -429,7 +429,7 @@ The complete scores are:
 
 As discussed in the prior chapters, centrality measures are sensitive to the size of the graph, *g*. In the case of *betweenness* centrality, having to sum over more nodes will make scores from large networks bigger than scores from smaller networks (because you are just summing over more nodes). This means that we can't compare betweenness centrality scores across graphs of different sizes. *Solution*?
 
-Standardize! If we want to compare nodes in different sized graphs, then we just take into account the number of nodes and the maximum possible nodes to which *i* could be connected. For betweenness centrality, we have to go a step further. We need to account for the number of pairs of nodes that do not include *i*. In an undirected graph, this is $(g-1))(g-2)/2$.
+Standardize! If we want to compare nodes in different-sized graphs, then we just take into account the number of nodes and the maximum possible nodes to which *i* could be connected. For betweenness centrality, we have to go a step further. We need to account for the number of pairs of nodes that do not include *i*. In an undirected graph, this is $(g-1))(g-2)/2$.
 
 Thus, we can calculate a standardized betweenness centrality score for an undirected graph as:
 
@@ -457,7 +457,7 @@ The mean betweenness for an undirected network is:
 
 $$\bar C_B =  \dfrac{\sum\limits_{i=1}^g C_B(n_i)}{g}$$
 
-This equation, $\dfrac{\sum\limits_{i=1}^g C_B(n_i)}{g}$, just says to sum up the betweeness scores for each node and then divide by the number of nodes, *g*.
+This equation, $\dfrac{\sum\limits_{i=1}^g C_B(n_i)}{g}$, just says to sum up the betweenness scores for each node and then divide by the number of nodes, *g*.
 
 What is the mean betweenness for our example network? We can pull these from the table above:
 
@@ -494,20 +494,20 @@ If I lost you in some of the math, don't worry. Let's calculate the betweenness 
 $$C_B = \frac{\sum\limits_{i=1}^g[0.667-C'_B(n_i)]}{4} $$
 
 | Node | Betweenness | Standardized Betweenness | Deviations of Betweenness Closeness, $0.667-C'_B(n_i)$ |
-|:-----------:|:-----------:|:-----------:|:-------------------------------:|
-| Jen  |      0      |      0 / 6 = 0.000       |                 0.667 - 0.000 = 0.667                  |
-| Tom  |      3      |      3 / 6 = 0.500       |                 0.667 - 0.500 = 0.167                  |
-| Bob  |      4      |      4 / 6 = 0.667       |                 0.667 - 0.667 = 0.000                  |
-| Leaf |      0      |      0 / 6 = 0.000       |                 0.667 - 0.000 = 0.667                  |
-| Jim  |      0      |      0 / 6 = 0.000       |                 0.667 - 0.000 = 0.667                  |
+|:-------------:|:-------------:|:-------------:|:---------------------------:|
+| Jen | 0 | 0 / 6 = 0.000 | 0.667 - 0.000 = 0.667 |
+| Tom | 3 | 3 / 6 = 0.500 | 0.667 - 0.500 = 0.167 |
+| Bob | 4 | 4 / 6 = 0.667 | 0.667 - 0.667 = 0.000 |
+| Leaf | 0 | 0 / 6 = 0.000 | 0.667 - 0.000 = 0.667 |
+| Jim | 0 | 0 / 6 = 0.000 | 0.667 - 0.000 = 0.667 |
 
-If we total all of the values in the last column we get 2.168. Plugging this in as our numerator, we get:
+If we total all of the values in the last column, we get 2.168. Plugging this in as our numerator, we get:
 
 $$C_B = \frac{2.168}{4} = 0.542$$
 
 So, the betweenness centralization score for our example graph is 0.542. *What does this mean?*
 
-When betweenness centrality is evenly dispersed, meaning that all nodes have the same betweenness score, then the numerator in the equation will be zero and the quotient will be close to 0. When there is considerable inequality in the betweenness centrality scores between nodes, the quotient will be closer to 1. Thus, closer to 1 indicates that the graph is hierarchically structured and closer to 0 means that the graph is more decentralized.
+When betweenness centrality is evenly dispersed, meaning that all nodes have the same betweenness score, then the numerator in the equation will be zero, and the quotient will be close to 0. When there is considerable inequality in the betweenness centrality scores between nodes, the quotient will be closer to 1. Thus, closer to 1 indicates that the graph is hierarchically structured, and closer to 0 means that the graph is more decentralized.
 
 We can see this by examining two additional undirected networks:
 
@@ -565,7 +565,15 @@ As before, we can put this information in a table of geodesic proportions:
 | Leaf |     |     |      | 0/1 |
 | Jim  |     |     |      |     |
 
-Are we done? Not quite yet. Since the graph is **directed** we have to total *all* the rows. The reasons we did not do this for **undirected** graph is because the adjacency matrix is symmetric. Since the matrix for an undirected graph is not symmetric, we have to think of all the ties. Recall from our discussion about adjacency matrices for directed graphs, the rows tell us about outgoing ties or sending whereas the columns tell us about incoming ties or receiving. So, we will need information for the <u>complete</u> table.
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+Are we done? Not quite yet. Since the graph is **directed,** we have to total *all* the rows. The reason we did not do this for an **undirected** graph is that the adjacency matrix is symmetric. Since the matrix for an undirected graph is not symmetric, we have to think of all the ties. Recall from our discussion about adjacency matrices for directed graphs, the rows tell us about outgoing ties or sending, whereas the columns tell us about incoming ties or receiving. So, we will need information for the <u>complete</u> table.
+=======
+Are we done? Not quite yet. Since the graph is **directed,** we have to total *all* the rows. The reason we did not do this for an **undirected** graph is because the adjacency matrix is symmetric. Since the matrix for an undirected graph is not symmetric, we have to think of all the ties. Recall from our discussion about adjacency matrices for directed graphs, the rows tell us about outgoing ties or sending, whereas the columns tell us about incoming ties or receiving. So, we will need information for the <u>complete</u> table.
+>>>>>>> Stashed changes
+=======
+Are we done? Not quite yet. Since the graph is **directed,** we have to total *all* the rows. The reason we did not do this for an **undirected** graph is because the adjacency matrix is symmetric. Since the matrix for an undirected graph is not symmetric, we have to think of all the ties. Recall from our discussion about adjacency matrices for directed graphs, the rows tell us about outgoing ties or sending, whereas the columns tell us about incoming ties or receiving. So, we will need information for the <u>complete</u> table.
+>>>>>>> Stashed changes
 
 *Why?* Well, think about the table below:
 
@@ -579,7 +587,7 @@ Are we done? Not quite yet. Since the graph is **directed** we have to total *al
 |    Jim    |     |     |      |     |         |
 | **TOTAL** |     |     |      |     |  **4**  |
 
-If we sum this, we get 4. But, note that this does not account for *all* of the edges in the network. We need to complete the matrix:
+If we sum this, we get 4. But note that this does not account for *all* of the edges in the network. We need to complete the matrix:
 
 #### Geodesic Proportions for *Bob*
 
@@ -634,7 +642,7 @@ We can now complete our table:
 |    Jim    | 0/0 | 0/0 | 0/1  |     |         |
 | **TOTAL** |     |     |      |     |  **4**  |
 
-*Why are there no geodesics in the lower portion of the table?* Take a look at the plot. Tom does not send a tie to Jen, so there is not a geodesic from Tom to Jen. This is the same for Leaf to Jen. There *is* a geodesic from Jim to Leaf, but Bob is not on it. As a consequence, the total is 4.
+*Why are there no geodesics in the lower portion of the table?* Take a look at the plot. Tom does not send a tie to Jen, so there is no geodesic from Tom to Jen. This is the same for Leaf to Jen. There *is* a geodesic from Jim to Leaf, but Bob is not on it. As a consequence, the total is 4.
 
 Go ahead and compute the betweenness scores for the rest of the nodes in the network. You should get this:
 
@@ -687,14 +695,14 @@ If I lost you in some of the math, don't worry. Let's calculate the betweenness 
 $$C_B = \frac{\sum\limits_{i=1}^g[0.333-C'_B(n_i)]}{4} $$
 
 | Node | Betweenness | Standardized Betweenness | Deviations of Betweenness Closeness, $0.667-C'_B(n_i)$ |
-|:-----------:|:-----------:|:-----------:|:-------------------------------:|
-| Jen  |      0      |      0 / 12 = 0.000      |                 0.333 - 0.000 = 0.333                  |
-| Tom  |      3      |      3 / 12 = 0.250      |                 0.333 - 0.250 = 0.083                  |
-| Bob  |      4      |      4 / 12 = 0.333      |                 0.333 - 0.333 = 0.000                  |
-| Leaf |      0      |      0 / 12 = 0.000      |                 0.333 - 0.000 = 0.333                  |
-| Jim  |      0      |      0 / 12 = 0.000      |                 0.333 - 0.000 = 0.333                  |
+|:-------------:|:-------------:|:-------------:|:---------------------------:|
+| Jen | 0 | 0 / 12 = 0.000 | 0.333 - 0.000 = 0.333 |
+| Tom | 3 | 3 / 12 = 0.250 | 0.333 - 0.250 = 0.083 |
+| Bob | 4 | 4 / 12 = 0.333 | 0.333 - 0.333 = 0.000 |
+| Leaf | 0 | 0 / 12 = 0.000 | 0.333 - 0.000 = 0.333 |
+| Jim | 0 | 0 / 12 = 0.000 | 0.333 - 0.000 = 0.333 |
 
-If we total all of the values in the last column we get 1.082. Plugging this in as our numerator, we get:
+If we total all of the values in the last column, we get 1.082. Plugging this in as our numerator, we get:
 
 $$C_B = \frac{1.082}{4} = 0.271$$
 
@@ -709,7 +717,7 @@ We can now compare four different centralization scores for this directed graph:
 |  Closeness  |     0.555      |
 | Betweenness |     0.271      |
 
-What can we say about the closeness centralization scores for each type of centrality? (take a look at the graph if that helps)
+What can we say about the closeness centralization scores for each type of centrality (take a look at the graph if that helps)?
 
 ```{r}
 d_graph
@@ -719,7 +727,7 @@ d_graph
 
 ## Test your Knowledge
 
--   What distinguishes betweenness centrality from other types of centrality like degree and closeness?
+-   What distinguishes betweenness centrality from other types of centrality, like degree and closeness?
 -   How does betweenness centrality help identify key actors in criminal networks, such as those in organized crime?
 -   Why might law enforcement focus on individuals with high betweenness centrality when disrupting criminal networks?
 -   What are the steps to calculate betweenness centrality for a specific node within an undirected network?
