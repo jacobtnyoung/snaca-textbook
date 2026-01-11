@@ -40,7 +40,7 @@ Network data can come from MANY sources. For example, data can be:
 
 ## Boundary Specification
 
-While there are various ways that network data can be collected, an important consideration is the issue of *boundary specification*. This concerns the theoretical and methodological challenge of determining the appropriate set of actors and connections to analyze in order to identify the relevant social network within a given context. When we collect data on a network, we impose a particular boundary. For example, suppose we ask adolescents in a school who their friends are, but we only have a list of people in that school. The boundary would be those friends that are in the school. Does the boundary really exist? What about friendships that are outside of the school? Is the boundary imposed to conduct the research?
+While there are various ways that network data can be collected, an important consideration is the issue of *boundary specification*. This concerns the theoretical and methodological challenge of determining the appropriate set of actors and connections to analyze in order to identify the relevant social network within a given context. When we collect data on a network, we impose a particular boundary. For example, suppose we ask adolescents in a school who their friends are, but we only have a list of people in that school. The boundary would be those friends who are in the school. Does the boundary really exist? What about friendships that are outside of the school? Is the boundary imposed to conduct the research?
 
 This is an important question to consider when collecting network data and when you are analyzing it. This can be a particular challenge for crime analysts given the types of data involved in our work. Defining clear boundaries influences the accuracy and effectiveness of the resulting analysis, which may have important implications for the policies that we identify from these analyses.
 
@@ -84,4 +84,4 @@ As you may have guessed, collecting network data involves a lot of questions and
 
 ## Summary
 
-This chapter has provided a brief introduction to network data collection in the context of crime analysis, focusing on the practical methods of gathering and analyzing network data. In the next chapter, we will cover the basics of what network data are and how we go about actually doing network analysis!
+This chapter has provided a brief introduction to network data collection in the context of crime analysis, focusing on the practical methods of gathering and analyzing network data. In the next chapter, we will cover the basics of what network data is and how we go about actually doing network analysis!

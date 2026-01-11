@@ -67,7 +67,7 @@ knitr::include_graphics( "images/ch-11-figure-02.jpeg" )
 
 We can see that *A*, *B*, and *C* are connected through the shared edges with node *1*. That is, the edges $L_{A,1}$ and $L_{B,1}$ connect nodes *A* and *B*. The same for edges $L_{B,1}$ and $L_{C,1}$ which connect nodes *B* and *C*.
 
-What about node *2* ?
+What about node *2*?
 
 ```{r, fig.cap = "", out.width = "60%"}
 knitr::include_graphics( "images/ch-11-figure-03.jpeg" )
@@ -353,7 +353,7 @@ gplot( onemode,
 
 ```
 
-We may be inclined to always keep the network weighted (i.e. not dichotomize the adjacency matrix), but there are far fewer tools for weighted networks. As you continue your work as a crime analyst, be sure to keep in mind what options you have for handling projections.
+We may be inclined to always keep the network weighted (i.e., not dichotomize the adjacency matrix), but there are far fewer tools for weighted networks. As you continue your work as a crime analyst, be sure to keep in mind what options you have for handling projections.
 
 <br>
 
