@@ -439,7 +439,7 @@ grid.arrange( p1, nullGrob(), p2, ncol = 3, widths = c( 1, 0.2, 1 ) )
 
 ```
 
-The plot above shows two different graphs with the *raw* closeness centrality scores for two nodes. Note that they have the exact same score. Yet, would you say they are equally close to other nodes in the network? In other words, that their closeness to other nodes is the same?
+The plot above shows two different graphs with the *raw* closeness centrality scores for two nodes. Note that they have the exact same score. Yet, would you say they are equally close to other nodes in the network? In other words, is their closeness to other nodes the same?
 
 When we standardize, we adjust for the size of the network:
 
@@ -549,7 +549,7 @@ Recall our table of standardized closeness scores:
 $$C_C = \frac{\sum\limits_{i=1}^g[0.800-C'_C(n_i)]}{[(5-2)(5-1)]/(2*5-3)}$$
 
 | Node | Distance | Closeness | Standardized Closeness | Deviations of Standardized Closeness $0.800-C'_C(n_i)$ |
-|:-----------:|:-----------:|:-----------:|:-----------:|:--------------------:|
+|:------------:|:------------:|:------------:|:------------:|:---------------:|
 | Jen | 9 | 1/9 = 0.111 | 0.111\*4 = 0.444 | 0.800 - 0.444 = 0.356 |
 | Tom | 6 | 1/6 = 0.167 | 0.167\*4 = 0.668 | 0.800 - 0.668 = 0.132 |
 | Bob | 5 | 1/5 = 0.200 | 0.200\*4 = 0.800 | 0.800 - 0.800 = 0.000 |
@@ -766,7 +766,7 @@ grid.arrange( d_graph, d_to_plot, ncol = 2 )
 
 ```
 
-How far is Bob from Jen? Bob is at an "infinite distance" from Jen because there is no directed path by which he can reach her. This is also the case for the distance from Bob to Tom. But, Bob does have directed ties to Jim and Leaf. With directionality in mind, they are unreachable. But, Bob is 1 step from Leaf and 1 step from Jim along a directed path:
+How far is Bob from Jen? Bob is at an "infinite distance" from Jen because there is no directed path by which he can reach her. This is also the case for the distance from Bob to Tom. But Bob does have directed ties to Jim and Leaf. With directionality in mind, they are unreachable. But Bob is 1 step from Leaf and 1 step from Jim along a directed path:
 
 ```{r}
 

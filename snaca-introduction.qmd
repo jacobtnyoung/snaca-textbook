@@ -38,7 +38,7 @@ Most accounts tend to focus on several factors:
 -   Individual characteristics (e.g., age, experience)
 -   Situational characteristics (e.g., time of day, incident)
 
-In other words, usually the explanation focuses on something about the person and/or something about the situation. Both of these explanations, though, tend to think about units (in this, case police officers) as independent. For example, police officers endorse body-worn cameras because of their age or because of the characteristics of their beat. This may be true, but the underlying assumption is that officer endorsement is entirely independent from other officers in the department. This is the assumption of **independence across units** and underlies the vast majority of research in criminology and criminal justice.
+In other words, usually the explanation focuses on something about the person and/or something about the situation. Both of these explanations, though, tend to think about units (in this case, police officers) as independent. For example, police officers endorse body-worn cameras because of their age or because of the characteristics of their beat. This may be true, but the underlying assumption is that officer endorsement is entirely independent from other officers in the department. This is the assumption of **independence across units** and underlies the vast majority of research in criminology and criminal justice.
 
 In the study of networks, we are interested in the *dependence* between units as an explanatory tool. That is, we are interested in **the network**!
 
@@ -74,7 +74,7 @@ Network science takes these **relational structures** as the primary domain of i
     -   Here, the network is a *dependent variable*.
     -   For example, do younger individuals who are involved in crime have more co-offenders?
 
-Thinking about research problems and crime analysis through a network perspective lens means that we frame our inquiry around these basic questions. That is, "how does the network matter?" and/or "what effects the network?".
+Thinking about research problems and crime analysis through a network perspective lens means that we frame our inquiry around these basic questions. That is, "how does the network matter?" and/or "what affects the network?"
 
 ## Network Analysis
 
@@ -157,7 +157,7 @@ Network science **conceptualizes** theoretical concepts that are inherently rela
 
 Let's take an example. Suppose we are interested in the concept of *power* in a gang. Some gang members may be more powerful than others, and we may want to develop an intervention that focuses on the most powerful members. But what does it mean to say that someone is powerful? There are many different ways to conceptualize power.
 
-One way is to think about it is as being a central member of the gang. So, we could create a conceptual definition: powerful gang members are those who are central to the gang network. Ok, so how do we measure it? In other words, how do we *operationalize* power based on our *conceptual* definition? We could say that individuals who are central in the gang are those who are perceived as being central. So, we could ask gang members "who is the most central person in your gang?". Then, we would have an operationalization of power in the gang.
+One way is to think about it is as being a central member of the gang. So, we could create a conceptual definition: powerful gang members are those who are central to the gang network. Ok, so how do we measure it? In other words, how do we *operationalize* power based on our *conceptual* definition? We could say that individuals who are central in the gang are those who are perceived as being central. So, we could ask gang members, "Who is the most central person in your gang?" Then, we would have an operationalization of power in the gang.
 
 To illustrate, consider a case study by @Papachristos2006 of a gang operating in an urban neighborhood. Law enforcement agencies had been investigating the gang for months, but traditional surveillance methods were failing to identify the key players who were directing most of the criminal activities. To tackle this, researchers decided to take a network perspective on the problem, guided by the conceptual definition that power within the gang is held by those perceived as central. They conducted interviews with current and former gang members, asking them directly, "Who is the most important person in your gang?" This simple question revealed individuals who were not initially flagged by police investigations but were considered highly influential by their peers. Upon further analysis, it became clear that these individuals controlled significant communication pathways and resources within the gang. By focusing on those perceived as central, law enforcement was able to disrupt key relationships and dismantle the gang's leadership structure, demonstrating the effectiveness of operationalizing power through social perception.
 
@@ -183,9 +183,9 @@ An *edge* can be anything that can record a connection between nodes. Anything.
 
 Examples:
 
--   In a friendship network, the nodes are individuals and the edges are friendships.
+-   In a friendship network, the nodes are individuals, and the edges are friendships.
 
--   In a co-offending network, the nodes are individuals and the edges are offenses. That is, individuals are connected through offenses in which they were both present.
+-   In a co-offending network, the nodes are individuals, and the edges are offenses. That is, individuals are connected through offenses in which they were both present.
 
 On a graph, nodes are represented by *points* and edges are represented by *lines*.
 
@@ -443,6 +443,6 @@ Networks can also differ with respect to the types of edges.
 
 ## Summary
 
-We started this chapter by asking: why do "social network analysis"? This chapter has sought to introduce the logic of *network science* so as to help you think about research problems through a network lens. We then examined some of the building blocks of network analysis to get at the question of "what networks look like".
+We started this chapter by asking: why do "social network analysis"? This chapter has sought to introduce the logic of *network science* to help you think about research problems through a network lens. We then examined some of the building blocks of network analysis to get at the question of "what networks look like".
 
 In the next chapter, we will delve deeper into the theoretical background of network science.

@@ -20,7 +20,7 @@ library( reshape2 )  # for reshaping the matrix data for a plot
 
 # Network Description {.unnumbered}
 
-Understanding the basic structure of a network is the first step toward making informed, data-driven decisions in crime analysis. Networks, whether simple or complex, contain key features that offer valuable insights into relationships, patterns, and points of vulnerability. As crime analysts, the ability to describe these features (such as the number of connections), the centrality of nodes, and the overall shape of the network, is essential for identifying trends and prioritizing interventions. But how do we translate raw data into these insights? Before we get too deep into analysis, we should start by doing some basic description of a network to get our hands dirty.
+Understanding the basic structure of a network is the first step toward making informed, data-driven decisions in crime analysis. Networks, whether simple or complex, contain key features that offer valuable insights into relationships, patterns, and points of vulnerability. As crime analysts, the ability to describe these features (such as the number of connections), the centrality of nodes, and the overall shape of the network is essential for identifying trends and prioritizing interventions. But how do we translate raw data into these insights? Before we get too deep into analysis, we should start by doing a basic description of a network to get our hands dirty.
 
 By the end of the chapter, you should be able to answer this question:
 
@@ -250,4 +250,4 @@ Paths with *directed graphs* can be a bit tricky to comprehend due to the direct
 
 ## Summary
 
-This chapter focused on how crime analysts can gain an understanding of a network by describing some basic structures. We focused on key network features (size, density, components, and diameter) for gaining insights into relationships and patterns. Examining these properties can help analysts identify areas for targeted interventions. In the next chapters, we will begin focusing on a key idea in social network analysis: *centrality*.
+This chapter focused on how crime analysts can gain an understanding of a network by describing some basic structures. We focused on key network features (size, density, components, and diameter) to gain insights into relationships and patterns. Examining these properties can help analysts identify areas for targeted interventions. In the next chapters, we will begin focusing on a key idea in social network analysis: *centrality*.
